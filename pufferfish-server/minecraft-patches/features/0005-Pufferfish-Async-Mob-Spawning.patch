@@ -17,7 +17,7 @@ and, in my opinion, worth the low risk of minor mob-spawning-related
 inconsistencies.
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index d6dcb6d146d89a8fb96e7c669e5deb802223abd6..a469fa91bf976335ced9c824c09a5f18cc31c790 100644
+index d6dcb6d146d89a8fb96e7c669e5deb802223abd6..8871cd3c0610ea584c3bbf15913de976da18778d 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
 @@ -303,6 +303,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -29,10 +29,10 @@ index d6dcb6d146d89a8fb96e7c669e5deb802223abd6..a469fa91bf976335ced9c824c09a5f18
      public static <S extends MinecraftServer> S spin(Function<Thread, S> threadFunction) {
          ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry.init(); // Paper - rewrite data converter system
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index 31144984f550c21dac6da35070393ab90db18b83..c1e17e04d511b963fbde9af61d173c6b39389568 100644
+index fab894e6308049f6506ae58b434d54a5f79ff814..91403df719574d668e6f4f2165a3925a41fe9c86 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -313,6 +313,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -309,6 +309,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
                  LOGGER.info("JMX monitoring enabled");
              }
  
