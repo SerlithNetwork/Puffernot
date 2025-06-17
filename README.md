@@ -48,4 +48,4 @@ All other files are licensed under MIT.
 
 ## Additional Credits
 1. PurpurMC for their paperweight setup
-2. Toffikk for [0014-Pufferfish-Better-Check-For-Useless-Packets.patch](pufferfish-server/minecraft-patches/features/0014-Pufferfish-Better-Check-For-Useless-Packets.patch)
+2. Toffikk for [0014-Pufferfish-Better-Check-For-Useless-Packets.patch](https://github.com/Toffikk/Pufferfork/blob/ver/1.21.6/pufferfork-server/minecraft-patches/sources/net/minecraft/server/level/ServerEntity.java.patch)
