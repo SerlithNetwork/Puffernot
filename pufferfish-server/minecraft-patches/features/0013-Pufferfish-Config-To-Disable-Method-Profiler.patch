@@ -1,0 +1,18 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Biquaternions <biquaternions@serlith.net>
+Date: Fri, 21 Mar 2025 12:19:09 -0500
+Subject: [PATCH] Pufferfish Config To Disable Method Profiler
+
+
+diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
+index a469fa91bf976335ced9c824c09a5f18cc31c790..ad89ae15b91c7bae7da3243d89cbc3071d6b8e90 100644
+--- a/net/minecraft/server/MinecraftServer.java
++++ b/net/minecraft/server/MinecraftServer.java
+@@ -2596,6 +2596,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+     // CraftBukkit end
+ 
+     private ProfilerFiller createProfiler() {
++        if (gg.pufferfish.pufferfish.PufferfishConfig.MISC.DISABLE_METHOD_PROFILER) return net.minecraft.util.profiling.InactiveProfiler.INSTANCE; // Pufferfish - Disable Method Profiler
+         if (this.willStartRecordingMetrics) {
+             this.metricsRecorder = ActiveMetricsRecorder.createStarted(
+                 new ServerMetricsSamplersProvider(Util.timeSource, this.isDedicatedServer()),
