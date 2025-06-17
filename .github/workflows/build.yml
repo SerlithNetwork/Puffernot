@@ -32,3 +32,16 @@ jobs:
           ./gradlew clean cleanCache --refresh-dependencies
           ./gradlew applyAllPatches --stacktrace 
           ./gradlew build --stacktrace
+      - name: Release Pufferfish
+        if: "contains(github.event.commits[0].message, '[release]')"
+        uses: softprops/action-gh-release@master
+        with:
+          name: "Pufferfish build ${{ env.BUILD_NUMBER }}"
+          tag_name: "ver-1.21.6-b${{ env.BUILD_NUMBER }}"
+          files: |
+            ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.6-R0.1-SNAPSHOT-mojmap.jar
+            ./pufferfish-api/build/libs/pufferfish-api-1.21.5-R0.1-SNAPSHOT.jar
+          token: "${{ secrets.GITHUB_TOKEN }}"
+          target_commitish: "${{ github.sha }}"
+          draft: false
+          prerelease: false
