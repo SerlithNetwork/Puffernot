@@ -1,8 +1,20 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: Biquaternions <biquaternions@serlith.net>
-Date: Fri, 21 Mar 2025 01:05:37 -0500
+From: Kevin Raneri <kevin.raneri@gmail.com>
+Date: Fri, 1 Nov 2024 22:20:06 -0500
 Subject: [PATCH] Pufferfish Async Mob Spawning
 
+This patch aims to reduce the main-thread impact of mob spawning by
+offloading as much work as possible to other threads. It is possible for
+inconsistencies to come up, but when they happen they never interfere
+with the server's operation (they don't produce errors), and side
+effects are limited to more or less mobs being spawned in any particular
+tick.
+
+It is possible to disable this optimization if it is not required or if
+it interferes with any plugins. On servers with thousands of entities,
+this can result in performance gains of up to 15%, which is significant
+and, in my opinion, worth the low risk of minor mob-spawning-related
+inconsistencies.
 
 diff --git a/src/main/java/ca/spottedleaf/moonrise/common/list/IteratorSafeOrderedReferenceSet.java b/src/main/java/ca/spottedleaf/moonrise/common/list/IteratorSafeOrderedReferenceSet.java
 index ece6db7b9a0dfd535141c0c756947c4898140503..1e78c2c76f798dff7395f1f73bc00ed1ad84d5f9 100644

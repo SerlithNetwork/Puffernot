@@ -1,8 +1,20 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: Biquaternions <biquaternions@serlith.net>
-Date: Sat, 19 Apr 2025 19:51:28 -0500
+From: Kevin Raneri <kevin.raneri@gmail.com>
+Date: Tue, 9 Nov 2021 14:50:57 -0500
 Subject: [PATCH] Pufferfish Optimize Suffocation
 
+The isInWall check to determine suffocation is quite expensive, and
+often is completely unnecessary to check. We do two things here to
+improve this:
+
+1. We only check for suffocation once per 20 ticks. The maximum
+no-damage ticks value means that this change should be extremely
+difficult, if not impossible, for players to notice.
+
+2. We additionally execute a check to see if the player can even take
+damage in the first place. This check doesn't improve performance much
+but is so much cheaper than the suffocation check that it's worth
+keeping it.
 
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
 index 35d71978a3d360eed97feb66d1048bee337ef2b9..8bba401e10d8b3c8ec403ca953d91aacc82c36aa 100644

@@ -1,8 +1,12 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: Biquaternions <biquaternions@serlith.net>
-Date: Sat, 19 Apr 2025 21:15:33 -0500
+From: Kevin Raneri <kevin.raneri@gmail.com>
+Date: Tue, 30 May 2023 22:22:31 -0400
 Subject: [PATCH] Pufferfish Option To Disable End Crystal Dragon Respawn
 
+On servers that expect end crystal fights in the end dimension,
+disabling this will prevent the server from performing an expensive
+search to attempt respawning the ender dragon whenever a player places
+an end crystal.
 
 diff --git a/net/minecraft/world/item/EndCrystalItem.java b/net/minecraft/world/item/EndCrystalItem.java
 index 05ec512839898f96d9769bb0d00f6ba11dda0c4b..04f5e43c35f4fd642298d26df323f2470756a64f 100644

@@ -1,8 +1,27 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: Biquaternions <biquaternions@serlith.net>
-Date: Sat, 19 Apr 2025 20:24:50 -0500
+From: Paul Sauve <paul@technove.co>
+Date: Sat, 31 Oct 2020 18:51:38 -0500
 Subject: [PATCH] Pufferfish Simpler Shapeless Comparison
 
+Paper added a fancy sorting comparison due to Bukkit recipes breaking
+the vanilla one, however this is far more advanced than what you need
+for all the vanilla recipes.
+
+Airplane
+Copyright (C) 2020 Technove LLC
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/item/crafting/ShapelessRecipe.java b/net/minecraft/world/item/crafting/ShapelessRecipe.java
 index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..e69637ff7e91ab3beba53e8803c61f21743f01d7 100644

@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: Biquaternions <biquaternions@serlith.net>
-Date: Thu, 20 Mar 2025 23:27:10 -0500
+From: Paul Sauve <paul@technove.co>
+Date: Sat, 19 Dec 2020 19:06:37 -0600
 Subject: [PATCH] Pufferfish Expose findClass For Profiler
 
 

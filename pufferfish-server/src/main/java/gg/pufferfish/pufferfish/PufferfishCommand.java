@@ -16,14 +16,14 @@ import org.bukkit.command.CommandSender;
 public class PufferfishCommand extends Command {
 
     public PufferfishCommand() {
-        super("gg/pufferfish/pufferfish");
+        super("pufferfish");
         this.description = "Pufferfish related commands";
         this.usageMessage = "/pufferfish [reload | version]";
         this.setPermission("bukkit.command.pufferfish");
     }
 
     public static void init() {
-        MinecraftServer.getServer().server.getCommandMap().register("gg/pufferfish/pufferfish", "Pufferfish", new PufferfishCommand());
+        MinecraftServer.getServer().server.getCommandMap().register("pufferfish", "Pufferfish", new PufferfishCommand());
     }
 
     @Override

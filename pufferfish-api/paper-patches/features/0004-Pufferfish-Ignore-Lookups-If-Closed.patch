@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: Biquaternions <biquaternions@serlith.net>
-Date: Thu, 20 Mar 2025 23:29:49 -0500
+From: Paul <paul@technove.co>
+Date: Tue, 6 Jul 2021 17:51:18 -0500
 Subject: [PATCH] Pufferfish Ignore Lookups If Closed
 
 

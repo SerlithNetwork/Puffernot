@@ -12,7 +12,7 @@ index 652ff54e7c50412503725d628bfe72ed03059790..0c0b2d5b4516e180e948a6e2be31d5cf
       * The brand id for Paper.
       */
      Key BRAND_PAPER_ID = Key.key("papermc", "paper");
-+    Key BRAND_AURORA_ID = Key.key("pufferfish", "pufferfish"); // Pufferfish - Rebrand
++    Key BRAND_PUFFERFISH_ID = Key.key("pufferfish", "pufferfish"); // Pufferfish - Rebrand
  
      /**
       * Gets the {@code ServerBuildInfo}.
