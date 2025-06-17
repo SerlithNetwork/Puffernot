@@ -5,8 +5,7 @@ import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.command.brigadier.PaperCommands;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -15,7 +14,7 @@ import java.util.Set;
 
 public class PufferfishCommand {
 
-    private static final Component PREFIX = Component.text("Pufferfish » ", TextColor.fromHexString("#12fff6"), TextDecoration.BOLD);
+    private static final Component PREFIX = MiniMessage.miniMessage().deserialize("<#12fff6><b>Pufferfish »</b></#12fff6> ");
     private static final Component FEEDBACK_RELOAD_SUCCESS = PREFIX.append(Component.text("Pufferfish configuration has been reloaded.", NamedTextColor.WHITE));
     private static final Component FEEDBACK_RELOAD_FAILED = PREFIX.append(Component.text("Failed to reload.", NamedTextColor.RED));
     private static Component FEEDBACK_CURRENT_VERSION = null;
