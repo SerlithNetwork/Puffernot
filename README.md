@@ -4,13 +4,13 @@
 [downloads]: https://pufferfish.host/downloads
 [optguide]: https://docs.pufferfish.host/optimization/pufferfish-server-optimization-guide/
 
-# Pufferfish
+# [Puffernot](https://github.com/pufferfish-gg/Pufferfish)
 A highly optimized Paper fork designed for large servers requiring both maximum performance, stability, and "enterprise" features.
 
 > [!WARNING]
-> This is an unofficial port for Pufferfish to 1.21.6+
-> All credits go to Pufferfish Host
-> Do not report errors to Pufferfish Host while using this port
+> This is an unofficial port for [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) to 1.21.6+ \
+> All credits go to Pufferfish Host \
+> **Do not** report errors to Pufferfish Host while using this port
 
 [Homepage][home] - [Downloads][downloads] - [Discord][discord] - [Knowledgebase][knowledgebase] - [Optimization Guide][optguide]
 
