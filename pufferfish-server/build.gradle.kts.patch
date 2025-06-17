@@ -61,6 +61,17 @@
      testImplementation("io.github.classgraph:classgraph:4.8.179") // For mob goal test
      testImplementation("org.junit.jupiter:junit-jupiter:5.12.2")
      testImplementation("org.junit.platform:junit-platform-suite-engine:1.12.2")
+@@ -187,8 +_,8 @@
+     implementation("io.papermc:reflection-rewriter-proxy-generator:$reflectionRewriterVersion")
+ 
+     // Spark
+-    implementation("me.lucko:spark-api:0.1-20240720.200737-2")
+-    implementation("me.lucko:spark-paper:1.10.133-20250413.112336-1")
++    implementation("com.github.Biquaternions.spark:spark-api:1.0-pufferfish")
++    implementation("com.github.Biquaternions.spark:spark-paper:1.0-pufferfish")
+ }
+ 
+ tasks.jar {
 @@ -203,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(

@@ -9,8 +9,13 @@ A highly optimized Paper fork designed for large servers requiring both maximum 
 
 > [!WARNING]
 > This is an unofficial port for [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) to 1.21.6+ \
-> All credits go to Pufferfish Host \
-> **Do not** report errors to Pufferfish Host while using this port
+> All credits go to Pufferfish Host. \
+> **Do not** report errors to Pufferfish Host while using this port.
+
+> [!WARNING]
+> The purpose of this project is to serve as a template for other Pufferfish forks in this organization. \
+> Therefore we've made some aesthetic and config dependency changes. \
+> If you want to run a Pufferfish jar closer to the original project, please refer to [Toffikk's port](https://github.com/Toffikk/Pufferfork).
 
 [Homepage][home] - [Downloads][downloads] - [Discord][discord] - [Knowledgebase][knowledgebase] - [Optimization Guide][optguide]
 
@@ -39,6 +44,7 @@ This fork is developed by [Pufferfish Host][home], and we can provide additional
 ## Building
 
 ```bash
+./gradlew applyAllPatches
 ./gradlew createMojmapPaperclipJar
 ```
 

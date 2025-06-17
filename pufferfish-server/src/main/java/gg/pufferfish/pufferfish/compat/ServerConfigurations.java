@@ -21,7 +21,9 @@ public class ServerConfigurations {
         "bukkit.yml",
         "spigot.yml",
         // "paper.yml", // TODO: Figure out what to do with this.
-        "pufferfish.yml"
+        "pufferfish.yml",
+        "jellyfish.yml",
+        "aurora.yml"
     };
 
     public static Map<String, String> getCleanCopies() throws IOException {
