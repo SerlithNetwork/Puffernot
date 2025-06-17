@@ -5,7 +5,7 @@ Subject: [PATCH] Pufferfish Rebrand
 
 
 diff --git a/net/minecraft/CrashReport.java b/net/minecraft/CrashReport.java
-index 3e0e88afcf010d9a3d46e48bca5cbdf98fe97544..8337b9c4b0f84e922b7256d39f7ed8c485ffac97 100644
+index 3e0e88afcf010d9a3d46e48bca5cbdf98fe97544..606c8f4a47f3ea2dc223c2bc3cab543bc389f4ea 100644
 --- a/net/minecraft/CrashReport.java
 +++ b/net/minecraft/CrashReport.java
 @@ -30,6 +30,7 @@ public class CrashReport {
@@ -35,7 +35,7 @@ index 3e0e88afcf010d9a3d46e48bca5cbdf98fe97544..8337b9c4b0f84e922b7256d39f7ed8c4
  
      public SystemReport getSystemReport() {
 diff --git a/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index 384f2cd090d6d23bd1308d6e82c24338f2bf55d1..99b362377b390b617492fbf83ee1852d29ab2bac 100644
+index 384f2cd090d6d23bd1308d6e82c24338f2bf55d1..6ec80b0e865f37f3411ac7894e0007f56180f051 100644
 --- a/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 @@ -308,7 +308,7 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise

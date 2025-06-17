@@ -5,10 +5,10 @@ Subject: [PATCH] Pufferfish Reduce Entity Allocations
 
 
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 188bc2789af5c17acf76999c97577392972fd14a..eeaa81e026ff628504203976cb87e15f9adf3078 100644
+index 8b34dc914fc0be0b979f30852e0f41aa2c0ef941..7edc4e69edc9585ae1cb9073b8367ec384fdcc85 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
-@@ -352,6 +352,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -373,6 +373,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      public long activatedImmunityTick = Integer.MIN_VALUE;
      public boolean activatedPriorityReset = false; // Pufferfish - DAB
      public int activatedPriority = gg.pufferfish.pufferfish.PufferfishConfig.DAB.MAX_TICK_FREQ; // Pufferfish - DAB (golf score)
@@ -17,7 +17,7 @@ index 188bc2789af5c17acf76999c97577392972fd14a..eeaa81e026ff628504203976cb87e15f
      public void inactiveTick() {
      }
 diff --git a/net/minecraft/world/entity/ai/attributes/AttributeMap.java b/net/minecraft/world/entity/ai/attributes/AttributeMap.java
-index bed9b564c493cd84bf53fc49368fda736f3fbc2b..a8826d6cac33a6434b518f16060d3f36e0dcb70e 100644
+index fdb02fc40579866167e8cc9bcefbd961588b53a6..b348e404160b25cdfb51ec7438caabe308f1a4a8 100644
 --- a/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 +++ b/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 @@ -18,9 +18,11 @@ public class AttributeMap {

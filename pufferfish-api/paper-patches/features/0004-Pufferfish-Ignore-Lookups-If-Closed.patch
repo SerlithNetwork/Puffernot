@@ -1,0 +1,44 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Biquaternions <biquaternions@serlith.net>
+Date: Thu, 20 Mar 2025 23:29:49 -0500
+Subject: [PATCH] Pufferfish Ignore Lookups If Closed
+
+
+diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
+index a9a23759f4a1a6b06b983bb8cdcde92944d7ca20..b774061c4084fe078c00e258ca703fdaa852e139 100644
+--- a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
++++ b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
+@@ -50,6 +50,8 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+     private io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup classLoaderGroup; // Paper
+     public io.papermc.paper.plugin.provider.entrypoint.DependencyContext dependencyContext; // Paper
+ 
++    private boolean closed = false; // Pufferfish - Ignore lookups if closed
++
+     static {
+         ClassLoader.registerAsParallelCapable();
+     }
+@@ -205,7 +207,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+         }
+         Class<?> result = classes.get(name);
+ 
+-        if (result == null) {
++        if (result == null && !this.closed) { // Pufferfish - Ignore lookups if closed
+             String path = name.replace('.', '/').concat(".class");
+             // Add details to zip file errors - help debug classloading
+             JarEntry entry;
+@@ -261,6 +263,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+             this.setClass(name, result); // Paper
+         }
+ 
++        if (result == null) throw new ClassNotFoundException(name); // Pufferfish - Ignore lookups if closed
+         return result;
+     }
+ 
+@@ -275,6 +278,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+             // Paper end
+             super.close();
+         } finally {
++            this.closed = true; // Pufferfish - Ignore lookups if closed
+             jar.close();
+         }
+     }

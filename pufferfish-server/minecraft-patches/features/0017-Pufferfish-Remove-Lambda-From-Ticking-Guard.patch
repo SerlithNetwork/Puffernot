@@ -5,10 +5,10 @@ Subject: [PATCH] Pufferfish Remove Lambda From Ticking Guard
 
 
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index f5d905ec4bcd5f7f6103be31e155e76da51821a2..cc4e54b7198acec4c3ce09e1b6fa9efcd89c54e1 100644
+index c971bf7c966aa0825c549ed88f2c7f8fb9e58156..071824d3f3e67b1cf8c6205ca0ff664fff9d3ebc 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
-@@ -805,7 +805,19 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
+@@ -809,7 +809,19 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
                                      }
  
                                      profilerFiller.push("tick");
@@ -30,7 +30,7 @@ index f5d905ec4bcd5f7f6103be31e155e76da51821a2..cc4e54b7198acec4c3ce09e1b6fa9efc
                                  }
                              }
 diff --git a/net/minecraft/world/level/Level.java b/net/minecraft/world/level/Level.java
-index 013ed7dbe2309f562f63e66203179a90566e8115..2e54cbf126a89ea7dfd26dcbb8c1f13769ecd230 100644
+index c41df4b1fff1f65532256e835dc30fadbb4f8c8b..e2c2691d475c1ad41a2f99f3ab30efa8d940d513 100644
 --- a/net/minecraft/world/level/Level.java
 +++ b/net/minecraft/world/level/Level.java
 @@ -1481,15 +1481,15 @@ public abstract class Level implements LevelAccessor, UUIDLookup<Entity>, AutoCl

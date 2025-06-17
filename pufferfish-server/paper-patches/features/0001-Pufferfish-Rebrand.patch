@@ -5,7 +5,7 @@ Subject: [PATCH] Pufferfish Rebrand
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 6abc57669e87f7f98f3b76af3c0e50825fea6eb1..ee296293a61ed597fb56f40b8152cf031a074ef6 100644
+index 6abc57669e87f7f98f3b76af3c0e50825fea6eb1..af91d0c7cfa60efa768d5f40d42283d6d67f7614 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
 @@ -593,7 +593,7 @@ public class Metrics {
@@ -32,7 +32,7 @@ index 6abc57669e87f7f98f3b76af3c0e50825fea6eb1..ee296293a61ed597fb56f40b8152cf03
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index d0554ed6631535815e5932930911e3fe1dee8710..91d1492b67947be1976678b84cdf45bd26f8a4fa 100644
+index d0554ed6631535815e5932930911e3fe1dee8710..44bcf8101d49cd157fed6c072946a3de9e4cabde 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 @@ -35,7 +35,7 @@ public class PaperVersionFetcher implements VersionFetcher {
@@ -54,7 +54,7 @@ index d0554ed6631535815e5932930911e3fe1dee8710..91d1492b67947be1976678b84cdf45bd
          final @Nullable Component history = this.getHistory();
  
 diff --git a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
-index 6ee39b534b8d992655bc0cef3c299d12cbae0034..d69a786c1ee31b60eac33ae97e1e26b4de84828f 100644
+index 6ee39b534b8d992655bc0cef3c299d12cbae0034..3b04f982b3a31ecdaed412390941e9c9b1e7e0f6 100644
 --- a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
 +++ b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
 @@ -20,7 +20,7 @@ public final class PaperConsole extends SimpleTerminalConsole {
@@ -67,7 +67,7 @@ index 6ee39b534b8d992655bc0cef3c299d12cbae0034..d69a786c1ee31b60eac33ae97e1e26b4
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
-index 790bad0494454ca12ee152e3de6da3da634d9b20..aab9bbc88733f09ea952c3042085f74af847e8fb 100644
+index 74ffdc823e66fc5ec027c4b7c462382bcbfe2be2..c1639f79b5a5e53d3a276458e4aa8f44e6841464 100644
 --- a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
 +++ b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
 @@ -31,6 +31,7 @@ public record ServerBuildInfoImpl(
@@ -91,7 +91,7 @@ index 790bad0494454ca12ee152e3de6da3da634d9b20..aab9bbc88733f09ea952c3042085f74a
              SharedConstants.getCurrentVersion().name(),
              getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index 1354ccfbf525e5e64483ac5f443cc2325ba63850..6e0a00f632afab6089fc145f8efb9e48bc60104a 100644
+index 1354ccfbf525e5e64483ac5f443cc2325ba63850..3b756aca5fa44af6a41d7fcaf3b0f7d3672c691e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -491,7 +491,7 @@ public class CraftScheduler implements BukkitScheduler {
@@ -104,7 +104,7 @@ index 1354ccfbf525e5e64483ac5f443cc2325ba63850..6e0a00f632afab6089fc145f8efb9e48
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-index 774556a62eb240da42e84db4502e2ed43495be17..3bde8e98569552e6d4015db43f297ad87a47367a 100644
+index 774556a62eb240da42e84db4502e2ed43495be17..a0c69929beefb44e7726e318d52147f088da14c5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 @@ -11,7 +11,7 @@ public final class Versioning {
@@ -117,7 +117,7 @@ index 774556a62eb240da42e84db4502e2ed43495be17..3bde8e98569552e6d4015db43f297ad8
  
          if (stream != null) {
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index c77748061f1c8bb2b0dc8dbd80f608d431752015..4595091335cad1c5e7b52cde90d2aefa4c9565ed 100644
+index c77748061f1c8bb2b0dc8dbd80f608d431752015..b36f91a3c0c00fe5232653becead590d74d318a5 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
 @@ -25,7 +25,7 @@ public class WatchdogThread extends ca.spottedleaf.moonrise.common.util.TickThre
@@ -171,4 +171,3 @@ index c77748061f1c8bb2b0dc8dbd80f608d431752015..4595091335cad1c5e7b52cde90d2aefa
                  }
  
                  logger.log(Level.SEVERE, "------------------------------");
-
