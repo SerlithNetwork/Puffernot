@@ -17,6 +17,11 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.command.CommandSender;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -90,24 +95,55 @@ public class FlareCommand {
                         return Command.SINGLE_SUCCESS;
                     })
                 )
-                .then(Commands.literal("status")
-                    .executes(ctx -> {
-                        CommandSender sender = ctx.getSource().getSender();
-                        if (!FlareCommand.isFlareAvailable(sender)) {
-                            return Command.SINGLE_SUCCESS;
-                        }
-                        if (ProfilingManager.isProfiling()) {
-                            sendPrefixed(sender,
-                                Component.text("Current profile has been ran for " + ProfilingManager.getTimeRan().toString(), HEX)
-                            );
-                        } else {
-                            sendPrefixed(sender,
-                                Component.text("Flare is not running.", HEX)
-                            );
-                        }
+            )
+            .then(Commands.literal("status")
+                .executes(ctx -> {
+                    CommandSender sender = ctx.getSource().getSender();
+                    if (!FlareCommand.isFlareAvailable(sender)) {
                         return Command.SINGLE_SUCCESS;
-                    })
-                )
+                    }
+                    if (ProfilingManager.isProfiling()) {
+                        sendPrefixed(sender,
+                            Component.text("Current profile has been ran for " + ProfilingManager.getTimeRan().toString(), HEX)
+                        );
+                    } else {
+                        sendPrefixed(sender,
+                            Component.text("Flare is not running.", HEX)
+                        );
+                    }
+                    return Command.SINGLE_SUCCESS;
+                })
+            )
+            .then(Commands.literal("license")
+                .executes(ctx -> {
+                    MCUtil.scheduleAsyncTask(() -> {
+                        CommandSender sender = ctx.getSource().getSender();
+                        try (HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build()) {
+                            HttpResponse<String> response = client.send(HttpRequest.newBuilder()
+                                .uri(URI.create(PufferfishConfig.FLARE.URL + "/license"))
+                                .header("Authorization", "token " + PufferfishConfig.WEB_SERVICES.TOKEN)
+                                .GET()
+                                .build(),
+                                HttpResponse.BodyHandlers.ofString()
+                            );
+                            if (response.statusCode() == 200) {
+                                sendPrefixed(sender,
+                                    Component.text("Flare Profiler", MAIN_COLOR),
+                                    Component.text("Licensed to ", HEX).append(Component.text(response.body(), NamedTextColor.GREEN)).append(Component.text(".", HEX))
+                                );
+                            } else {
+                                sendPrefixed(sender,
+                                    Component.text("License provided is invalid!", NamedTextColor.RED)
+                                );
+                            }
+                        } catch (Exception ex) {
+                            sendPrefixed(sender,
+                                Component.text("Failed to connect to Flare server.", NamedTextColor.RED)
+                            );
+                        }
+                    });
+                    return Command.SINGLE_SUCCESS;
+                })
             )
             .build();
 
