@@ -81,7 +81,7 @@
              "Implementation-Version" to implementationVersion,
              "Implementation-Vendor" to date,
 -            "Specification-Title" to "Paper",
-+            "Specification-Title" to "Pufferfish", // Pufferfish
++            "Specification-Title" to "Puffernot", // Pufferfish
              "Specification-Version" to project.version,
 -            "Specification-Vendor" to "Paper Team",
 -            "Brand-Id" to "papermc:paper",

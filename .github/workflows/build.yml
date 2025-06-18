@@ -26,12 +26,6 @@ jobs:
         run: ./gradlew applyAllPatches --stacktrace
       - name: Build
         run: ./gradlew build --stacktrace
-      - name: Rebuild on Failure
-        if: ${{ failure() }}
-        run: |
-          ./gradlew clean cleanCache --refresh-dependencies
-          ./gradlew applyAllPatches --stacktrace 
-          ./gradlew build --stacktrace
       - name: Release Pufferfish
         if: "contains(github.event.commits[0].message, '[release]')"
         uses: softprops/action-gh-release@master
