@@ -16,22 +16,23 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class FlareCommand {
 
     private static final String BASE_URL = "https://blog.airplane.gg/flare-tutorial/#setting-the-access-token";
-    private static final TextColor HEX = TextColor.fromHexString("#e3eaea");
+    private static final TextColor HEX = TextColor.color(227, 234, 234);
+    private static final TextColor MAIN_COLOR = TextColor.color(106, 126, 218);
     private static final Component PREFIX = Component.text()
-        .append(Component.text("Flare ✈")
-            .color(TextColor.fromHexString("#6a7eda"))
-            .decoration(TextDecoration.BOLD, true)
-            .append(Component.text(" ", HEX)
-                .decoration(TextDecoration.BOLD, false)))
-        .asComponent();
+        .color(NamedTextColor.GRAY)
+        .append(Component.text("[", NamedTextColor.DARK_GRAY))
+        .append(Component.text("✈", MAIN_COLOR, TextDecoration.BOLD))
+        .append(Component.text("]", NamedTextColor.DARK_GRAY))
+        .append(Component.text(" "))
+        .build();
 
     public static void init() {
 
@@ -74,12 +75,17 @@ public class FlareCommand {
                         if (!FlareCommand.isFlareAvailable(sender)) {
                             return Command.SINGLE_SUCCESS;
                         }
+
+                        String profile = ProfilingManager.getProfilingUri();
                         if (ProfilingManager.stop()) {
-                            if (!(sender instanceof ConsoleCommandSender)) {
-                                sender.sendMessage(PREFIX.append(Component.text("Profiling has been stopped.", HEX)));
-                            }
+                            broadcastPrefixed(
+                                Component.text("Profiling has been stopped.", MAIN_COLOR),
+                                Component.text(profile, HEX).clickEvent(ClickEvent.openUrl(profile))
+                            );
                         } else {
-                            sender.sendMessage(PREFIX.append(Component.text("Profiling has already been stopped.", HEX)));
+                            sendPrefixed(sender,
+                                Component.text("Profiling has already been stopped.", HEX)
+                            );
                         }
                         return Command.SINGLE_SUCCESS;
                     })
@@ -91,9 +97,13 @@ public class FlareCommand {
                             return Command.SINGLE_SUCCESS;
                         }
                         if (ProfilingManager.isProfiling()) {
-                            sender.sendMessage(PREFIX.append(Component.text("Current profile has been ran for " + ProfilingManager.getTimeRan().toString(), HEX)));
+                            sendPrefixed(sender,
+                                Component.text("Current profile has been ran for " + ProfilingManager.getTimeRan().toString(), HEX)
+                            );
                         } else {
-                            sender.sendMessage(PREFIX.append(Component.text("Flare is not running.", HEX)));
+                            sendPrefixed(sender,
+                                Component.text("Flare is not running.", HEX)
+                            );
                         }
                         return Command.SINGLE_SUCCESS;
                     })
@@ -109,7 +119,10 @@ public class FlareCommand {
     private static boolean isFlareAvailable(CommandSender sender) {
         if (PufferfishConfig.WEB_SERVICES.TOKEN.isEmpty()) {
             Component clickable = Component.text(BASE_URL, HEX, TextDecoration.UNDERLINED).clickEvent(ClickEvent.clickEvent(ClickEvent.Action.OPEN_URL, BASE_URL));
-            sender.sendMessage(PREFIX.append(Component.text("Flare currently requires an access token to use. To learn more, visit ").color(HEX).append(clickable)));
+            sendPrefixed(sender,
+                Component.text("Flare currently requires an access token to use.").color(NamedTextColor.GRAY),
+                Component.text("To learn more, visit ", NamedTextColor.GRAY).append(clickable)
+            );
             return false;
         }
         return true;
@@ -120,41 +133,69 @@ public class FlareCommand {
             return;
         }
         if (!FlareSetup.isSupported()) {
-            sender.sendMessage(PREFIX.append(
-                Component.text("Profiling is not supported in this environment, check your startup logs for the error.", NamedTextColor.RED)));
+            sendPrefixed(sender,
+                Component.text("Profiling is not supported in this environment", NamedTextColor.RED),
+                Component.text("Check your startup logs for the error.", NamedTextColor.RED)
+            );
             return;
         }
         if (ProfilingManager.isProfiling()) {
-            sender.sendMessage(PREFIX.append(Component
-                .text("Flare has already been started: " + ProfilingManager.getProfilingUri(), HEX)
-                .clickEvent(ClickEvent.openUrl(ProfilingManager.getProfilingUri()))
-            ));
+            sendPrefixed(sender,
+                Component.text("Flare has already been started", MAIN_COLOR),
+                Component.text(ProfilingManager.getProfilingUri(), HEX).clickEvent(ClickEvent.openUrl(ProfilingManager.getProfilingUri()))
+            );
             return;
         }
 
+        sendPrefixed(sender,
+            Component.text("Starting a new flare, please wait...", NamedTextColor.GRAY)
+        );
         MCUtil.scheduleAsyncTask(() -> {
             try {
                 if (ProfilingManager.start(profileType)) {
-                    if (!(sender instanceof ConsoleCommandSender)) {
-                        sender.sendMessage(PREFIX.append(Component
-                            .text("Flare has been started: " + ProfilingManager.getProfilingUri(), HEX)
-                            .clickEvent(ClickEvent.openUrl(ProfilingManager.getProfilingUri()))
-                        ));
-                        sender.sendMessage(PREFIX.append(Component.text("  Run '/flare stop' to stop the Flare.", HEX)));
-                    }
+                    broadcastPrefixed(
+                        Component.text("Flare has been started!", MAIN_COLOR),
+                        Component.text("It will run in the background for 15 minutes", NamedTextColor.GRAY),
+                        Component.text("or until manually stopped using:", NamedTextColor.GRAY),
+                        Component.text("  ").append(Component.text("/flare profiler stop", NamedTextColor.WHITE).clickEvent(ClickEvent.runCommand("flare profiler stop"))),
+                        Component.text("Follow its progress here:", NamedTextColor.GRAY),
+                        Component.text(ProfilingManager.getProfilingUri(), HEX).clickEvent(ClickEvent.openUrl(ProfilingManager.getProfilingUri()))
+                    );
                 } else {
-                    sender.sendMessage(PREFIX.append(Component
-                        .text("Flare has already been started: " + ProfilingManager.getProfilingUri(), HEX)
-                        .clickEvent(ClickEvent.openUrl(ProfilingManager.getProfilingUri()))
-                    ));
+                    sendPrefixed(sender,
+                        Component.text("Flare has already been started", NamedTextColor.GRAY),
+                        Component.text(ProfilingManager.getProfilingUri(), HEX).clickEvent(ClickEvent.openUrl(ProfilingManager.getProfilingUri()))
+                    );
                 }
             } catch (UserReportableException e) {
-                sender.sendMessage(Component.text("Flare failed to start: " + e.getUserError(), NamedTextColor.RED));
+                sendPrefixed(sender,
+                    Component.text("Flare failed to start: " + e.getUserError(), NamedTextColor.RED)
+                );
                 if (e.getCause() != null) {
                     MinecraftServer.LOGGER.warn("Flare failed to start", e);
                 }
             }
         });
+    }
+
+    private static void sendPrefixed(CommandSender sender, Component ...lines) {
+        for (Component line : lines) {
+            sender.sendMessage(PREFIX.append(line));
+        }
+    }
+
+    private static void broadcastPrefixed(Component ...lines) {
+        Stream.concat(
+            MinecraftServer.getServer().server.getOnlinePlayers().stream(),
+            Stream.of(MinecraftServer.getServer().server.getConsoleSender())
+            )
+            .filter(s -> s.hasPermission("airplane.flare"))
+            .forEach(s -> {
+                for (Component line : lines) {
+                    s.sendMessage(PREFIX.append(line));
+                }
+            });
+
     }
 
 }

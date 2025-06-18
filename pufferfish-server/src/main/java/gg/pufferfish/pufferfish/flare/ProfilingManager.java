@@ -127,7 +127,7 @@ public class ProfilingManager {
         }
 
         currentTask = ses.schedule(ProfilingManager::stop, 15, TimeUnit.MINUTES);
-        PufferfishLogger.LOGGER.log(Level.INFO, "Flare has been started: " + getProfilingUri());
+        // PufferfishLogger.LOGGER.log(Level.INFO, "Flare has been started: " + getProfilingUri());
         return true;
     }
 
@@ -139,7 +139,7 @@ public class ProfilingManager {
             currentFlare = null;
             return true;
         }
-        PufferfishLogger.LOGGER.log(Level.INFO, "Flare has been stopped: " + getProfilingUri());
+        // PufferfishLogger.LOGGER.log(Level.INFO, "Flare has been stopped: " + getProfilingUri());
         try {
             currentFlare.stop();
         } catch (IllegalStateException e) {
