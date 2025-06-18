@@ -1,6 +1,8 @@
 package gg.pufferfish.pufferfish;
 
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.command.brigadier.PaperCommands;
 import net.kyori.adventure.text.Component;
@@ -21,7 +23,7 @@ public class PufferfishCommand {
 
     public static void init() {
 
-        var command = Commands.literal("pufferfish")
+        LiteralCommandNode<CommandSourceStack> command = Commands.literal("pufferfish")
             .requires(s -> s.getSender().hasPermission("bukkit.command.pufferfish"))
             .then(Commands.literal("reload")
                 .executes(ctx -> {

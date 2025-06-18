@@ -3,7 +3,6 @@ package gg.pufferfish.pufferfish;
 import java.io.File;
 import java.net.URI;
 import java.util.List;
-import gg.pufferfish.pufferfish.flare.FlareCommand;
 import gg.pufferfish.pufferfish.flare.FlareSetup;
 import gg.pufferfish.pufferfish.sentry.SentryManager;
 import gg.pufferfish.pufferfish.simd.SIMDDetection;
@@ -12,7 +11,6 @@ import net.j4c0b3y.api.config.StaticConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.EntityType;
-import org.bukkit.command.SimpleCommandMap;
 
 @StaticConfig.Header({
     "Pufferfish Configuration",
@@ -229,10 +227,6 @@ public class PufferfishConfig extends StaticConfig {
 
         if (!WEB_SERVICES.TOKEN.isBlank()) {
             FlareSetup.init();
-            SimpleCommandMap commandMap = MinecraftServer.getServer().server.getCommandMap();
-            if (commandMap.getCommand("flare") == null) {
-                commandMap.register("flare", "Pufferfish", new FlareCommand());
-            }
         }
 
     }
