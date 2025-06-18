@@ -116,8 +116,11 @@ public class FlareCommand {
             )
             .then(Commands.literal("license")
                 .executes(ctx -> {
+                    CommandSender sender = ctx.getSource().getSender();
+                    if (!FlareCommand.isFlareAvailable(sender)) {
+                        return Command.SINGLE_SUCCESS;
+                    }
                     MCUtil.scheduleAsyncTask(() -> {
-                        CommandSender sender = ctx.getSource().getSender();
                         try (HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build()) {
                             HttpResponse<String> response = client.send(HttpRequest.newBuilder()
                                 .uri(URI.create(PufferfishConfig.FLARE.URL + "/license"))
@@ -133,12 +136,14 @@ public class FlareCommand {
                                 );
                             } else {
                                 sendPrefixed(sender,
-                                    Component.text("License provided is invalid!", NamedTextColor.RED)
+                                    Component.text("License provided is invalid!", NamedTextColor.RED),
+                                    Component.text("It might be down, or don't contain a license endpoint.", NamedTextColor.DARK_GRAY)
                                 );
                             }
                         } catch (Exception ex) {
                             sendPrefixed(sender,
-                                Component.text("Failed to connect to Flare server.", NamedTextColor.RED)
+                                Component.text("Failed to connect to Flare server.", NamedTextColor.RED),
+                                Component.text("It might be down, or don't contain a license endpoint.", NamedTextColor.DARK_GRAY)
                             );
                         }
                     });
