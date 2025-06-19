@@ -5,7 +5,7 @@ Subject: [PATCH] Pufferfish Optimize Map Rendering
 
 
 diff --git a/src/main/java/org/bukkit/map/MapPalette.java b/src/main/java/org/bukkit/map/MapPalette.java
-index 5bb3267f81a23d73baa3e4117563a13d61303013..694bcdf5cb0087a2055d2b1d8018ee4ced87c4cc 100644
+index fd6f3bce50a66004687b08fd80568543f814747a..16550d653dabe49f6736009981f6e069ef73e68d 100644
 --- a/src/main/java/org/bukkit/map/MapPalette.java
 +++ b/src/main/java/org/bukkit/map/MapPalette.java
 @@ -35,7 +35,7 @@ public final class MapPalette {
@@ -15,7 +15,7 @@ index 5bb3267f81a23d73baa3e4117563a13d61303013..694bcdf5cb0087a2055d2b1d8018ee4c
 -    static final Color[] colors = {
 +    public static final Color[] colors = {
          // Start generate - MapPalette#colors
-         // @GeneratedFrom 1.21.6-rc1
+         // @GeneratedFrom 1.21.6
          new Color(0x00000000, true),
 @@ -395,9 +395,15 @@ public final class MapPalette {
          temp.getRGB(0, 0, temp.getWidth(), temp.getHeight(), pixels, 0, temp.getWidth());
