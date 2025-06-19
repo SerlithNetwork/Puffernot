@@ -55,7 +55,7 @@
      runtimeOnly("org.apache.maven.resolver:maven-resolver-connector-basic:1.9.18")
      runtimeOnly("org.apache.maven.resolver:maven-resolver-transport-http:1.9.18")
  
-+    implementation("net.serlith:Flare:4.0.0") // Pufferfish - Flare
++    implementation("net.serlith:Flare:4.0.3") // Pufferfish - Flare
 +    implementation("net.serlith.ConfigAPI:ConfigAPI-core:1.2.2.2") // Pufferfish - Config API
 +
      testImplementation("io.github.classgraph:classgraph:4.8.179") // For mob goal test
