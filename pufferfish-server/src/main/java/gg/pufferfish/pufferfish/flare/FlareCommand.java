@@ -137,13 +137,13 @@ public class FlareCommand {
                             } else {
                                 sendPrefixed(sender,
                                     Component.text("License provided is invalid!", NamedTextColor.RED),
-                                    Component.text("It might be down, or don't contain a license endpoint.", NamedTextColor.DARK_GRAY)
+                                    Component.text("It might be down or the flare instance doesn't contain a license endpoint.", NamedTextColor.DARK_GRAY)
                                 );
                             }
                         } catch (Exception ex) {
                             sendPrefixed(sender,
                                 Component.text("Failed to connect to Flare server.", NamedTextColor.RED),
-                                Component.text("It might be down, or don't contain a license endpoint.", NamedTextColor.DARK_GRAY)
+                                Component.text("It might be down or the flare instance doesn't contain a license endpoint.", NamedTextColor.DARK_GRAY)
                             );
                         }
                     });

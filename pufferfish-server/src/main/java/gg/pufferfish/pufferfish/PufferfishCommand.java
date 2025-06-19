@@ -44,7 +44,7 @@ public class PufferfishCommand {
             .then(Commands.literal("version")
                 .executes(ctx -> {
                     if (FEEDBACK_CURRENT_VERSION == null) {
-                        FEEDBACK_CURRENT_VERSION = PREFIX.append(Component.text("This server is running " + Bukkit.getName() + " (Unofficial) version " + Bukkit.getVersion() + " (Implementing API version " + Bukkit.getBukkitVersion() + ")", NamedTextColor.WHITE));
+                        FEEDBACK_CURRENT_VERSION = PREFIX.append(Component.text("This server is running " + Bukkit.getName() + " (Puffernot) version " + Bukkit.getVersion() + " (Implementing API version " + Bukkit.getBukkitVersion() + ")", NamedTextColor.WHITE));
                     }
                     ctx.getSource().getSender().sendMessage(FEEDBACK_CURRENT_VERSION);
                     return Command.SINGLE_SUCCESS;

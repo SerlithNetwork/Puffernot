@@ -147,6 +147,14 @@ public class PufferfishConfig extends StaticConfig {
     @Comment("Configures Flare, the built-in profiler")
     public static class FLARE {
 
+        @Hidden
+        @Comment({
+            "Sets the Flare version",
+            "1: Original Flare by Airplane",
+            "2: Updated version of Flare by SerlithNetwork"
+        })
+        public static int VERSION = 1;
+
         @Comment("Sets the server to use for profiles.")
         public static URI URL = URI.create("https://flare.airplane.gg");
 
