@@ -55,3 +55,4 @@ All other files are licensed under MIT.
 ## Additional Credits
 1. PurpurMC for their paperweight setup
 2. Toffikk for [ServerConfigurations](https://github.com/Toffikk/Pufferfork/blob/ver/1.21.6/pufferfork-server/src/main/java/gg/pufferfish/pufferfish/compat/ServerConfigurations.java) and [0014-Pufferfish-Better-Check-For-Useless-Packets.patch](https://github.com/Toffikk/Pufferfork/blob/ver/1.21.6/pufferfork-server/minecraft-patches/sources/net/minecraft/server/level/ServerEntity.java.patch)
+3. Winds-Studio for their [auto-release script](https://github.com/Winds-Studio/Leaf/blob/ver/1.21.5/scripts/prepareRelease.sh)

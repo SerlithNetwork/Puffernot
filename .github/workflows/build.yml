@@ -14,27 +14,48 @@ jobs:
       BUILD_NUMBER: ${{ github.run_number }}
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
           cache: 'gradle'
+
       - uses: gradle/actions/setup-gradle@v4
+
       - name: Configure Git
         run: git config --global user.email "no-reply@github.com" && git config --global user.name "Github Actions"
+
       - name: Apply Patches
         run: ./gradlew applyAllPatches --stacktrace
-      - name: Build
-        run: ./gradlew build --stacktrace
+
+      - name: Create MojmapPaperclipJar
+        run: ./gradlew createMojmapPaperclipJar --stacktrace
+
+      - name: Prepare release notes and artifacts
+        run: |
+          chmod +x ./scripts/prepareRelease.sh
+          ./scripts/prepareRelease.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
+          BUILD_NUMBER: ${{ env.BUILD_NUMBER }}
+
+      - name: Upload Pufferfish
+        uses: actions/upload-artifact@main
+        with:
+          name: Pufferfish 1.21.6
+          path: ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.6-R0.1-SNAPSHOT-mojmap.jar
+
       - name: Release Pufferfish
-        if: "contains(github.event.commits[0].message, '[release]')"
         uses: softprops/action-gh-release@master
         with:
           name: "Pufferfish build ${{ env.BUILD_NUMBER }}"
-          tag_name: "ver-1.21.6-b${{ env.BUILD_NUMBER }}"
+          tag_name: "ver-1.21.6"
           files: |
-            pufferfish-server/build/libs/pufferfish-paperclip-1.21.6-R0.1-SNAPSHOT-mojmap.jar
-            pufferfish-api/build/libs/pufferfish-api-1.21.6-R0.1-SNAPSHOT.jar
+            ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.6-R0.1-SNAPSHOT-mojmap.jar
+            ./pufferfish-api/build/libs/pufferfish-api-1.21.6-R0.1-SNAPSHOT.jar
+          body_path: "./RELEASE.md"
           token: "${{ secrets.GITHUB_TOKEN }}"
           target_commitish: "${{ github.sha }}"
           draft: false
