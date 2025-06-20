@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
+import org.apache.logging.log4j.core.config.Property;
 import org.apache.logging.log4j.core.filter.AbstractFilter;
 
 public class PufferfishSentryAppender extends AbstractAppender {
@@ -23,7 +24,7 @@ public class PufferfishSentryAppender extends AbstractAppender {
     private static final Gson GSON = new Gson();
 
     public PufferfishSentryAppender() {
-        super("PufferfishSentryAdapter", new SentryFilter(), null);
+        super("PufferfishSentryAdapter", new SentryFilter(), null, true, Property.EMPTY_ARRAY);
     }
 
     @Override
@@ -54,6 +55,7 @@ public class PufferfishSentryAppender extends AbstractAppender {
         event.setLogger(e.getLoggerName());
         event.setTransaction(e.getLoggerName());
         event.setExtra("thread_name", e.getThreadName());
+        event.setMessage(sentryMessage);
 
         boolean hasContext = e.getContextData() != null;
 
@@ -92,20 +94,13 @@ public class PufferfishSentryAppender extends AbstractAppender {
     }
 
     private SentryLevel getLevel(Level level) {
-        switch (level.getStandardLevel()) {
-            case TRACE:
-            case DEBUG:
-                return SentryLevel.DEBUG;
-            case WARN:
-                return SentryLevel.WARNING;
-            case ERROR:
-                return SentryLevel.ERROR;
-            case FATAL:
-                return SentryLevel.FATAL;
-            case INFO:
-            default:
-                return SentryLevel.INFO;
-        }
+        return switch (level.getStandardLevel()) {
+            case TRACE, DEBUG -> SentryLevel.DEBUG;
+            case WARN -> SentryLevel.WARNING;
+            case ERROR -> SentryLevel.ERROR;
+            case FATAL -> SentryLevel.FATAL;
+            default -> SentryLevel.INFO;
+        };
     }
 
     private static class SentryFilter extends AbstractFilter {
