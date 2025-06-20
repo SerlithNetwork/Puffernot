@@ -10,6 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    permissions:
+      contents: write
     env:
       BUILD_NUMBER: ${{ github.run_number }}
     steps:
