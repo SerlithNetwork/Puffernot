@@ -44,20 +44,20 @@ echo "" >> $RELEASE_NOTES
 # Get checksums
 file="./pufferfish-server/build/libs/pufferfish-paperclip-1.21.6-R0.1-SNAPSHOT-mojmap.jar"
 if [ -f $file ]; then
-  MD5=$(md5sum $file | awk '{ print $1 }')
   SHA256=$(sha256sum $file | awk '{ print $1 }')
+  SHA512=$(sha512sum $file | awk '{ print $1 }')
   FILENAME=$(basename $file)
 
   {
     echo "|           | $FILENAME |"
     echo "| --------- | --------- |"
-    echo "| MD5       | $MD5      |"
     echo "| SHA256    | $SHA256   |"
+    echo "| SHA512    | $SHA512   |"
   } >> $RELEASE_NOTES
 
   echo "🔒Checksums calculated:"
-  echo "   MD5: $MD5"
   echo "   SHA256: $SHA256"
+  echo "   SHA512: $SHA512"
 else
   echo "⚠️No artifacts found." >> $RELEASE_NOTES
 fi
