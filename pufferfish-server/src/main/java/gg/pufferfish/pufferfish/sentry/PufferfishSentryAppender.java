@@ -53,6 +53,7 @@ public class PufferfishSentryAppender extends AbstractAppender {
         event.setThrowable(e.getThrown());
         event.setLevel(getLevel(e.getLevel()));
         event.setLogger(e.getLoggerName());
+        event.setTag("Logger", e.getLoggerName());
         event.setTransaction(e.getLoggerName());
         event.setExtra("thread_name", e.getThreadName());
         event.setMessage(sentryMessage);
@@ -70,6 +71,7 @@ public class PufferfishSentryAppender extends AbstractAppender {
             event.setExtra("plugin.name", e.getContextData().getValue("pufferfishsentry_pluginname"));
             event.setExtra("plugin.version", e.getContextData().getValue("pufferfishsentry_pluginversion"));
             event.setTransaction(e.getContextData().getValue("pufferfishsentry_pluginname"));
+            event.setTag("Plugin", e.getContextData().getValue("pufferfishsentry_pluginname"));
         }
 
         if (hasContext && e.getContextData().containsKey("pufferfishsentry_eventdata")) {

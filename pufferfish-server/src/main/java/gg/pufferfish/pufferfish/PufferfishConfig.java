@@ -42,7 +42,7 @@ public class PufferfishConfig extends StaticConfig {
         if (SIMDDetection.isEnabled) {
             PufferfishLogger.LOGGER.info("SIMD operations detected as functional. Will replace some operations with faster versions.");
         } else if (SIMDDetection.versionLimited) {
-            PufferfishLogger.LOGGER.warning("Will not enable SIMD! These optimizations are only safely supported on Java 17-24.");
+            PufferfishLogger.LOGGER.warning("Will not enable SIMD! These optimizations are only safely supported on Java 17-25.");
         } else {
             PufferfishLogger.LOGGER.warning("SIMD operations are available for your server, but are not configured!");
             PufferfishLogger.LOGGER.warning("To enable additional optimizations, add \"--add-modules=jdk.incubator.vector\" to your startup flags, BEFORE the \"-jar\".");

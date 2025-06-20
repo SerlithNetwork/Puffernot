@@ -1,0 +1,23 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Biquaternions <biquaternions@serlith.net>
+Date: Fri, 20 Jun 2025 18:07:56 -0500
+Subject: [PATCH] Pufferfish Add Sentry
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
+index 3b756aca5fa44af6a41d7fcaf3b0f7d3672c691e..628af266431b66e93c73f1bc2d4da3aa5cc411e0 100644
+--- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
++++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
+@@ -478,10 +478,12 @@ public class CraftScheduler implements BukkitScheduler {
+                         "Task #%s for %s generated an exception",
+                         task.getTaskId(),
+                         task.getOwner().getDescription().getFullName());
++                    gg.pufferfish.pufferfish.sentry.SentryContext.setPluginContext(task.getOwner()); // Pufferfish
+                     task.getOwner().getLogger().log(
+                             Level.WARNING,
+                         logMessage,
+                             throwable);
++                    gg.pufferfish.pufferfish.sentry.SentryContext.removePluginContext(); // Pufferfish
+                     org.bukkit.Bukkit.getServer().getPluginManager().callEvent(
+                         new com.destroystokyo.paper.event.server.ServerExceptionEvent(new com.destroystokyo.paper.exception.ServerSchedulerException(logMessage, throwable, task)));
+                     // Paper end
