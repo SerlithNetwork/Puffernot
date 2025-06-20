@@ -14,7 +14,7 @@ A highly optimized Paper fork designed for large servers requiring both maximum 
 
 > [!WARNING]
 > The purpose of this project is to serve as a template for other Pufferfish forks in this organization. \
-> Therefore we've made some aesthetic and config dependency changes. \
+> Therefore we've made some aesthetic and dependency changes that fit our taste and needs. \
 > If you want to run a Pufferfish jar closer to the original project, please refer to [Toffikk's port](https://github.com/Toffikk/Pufferfork).
 
 [Homepage][home] - [Downloads][downloads] - [Discord][discord] - [Knowledgebase][knowledgebase] - [Optimization Guide][optguide]
