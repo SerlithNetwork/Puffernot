@@ -13,6 +13,25 @@ public class VectorMapPalette {
     private static final VectorSpecies<Integer> I_SPEC = IntVector.SPECIES_PREFERRED;
     private static final VectorSpecies<Float> F_SPEC = FloatVector.SPECIES_PREFERRED;
 
+    private static final FloatVector[] CACHED_REDS;
+    private static final FloatVector[] CACHED_GREENS;
+    private static final FloatVector[] CACHED_BLUES;
+
+    static {
+
+        int length = MapPalette.colors.length;
+        CACHED_REDS = new FloatVector[length];
+        CACHED_GREENS = new FloatVector[length];
+        CACHED_BLUES = new FloatVector[length];
+
+        for (int c = 4; c < length; c++) {
+            CACHED_REDS[c] = FloatVector.broadcast(F_SPEC, MapPalette.colors[c].getRed());
+            CACHED_GREENS[c] = FloatVector.broadcast(F_SPEC, MapPalette.colors[c].getGreen());
+            CACHED_BLUES[c] = FloatVector.broadcast(F_SPEC, MapPalette.colors[c].getBlue());
+        }
+
+    }
+
     @Deprecated
     public static void matchColorVectorized(int[] in, byte[] out) {
         int speciesLength = I_SPEC.length();
@@ -43,9 +62,9 @@ public class VectorMapPalette {
             for (int c = 4; c < MapPalette.colors.length; c++) {
                 // We're using 32-bit floats here because it's 2x faster and nobody will know the difference.
                 // For correctness, the original algorithm uses 64-bit floats instead. Completely unnecessary.
-                FloatVector compReds = FloatVector.broadcast(F_SPEC, MapPalette.colors[c].getRed());
-                FloatVector compGreens = FloatVector.broadcast(F_SPEC, MapPalette.colors[c].getGreen());
-                FloatVector compBlues = FloatVector.broadcast(F_SPEC, MapPalette.colors[c].getBlue());
+                FloatVector compReds = CACHED_REDS[c];
+                FloatVector compGreens = CACHED_GREENS[c];
+                FloatVector compBlues = CACHED_BLUES[c];
 
                 FloatVector rMean = reds.add(compReds).div(2.0f);
                 FloatVector rDiff = reds.sub(compReds);
