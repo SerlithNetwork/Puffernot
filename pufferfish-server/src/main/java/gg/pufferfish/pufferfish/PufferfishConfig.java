@@ -34,7 +34,7 @@ public class PufferfishConfig extends StaticConfig {
         // Attempt to detect vectorization
         try {
             SIMDDetection.isEnabled = SIMDDetection.canEnable(PufferfishLogger.LOGGER);
-            SIMDDetection.versionLimited = SIMDDetection.getJavaVersion() < 17 || SIMDDetection.getJavaVersion() > 25;
+            SIMDDetection.versionLimited = SIMDDetection.getJavaVersion() < SIMDDetection.MIN_JAVA_VERSION || SIMDDetection.getJavaVersion() > SIMDDetection.MAX_JAVA_VERSION;
         } catch (NoClassDefFoundError | Exception e) {
             MinecraftServer.LOGGER.error(e.getMessage());
         }

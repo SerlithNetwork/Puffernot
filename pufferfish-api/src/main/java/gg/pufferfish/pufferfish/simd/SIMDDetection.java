@@ -5,6 +5,9 @@ import java.util.logging.Logger;
 @Deprecated
 public class SIMDDetection {
 
+    public static final int MIN_JAVA_VERSION = 17;
+    public static final int MAX_JAVA_VERSION = 25; // Pending test to see if the bytecode is still faster
+
     public static boolean isEnabled = false;
     public static boolean versionLimited = false;
     public static boolean testRun = false;

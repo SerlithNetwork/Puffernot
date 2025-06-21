@@ -27,7 +27,7 @@ public class VectorMapPalette {
                 alphasArr[j] = (in[i + j] >> 24) & 0xFF;
                 redsArr[j] = (in[i + j] >> 16) & 0xFF;
                 greensArr[j] = (in[i + j] >> 8) & 0xFF;
-                bluesArr[j] = (in[i + j] >> 0) & 0xFF;
+                bluesArr[j] = (in[i + j]) & 0xFF;
             }
 
             IntVector alphas = IntVector.fromArray(I_SPEC, alphasArr, 0);
