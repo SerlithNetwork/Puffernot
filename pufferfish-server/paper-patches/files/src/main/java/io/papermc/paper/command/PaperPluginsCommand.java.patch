@@ -1,0 +1,71 @@
+--- a/src/main/java/io/papermc/paper/command/PaperPluginsCommand.java
++++ b/src/main/java/io/papermc/paper/command/PaperPluginsCommand.java
+@@ -55,7 +_,7 @@
+ 
+     private static final Component LEGACY_PLUGIN_STAR = Component.text('*', TextColor.color(255, 212, 42)).hoverEvent(LEGACY_PLUGIN_INFO);
+     private static final Component INFO_ICON_START = Component.text("ℹ ", INFO_COLOR);
+-    private static final Component PLUGIN_TICK = Component.text("- ", NamedTextColor.DARK_GRAY);
++    private static final Component PLUGIN_TICK = Component.text("► ", NamedTextColor.DARK_GRAY); // Jellyfish - Better plugin UI - This patch is not from Pufferfish, is an aesthetic change I originally made for https://github.com/SerlithNetwork/Jellyfish
+     private static final Component PLUGIN_TICK_EMPTY = Component.text(" ");
+ 
+     private static final Component INFO_ICON_SERVER_PLUGIN = INFO_ICON_START.hoverEvent(SERVER_PLUGIN_INFO).clickEvent(ClickEvent.openUrl("https://docs.papermc.io/paper/adding-plugins"));
+@@ -126,6 +_,27 @@
+         return componentHeader.append(Component.text(":")).build();
+     }
+ 
++    // Jellyfish start - Better plugin UI - This patch is not from Pufferfish, is an aesthetic change I originally made for https://github.com/SerlithNetwork/Jellyfish
++    private final Component paperSeparator = net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize("<st><gradient:#6500ff:#00adff>                                        </gradient><gradient:#00adff:#6500ff>                                        </gradient></st>");
++    private final Component bukkitSeparator = net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize("<st><gradient:#ff5300:#ffcb00>                                        </gradient><gradient:#ffcb00:#ff5300>                                        </gradient></st>");
++
++    private static Component headerWithIcon(final String icon, final String header, final int color, final int count, final boolean showSize) {
++        final TextComponent.Builder componentIcon = Component.text().color(TextColor.color(color))
++            .append(Component.text(icon));
++        final TextComponent.Builder componentHeader = Component.text().color(TextColor.color(0xffffff))
++            .append(Component.text(header));
++
++        if (showSize) {
++            final Component p1 = Component.text("(", TextColor.color(color));
++            final Component p2 = Component.text(")", TextColor.color(color));
++            final Component c = Component.text(count, TextColor.color(0xffffff));
++            componentHeader.appendSpace().append(p1.append(c).append(p2));
++        }
++
++        return componentIcon.appendSpace().append(componentHeader).build();
++    }
++    // Jellyfish stop - Better plugin UI - This patch is not from Pufferfish, is an aesthetic change I originally made for https://github.com/SerlithNetwork/Jellyfish
++
+     private static Component asPlainComponents(final String strings) {
+         final net.kyori.adventure.text.TextComponent.Builder builder = Component.text();
+         for (final String string : strings.split("\n")) {
+@@ -188,12 +_,16 @@
+         final int sizePlugins = sizePaperPlugins + sizeSpigotPlugins;
+         final boolean hasAllPluginTypes = (sizePaperPlugins > 0 && sizeSpigotPlugins > 0);
+ 
+-        final Component infoMessage = Component.text().append(INFO_ICON_SERVER_PLUGIN).append(Component.text("Server Plugins (%s):".formatted(sizePlugins), NamedTextColor.WHITE)).build();
++        final Component infoMessage = Component.text().append(INFO_ICON_SERVER_PLUGIN).append(Component.text("Server Plugins (%s):".formatted(sizePlugins), NamedTextColor.AQUA)).build(); // Jellyfish - Better plugin UI - This patch is not from Pufferfish, is an aesthetic change I originally made for https://github.com/SerlithNetwork/Jellyfish
+ 
+         sender.sendMessage(infoMessage);
+ 
+         if (!paperPlugins.isEmpty()) {
+-            sender.sendMessage(header("Paper Plugins", 0x0288D1, sizePaperPlugins, hasAllPluginTypes));
++            // Jellyfish start - Better plugin UI - This patch is not from Pufferfish, is an aesthetic change I originally made for https://github.com/SerlithNetwork/Jellyfish
++            sender.sendMessage(this.paperSeparator);
++            sender.sendMessage(headerWithIcon(" ➤", "Paper Plugins", 0x0288D1, sizePaperPlugins, hasAllPluginTypes));
++            sender.sendMessage(this.paperSeparator);
++            // Jellyfish end - Better plugin UI - This patch is not from Pufferfish, is an aesthetic change I originally made for https://github.com/SerlithNetwork/Jellyfish
+         }
+ 
+         for (final Component component : formatProviders(paperPlugins)) {
+@@ -201,7 +_,11 @@
+         }
+ 
+         if (!spigotPlugins.isEmpty()) {
+-            sender.sendMessage(header("Bukkit Plugins", 0xED8106, sizeSpigotPlugins, hasAllPluginTypes));
++            // Jellyfish start - Better plugin UI - This patch is not from Pufferfish, is an aesthetic change I originally made for https://github.com/SerlithNetwork/Jellyfish
++            sender.sendMessage(this.bukkitSeparator);
++            sender.sendMessage(headerWithIcon(" 🪣", "Bukkit Plugins", 0xED8106, sizeSpigotPlugins, hasAllPluginTypes));
++            sender.sendMessage(this.bukkitSeparator);
++            // Jellyfish end - Better plugin UI - This patch is not from Pufferfish, is an aesthetic change I originally made for https://github.com/SerlithNetwork/Jellyfish
+         }
+ 
+         for (final Component component : formatProviders(spigotPlugins)) {
