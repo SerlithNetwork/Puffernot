@@ -53,6 +53,44 @@ index d0554ed6631535815e5932930911e3fe1dee8710..44bcf8101d49cd157fed6c072946a3de
          }
          final @Nullable Component history = this.getHistory();
  
+@@ -61,7 +61,7 @@ public class PaperVersionFetcher implements VersionFetcher {
+ 
+         final OptionalInt buildNumber = build.buildNumber();
+         if (buildNumber.isPresent()) {
+-            distance = fetchDistanceFromSiteApi(build, buildNumber.getAsInt());
++            distance = fetchDistanceFromWorkflows(repo, buildNumber.getAsInt()); // Pufferfish - Rebrand
+         } else {
+             final Optional<String> gitBranch = build.gitBranch();
+             final Optional<String> gitCommit = build.gitCommit();
+@@ -130,6 +130,28 @@ public class PaperVersionFetcher implements VersionFetcher {
+         }
+     }
+ 
++    // Pufferfish start - Rebrand
++    private static int fetchDistanceFromWorkflows(final String repo, final int workflowsBuild) {
++        try {
++            final HttpURLConnection connection = (HttpURLConnection) URI.create("https://api.github.com/repos/%s/actions/workflows/build.yml/runs?per_page=15".formatted(repo)).toURL().openConnection();
++            connection.connect();
++            if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) return DISTANCE_UNKNOWN; // Unknown commit
++            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
++                final JsonObject obj = new Gson().fromJson(reader, JsonObject.class);
++                final JsonArray runs = obj.getAsJsonArray("workflow_runs");
++                final Optional<JsonElement> run = runs.asList().stream().filter(r -> r.getAsJsonObject().get("status").getAsString().equalsIgnoreCase("success")).findFirst();
++                return run.map(jsonElement -> jsonElement.getAsJsonObject().get("run_number").getAsInt() - workflowsBuild).orElse(DISTANCE_ERROR);
++            } catch (final JsonSyntaxException | NumberFormatException e) {
++                LOGGER.error("Error parsing json from GitHub's API", e);
++                return DISTANCE_ERROR;
++            }
++        } catch (IOException e) {
++            LOGGER.error("Error while parsing version", e);
++            return DISTANCE_ERROR;
++        }
++    }
++    // Pufferfish start - Rebrand
++
+     private @Nullable Component getHistory() {
+         final VersionHistoryManager.@Nullable VersionData data = VersionHistoryManager.INSTANCE.getVersionData();
+         if (data == null) {
 diff --git a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
 index 6ee39b534b8d992655bc0cef3c299d12cbae0034..3b04f982b3a31ecdaed412390941e9c9b1e7e0f6 100644
 --- a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
