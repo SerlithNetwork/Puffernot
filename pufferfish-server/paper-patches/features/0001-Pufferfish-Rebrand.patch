@@ -86,7 +86,7 @@ index d0554ed6631535815e5932930911e3fe1dee8710..8af5d4bb172ad5686f992183bedadae8
 +            return DISTANCE_ERROR;
 +        }
 +    }
-+    // Pufferfish start - Rebrand
++    // Pufferfish end - Rebrand
 +
      private @Nullable Component getHistory() {
          final VersionHistoryManager.@Nullable VersionData data = VersionHistoryManager.INSTANCE.getVersionData();
