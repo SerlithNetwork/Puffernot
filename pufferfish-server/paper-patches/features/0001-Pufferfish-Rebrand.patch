@@ -32,7 +32,7 @@ index 6abc57669e87f7f98f3b76af3c0e50825fea6eb1..af91d0c7cfa60efa768d5f40d42283d6
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index d0554ed6631535815e5932930911e3fe1dee8710..44bcf8101d49cd157fed6c072946a3de9e4cabde 100644
+index d0554ed6631535815e5932930911e3fe1dee8710..8af5d4bb172ad5686f992183bedadae89e436a96 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 @@ -35,7 +35,7 @@ public class PaperVersionFetcher implements VersionFetcher {
@@ -75,7 +75,7 @@ index d0554ed6631535815e5932930911e3fe1dee8710..44bcf8101d49cd157fed6c072946a3de
 +            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
 +                final JsonObject obj = new Gson().fromJson(reader, JsonObject.class);
 +                final JsonArray runs = obj.getAsJsonArray("workflow_runs");
-+                final Optional<JsonElement> run = runs.asList().stream().filter(r -> r.getAsJsonObject().get("status").getAsString().equalsIgnoreCase("success")).findFirst();
++                final Optional<JsonElement> run = runs.asList().stream().filter(r -> r.getAsJsonObject().get("conclusion").getAsString().equalsIgnoreCase("success")).findFirst();
 +                return run.map(jsonElement -> jsonElement.getAsJsonObject().get("run_number").getAsInt() - workflowsBuild).orElse(DISTANCE_ERROR);
 +            } catch (final JsonSyntaxException | NumberFormatException e) {
 +                LOGGER.error("Error parsing json from GitHub's API", e);
