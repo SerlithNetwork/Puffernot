@@ -52,17 +52,17 @@ jobs:
       - name: Upload Pufferfish
         uses: actions/upload-artifact@main
         with:
-          name: Pufferfish 1.21.6
-          path: ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.6-R0.1-SNAPSHOT-mojmap.jar
+          name: Pufferfish 1.21.7
+          path: ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.7-R0.1-SNAPSHOT-mojmap.jar
 
       - name: Release Pufferfish
         uses: softprops/action-gh-release@master
         with:
-          name: "🐡 Puffernot 1.21.6 (Build ${{ env.BUILD_NUMBER }})"
-          tag_name: "ver-1.21.6"
+          name: "🐡 Puffernot 1.21.7 (Build ${{ env.BUILD_NUMBER }})"
+          tag_name: "ver-1.21.7"
           files: |
-            ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.6-R0.1-SNAPSHOT-mojmap.jar
-            ./pufferfish-api/build/libs/pufferfish-api-1.21.6-R0.1-SNAPSHOT.jar
+            ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.7-R0.1-SNAPSHOT-mojmap.jar
+            ./pufferfish-api/build/libs/pufferfish-api-1.21.7-R0.1-SNAPSHOT.jar
           body_path: "./RELEASE.md"
           token: "${{ secrets.GITHUB_TOKEN }}"
           target_commitish: "${{ github.sha }}"

@@ -79,7 +79,7 @@ tasks.register("printMinecraftVersion") {
     }
 }
 
-tasks.register("printPurpurVersion") {
+tasks.register("printPufferfishVersion") {
     doLast {
         println(project.version)
     }
