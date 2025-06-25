@@ -58,7 +58,7 @@ jobs:
       - name: Release Pufferfish
         uses: softprops/action-gh-release@master
         with:
-          name: "🐡 Puffernot build ${{ env.BUILD_NUMBER }}"
+          name: "🐡 Puffernot 1.21.6 (Build ${{ env.BUILD_NUMBER }})"
           tag_name: "ver-1.21.6"
           files: |
             ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.6-R0.1-SNAPSHOT-mojmap.jar
