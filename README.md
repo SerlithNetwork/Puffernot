@@ -15,8 +15,11 @@ A highly optimized Paper fork designed for large servers requiring both maximum 
 > [!WARNING]
 > The purpose of this project is to serve as a template for other Pufferfish forks in this organization. \
 > Therefore we've made some aesthetic and dependency changes that fit our taste and needs. \
-> If you want to run a Pufferfish jar closer to the original project, please refer to [Toffikk's port](https://github.com/Toffikk/Pufferfork).
+> If you want to run a Pufferfish jar closer to the original project, please refer to [Toffikk's port](https://github.com/Toffikk/Pufferfork). \
 > This is <u>our</u> interpretation of the Pufferfish software as a _modern implementation_ according to <u>our</u> personal style.
+
+> [!TIP]
+> Don't forget to check the [Wiki](https://github.com/SerlithNetwork/Puffernot/wiki)!
 
 [Homepage][home] - [Downloads][downloads] - [Discord][discord] - [Knowledgebase][knowledgebase] - [Optimization Guide][optguide]
 
