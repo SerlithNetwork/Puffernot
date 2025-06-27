@@ -166,24 +166,6 @@ index 859b859d29b637200cf7c9a0bd52d9f712413e3d..62124e6d9e2bbe9c0ea1835c172fa564
      }
  
      public boolean hasTasks() {
-diff --git a/net/minecraft/world/entity/animal/HappyGhast.java b/net/minecraft/world/entity/animal/HappyGhast.java
-index 24fdfda487bf5348c32707022719ec9907debc80..cbd2ab78929769d020b9a1f63a319fc2026faa13 100644
---- a/net/minecraft/world/entity/animal/HappyGhast.java
-+++ b/net/minecraft/world/entity/animal/HappyGhast.java
-@@ -376,11 +376,13 @@ public class HappyGhast extends Animal {
-         return HappyGhastAi.makeBrain(this.brainProvider().makeBrain(dynamic));
-     }
- 
-+    private int behaviorTick = 0; // Pufferfish
-     @Override
-     protected void customServerAiStep(ServerLevel level) {
-         if (this.isBaby()) {
-             ProfilerFiller profilerFiller = Profiler.get();
-             profilerFiller.push("happyGhastBrain");
-+            if (this.behaviorTick++ % this.activatedPriority == 0) // Pufferfish
-             ((Brain<HappyGhast>)this.brain).tick(level, this);
-             profilerFiller.pop();
-             profilerFiller.push("happyGhastActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/allay/Allay.java b/net/minecraft/world/entity/animal/allay/Allay.java
 index b7b964bd4e2d611a3e48ece072d5787193077a92..e846490db811267d6c0435bf91dffca27fd14cbf 100644
 --- a/net/minecraft/world/entity/animal/allay/Allay.java

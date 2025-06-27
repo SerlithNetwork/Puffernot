@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-CURRENT_TAG="ver-1.21.6"
+CURRENT_TAG="ver-1.21.5"
 RELEASE_NOTES="RELEASE.md"
 
 # Branch name
@@ -42,7 +42,7 @@ echo "" >> $RELEASE_NOTES
 } >> $RELEASE_NOTES
 
 # Get checksums
-file="./pufferfish-server/build/libs/pufferfish-paperclip-1.21.6-R0.1-SNAPSHOT-mojmap.jar"
+file="./pufferfish-server/build/libs/pufferfish-paperclip-1.21.5-R0.1-SNAPSHOT-mojmap.jar"
 if [ -f $file ]; then
   SHA256=$(sha256sum $file | awk '{ print $1 }')
   SHA512=$(sha512sum $file | awk '{ print $1 }')

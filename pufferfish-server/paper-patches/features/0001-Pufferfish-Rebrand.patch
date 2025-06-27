@@ -69,7 +69,7 @@ index d0554ed6631535815e5932930911e3fe1dee8710..8af5d4bb172ad5686f992183bedadae8
 +    // Pufferfish start - Rebrand
 +    private static int fetchDistanceFromWorkflows(final String repo, final int workflowsBuild) {
 +        try {
-+            final HttpURLConnection connection = (HttpURLConnection) URI.create("https://api.github.com/repos/%s/actions/workflows/build.yml/runs?per_page=15".formatted(repo)).toURL().openConnection();
++            final HttpURLConnection connection = (HttpURLConnection) URI.create("https://api.github.com/repos/%s/actions/workflows/build-1-21-5.yml/runs?per_page=15".formatted(repo)).toURL().openConnection();
 +            connection.connect();
 +            if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) return DISTANCE_UNKNOWN; // Unknown commit
 +            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
@@ -125,8 +125,8 @@ index 74ffdc823e66fc5ec027c4b7c462382bcbfe2be2..c1639f79b5a5e53d3a276458e4aa8f44
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_NAME)
 -                .orElse(BRAND_PAPER_NAME),
 +                .orElse(BRAND_PUFFERFISH_NAME), // Pufferfish - Rebrand
-             SharedConstants.getCurrentVersion().id(),
-             SharedConstants.getCurrentVersion().name(),
+             SharedConstants.getCurrentVersion().getId(),
+             SharedConstants.getCurrentVersion().getName(),
              getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 index 1354ccfbf525e5e64483ac5f443cc2325ba63850..3b756aca5fa44af6a41d7fcaf3b0f7d3672c691e 100644

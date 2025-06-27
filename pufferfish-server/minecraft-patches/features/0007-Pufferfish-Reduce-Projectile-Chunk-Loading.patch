@@ -23,7 +23,7 @@ diff --git a/net/minecraft/world/entity/projectile/Projectile.java b/net/minecra
 index ee16a05b8b2747ce95fcae1616c96143a5dec74e..7565fee5179fd8cc8b0b46c0820c06cbfb24fef5 100644
 --- a/net/minecraft/world/entity/projectile/Projectile.java
 +++ b/net/minecraft/world/entity/projectile/Projectile.java
-@@ -50,6 +50,36 @@ public abstract class Projectile extends Entity implements TraceableEntity {
+@@ -53,6 +53,36 @@ public abstract class Projectile extends Entity implements TraceableEntity {
          super(entityType, level);
      }
  
@@ -57,6 +57,6 @@ index ee16a05b8b2747ce95fcae1616c96143a5dec74e..7565fee5179fd8cc8b0b46c0820c06cb
 +    }
 +    // Pufferfish end - Reduce Projectile Chunk Loading
 +
-     protected void setOwner(@Nullable EntityReference<Entity> owner) {
-         this.owner = owner;
-     }
+     public void setOwner(@Nullable Entity owner) {
+         if (owner != null) {
+             this.ownerUUID = owner.getUUID();

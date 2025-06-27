@@ -13,6 +13,6 @@ index d0ab3db7bbd2942db19f473474371b20ce822608..0f7ccc09880e270f24bcde5b46ddd804
                      for (int i5 = i4 < i3 && i4 > -i3 ? i3 : 0; i5 <= i3; i5 = i5 > 0 ? -i5 : 1 - i5) {
                          mutableBlockPos.setWithOffset(blockPos, i4, i2 - 1, i5);
 +                        if (!this.mob.level().hasChunkAt(mutableBlockPos)) continue; // Pufferfish - if this block isn't loaded, continue
-                         if (this.mob.isWithinHome(mutableBlockPos) && this.isValidTarget(this.mob.level(), mutableBlockPos)) {
+                         if (this.mob.isWithinRestriction(mutableBlockPos) && this.isValidTarget(this.mob.level(), mutableBlockPos)) {
                              this.blockPos = mutableBlockPos;
                              this.mob.movingTarget = mutableBlockPos == BlockPos.ZERO ? null : mutableBlockPos.immutable(); // Paper
