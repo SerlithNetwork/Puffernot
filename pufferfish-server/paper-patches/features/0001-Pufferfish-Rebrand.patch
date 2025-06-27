@@ -69,7 +69,7 @@ index d0554ed6631535815e5932930911e3fe1dee8710..8af5d4bb172ad5686f992183bedadae8
 +    // Pufferfish start - Rebrand
 +    private static int fetchDistanceFromWorkflows(final String repo, final int workflowsBuild) {
 +        try {
-+            final HttpURLConnection connection = (HttpURLConnection) URI.create("https://api.github.com/repos/%s/actions/workflows/build.yml/runs?per_page=15".formatted(repo)).toURL().openConnection();
++            final HttpURLConnection connection = (HttpURLConnection) URI.create("https://api.github.com/repos/%s/actions/workflows/build-1-21-6.yml/runs?per_page=15".formatted(repo)).toURL().openConnection();
 +            connection.connect();
 +            if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) return DISTANCE_UNKNOWN; // Unknown commit
 +            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
