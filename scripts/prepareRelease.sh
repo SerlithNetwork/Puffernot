@@ -8,27 +8,6 @@ RELEASE_NOTES="RELEASE.md"
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 echo "✨Current branch: $CURRENT_BRANCH"
 
-# Latest tag name
-LATEST_TAG=$(git describe --tags --abbrev=0)
-if [ -z "$LATEST_TAG" ]; then
-  LATEST_TAG=$(git rev-list --max-parents=0 HEAD)
-  echo "⚠️No previous release found. Using initial commit."
-else
-  echo "✨Latest tag: $LATEST_TAG"
-fi
-
-# Commit of the latest tag
-LAST_RELEASE_COMMIT=$(git rev-list -n 1 "$LATEST_TAG")
-echo "✨Last release commit: $LAST_RELEASE_COMMIT"
-
-# Commits log
-COMMIT_LOG=$(git log "$LAST_RELEASE_COMMIT"..HEAD --pretty=format:"- [\`%h\`](https://github.com/${GITHUB_REPO}/commit/%H) %s (%an)")
-if [ -z "$COMMIT_LOG" ]; then
-  COMMIT_LOG="⚠️No new commits since $LATEST_TAG."
-else
-  echo "✅Commits log generated"
-fi
-
 # Release notes header
 echo "" >> $RELEASE_NOTES
 
