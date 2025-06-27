@@ -1,4 +1,4 @@
-name: Build
+name: Build 1.21.5
 on:
   workflow_dispatch:
   pull_request:
