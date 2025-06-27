@@ -15,7 +15,7 @@ index fd6f3bce50a66004687b08fd80568543f814747a..16550d653dabe49f6736009981f6e069
 -    static final Color[] colors = {
 +    public static final Color[] colors = {
          // Start generate - MapPalette#colors
-         // @GeneratedFrom 1.21.6
+         // @GeneratedFrom 1.21.5
          new Color(0x00000000, true),
 @@ -395,9 +395,15 @@ public final class MapPalette {
          temp.getRGB(0, 0, temp.getWidth(), temp.getHeight(), pixels, 0, temp.getWidth());

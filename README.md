@@ -8,7 +8,7 @@
 A highly optimized Paper fork designed for large servers requiring both maximum performance, stability, and "enterprise" features.
 
 > [!WARNING]
-> This is an unofficial port for [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) to 1.21.6+ \
+> This is an unofficial port for [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) to 1.21.5+ \
 > All credits go to Pufferfish Host. \
 > **Do not** report errors to Pufferfish Host while using this port.
 
@@ -26,17 +26,17 @@ A highly optimized Paper fork designed for large servers requiring both maximum 
 ## Puffernot differences from Pufferfish
 1. Updated Sentry dependency (and properly tested).
 2. Updated [Flare](https://github.com/SerlithNetwork/Flare) dependency (and properly tested).
-3. Removed usage of deprecated [Bungee ChatColor](https://github.com/pufferfish-gg/Pufferfish/blob/ver/1.21/patches/server/0003-Pufferfish-Config-and-Command.patch) in favor of [Adventure Components](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/src/main/java/gg/pufferfish/pufferfish/PufferfishCommand.java#L40).
-4. Migrated commands from [BukkitCommand](https://github.com/pufferfish-gg/Pufferfish/blob/ver/1.21/patches/server/0003-Pufferfish-Config-and-Command.patch) to [Brigadier](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/src/main/java/gg/pufferfish/pufferfish/PufferfishCommand.java).
-5. Refactor [FlareCommand](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/src/main/java/gg/pufferfish/pufferfish/flare/FlareCommand.java) to use spark-like syntax in both the command completion and feedback.
-6. Added missing entities with a brain to [DAB](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/minecraft-patches/features/0010-Pufferfish-Dynamic-Activation-Of-Brain.patch).
-7. Fixed some unused values in [PufferfishSentryAppender](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/src/main/java/gg/pufferfish/pufferfish/sentry/PufferfishSentryAppender.java#L59).
-8. Toffikk's reworked [ServerConfigurations](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/src/main/java/gg/pufferfish/pufferfish/compat/ServerConfigurations.java) to support paper configs and redact confidential values in Flare.
-9. Customized [spark](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/build.gradle.kts.patch#L70) build.
+3. Removed usage of deprecated [Bungee ChatColor](https://github.com/pufferfish-gg/Pufferfish/blob/ver/1.21/patches/server/0003-Pufferfish-Config-and-Command.patch) in favor of [Adventure Components](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.5/pufferfish-server/src/main/java/gg/pufferfish/pufferfish/PufferfishCommand.java#L40).
+4. Migrated commands from [BukkitCommand](https://github.com/pufferfish-gg/Pufferfish/blob/ver/1.21/patches/server/0003-Pufferfish-Config-and-Command.patch) to [Brigadier](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.5/pufferfish-server/src/main/java/gg/pufferfish/pufferfish/PufferfishCommand.java).
+5. Refactor [FlareCommand](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.5/pufferfish-server/src/main/java/gg/pufferfish/pufferfish/flare/FlareCommand.java) to use spark-like syntax in both the command completion and feedback.
+6. Added missing entities with a brain to [DAB](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.5/pufferfish-server/minecraft-patches/features/0010-Pufferfish-Dynamic-Activation-Of-Brain.patch).
+7. Fixed some unused values in [PufferfishSentryAppender](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.5/pufferfish-server/src/main/java/gg/pufferfish/pufferfish/sentry/PufferfishSentryAppender.java#L59).
+8. Toffikk's reworked [ServerConfigurations](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.5/pufferfish-server/src/main/java/gg/pufferfish/pufferfish/compat/ServerConfigurations.java) to support paper configs and redact confidential values in Flare.
+9. Customized [spark](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.5/pufferfish-server/build.gradle.kts.patch#L70) build.
 10. GitHub Workflows auto-release and version fetcher, the exact code in the repository is what will be delivered.
 11. Added two additional QoL patches:
-    1. [Custom plugin UI](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/paper-patches/files/src/main/java/io/papermc/paper/command/PaperPluginsCommand.java.patch).
-    2. [Spark tps and ping aliases added by default](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/paper-patches/files/src/main/resources/configurations/commands.yml.patch).
+    1. [Custom plugin UI](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.5/pufferfish-server/paper-patches/files/src/main/java/io/papermc/paper/command/PaperPluginsCommand.java.patch).
+    2. [Spark tps and ping aliases added by default](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.5/pufferfish-server/paper-patches/files/src/main/resources/configurations/commands.yml.patch).
 
 ## Pufferfish Features
 
