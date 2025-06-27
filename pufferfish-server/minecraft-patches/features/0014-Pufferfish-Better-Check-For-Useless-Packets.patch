@@ -8,7 +8,7 @@ diff --git a/net/minecraft/server/level/ServerEntity.java b/net/minecraft/server
 index e96d4dee14c05f2fa329bfb1588ec795d4e3d730..f7b2562e4cc613ba0623eadabe8e27f13749a022 100644
 --- a/net/minecraft/server/level/ServerEntity.java
 +++ b/net/minecraft/server/level/ServerEntity.java
-@@ -193,7 +193,7 @@ public class ServerEntity {
+@@ -189,7 +_,7 @@
                      packet = ClientboundEntityPositionSyncPacket.of(this.entity);
                      flag3 = true;
                      flag4 = true;
@@ -17,7 +17,7 @@ index e96d4dee14c05f2fa329bfb1588ec795d4e3d730..f7b2562e4cc613ba0623eadabe8e27f1
                      if (flag2) {
                          packet = new ClientboundMoveEntityPacket.Pos(this.entity.getId(), (short)l, (short)l1, (short)l2, this.entity.onGround());
                          flag3 = true;
-@@ -206,6 +206,7 @@ public class ServerEntity {
+@@ -202,6 +_,7 @@
                      flag3 = true;
                      flag4 = true;
                  }

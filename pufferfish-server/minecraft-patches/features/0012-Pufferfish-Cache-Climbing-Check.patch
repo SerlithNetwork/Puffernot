@@ -5,10 +5,10 @@ Subject: [PATCH] Pufferfish Cache Climbing Check
 
 
 diff --git a/io/papermc/paper/entity/activation/ActivationRange.java b/io/papermc/paper/entity/activation/ActivationRange.java
-index 3fbafe6e67cb5ac6c0acab0621029eea32614089..9c9368e7303a96923f5d6c7e33a18e0300ec11e8 100644
+index 5a5b56177ac5b6d03c5d2c77a6e61d8449917282..e0012484e21edc526d3f0c40b1853f037e2d76ae 100644
 --- a/io/papermc/paper/entity/activation/ActivationRange.java
 +++ b/io/papermc/paper/entity/activation/ActivationRange.java
-@@ -239,7 +239,7 @@ public final class ActivationRange {
+@@ -233,7 +233,7 @@ public final class ActivationRange {
          }
          // special cases.
          if (entity instanceof final LivingEntity living) {
@@ -18,10 +18,10 @@ index 3fbafe6e67cb5ac6c0acab0621029eea32614089..9c9368e7303a96923f5d6c7e33a18e03
              }
              if (entity instanceof final Mob mob && mob.getTarget() != null) {
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index 8bba401e10d8b3c8ec403ca953d91aacc82c36aa..cbd1cfcd46c5929bbaaee9b84b543c6afb482950 100644
+index f88ead541042957188d46b98358a195f543d9bae..db6cd9bdef1393be4b2bb8d90a7a36d72920bb8b 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
-@@ -2133,6 +2133,19 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+@@ -2101,6 +2101,19 @@ public abstract class LivingEntity extends Entity implements Attackable {
          return this.lastClimbablePos;
      }
  

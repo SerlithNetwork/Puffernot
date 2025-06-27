@@ -27,12 +27,12 @@ index d6dcb6d146d89a8fb96e7c669e5deb802223abd6..8871cd3c0610ea584c3bbf15913de976
 +    public gg.pufferfish.pufferfish.util.AsyncExecutor mobSpawnExecutor = new gg.pufferfish.pufferfish.util.AsyncExecutor("Pufferfish Async Mob Spawning Thread"); // Pufferfish - Optimize mob spawning
  
      public static <S extends MinecraftServer> S spin(Function<Thread, S> threadFunction) {
-         ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry.init(); // Paper - rewrite data converter system
+         AtomicReference<S> atomicReference = new AtomicReference<>();
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index fab894e6308049f6506ae58b434d54a5f79ff814..91403df719574d668e6f4f2165a3925a41fe9c86 100644
+index a8cf3e2ab5dec0e76b3ba394a905dd6f01e1b75c..57f2e627ea449fb0ce1ab41cfce6854babc94d63 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -309,6 +309,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -313,6 +313,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
                  LOGGER.info("JMX monitoring enabled");
              }
  
@@ -41,7 +41,7 @@ index fab894e6308049f6506ae58b434d54a5f79ff814..91403df719574d668e6f4f2165a3925a
          }
      }
 diff --git a/net/minecraft/server/level/ServerChunkCache.java b/net/minecraft/server/level/ServerChunkCache.java
-index 2882cd829d4d8e1f8615f085f6908efcdf68ac62..69d7e2422b58613030a9c5c5af442be25af7e845 100644
+index 59e8a5e1b35c81883c9b1ca00c6e55d77584d8cc..924535f6acb1c0e63b211e2c1fc508545d5719b3 100644
 --- a/net/minecraft/server/level/ServerChunkCache.java
 +++ b/net/minecraft/server/level/ServerChunkCache.java
 @@ -184,6 +184,8 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
