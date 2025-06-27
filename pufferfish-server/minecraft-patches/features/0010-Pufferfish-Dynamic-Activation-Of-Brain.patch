@@ -56,7 +56,7 @@ index 2ebee223085fe7926c7f3e555df19ae69f36157e..829f669ea7f67824d76d1678b0d17dc8
          }
      }
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 1b6f09227208c91467f22f5b03ad46886dc7882b..f5d905ec4bcd5f7f6103be31e155e76da51821a2 100644
+index 399f1167e96f58f22f6ddd75191454421c53a42f..1d43b9b86c9f564456063d0ec1919f99e0ddccd5 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -788,6 +788,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
@@ -68,7 +68,7 @@ index 1b6f09227208c91467f22f5b03ad46886dc7882b..f5d905ec4bcd5f7f6103be31e155e76d
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profilerFiller.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 98682e86d911c571c7e9d2cf02b424b7d561c391..188bc2789af5c17acf76999c97577392972fd14a 100644
+index 168893e876407ca83b5f9d68e77a034a7b12e1ac..09abd4faf2a8e0d743d81e7ba2895fbb6ee9c950 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -350,6 +350,8 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -184,10 +184,10 @@ index eaa1745d34323cd684782a7fb2e153851a736471..372f8cb0ebb268823cb5714744ccc1ef
          profilerFiller.pop();
          profilerFiller.push("allayActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/armadillo/Armadillo.java b/net/minecraft/world/entity/animal/armadillo/Armadillo.java
-index c1798db2972c8f2a343cf6e16fd9354ff212d906..e60f73a052105b0a7be5ebdbb0affb53f4b6b7be 100644
+index b72e07ad954efa7f26f876a59f428086b40d9bb2..0b866644fa7769fc7290fd565461b76fcc70ad0c 100644
 --- a/net/minecraft/world/entity/animal/armadillo/Armadillo.java
 +++ b/net/minecraft/world/entity/animal/armadillo/Armadillo.java
-@@ -133,10 +133,12 @@ public class Armadillo extends Animal {
+@@ -132,10 +132,12 @@ public class Armadillo extends Animal {
          return ArmadilloAi.makeBrain(this.brainProvider().makeBrain(dynamic));
      }
  
@@ -218,10 +218,10 @@ index 233025bc1d4ba2590223def9b206140c68ea5f26..0b2f43d3c245bb51dc0ee66fce2baf3b
          profilerFiller.pop();
          profilerFiller.push("axolotlActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/camel/Camel.java b/net/minecraft/world/entity/animal/camel/Camel.java
-index 757b63ee059c95e673a098706b4ee7ab4fc21f70..4323e8fea0a0128ab25ae01daffd88f781ed181d 100644
+index 6336fb58f4314be2fe987d7e3de258d977369417..9a06e64d57ea714f187ec74b76caf15374b02b50 100644
 --- a/net/minecraft/world/entity/animal/camel/Camel.java
 +++ b/net/minecraft/world/entity/animal/camel/Camel.java
-@@ -157,12 +157,15 @@ public class Camel extends AbstractHorse {
+@@ -155,12 +155,15 @@ public class Camel extends AbstractHorse {
          return pose == Pose.SITTING ? SITTING_DIMENSIONS.scale(this.getAgeScale()) : super.getDefaultDimensions(pose);
      }
  
@@ -289,10 +289,10 @@ index b22321ead9d66cb089b67276743624b3cca52fc1..b7dbacf9b26a70522aedd600327aae0d
          profilerFiller.pop();
          profilerFiller.push("goatActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/sniffer/Sniffer.java b/net/minecraft/world/entity/animal/sniffer/Sniffer.java
-index 6a9f31c1f39cc14ad7b5ae3af85908bc7a4caae4..a082ba19c326935d7092ec50f278c85990d8dacc 100644
+index d34dcbbdeae41d23d6fb497e0e8da038580b6d01..84cf52e2f2a0d95de43eee1724ca2c8ac4dc565a 100644
 --- a/net/minecraft/world/entity/animal/sniffer/Sniffer.java
 +++ b/net/minecraft/world/entity/animal/sniffer/Sniffer.java
-@@ -463,10 +463,12 @@ public class Sniffer extends Animal {
+@@ -452,10 +452,12 @@ public class Sniffer extends Animal {
          return Brain.provider(SnifferAi.MEMORY_TYPES, SnifferAi.SENSOR_TYPES);
      }
  
@@ -306,10 +306,10 @@ index 6a9f31c1f39cc14ad7b5ae3af85908bc7a4caae4..a082ba19c326935d7092ec50f278c859
          profilerFiller.popPush("snifferActivityUpdate");
          SnifferAi.updateActivity(this);
 diff --git a/net/minecraft/world/entity/monster/Zoglin.java b/net/minecraft/world/entity/monster/Zoglin.java
-index 0dbc528bcad2b2f79585e2462a265d43fcbebe76..2bd6eb3fa6cec729e2ce71681e6dbeb5faa05174 100644
+index 4405f465ad5b136390c4204b177967c6e47738dd..4d99939edd7ff24e0a8fcaea4a92b58a2cc62cf3 100644
 --- a/net/minecraft/world/entity/monster/Zoglin.java
 +++ b/net/minecraft/world/entity/monster/Zoglin.java
-@@ -248,10 +248,12 @@ public class Zoglin extends Monster implements HoglinBase {
+@@ -247,10 +247,12 @@ public class Zoglin extends Monster implements HoglinBase {
          this.setAggressive(this.brain.hasMemoryValue(MemoryModuleType.ATTACK_TARGET));
      }
  
@@ -425,7 +425,7 @@ index cd28ca290c081d9f5e4498f59d7b87a566f81544..96e60d5f6b00daeb5a9188eda1ce66b8
          profilerFiller.pop();
          super.customServerAiStep(level);
 diff --git a/net/minecraft/world/entity/npc/Villager.java b/net/minecraft/world/entity/npc/Villager.java
-index e0e0d2ea7fc60e3142c675404d152eca60263240..9e0defa94d99242c40ab24f7f83bbaabd1cc8001 100644
+index 57498ab392c0dc0729fed048a89ef57509e31078..94219b3f0474201fdf78660abb5eb956610a9e03 100644
 --- a/net/minecraft/world/entity/npc/Villager.java
 +++ b/net/minecraft/world/entity/npc/Villager.java
 @@ -179,6 +179,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
@@ -436,7 +436,7 @@ index e0e0d2ea7fc60e3142c675404d152eca60263240..9e0defa94d99242c40ab24f7f83bbaab
      public Villager(EntityType<? extends Villager> entityType, Level level) {
          this(entityType, level, VillagerType.PLAINS);
      }
-@@ -287,6 +289,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
+@@ -287,6 +288,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
      }
      // Paper end - EAR 2
  
@@ -444,7 +444,7 @@ index e0e0d2ea7fc60e3142c675404d152eca60263240..9e0defa94d99242c40ab24f7f83bbaab
      @Override
      protected void customServerAiStep(ServerLevel level) {
          // Paper start - EAR 2
-@@ -296,7 +299,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
+@@ -296,7 +298,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
          // Paper end - EAR 2
          ProfilerFiller profilerFiller = Profiler.get();
          profilerFiller.push("villagerBrain");

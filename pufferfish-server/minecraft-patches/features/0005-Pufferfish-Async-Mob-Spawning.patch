@@ -17,10 +17,10 @@ and, in my opinion, worth the low risk of minor mob-spawning-related
 inconsistencies.
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index d6dcb6d146d89a8fb96e7c669e5deb802223abd6..8871cd3c0610ea584c3bbf15913de976da18778d 100644
+index f1373fd5fdebb9f4600ba7f32a5df6188de3a0e9..95a8967649b86f30a59ad82afbab8056c027a9ca 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -303,6 +303,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -302,6 +302,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      public boolean isIteratingOverLevels = false; // Paper - Throw exception on world create while being ticked
      private final Set<String> pluginsBlockingSleep = new java.util.HashSet<>(); // Paper - API to allow/disallow tick sleeping
      public static final long SERVER_INIT = System.nanoTime(); // Paper - Lag compensation
@@ -29,10 +29,10 @@ index d6dcb6d146d89a8fb96e7c669e5deb802223abd6..8871cd3c0610ea584c3bbf15913de976
      public static <S extends MinecraftServer> S spin(Function<Thread, S> threadFunction) {
          AtomicReference<S> atomicReference = new AtomicReference<>();
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index a8cf3e2ab5dec0e76b3ba394a905dd6f01e1b75c..57f2e627ea449fb0ce1ab41cfce6854babc94d63 100644
+index 195c671cd721d31a2fa092fab2e0472a4504d8a6..312d626e674c0e269f20dae93861f77071ccee05 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -313,6 +313,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -309,6 +309,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
                  LOGGER.info("JMX monitoring enabled");
              }
  
