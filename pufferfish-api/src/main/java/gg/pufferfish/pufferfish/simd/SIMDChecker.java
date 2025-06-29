@@ -5,14 +5,15 @@ import java.util.logging.Logger;
 import jdk.incubator.vector.FloatVector;
 import jdk.incubator.vector.IntVector;
 import jdk.incubator.vector.VectorSpecies;
+import org.jetbrains.annotations.ApiStatus;
 
 /**
  * Basically, java is annoying and we have to push this out to its own class.
  */
-@Deprecated
+@ApiStatus.Internal
 public class SIMDChecker {
 
-    @Deprecated
+    @ApiStatus.Internal
     public static boolean canEnable(Logger logger) {
         try {
             if (SIMDDetection.getJavaVersion() < SIMDDetection.MIN_JAVA_VERSION || SIMDDetection.getJavaVersion() > SIMDDetection.MAX_JAVA_VERSION) {
