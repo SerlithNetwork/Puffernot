@@ -1,12 +1,13 @@
 package gg.pufferfish.pufferfish.simd;
 
+import org.jetbrains.annotations.ApiStatus;
 import java.util.logging.Logger;
 
-@Deprecated
+@ApiStatus.Internal
 public class SIMDDetection {
 
     public static final int MIN_JAVA_VERSION = 17;
-    public static final int MAX_JAVA_VERSION = 25; // Pending test to see if the bytecode is still faster
+    public static final int MAX_JAVA_VERSION = 25;
 
     public static boolean isEnabled = false;
     public static boolean versionLimited = false;
@@ -14,7 +15,7 @@ public class SIMDDetection {
 
     private static int version = 0; // Aurora - Cache Java version
 
-    @Deprecated
+    @ApiStatus.Internal
     public static boolean canEnable(Logger logger) {
         try {
             return SIMDChecker.canEnable(logger);
@@ -23,7 +24,7 @@ public class SIMDDetection {
         }
     }
 
-    @Deprecated
+    @ApiStatus.Internal
     public static int getJavaVersion() {
         // https://stackoverflow.com/a/2591122
         if (SIMDDetection.version != 0) return SIMDDetection.version; // Aurora - Cache Java version
