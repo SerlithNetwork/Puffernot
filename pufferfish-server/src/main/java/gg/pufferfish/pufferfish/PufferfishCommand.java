@@ -52,7 +52,7 @@ public class PufferfishCommand {
             )
             .build();
 
-        PaperCommands.INSTANCE.registerWithFlagsInternal(null, "pufferfish", "pufferfish", command, "Pufferfish related commands", List.of(), Set.of());
+        PaperCommands.INSTANCE.registerWithFlagsInternal(null, "pufferfish", "Pufferfish", command, "Pufferfish related commands", List.of(), Set.of());
 
     }
 
