@@ -152,7 +152,7 @@ public class FlareCommand {
             )
             .build();
 
-        PaperCommands.INSTANCE.registerWithFlagsInternal(null, "pufferfish", "pufferfish", command, "Profile your server with Flare", List.of(), Set.of());
+        PaperCommands.INSTANCE.registerWithFlagsInternal(null, "pufferfish", "Pufferfish", command, "Profile your server with Flare", List.of(), Set.of());
 
     }
 
