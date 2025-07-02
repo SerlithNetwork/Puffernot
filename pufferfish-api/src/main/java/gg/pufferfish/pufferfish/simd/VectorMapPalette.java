@@ -56,7 +56,7 @@ public class VectorMapPalette {
             FloatVector greens = FloatVector.fromArray(F_SPEC, greensArr, 0);
             FloatVector blues = FloatVector.fromArray(F_SPEC, bluesArr, 0);
             IntVector resultIndex = IntVector.zero(I_SPEC);
-            VectorMask<Integer> modificationMask = VectorMask.fromLong(I_SPEC, 0xffffffffL);
+            VectorMask<Integer> modificationMask = VectorMask.fromLong(I_SPEC, 0xffffffff);
 
             modificationMask = modificationMask.and(alphas.lt(128).not());
             FloatVector bestDistances = FloatVector.broadcast(F_SPEC, Float.MAX_VALUE);

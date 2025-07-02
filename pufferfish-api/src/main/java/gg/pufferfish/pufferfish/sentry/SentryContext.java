@@ -22,7 +22,7 @@ public class SentryContext {
     public static void setPluginContext(@Nullable Plugin plugin) {
         if (plugin != null) {
             ThreadContext.put("pufferfishsentry_pluginname", plugin.getName());
-            ThreadContext.put("pufferfishsentry_pluginversion", plugin.getDescription().getVersion());
+            ThreadContext.put("pufferfishsentry_pluginversion", plugin.getPluginMeta().getVersion());
         }
     }
 
@@ -74,7 +74,7 @@ public class SentryContext {
             if (player != null) {
                 setSenderContext(player);
             }
-        } catch (Exception e) {} // We can't really safely log exceptions.
+        } catch (Exception ignore) {} // We can't really safely log exceptions.
 
         ThreadContext.put("pufferfishsentry_eventdata", GSON.toJson(serializeFields(event)));
     }
@@ -105,11 +105,12 @@ public class SentryContext {
                 } else {
                     fields.put(fieldName, "<null>");
                 }
-            } catch (Exception e) {} // We can't really safely log exceptions.
+            } catch (Exception ignore) {} // We can't really safely log exceptions.
         }
         return fields;
     }
 
+    @SuppressWarnings("unused")
     public static class State {
 
         private Plugin plugin;
