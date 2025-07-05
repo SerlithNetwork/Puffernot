@@ -52,7 +52,7 @@
 @@ -165,8 +_,9 @@
  val services = objects.newInstance<Services>()
  
- tasks.withType<Javadoc> {
+ tasks.withType<Javadoc>().configureEach {
 +    (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "-quiet") // Purpur - silence Paper's bajillion javadoc warnings
      val options = options as StandardJavadocDocletOptions
 -    options.overview = "src/main/javadoc/overview.html"
