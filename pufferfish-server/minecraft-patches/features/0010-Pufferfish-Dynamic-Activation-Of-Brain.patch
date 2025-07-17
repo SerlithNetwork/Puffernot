@@ -68,7 +68,7 @@ index 6f285bea4b2824ae47f5cedfc1a4021220d582df..c971bf7c966aa0825c549ed88f2c7f8f
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profilerFiller.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index c6f1dd8b22156c8e2707c06c0ebe53f22913c31b..2cd9e4fbc5f453a727cd286a9ad571c933ebfa91 100644
+index 752e93678a419f4cbd171f491f6607b664044dcd..78d16925fdd3223feb3db37b49a7b56aef7aea02 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -371,6 +371,8 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -443,10 +443,10 @@ index 4a4cc7f9c95d4f4b6ad4948e3ed3504efbbcef15..5e4392852bc279937a841d10b89833de
          profilerFiller.pop();
          super.customServerAiStep(level);
 diff --git a/net/minecraft/world/entity/npc/Villager.java b/net/minecraft/world/entity/npc/Villager.java
-index 43f16df230f87a43e249a58fc10ef2da517f22ee..80501f675c8b7cea92335d20f665a294fb8be476 100644
+index e1e2bdb35866a8f32a41f6efd24ad77cf916b2e9..f29e569b4d19b7f8bed622df5087ad84ae753f24 100644
 --- a/net/minecraft/world/entity/npc/Villager.java
 +++ b/net/minecraft/world/entity/npc/Villager.java
-@@ -180,6 +180,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
+@@ -179,6 +179,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
          (villager, poiType) -> poiType.is(PoiTypes.MEETING)
      );
  
@@ -454,7 +454,7 @@ index 43f16df230f87a43e249a58fc10ef2da517f22ee..80501f675c8b7cea92335d20f665a294
      public Villager(EntityType<? extends Villager> entityType, Level level) {
          this(entityType, level, VillagerType.PLAINS);
      }
-@@ -293,11 +294,12 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
+@@ -292,11 +293,12 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
          // Paper start - EAR 2
          this.customServerAiStep(level, false);
      }

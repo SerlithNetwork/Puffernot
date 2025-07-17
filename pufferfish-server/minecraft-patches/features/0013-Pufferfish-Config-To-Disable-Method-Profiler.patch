@@ -5,10 +5,10 @@ Subject: [PATCH] Pufferfish Config To Disable Method Profiler
 
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 7204742096cc2738c914d3ed0b0684539b5fa5a2..d67d8b3d6edb7c119a86ee1472561626e5ffc4b3 100644
+index 60db79e49d7c5b9e5d4d93ab966ed4838ae35b26..0403b9bacaa4d9c80c192975e34f41f4ec38e6ba 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -2595,6 +2595,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2596,6 +2596,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      // CraftBukkit end
  
      private ProfilerFiller createProfiler() {

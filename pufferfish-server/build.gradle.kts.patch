@@ -51,9 +51,9 @@
      implementation("ca.spottedleaf:concurrentutil:0.0.3")
      implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
      implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
-@@ -170,6 +_,9 @@
-     runtimeOnly("org.apache.maven.resolver:maven-resolver-connector-basic:1.9.18")
-     runtimeOnly("org.apache.maven.resolver:maven-resolver-transport-http:1.9.18")
+@@ -166,6 +_,9 @@
+         isTransitive = false // includes junit
+     }
  
 +    implementation("net.serlith:Flare:4.0.3") // Pufferfish - Flare
 +    implementation("net.serlith.ConfigAPI:ConfigAPI-core:1.2.2.2") // Pufferfish - Config API
@@ -61,7 +61,7 @@
      testImplementation("io.github.classgraph:classgraph:4.8.179") // For mob goal test
      testImplementation("org.junit.jupiter:junit-jupiter:5.12.2")
      testImplementation("org.junit.platform:junit-platform-suite-engine:1.12.2")
-@@ -189,8 +_,8 @@
+@@ -185,8 +_,8 @@
      implementation("io.papermc:reflection-rewriter-proxy-generator:$reflectionRewriterVersion")
  
      // Spark
@@ -72,7 +72,7 @@
  }
  
  tasks.jar {
-@@ -205,14 +_,14 @@
+@@ -201,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -92,7 +92,7 @@
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),
              "Git-Branch" to gitBranch,
-@@ -243,6 +_,12 @@
+@@ -239,6 +_,12 @@
      dependsOn(scanJarForBadCalls)
  }
  
@@ -105,7 +105,7 @@
  // Use TCA for console improvements
  tasks.jar {
      val archiveOperations = services.archiveOperations
-@@ -271,7 +_,7 @@
+@@ -267,7 +_,7 @@
      jvmArgumentProviders.add(provider)
  }
  
