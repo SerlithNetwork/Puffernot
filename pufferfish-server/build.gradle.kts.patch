@@ -51,7 +51,7 @@
      implementation("ca.spottedleaf:concurrentutil:0.0.3")
      implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
      implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
-@@ -166,6 +_,9 @@
+@@ -165,6 +_,9 @@
          isTransitive = false // includes junit
      }
  
@@ -61,7 +61,7 @@
      testImplementation("io.github.classgraph:classgraph:4.8.179") // For mob goal test
      testImplementation("org.junit.jupiter:junit-jupiter:5.12.2")
      testImplementation("org.junit.platform:junit-platform-suite-engine:1.12.2")
-@@ -185,8 +_,8 @@
+@@ -184,8 +_,8 @@
      implementation("io.papermc:reflection-rewriter-proxy-generator:$reflectionRewriterVersion")
  
      // Spark
@@ -72,7 +72,7 @@
  }
  
  tasks.jar {
-@@ -201,14 +_,14 @@
+@@ -200,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -92,7 +92,7 @@
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),
              "Git-Branch" to gitBranch,
-@@ -239,6 +_,12 @@
+@@ -238,6 +_,12 @@
      dependsOn(scanJarForBadCalls)
  }
  
@@ -105,7 +105,7 @@
  // Use TCA for console improvements
  tasks.jar {
      val archiveOperations = services.archiveOperations
-@@ -267,7 +_,7 @@
+@@ -266,7 +_,7 @@
      jvmArgumentProviders.add(provider)
  }
  
