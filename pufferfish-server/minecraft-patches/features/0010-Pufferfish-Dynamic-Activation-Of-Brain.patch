@@ -68,7 +68,7 @@ index 6f285bea4b2824ae47f5cedfc1a4021220d582df..c971bf7c966aa0825c549ed88f2c7f8f
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profilerFiller.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 752e93678a419f4cbd171f491f6607b664044dcd..78d16925fdd3223feb3db37b49a7b56aef7aea02 100644
+index eb619032fe8d5738340954284e7cecb1a606ff88..d58d2f8b451771e1ee11279f15a2bf2f40275868 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -371,6 +371,8 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -93,10 +93,10 @@ index 96e1f8f40a0af4350155f192ac2126b523c9f0f5..9fa305f3bf96c4b9593b6b3a5724f590
      private Component description;
      private final Optional<ResourceKey<LootTable>> lootTable;
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index 0470c4bbf8be7e48ce8dfa4910c3b9f5ebb23360..a1ec18b3e5df1b211aca0767bf6331eaa43e348e 100644
+index e0b3cb2b2694768803ed347a1026b881fd624951..321dbb40fbe944eae329b8e9faae24c459d25603 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
-@@ -210,10 +210,10 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -211,10 +211,10 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
      @Override
      public void inactiveTick() {
          super.inactiveTick();
@@ -109,7 +109,7 @@ index 0470c4bbf8be7e48ce8dfa4910c3b9f5ebb23360..a1ec18b3e5df1b211aca0767bf6331ea
              this.targetSelector.tick();
          }
      }
-@@ -748,16 +748,20 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -761,16 +761,20 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
          int i = this.tickCount + this.getId();
          if (i % 2 != 0 && this.tickCount > 1) {
              profilerFiller.push("targetSelector");
