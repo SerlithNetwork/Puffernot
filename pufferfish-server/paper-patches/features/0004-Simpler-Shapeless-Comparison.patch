@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paul Sauve <paul@technove.co>
 Date: Sat, 31 Oct 2020 18:51:38 -0500
-Subject: [PATCH] Pufferfish Simpler Shapeless Comparison
+Subject: [PATCH] Simpler Shapeless Comparison
 
 Paper added a fancy sorting comparison due to Bukkit recipes breaking
 the vanilla one, however this is far more advanced than what you need

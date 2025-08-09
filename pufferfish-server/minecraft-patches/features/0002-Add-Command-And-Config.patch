@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Kevin Raneri <kevin.raneri@gmail.com>
 Date: Tue, 9 Nov 2021 13:53:53 -0500
-Subject: [PATCH] Pufferfish Add Command And Config
+Subject: [PATCH] Add Command And Config
 
 
 diff --git a/net/minecraft/server/ReloadableServerResources.java b/net/minecraft/server/ReloadableServerResources.java

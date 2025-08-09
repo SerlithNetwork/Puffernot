@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paul <paul@technove.co>
 Date: Tue, 6 Jul 2021 17:51:18 -0500
-Subject: [PATCH] Pufferfish Ignore Lookups If Closed
+Subject: [PATCH] Ignore Lookups If Closed
 
 
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java

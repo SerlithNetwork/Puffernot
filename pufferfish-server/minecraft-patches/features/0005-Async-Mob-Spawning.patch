@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Kevin Raneri <kevin.raneri@gmail.com>
 Date: Fri, 1 Nov 2024 22:20:06 -0500
-Subject: [PATCH] Pufferfish Async Mob Spawning
+Subject: [PATCH] Async Mob Spawning
 
 This patch aims to reduce the main-thread impact of mob spawning by
 offloading as much work as possible to other threads. It is possible for

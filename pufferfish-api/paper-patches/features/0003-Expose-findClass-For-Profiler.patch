@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paul Sauve <paul@technove.co>
 Date: Sat, 19 Dec 2020 19:06:37 -0600
-Subject: [PATCH] Pufferfish Expose findClass For Profiler
+Subject: [PATCH] Expose findClass For Profiler
 
 
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java

@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paul Sauve <paul@technove.co>
 Date: Sun, 13 Dec 2020 17:52:35 -0600
-Subject: [PATCH] Pufferfish Reduce Projectile Chunk Loading
+Subject: [PATCH] Reduce Projectile Chunk Loading
 
 Airplane
 Copyright (C) 2020 Technove LLC

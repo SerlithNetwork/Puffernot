@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paul <paul@technove.co>
 Date: Fri, 2 Jul 2021 18:27:12 -0500
-Subject: [PATCH] Pufferfish Remove Lambda From Ticking Guard
+Subject: [PATCH] Remove Lambda From Ticking Guard
 
 
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java

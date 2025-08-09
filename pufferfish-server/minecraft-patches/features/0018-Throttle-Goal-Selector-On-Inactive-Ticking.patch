@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Kevin Raneri <kevin.raneri@gmail.com>
 Date: Sat, 11 Dec 2021 22:20:45 -0500
-Subject: [PATCH] Pufferfish Throttle Goal Selector On Inactive Ticking
+Subject: [PATCH] Throttle Goal Selector On Inactive Ticking
 
 
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java

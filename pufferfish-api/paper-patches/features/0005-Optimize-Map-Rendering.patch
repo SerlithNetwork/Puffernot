@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Kevin Raneri <kevin.raneri@gmail.com>
 Date: Tue, 8 Feb 2022 12:53:02 -0500
-Subject: [PATCH] Pufferfish Optimize Map Rendering
+Subject: [PATCH] Optimize Map Rendering
 
 
 diff --git a/src/main/java/org/bukkit/map/MapPalette.java b/src/main/java/org/bukkit/map/MapPalette.java

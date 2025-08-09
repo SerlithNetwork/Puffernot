@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paul <paul@technove.co>
 Date: Fri, 2 Jul 2021 18:25:18 -0500
-Subject: [PATCH] Pufferfish Reduce Entity Allocations
+Subject: [PATCH] Reduce Entity Allocations
 
 
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
