@@ -24,9 +24,7 @@ public class ServerConfigurations {
         "spigot.yml",
         "config/paper-global.yml",
         "config/paper-world-defaults.yml",
-        "pufferfish.yml",
-        "jellyfish.yml",
-        "aurora.yml"
+        "pufferfish.yml"
     };
 
     private static final String[] hiddenConfigEntries = new String[]{
