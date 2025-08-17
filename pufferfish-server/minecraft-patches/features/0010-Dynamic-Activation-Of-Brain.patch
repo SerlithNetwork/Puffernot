@@ -27,7 +27,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/io/papermc/paper/entity/activation/ActivationRange.java b/io/papermc/paper/entity/activation/ActivationRange.java
-index ae2bb9a73106febfe5f0d090abd4252bbb5fd27e..3fbafe6e67cb5ac6c0acab0621029eea32614089 100644
+index ae2bb9a73106febfe5f0d090abd4252bbb5fd27e..2204f3d23adcb4b1b4d7994db1fbe977f10b4efb 100644
 --- a/io/papermc/paper/entity/activation/ActivationRange.java
 +++ b/io/papermc/paper/entity/activation/ActivationRange.java
 @@ -165,6 +165,24 @@ public final class ActivationRange {
@@ -55,6 +55,20 @@ index ae2bb9a73106febfe5f0d090abd4252bbb5fd27e..3fbafe6e67cb5ac6c0acab0621029eea
              }
          }
      }
+@@ -176,11 +194,11 @@ public final class ActivationRange {
+      */
+     private static void activateEntity(final Entity entity) {
+         if (MinecraftServer.currentTick > entity.activatedTick) {
+-            if (entity.defaultActivationState) {
++            if (entity.defaultActivationState) { // Pufferfish - diff on change
+                 entity.activatedTick = MinecraftServer.currentTick;
+                 return;
+             }
+-            if (entity.activationType.boundingBox.intersects(entity.getBoundingBox())) {
++            if (entity.activationType.boundingBox.intersects(entity.getBoundingBox())) { // Pufferfish - diff on change
+                 entity.activatedTick = MinecraftServer.currentTick;
+             }
+         }
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
 index 6f285bea4b2824ae47f5cedfc1a4021220d582df..c971bf7c966aa0825c549ed88f2c7f8fb9e58156 100644
 --- a/net/minecraft/server/level/ServerLevel.java
@@ -443,21 +457,14 @@ index 4a4cc7f9c95d4f4b6ad4948e3ed3504efbbcef15..5e4392852bc279937a841d10b89833de
          profilerFiller.pop();
          super.customServerAiStep(level);
 diff --git a/net/minecraft/world/entity/npc/Villager.java b/net/minecraft/world/entity/npc/Villager.java
-index e1e2bdb35866a8f32a41f6efd24ad77cf916b2e9..f29e569b4d19b7f8bed622df5087ad84ae753f24 100644
+index e1e2bdb35866a8f32a41f6efd24ad77cf916b2e9..e5d2335fb5b5efd42f8934388069a36fbe880bc8 100644
 --- a/net/minecraft/world/entity/npc/Villager.java
 +++ b/net/minecraft/world/entity/npc/Villager.java
-@@ -179,6 +179,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
-         (villager, poiType) -> poiType.is(PoiTypes.MEETING)
-     );
- 
-+    public long nextGolemPanic = -1; // Pufferfish
-     public Villager(EntityType<? extends Villager> entityType, Level level) {
-         this(entityType, level, VillagerType.PLAINS);
-     }
-@@ -292,11 +293,12 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
+@@ -292,11 +292,13 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
          // Paper start - EAR 2
          this.customServerAiStep(level, false);
      }
++    public long nextGolemPanic = -1; // Pufferfish
 +    private int behaviorTick = 0; // Pufferfish
      protected void customServerAiStep(ServerLevel level, final boolean inactive) {
          // Paper end - EAR 2
