@@ -56,7 +56,7 @@
      }
  
 +    implementation("net.serlith:Flare:4.0.3") // Pufferfish - Flare
-+    implementation("net.serlith.ConfigAPI:ConfigAPI-core:1.2.2.2") // Pufferfish - Config API
++    implementation("net.serlith.ConfigAPI:ConfigAPI-core:1.2.5") // Pufferfish - Config API
 +
      testImplementation("io.github.classgraph:classgraph:4.8.179") // For mob goal test
      testImplementation("org.junit.jupiter:junit-jupiter:5.12.2")

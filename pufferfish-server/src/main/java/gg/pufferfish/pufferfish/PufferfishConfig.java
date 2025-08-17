@@ -18,7 +18,7 @@ import net.minecraft.world.entity.EntityType;
     "Join our Discord for support: https://discord.gg/reZw4vQV9H",
     "Download new builds at https://ci.pufferfish.host/job/Pufferfish"
 })
-@SuppressWarnings({"unused", "deprecation"})
+@SuppressWarnings({"unused"})
 public class PufferfishConfig extends StaticConfig {
 
     @Ignore
@@ -52,12 +52,12 @@ public class PufferfishConfig extends StaticConfig {
 
     }
 
-    @Order(1)
+    @Priority(1)
     public static class INFO {
         public static String VERSION = "1.0";
     }
 
-    @Order(2)
+    @Priority(2)
     @Comment({
         "Whether or not books should be writeable.",
         "Servers that anticipate being a target for duping may want to consider",
@@ -66,7 +66,7 @@ public class PufferfishConfig extends StaticConfig {
     })
     public static boolean ENABLE_BOOKS = true;
 
-    @Order(3)
+    @Priority(3)
     @Comment({
         "Optimizes the suffocation check by selectively skipping",
         "the check in a way that still appears vanilla. This should",
@@ -75,7 +75,7 @@ public class PufferfishConfig extends StaticConfig {
     })
     public static boolean ENABLE_SUFFOCATION_OPTIMIZATION = true;
 
-    @Order(4)
+    @Priority(4)
     @Comment({
         "Whether or not asynchronous mob spawning should be enabled.",
         "On servers with many entities, this can improve performance by up to 15%. You must have",
@@ -89,7 +89,7 @@ public class PufferfishConfig extends StaticConfig {
     @Ignore
     public static boolean ASYNC_MOB_SPAWNING_INITIALIZED = false;
 
-    @Order(5)
+    @Priority(5)
     @Comment("Optimizes projectile settings")
     public static class PROJECTILE {
 
@@ -107,7 +107,7 @@ public class PufferfishConfig extends StaticConfig {
 
     }
 
-    @Order(6)
+    @Priority(6)
     @Comment({
         "Optimizes entity brains when",
         "they're far away from the player"
@@ -143,7 +143,7 @@ public class PufferfishConfig extends StaticConfig {
 
     }
 
-    @Order(7)
+    @Priority(7)
     @Comment("Configures Flare, the built-in profiler")
     public static class FLARE {
 
@@ -156,7 +156,7 @@ public class PufferfishConfig extends StaticConfig {
 
     }
 
-    @Order(8)
+    @Priority(8)
     @Comment("Options for connecting to Pufferfish/Airplane's online utilities")
     public static class WEB_SERVICES {
 
@@ -164,7 +164,7 @@ public class PufferfishConfig extends StaticConfig {
 
     }
 
-    @Order(9)
+    @Priority(9)
     @Comment("Settings for things that don't belong elsewhere")
     public static class MISC {
 
@@ -172,14 +172,14 @@ public class PufferfishConfig extends StaticConfig {
 
     }
 
-    @Order(10)
+    @Priority(10)
     @Comment({
         "Throttles the AI goal selector in entity inactive ticks.",
         "This can improve performance by a few percent, but has minor gameplay implications."
     })
     public static boolean INACTIVE_GOAL_SELECTOR_THROTTLE = true;
 
-    @Order(11)
+    @Priority(11)
     @Comment({
         "If this setting is true, the server will run faster after a lag spike in",
         "an attempt to maintain 20 TPS. This option (defaults to true per",
@@ -187,7 +187,7 @@ public class PufferfishConfig extends StaticConfig {
     })
     public static boolean TPS_CATCHUP = true;
 
-    @Order(12)
+    @Priority(12)
     @Comment({
         "Allows end crystals to respawn the ender dragon.",
         "On servers that expect end crystal fights in the end dimension, disabling this",
@@ -196,7 +196,7 @@ public class PufferfishConfig extends StaticConfig {
     })
     public static boolean ALLOW_END_CRYSTAL_RESPAWN = true;
 
-    @Order(13)
+    @Priority(13)
     @Comment({
         "Sentry DSN for improved error logging, leave blank to disable",
         "Obtain from https://sentry.io/"
