@@ -5,13 +5,13 @@ Subject: [PATCH] Reduce Entity Allocations
 
 
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 8b34dc914fc0be0b979f30852e0f41aa2c0ef941..7edc4e69edc9585ae1cb9073b8367ec384fdcc85 100644
+index 91f34f1550cef9e7b0c3abae4921df46650fe561..f84292bf17d7920afba1ecc00bc88ce78043026e 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
-@@ -373,6 +373,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -375,6 +375,7 @@ public abstract class Entity implements SyncedDataHolder, DebugValueSource, Name
      public long activatedImmunityTick = Integer.MIN_VALUE;
-     public boolean activatedPriorityReset = false; // Pufferfish - DAB
-     public int activatedPriority = gg.pufferfish.pufferfish.PufferfishConfig.DAB.MAX_TICK_FREQ; // Pufferfish - DAB (golf score)
+     public boolean pufferfish$activatedPriorityReset = false; // Pufferfish - DAB
+     public int pufferfish$activatedPriority = gg.pufferfish.pufferfish.PufferfishConfig.DAB.MAX_TICK_FREQ; // Pufferfish - DAB (golf score)
 +    public final BlockPos.MutableBlockPos cachedBlockPos = new BlockPos.MutableBlockPos(); // Pufferfish - reduce entity allocations
  
      public void inactiveTick() {

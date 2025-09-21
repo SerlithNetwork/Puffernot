@@ -5,7 +5,7 @@ Subject: [PATCH] Cache Climbing Check
 
 
 diff --git a/io/papermc/paper/entity/activation/ActivationRange.java b/io/papermc/paper/entity/activation/ActivationRange.java
-index 3fbafe6e67cb5ac6c0acab0621029eea32614089..9c9368e7303a96923f5d6c7e33a18e0300ec11e8 100644
+index bc1317b08c8657f2c045940f2c14e4f251dece0c..4728a672c6caa7727cb992f1976a7a828cbffd7a 100644
 --- a/io/papermc/paper/entity/activation/ActivationRange.java
 +++ b/io/papermc/paper/entity/activation/ActivationRange.java
 @@ -239,7 +239,7 @@ public final class ActivationRange {
@@ -13,28 +13,28 @@ index 3fbafe6e67cb5ac6c0acab0621029eea32614089..9c9368e7303a96923f5d6c7e33a18e03
          // special cases.
          if (entity instanceof final LivingEntity living) {
 -            if (living.onClimbable() || living.jumping || living.hurtTime > 0 || !living.activeEffects.isEmpty() || living.isFreezing()) {
-+            if (living.onClimbableCached() || living.jumping || living.hurtTime > 0 || !living.activeEffects.isEmpty() || living.isFreezing()) { // Pufferfish - use cached
++            if (living.pufferfish$onClimbableCached() || living.jumping || living.hurtTime > 0 || !living.activeEffects.isEmpty() || living.isFreezing()) { // Pufferfish - use cached
                  return 1;
              }
              if (entity instanceof final Mob mob && mob.getTarget() != null) {
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index 8bba401e10d8b3c8ec403ca953d91aacc82c36aa..cbd1cfcd46c5929bbaaee9b84b543c6afb482950 100644
+index e7ed26cde4c4e3af8a3dfcf8b221a9f80e1bc4ed..e89cb94d859dde86b3f550a7676e004751532a2b 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
-@@ -2133,6 +2133,19 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+@@ -2165,6 +2165,19 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
          return this.lastClimbablePos;
      }
  
 +    // Pufferfish start
-+    private boolean cachedOnClimable = false;
-+    private BlockPos lastClimbingPosition = null;
++    private boolean pufferfish$cachedOnClimable = false;
++    private BlockPos pufferfish$lastClimbingPosition = null;
 +
-+    public boolean onClimbableCached() {
-+        if (!this.blockPosition().equals(this.lastClimbingPosition)) {
-+            this.cachedOnClimable = this.onClimbable();
-+            this.lastClimbingPosition = this.blockPosition();
++    public boolean pufferfish$onClimbableCached() {
++        if (!this.blockPosition().equals(this.pufferfish$lastClimbingPosition)) {
++            this.pufferfish$cachedOnClimable = this.onClimbable();
++            this.pufferfish$lastClimbingPosition = this.blockPosition();
 +        }
-+        return this.cachedOnClimable;
++        return this.pufferfish$cachedOnClimable;
 +    }
 +    // Pufferfish end
 +

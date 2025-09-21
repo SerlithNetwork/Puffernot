@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/entity/projectile/Projectile.java b/net/minecraft/world/entity/projectile/Projectile.java
-index ee16a05b8b2747ce95fcae1616c96143a5dec74e..7565fee5179fd8cc8b0b46c0820c06cbfb24fef5 100644
+index 90c0e0a7574529846500e98494246974e836ad9a..e923b99847e609537291665ddc7e3c9a1a146220 100644
 --- a/net/minecraft/world/entity/projectile/Projectile.java
 +++ b/net/minecraft/world/entity/projectile/Projectile.java
 @@ -50,6 +50,36 @@ public abstract class Projectile extends Entity implements TraceableEntity {
@@ -28,29 +28,29 @@ index ee16a05b8b2747ce95fcae1616c96143a5dec74e..7565fee5179fd8cc8b0b46c0820c06cb
      }
  
 +    // Pufferfish start - Reduce Projectile Chunk Loading
-+    private static int loadedThisTick = 0;
-+    private static int loadedTick;
++    private static int pufferfish$loadedThisTick = 0;
++    private static int pufferfish$loadedTick;
 +
-+    private int loadedLifetime = 0;
++    private int pufferfish$loadedLifetime = 0;
 +    @Override
 +    public void setPos(double x, double y, double z) {
 +        int currentTick = net.minecraft.server.MinecraftServer.currentTick;
-+        if (loadedTick != currentTick) {
-+            loadedTick = currentTick;
-+            loadedThisTick = 0;
++        if (pufferfish$loadedTick != currentTick) {
++            pufferfish$loadedTick = currentTick;
++            pufferfish$loadedThisTick = 0;
 +        }
 +        int previousX = Mth.floor(this.getX()) >> 4, previousZ = Mth.floor(this.getZ()) >> 4;
 +        int newX = Mth.floor(x) >> 4, newZ = Mth.floor(z) >> 4;
 +        if (previousX != newX || previousZ != newZ) {
 +            boolean isLoaded = ((net.minecraft.server.level.ServerChunkCache) this.level().getChunkSource()).getChunkAtIfLoadedImmediately(newX, newZ) != null;
 +            if (!isLoaded) {
-+                if (Projectile.loadedThisTick > gg.pufferfish.pufferfish.PufferfishConfig.PROJECTILE.MAX_LOADS_PER_TICK) {
-+                    if (++this.loadedLifetime > gg.pufferfish.pufferfish.PufferfishConfig.PROJECTILE.MAX_LOADS_PER_PROJECTILE) {
++                if (Projectile.pufferfish$loadedThisTick > gg.pufferfish.pufferfish.PufferfishConfig.PROJECTILE.MAX_LOADS_PER_TICK) {
++                    if (++this.pufferfish$loadedLifetime > gg.pufferfish.pufferfish.PufferfishConfig.PROJECTILE.MAX_LOADS_PER_PROJECTILE) {
 +                        this.discard(org.bukkit.event.entity.EntityRemoveEvent.Cause.DESPAWN);
 +                    }
 +                    return;
 +                }
-+                Projectile.loadedThisTick++;
++                Projectile.pufferfish$loadedThisTick++;
 +            }
 +        }
 +        super.setPos(x, y, z);
@@ -59,4 +59,4 @@ index ee16a05b8b2747ce95fcae1616c96143a5dec74e..7565fee5179fd8cc8b0b46c0820c06cb
 +
      protected void setOwner(@Nullable EntityReference<Entity> owner) {
          this.owner = owner;
-     }
+         this.refreshProjectileSource(false); // Paper

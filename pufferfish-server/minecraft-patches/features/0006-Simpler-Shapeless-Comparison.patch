@@ -24,14 +24,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/item/crafting/ShapelessRecipe.java b/net/minecraft/world/item/crafting/ShapelessRecipe.java
-index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..e69637ff7e91ab3beba53e8803c61f21743f01d7 100644
+index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..25af823f59c154fc55fc613a6e8c40528eb6e8fd 100644
 --- a/net/minecraft/world/item/crafting/ShapelessRecipe.java
 +++ b/net/minecraft/world/item/crafting/ShapelessRecipe.java
 @@ -23,8 +23,16 @@ public class ShapelessRecipe implements CraftingRecipe {
      final List<Ingredient> ingredients;
      @Nullable
      private PlacementInfo placementInfo;
-+    private final boolean isBukkit; // Pufferfish - Simpler Shapeless Comparison
++    private final boolean pufferfish$isBukkit; // Pufferfish - Simpler Shapeless Comparison
  
 +    // Pufferfish start - Simpler Shapeless Comparison
      public ShapelessRecipe(String group, CraftingBookCategory category, ItemStack result, List<Ingredient> ingredients) {
@@ -39,7 +39,7 @@ index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..e69637ff7e91ab3beba53e8803c61f21
 +    }
 +
 +    public ShapelessRecipe(String group, CraftingBookCategory category, ItemStack result, List<Ingredient> ingredients, boolean isBukkit) {
-+        this.isBukkit = isBukkit;
++        this.pufferfish$isBukkit = isBukkit;
 +        // Pufferfish end - Simpler Shapeless Comparison
          this.group = group;
          this.category = category;
@@ -49,7 +49,7 @@ index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..e69637ff7e91ab3beba53e8803c61f21
      @Override
      public boolean matches(CraftingInput input, Level level) {
 +        // Pufferfish start
-+        if (!this.isBukkit) {
++        if (!this.pufferfish$isBukkit) {
 +            java.util.List<Ingredient> ingredients = com.google.common.collect.Lists.newArrayList(this.ingredients.toArray(new Ingredient[0]));
 +
 +            inventory: for (int index = 0; index < input.size(); index++) {

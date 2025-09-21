@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/entity/ambient/Bat.java b/net/minecraft/world/entity/ambient/Bat.java
-index 912b099a51269f92f250c7d6094ad41817749f93..c522330f06a658a204e1d6199adc9bc572ad4af2 100644
+index 6735e5a9226878520ab358bb63562378975d2b87..ec654abc9dfc1189ef7f3460843a2e0fe6ba7dfe 100644
 --- a/net/minecraft/world/entity/ambient/Bat.java
 +++ b/net/minecraft/world/entity/ambient/Bat.java
 @@ -245,11 +245,19 @@ public class Bat extends AmbientCreature {
@@ -28,19 +28,19 @@ index 912b099a51269f92f250c7d6094ad41817749f93..c522330f06a658a204e1d6199adc9bc5
      }
  
 +    // Pufferfish start - only check for spooky season once an hour
-+    private static boolean isSpookySeason = false;
-+    private static final int ONE_HOUR = 20 * 60 * 60;
-+    private static int lastSpookyCheck = -ONE_HOUR;
++    private static boolean pufferfish$isSpookySeason = false;
++    private static final int PUFFERFISH$ONE_HOUR = 20 * 60 * 60;
++    private static int pufferfish$lastSpookyCheck = -PUFFERFISH$ONE_HOUR;
      private static boolean isHalloween() {
-+        if (net.minecraft.server.MinecraftServer.currentTick - lastSpookyCheck > ONE_HOUR) {
++        if (net.minecraft.server.MinecraftServer.currentTick - pufferfish$lastSpookyCheck > PUFFERFISH$ONE_HOUR) {
          LocalDate localDate = LocalDate.now();
          int i = localDate.get(ChronoField.DAY_OF_MONTH);
          int i1 = localDate.get(ChronoField.MONTH_OF_YEAR);
 -        return i1 == 10 && i >= 20 || i1 == 11 && i <= 3;
-+        isSpookySeason = i1 == 10 && i >= 20 || i1 == 11 && i <= 3;
-+        lastSpookyCheck = net.minecraft.server.MinecraftServer.currentTick;
++        pufferfish$isSpookySeason = i1 == 10 && i >= 20 || i1 == 11 && i <= 3;
++        pufferfish$lastSpookyCheck = net.minecraft.server.MinecraftServer.currentTick;
 +        }
-+        return isSpookySeason;
++        return pufferfish$isSpookySeason;
      }
  
      private void setupAnimationStates() {
