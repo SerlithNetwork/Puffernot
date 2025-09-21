@@ -21,11 +21,11 @@ diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft
 index 5fea5e2e9fc10d348fa3e65cd354ef6a4a717a4d..fab894e6308049f6506ae58b434d54a5f79ff814 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -184,6 +184,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -277,6 +277,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          this.server.spark.registerCommandBeforePlugins(this.server); // Paper - spark
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
          com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // Paper - load version history now
 +        new gg.pufferfish.pufferfish.PufferfishConfig().load(); // Pufferfish - Config and command
  
-         this.setPvpAllowed(properties.pvp);
-         this.setFlightAllowed(properties.allowFlight);
+         // this.worldData.setGameType(properties.gameMode.get()); // CraftBukkit - moved to world loading
+         LOGGER.info("Default game type: {}", properties.gameMode.get());
