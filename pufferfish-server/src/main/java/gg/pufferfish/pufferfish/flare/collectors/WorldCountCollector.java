@@ -24,7 +24,7 @@ public class WorldCountCollector extends LiveCollector {
 
     @Override
     public void run() {
-        if (true) return; // This doesn't work, and it's not worth fixing at the moment. // TODO: Might be fixed now?
+        if (true) return; // This doesn't work, and it's not worth fixing at the moment. // TODO: Get counts has to be done on the main thread, wait until a proper way to fix is found
         int entities = 0;
         int chunkCount = 0;
         int tileEntityCount = 0;

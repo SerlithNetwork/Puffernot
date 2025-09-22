@@ -159,7 +159,7 @@ public class FlareCommand {
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private static boolean isFlareAvailable(CommandSender sender) {
         if (PufferfishConfig.WEB_SERVICES.TOKEN.isEmpty()) {
-            Component clickable = Component.text(BASE_URL, HEX, TextDecoration.UNDERLINED).clickEvent(ClickEvent.clickEvent(ClickEvent.Action.OPEN_URL, BASE_URL));
+            Component clickable = Component.text(BASE_URL, HEX, TextDecoration.UNDERLINED).clickEvent(ClickEvent.openUrl(BASE_URL));
             sendPrefixed(sender,
                 Component.text("Flare currently requires an access token to use.").color(NamedTextColor.GRAY),
                 Component.text("To learn more, visit ", NamedTextColor.GRAY).append(clickable)

@@ -4,18 +4,6 @@ Date: Fri, 2 Jul 2021 18:25:18 -0500
 Subject: [PATCH] Reduce Entity Allocations
 
 
-diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 91f34f1550cef9e7b0c3abae4921df46650fe561..f84292bf17d7920afba1ecc00bc88ce78043026e 100644
---- a/net/minecraft/world/entity/Entity.java
-+++ b/net/minecraft/world/entity/Entity.java
-@@ -375,6 +375,7 @@ public abstract class Entity implements SyncedDataHolder, DebugValueSource, Name
-     public long activatedImmunityTick = Integer.MIN_VALUE;
-     public boolean pufferfish$activatedPriorityReset = false; // Pufferfish - DAB
-     public int pufferfish$activatedPriority = gg.pufferfish.pufferfish.PufferfishConfig.DAB.MAX_TICK_FREQ; // Pufferfish - DAB (golf score)
-+    public final BlockPos.MutableBlockPos cachedBlockPos = new BlockPos.MutableBlockPos(); // Pufferfish - reduce entity allocations
- 
-     public void inactiveTick() {
-     }
 diff --git a/net/minecraft/world/entity/ai/attributes/AttributeMap.java b/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 index fdb02fc40579866167e8cc9bcefbd961588b53a6..b348e404160b25cdfb51ec7438caabe308f1a4a8 100644
 --- a/net/minecraft/world/entity/ai/attributes/AttributeMap.java
@@ -24,11 +12,11 @@ index fdb02fc40579866167e8cc9bcefbd961588b53a6..b348e404160b25cdfb51ec7438caabe3
      private final Set<AttributeInstance> attributesToSync = new ObjectOpenHashSet<>();
      private final Set<AttributeInstance> attributesToUpdate = new ObjectOpenHashSet<>();
      private final AttributeSupplier supplier;
-+    private final java.util.function.Function<Holder<Attribute>, AttributeInstance> createInstance; // Pufferfish
++    private final java.util.function.Function<Holder<Attribute>, AttributeInstance> pufferfish$createInstance; // Pufferfish
  
      public AttributeMap(AttributeSupplier supplier) {
          this.supplier = supplier;
-+        this.createInstance = attributex -> this.supplier.createInstance(this::onAttributeModified, attributex); // Pufferfish
++        this.pufferfish$createInstance = attributex -> this.supplier.createInstance(this::onAttributeModified, attributex); // Pufferfish
      }
  
      private void onAttributeModified(AttributeInstance instance) {
@@ -37,7 +25,7 @@ index fdb02fc40579866167e8cc9bcefbd961588b53a6..b348e404160b25cdfb51ec7438caabe3
      @Nullable
      public AttributeInstance getInstance(Holder<Attribute> attribute) {
 -        return this.attributes.computeIfAbsent(attribute, holder -> this.supplier.createInstance(this::onAttributeModified, (Holder<Attribute>)holder));
-+        return this.attributes.computeIfAbsent(attribute, this.createInstance); // Pufferfish - cache lambda, as for some reason java allocates it anyways
++        return this.attributes.computeIfAbsent(attribute, this.pufferfish$createInstance); // Pufferfish - cache lambda, as for some reason java allocates it anyways
      }
  
      public boolean hasAttribute(Holder<Attribute> attribute) {

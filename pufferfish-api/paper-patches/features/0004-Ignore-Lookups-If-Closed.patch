@@ -5,14 +5,14 @@ Subject: [PATCH] Ignore Lookups If Closed
 
 
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-index 1385d0444555b76edf1a7cba97b9cd13a1e644a2..00a2c0ff7eaf9ad16ec584e2e98e27d9c4fa6627 100644
+index 74af9d1b6797e2d697bf1ea67b613ac405a6bc0d..f520eae257dee2e597b416479dcf310e3d90e871 100644
 --- a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 @@ -51,6 +51,8 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
      private io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup classLoaderGroup; // Paper
      public io.papermc.paper.plugin.provider.entrypoint.DependencyContext dependencyContext; // Paper
  
-+    private boolean closed = false; // Pufferfish - Ignore lookups if closed
++    private boolean pufferfish$closed = false; // Pufferfish - Ignore lookups if closed
 +
      static {
          ClassLoader.registerAsParallelCapable();
@@ -22,7 +22,7 @@ index 1385d0444555b76edf1a7cba97b9cd13a1e644a2..00a2c0ff7eaf9ad16ec584e2e98e27d9
          Class<?> result = classes.get(name);
  
 -        if (result == null) {
-+        if (result == null && !this.closed) { // Pufferfish - Ignore lookups if closed
++        if (result == null && !this.pufferfish$closed) { // Pufferfish - Ignore lookups if closed
              String path = name.replace('.', '/').concat(".class");
              // Add details to zip file errors - help debug classloading
              JarEntry entry;
@@ -38,7 +38,7 @@ index 1385d0444555b76edf1a7cba97b9cd13a1e644a2..00a2c0ff7eaf9ad16ec584e2e98e27d9
              // Paper end
              super.close();
          } finally {
-+            this.closed = true; // Pufferfish - Ignore lookups if closed
++            this.pufferfish$closed = true; // Pufferfish - Ignore lookups if closed
              jar.close();
          }
      }

@@ -219,9 +219,9 @@ public class PufferfishConfig extends StaticConfig {
 
         DAB.START_DISTANCE_SQUARED = DAB.START_DISTANCE * DAB.START_DISTANCE;
 
-        BuiltInRegistries.ENTITY_TYPE.forEach(e -> e.dabEnabled = true);
+        BuiltInRegistries.ENTITY_TYPE.forEach(e -> e.pufferfish$dabEnabled = true);
         DAB.BLACKLISTED_ENTITIES.forEach(name -> EntityType.byString(name).ifPresentOrElse(
-            e -> e.dabEnabled = false,
+            e -> e.pufferfish$dabEnabled = false,
             () -> MinecraftServer.LOGGER.warn("Unknown entity \"{}\"", name)
         ));
 

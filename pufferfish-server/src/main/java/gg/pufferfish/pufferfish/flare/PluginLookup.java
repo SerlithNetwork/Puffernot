@@ -31,7 +31,7 @@ public class PluginLookup {
         for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
             ClassLoader classLoader = plugin.getClass().getClassLoader();
             if (classLoader instanceof PluginClassLoader) {
-                if (((PluginClassLoader) classLoader)._airplane_hasClass(name)) {
+                if (((PluginClassLoader) classLoader).airplane$hasClass(name)) {
                     newValue = plugin.getName();
                     break;
                 }

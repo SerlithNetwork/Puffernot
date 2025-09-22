@@ -34,7 +34,7 @@ public class ProfilingManager {
 
     private static Flare currentFlare;
     private static ScheduledFuture<?> currentTask = null;
-    private static ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(1);
+    private static final ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(1);
 
     public static synchronized boolean isProfiling() {
         return currentFlare != null && currentFlare.isRunning();
