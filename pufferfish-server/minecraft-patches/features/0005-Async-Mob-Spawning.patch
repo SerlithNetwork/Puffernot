@@ -17,7 +17,7 @@ and, in my opinion, worth the low risk of minor mob-spawning-related
 inconsistencies.
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 697b77f33d055e3ef0add9a315da043886e86bae..6a5b2110fd8509ccabf6b378b26ba2fca28e4bd8 100644
+index f0e16de0cd2e5794c0a86b54979d9ac043c704df..e98afa0f85b03fa04b04a210c5f426de8a5a81b6 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
 @@ -310,6 +310,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -27,9 +27,9 @@ index 697b77f33d055e3ef0add9a315da043886e86bae..6a5b2110fd8509ccabf6b378b26ba2fc
 +    public gg.pufferfish.pufferfish.util.AsyncExecutor pufferfish$mobSpawnExecutor = new gg.pufferfish.pufferfish.util.AsyncExecutor("Pufferfish Async Mob Spawning Thread"); // Pufferfish - Optimize mob spawning
  
      public static <S extends MinecraftServer> S spin(Function<Thread, S> threadFunction) {
-         AtomicReference<S> atomicReference = new AtomicReference<>();
+         ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry.init(); // Paper - rewrite data converter system
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index eb8b8339f732247ea3ae1ee55de55ae3ef1daf92..39c63a5860584054752ed305ac82ede971565375 100644
+index 4d60222c4d070b39336e12cea2b2cd1b2ef64659..a7c9119bb2d92b9524c1d45927091c59709179af 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -394,6 +394,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
