@@ -8,7 +8,7 @@
  
      // Deprecate bungeecord-chat in favor of adventure
      api("net.md-5:bungeecord-chat:$bungeeCordChatVersion") {
-@@ -98,7 +_,7 @@
+@@ -90,7 +_,7 @@
      testRuntimeOnly("org.junit.platform:junit-platform-launcher")
  }
  
@@ -17,7 +17,7 @@
  idea {
      module {
          generatedSourceDirs.add(generatedDir.toFile())
-@@ -108,6 +_,18 @@
+@@ -100,6 +_,18 @@
      main {
          java {
              srcDir(generatedDir)
@@ -36,7 +36,7 @@
          }
      }
  }
-@@ -155,6 +_,12 @@
+@@ -147,6 +_,12 @@
      }
  }
  
@@ -49,7 +49,7 @@
  tasks.jar {
      from(generateApiVersioningFile.map { it.outputs.files.singleFile }) {
          into("META-INF/maven/${project.group}/${project.name}")
-@@ -173,8 +_,9 @@
+@@ -165,8 +_,9 @@
  val services = objects.newInstance<Services>()
  
  tasks.withType<Javadoc>().configureEach {
@@ -60,7 +60,7 @@
      options.use()
      options.isDocFilesSubDirs = true
      options.links(
-@@ -196,6 +_,7 @@
+@@ -190,6 +_,7 @@
          "https://javadoc.io/doc/org.apache.maven.resolver/maven-resolver-api/1.7.3",
      )
      options.tags("apiNote:a:API Note:")
@@ -68,7 +68,7 @@
  
      inputs.files(apiAndDocs).ignoreEmptyDirectories().withPropertyName(apiAndDocs.name + "-configuration")
      val apiAndDocsElements = apiAndDocs.elements
-@@ -207,11 +_,11 @@
+@@ -201,11 +_,11 @@
      }
  
      // workaround for https://github.com/gradle/gradle/issues/4046
