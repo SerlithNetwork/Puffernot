@@ -5,7 +5,7 @@ Subject: [PATCH] Ignore Lookups If Closed
 
 
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-index 74af9d1b6797e2d697bf1ea67b613ac405a6bc0d..f520eae257dee2e597b416479dcf310e3d90e871 100644
+index a3138ff6045660844985ce26a4748b156f74e3ce..6c60efdbba5b038cba763883b6fda4d2e4a6bfe3 100644
 --- a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 @@ -51,6 +51,8 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
@@ -17,7 +17,7 @@ index 74af9d1b6797e2d697bf1ea67b613ac405a6bc0d..f520eae257dee2e597b416479dcf310e
      static {
          ClassLoader.registerAsParallelCapable();
      }
-@@ -213,7 +215,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+@@ -216,7 +218,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
          }
          Class<?> result = classes.get(name);
  
@@ -26,7 +26,7 @@ index 74af9d1b6797e2d697bf1ea67b613ac405a6bc0d..f520eae257dee2e597b416479dcf310e
              String path = name.replace('.', '/').concat(".class");
              // Add details to zip file errors - help debug classloading
              JarEntry entry;
-@@ -269,6 +271,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+@@ -272,6 +274,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
              this.setClass(name, result); // Paper
          }
  
@@ -34,7 +34,7 @@ index 74af9d1b6797e2d697bf1ea67b613ac405a6bc0d..f520eae257dee2e597b416479dcf310e
          return result;
      }
  
-@@ -283,6 +286,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+@@ -286,6 +289,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
              // Paper end
              super.close();
          } finally {
