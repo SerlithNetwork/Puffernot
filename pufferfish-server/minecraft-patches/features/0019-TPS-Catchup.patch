@@ -5,16 +5,32 @@ Subject: [PATCH] TPS Catchup
 
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index d95ff5c5f35bbc6694fe69a61bd85039d956659c..903ac160764c2b911a49641ca874cb147101d1b5 100644
+index d95ff5c5f35bbc6694fe69a61bd85039d956659c..3948bc01c4df4f5e6fe0c98e039997d58547c460 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1322,6 +1322,12 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1106,6 +1106,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+         this.scheduledTickStart = this.tickSchedule.getDeadline(interval);
+     }
+ 
++    private long pufferfish$now;
+     private void recordEndOfTick() {
+         final long prevStart = this.lastTickStart;
+         final long currStart = this.currentTickStart;
+@@ -1114,6 +1115,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+         this.scheduledTickStart = this.nextTickTimeNanos; // set scheduledStart for next tick
+ 
+         final long now = Util.getNanos();
++        this.pufferfish$now = now;
+ 
+         final ca.spottedleaf.moonrise.common.time.TickTime time = new ca.spottedleaf.moonrise.common.time.TickTime(
+             prevStart,
+@@ -1322,6 +1324,12 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                      profilerFiller.popPush("nextTickWait");
                      this.mayHaveDelayedTasks = true;
                      this.delayedTasksMaxNextTickTimeNanos = Math.max(Util.getNanos() + l, this.nextTickTimeNanos);
 +                    // Pufferfish start - tps catchup
 +                    if (!gg.pufferfish.pufferfish.PufferfishConfig.TPS_CATCHUP) {
-+                        this.nextTickTimeNanos = currentTime + l;
++                        this.nextTickTimeNanos = this.pufferfish$now + l;
 +                        this.delayedTasksMaxNextTickTimeNanos = nextTickTimeNanos;
 +                    }
 +                    // Pufferfish end
