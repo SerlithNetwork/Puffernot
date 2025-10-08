@@ -6,7 +6,6 @@ import co.technove.flare.live.LiveCollector;
 import co.technove.flare.live.formatter.SuffixFormatter;
 import gg.pufferfish.pufferfish.flare.CustomCategories;
 import net.minecraft.server.MinecraftServer;
-import org.bukkit.Bukkit;
 
 import java.time.Duration;
 
@@ -23,9 +22,10 @@ public class TPSCollector extends LiveCollector {
     @Override
     public void run() {
         TickData.TickReportData data = MinecraftServer.getServer().tickTimes5s.generateTickReport(null, System.nanoTime(), MinecraftServer.getServer().tickRateManager().nanosecondsPerTick());
-        double mspt = data == null ? 0.0 : data.timePerTickData().segmentAll().average();
+        double tps = data == null ? 2.0 : data.tpsData().segmentAll().average();
+        double mspt = data == null ? 0.0 : (data.timePerTickData().segmentAll().average() / 1.0E6);
 
-        this.report(TPS, Math.min(20D, Math.round(Bukkit.getServer().getTPS()[0] * 100d) / 100d));
+        this.report(TPS, Math.min(20D, Math.round(tps * 100d) / 100d));
         this.report(MSPT, (double) Math.round(mspt * 100d) / 100d);
     }
 }
