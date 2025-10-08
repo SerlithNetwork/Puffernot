@@ -70,10 +70,10 @@ index ae2bb9a73106febfe5f0d090abd4252bbb5fd27e..bc1317b08c8657f2c045940f2c14e4f2
              }
          }
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index faf5b9396b7fc8527fd06a2d1d355a7a3a7b5421..fe41f7c918ba8eb1878b4fe61ea1a221c642b0e7 100644
+index 6ef335faed65168fd02c35f5f886ccec7e517faa..bfe67773e039f391ad135fb2b4f397231471a700 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
-@@ -813,6 +813,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
+@@ -820,6 +820,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
              this.entityTickList
                  .forEach(
                      entity -> {
@@ -82,7 +82,7 @@ index faf5b9396b7fc8527fd06a2d1d355a7a3a7b5421..fe41f7c918ba8eb1878b4fe61ea1a221
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profilerFiller.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index c457b646d6919d26bb3700204553793d516f3cba..91f34f1550cef9e7b0c3abae4921df46650fe561 100644
+index 0da0dd6b6f2c461bbc3b399f9b9de1757e1e1acc..d8a0365632c522675cc4ba022e73f9688279cfce 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -373,6 +373,8 @@ public abstract class Entity implements SyncedDataHolder, DebugValueSource, Name
@@ -107,7 +107,7 @@ index c7afd2c600a6fefea26c0f522e7cf8acef76447b..82bb7c2faadf0f37168c0755813b2318
      private Component description;
      private final Optional<ResourceKey<LootTable>> lootTable;
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index fb291071ebf2bd1503e3d1db0793365278643bde..72165ed0eb90e72b8000aed24780ffbbbe658468 100644
+index 4994dcb209dd82d60559cfc453198b75cbfa1511..2a33fc5a8052048ae16b4d3986cbff6e8b6b36eb 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
 @@ -221,10 +221,10 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
@@ -270,7 +270,7 @@ index 9ad94aca22a100dddaded5833763f9acd2a0ce56..8e736f890416ad3948a88c34c2e61200
          profilerFiller.push("camelActivityUpdate");
          CamelAi.updateActivity(this);
 diff --git a/net/minecraft/world/entity/animal/coppergolem/CopperGolem.java b/net/minecraft/world/entity/animal/coppergolem/CopperGolem.java
-index fb1f8b8c39e01403a98c436525cc3ef73ade9715..10127ef2e2e60ae12db0cdd6d45832a31a0ce19b 100644
+index 11b530195a95627bdc9236715f91fa883c8d7966..5d19168c3ddfdeaae7f5c7508f56544e0e5065e3 100644
 --- a/net/minecraft/world/entity/animal/coppergolem/CopperGolem.java
 +++ b/net/minecraft/world/entity/animal/coppergolem/CopperGolem.java
 @@ -181,10 +181,12 @@ public class CopperGolem extends AbstractGolem implements ContainerUser, Shearab
@@ -372,7 +372,7 @@ index 4feaa6167d82278a104a37c3b10257e24b299e6c..943f7e8939081a958d799aaafcba0e81
          profilerFiller.pop();
          this.updateActivity();
 diff --git a/net/minecraft/world/entity/monster/breeze/Breeze.java b/net/minecraft/world/entity/monster/breeze/Breeze.java
-index 98326e0d65ecddb8ea6eaa9fdb0f28b5e3077bac..a6b76f97226f8594c927fe634599745c5844847d 100644
+index c1e391bac9976f74f5fe3f5b0d91130c927ebec2..0f5566de8766cf2a602769ef3e257a3e87e5be13 100644
 --- a/net/minecraft/world/entity/monster/breeze/Breeze.java
 +++ b/net/minecraft/world/entity/monster/breeze/Breeze.java
 @@ -232,10 +232,12 @@ public class Breeze extends Monster {

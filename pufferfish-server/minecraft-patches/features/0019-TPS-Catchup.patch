@@ -5,10 +5,10 @@ Subject: [PATCH] TPS Catchup
 
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index f651276ab1124b5dc8220547efd50c31260f250f..0bb4a804f871481929541ebccf1f312236f584a3 100644
+index d95ff5c5f35bbc6694fe69a61bd85039d956659c..903ac160764c2b911a49641ca874cb147101d1b5 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1198,6 +1198,12 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1322,6 +1322,12 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                      profilerFiller.popPush("nextTickWait");
                      this.mayHaveDelayedTasks = true;
                      this.delayedTasksMaxNextTickTimeNanos = Math.max(Util.getNanos() + l, this.nextTickTimeNanos);
@@ -19,5 +19,5 @@ index f651276ab1124b5dc8220547efd50c31260f250f..0bb4a804f871481929541ebccf1f3122
 +                    }
 +                    // Pufferfish end
                      this.startMeasuringTaskExecutionTime();
-                     this.waitUntilNextTick();
+                     this.recordTaskExecutionTimeWhileWaiting(); // Paper - improve tick loop - record task execution here on MSPT
                      this.finishMeasuringTaskExecutionTime();

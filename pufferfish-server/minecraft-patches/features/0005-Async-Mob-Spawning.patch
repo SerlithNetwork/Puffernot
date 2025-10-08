@@ -17,17 +17,17 @@ and, in my opinion, worth the low risk of minor mob-spawning-related
 inconsistencies.
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index f0e16de0cd2e5794c0a86b54979d9ac043c704df..e98afa0f85b03fa04b04a210c5f426de8a5a81b6 100644
+index fda102773812f239cd8dbbe19f742c9f028422c2..0b38391dd7826522bbe0c554feb9713c41e1b196 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -310,6 +310,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -302,6 +302,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      public boolean isIteratingOverLevels = false; // Paper - Throw exception on world create while being ticked
      private final Set<String> pluginsBlockingSleep = new java.util.HashSet<>(); // Paper - API to allow/disallow tick sleeping
      public static final long SERVER_INIT = System.nanoTime(); // Paper - Lag compensation
 +    public gg.pufferfish.pufferfish.util.AsyncExecutor pufferfish$mobSpawnExecutor = new gg.pufferfish.pufferfish.util.AsyncExecutor("Pufferfish Async Mob Spawning Thread"); // Pufferfish - Optimize mob spawning
- 
-     public static <S extends MinecraftServer> S spin(Function<Thread, S> threadFunction) {
-         ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry.init(); // Paper - rewrite data converter system
+     // Paper start - improve tick loop
+     public final ca.spottedleaf.moonrise.common.time.TickData tickTimes1s  = new ca.spottedleaf.moonrise.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(1L));
+     public final ca.spottedleaf.moonrise.common.time.TickData tickTimes5s  = new ca.spottedleaf.moonrise.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(5L));
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
 index 4d60222c4d070b39336e12cea2b2cd1b2ef64659..a7c9119bb2d92b9524c1d45927091c59709179af 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
