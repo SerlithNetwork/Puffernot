@@ -5,10 +5,10 @@ Subject: [PATCH] TPS Catchup
 
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index d95ff5c5f35bbc6694fe69a61bd85039d956659c..3948bc01c4df4f5e6fe0c98e039997d58547c460 100644
+index b0b423bb30d5f24cbeda91a1bed999be94426cbe..d368f234ecd488efcc97d375b793e5aaae0d12e5 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1106,6 +1106,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1114,6 +1114,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          this.scheduledTickStart = this.tickSchedule.getDeadline(interval);
      }
  
@@ -16,7 +16,7 @@ index d95ff5c5f35bbc6694fe69a61bd85039d956659c..3948bc01c4df4f5e6fe0c98e039997d5
      private void recordEndOfTick() {
          final long prevStart = this.lastTickStart;
          final long currStart = this.currentTickStart;
-@@ -1114,6 +1115,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1122,6 +1123,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          this.scheduledTickStart = this.nextTickTimeNanos; // set scheduledStart for next tick
  
          final long now = Util.getNanos();
@@ -24,7 +24,7 @@ index d95ff5c5f35bbc6694fe69a61bd85039d956659c..3948bc01c4df4f5e6fe0c98e039997d5
  
          final ca.spottedleaf.moonrise.common.time.TickTime time = new ca.spottedleaf.moonrise.common.time.TickTime(
              prevStart,
-@@ -1322,6 +1324,12 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1330,6 +1332,12 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                      profilerFiller.popPush("nextTickWait");
                      this.mayHaveDelayedTasks = true;
                      this.delayedTasksMaxNextTickTimeNanos = Math.max(Util.getNanos() + l, this.nextTickTimeNanos);
