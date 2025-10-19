@@ -186,6 +186,8 @@ public class PufferfishConfig extends StaticConfig {
         "spigot/paper) can cause mobs to move fast after a lag spike."
     })
     public static boolean TPS_CATCHUP = true;
+    @Ignore
+    public static int CATCHUP = 5;
 
     @Priority(12)
     @Comment({
@@ -228,6 +230,8 @@ public class PufferfishConfig extends StaticConfig {
         if (!WEB_SERVICES.TOKEN.isBlank()) {
             FlareSetup.init();
         }
+
+        CATCHUP = TPS_CATCHUP ? 5 : 1;
 
     }
 
