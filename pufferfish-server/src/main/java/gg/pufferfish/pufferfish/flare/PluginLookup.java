@@ -2,8 +2,8 @@ package gg.pufferfish.pufferfish.flare;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
+import io.papermc.paper.plugin.entrypoint.classloader.PaperPluginClassLoader;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.PluginClassLoader;
 
 import java.util.Optional;
@@ -26,19 +26,24 @@ public class PluginLookup {
             return Optional.ofNullable(existing.isEmpty() ? null : existing);
         }
 
-        String newValue = "";
+        try {
+            Class<?> clazz = Class.forName(name);
+            ClassLoader loader = clazz.getClassLoader();
 
-        for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
-            ClassLoader classLoader = plugin.getClass().getClassLoader();
-            if (classLoader instanceof PluginClassLoader) {
-                if (((PluginClassLoader) classLoader).airplane$hasClass(name)) {
-                    newValue = plugin.getName();
-                    break;
+            String pluginName = "";
+            if (loader instanceof PluginClassLoader bukkitLoader) {
+                pluginName = bukkitLoader.airplane$getPlugin().getName();
+            } else if (loader instanceof PaperPluginClassLoader paperLoader) {
+                JavaPlugin plugin = paperLoader.airplane$getLoadedJavaPlugin();
+                if (plugin != null) {
+                    pluginName = plugin.getName();
                 }
             }
-        }
+            pluginNameCache.put(name, pluginName);
+            return Optional.ofNullable(pluginName.isEmpty() ? null : pluginName);
 
-        pluginNameCache.put(name, newValue);
-        return Optional.ofNullable(newValue.isEmpty() ? null : newValue);
+        } catch (Exception ignored) {
+            return Optional.empty();
+        }
     }
 }
