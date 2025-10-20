@@ -1,0 +1,20 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Biquaternions <biquaternions@serlith.net>
+Date: Sun, 19 Oct 2025 21:05:30 -0500
+Subject: [PATCH] Expose findClass For Profiler
+
+The original implementation of "Expose findClass For Profiler" is no longer viable with the existence of Paper plugins
+Here we take the same approach as spark, matching the class loader instead of trying to look for the class key
+
+diff --git a/src/main/java/io/papermc/paper/plugin/entrypoint/classloader/PaperPluginClassLoader.java b/src/main/java/io/papermc/paper/plugin/entrypoint/classloader/PaperPluginClassLoader.java
+index 18401ede9cd1fc7094c6b74859929938e01795ca..5c204b4cf997053629de2f6cd05de3fd8bbbfa11 100644
+--- a/src/main/java/io/papermc/paper/plugin/entrypoint/classloader/PaperPluginClassLoader.java
++++ b/src/main/java/io/papermc/paper/plugin/entrypoint/classloader/PaperPluginClassLoader.java
+@@ -47,6 +47,7 @@ public class PaperPluginClassLoader extends PaperSimplePluginClassLoader impleme
+     private JavaPlugin loadedJavaPlugin;
+     @Nullable
+     private PluginClassLoaderGroup group;
++    public JavaPlugin airplane$getLoadedJavaPlugin() { return this.loadedJavaPlugin; } // Pufferfish - Airplane profiler
+ 
+     public PaperPluginClassLoader(Logger logger, Path source, JarFile file, PaperPluginMeta configuration, ClassLoader parentLoader, URLClassLoader libraryLoader) throws IOException {
+         super(source, file, configuration, parentLoader);

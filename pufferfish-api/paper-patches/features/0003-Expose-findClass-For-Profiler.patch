@@ -3,12 +3,24 @@ From: Paul Sauve <paul@technove.co>
 Date: Sat, 19 Dec 2020 19:06:37 -0600
 Subject: [PATCH] Expose findClass For Profiler
 
+Biquaternions note:
+The original implementation of "Expose findClass For Profiler" is no longer viable with the existence of Paper plugins
+Here we take the same approach as spark, matching the class loader instead of trying to look for the class key
+The `airplane$hasClass` will be kept for historical reasons
 
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-index c53cac5cbaa65a1c984043f69d159118c80fa6dd..a3138ff6045660844985ce26a4748b156f74e3ce 100644
+index c53cac5cbaa65a1c984043f69d159118c80fa6dd..f5fdeb2090803f9b5509c88b7dfff56cd09edc75 100644
 --- a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-@@ -208,6 +208,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+@@ -50,6 +50,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+     private java.util.logging.Logger logger; // Paper - add field
+     private io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup classLoaderGroup; // Paper
+     public io.papermc.paper.plugin.provider.entrypoint.DependencyContext dependencyContext; // Paper
++    public JavaPlugin airplane$getPlugin() { return this.plugin; } // Pufferfish - Expose plugin
+ 
+     static {
+         ClassLoader.registerAsParallelCapable();
+@@ -208,6 +209,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
          throw new ClassNotFoundException(name);
      }
  

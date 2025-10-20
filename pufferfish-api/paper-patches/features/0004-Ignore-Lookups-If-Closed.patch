@@ -5,19 +5,18 @@ Subject: [PATCH] Ignore Lookups If Closed
 
 
 diff --git a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-index a3138ff6045660844985ce26a4748b156f74e3ce..6c60efdbba5b038cba763883b6fda4d2e4a6bfe3 100644
+index f5fdeb2090803f9b5509c88b7dfff56cd09edc75..cd650d238a9d3e2e21ca02eeb8cc8460a7ee0774 100644
 --- a/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/PluginClassLoader.java
-@@ -51,6 +51,8 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+@@ -51,6 +51,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
      private io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup classLoaderGroup; // Paper
      public io.papermc.paper.plugin.provider.entrypoint.DependencyContext dependencyContext; // Paper
- 
+     public JavaPlugin airplane$getPlugin() { return this.plugin; } // Pufferfish - Expose plugin
 +    private boolean pufferfish$closed = false; // Pufferfish - Ignore lookups if closed
-+
+ 
      static {
          ClassLoader.registerAsParallelCapable();
-     }
-@@ -216,7 +218,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+@@ -217,7 +218,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
          }
          Class<?> result = classes.get(name);
  
@@ -26,7 +25,7 @@ index a3138ff6045660844985ce26a4748b156f74e3ce..6c60efdbba5b038cba763883b6fda4d2
              String path = name.replace('.', '/').concat(".class");
              // Add details to zip file errors - help debug classloading
              JarEntry entry;
-@@ -272,6 +274,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+@@ -273,6 +274,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
              this.setClass(name, result); // Paper
          }
  
@@ -34,7 +33,7 @@ index a3138ff6045660844985ce26a4748b156f74e3ce..6c60efdbba5b038cba763883b6fda4d2
          return result;
      }
  
-@@ -286,6 +289,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
+@@ -287,6 +289,7 @@ public final class PluginClassLoader extends URLClassLoader implements io.paperm
              // Paper end
              super.close();
          } finally {
