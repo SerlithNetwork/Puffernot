@@ -61,7 +61,7 @@
      options.isDocFilesSubDirs = true
      options.links(
 @@ -187,6 +_,7 @@
-         //"https://javadoc.io/doc/org.apache.maven.resolver/maven-resolver-api/1.7.3",
+         "https://www.javadocs.dev/org.apache.maven.resolver/maven-resolver-api/1.7.3",
      )
      options.tags("apiNote:a:API Note:")
 +    options.addStringOption("-add-modules", "jdk.incubator.vector") // Pufferfish - SIMD Utilities
