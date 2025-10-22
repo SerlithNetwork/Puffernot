@@ -1,30 +1,27 @@
 package gg.pufferfish.pufferfish.flare.collectors;
 
 import co.technove.flare.live.CollectorData;
-import co.technove.flare.live.LiveCollector;
+import co.technove.flare.live.PolledCollector;
 import co.technove.flare.live.formatter.SuffixFormatter;
 import gg.pufferfish.pufferfish.flare.CustomCategories;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
-import java.time.Duration;
+import java.util.concurrent.Executor;
 
-public class WorldCountCollector extends LiveCollector {
+public class WorldCountCollector extends PolledCollector {
 
     private static final CollectorData PLAYER_COUNT = new CollectorData("airplane:world:playercount", "Player Count", "The number of players currently on the server.", new SuffixFormatter(" Player", " Players"), CustomCategories.ENTITIES_AND_CHUNKS);
     private static final CollectorData ENTITY_COUNT = new CollectorData("airplane:world:entitycount", "Entity Count", "The number of entities in all worlds", new SuffixFormatter(" Entity", " Entities"), CustomCategories.ENTITIES_AND_CHUNKS);
     private static final CollectorData CHUNK_COUNT = new CollectorData("airplane:world:chunkcount", "Chunk Count", "The number of chunks currently loaded.", new SuffixFormatter(" Chunk", " Chunks"), CustomCategories.ENTITIES_AND_CHUNKS);
     private static final CollectorData TILE_ENTITY_COUNT = new CollectorData("airplane:world:blockentitycount", "Block Entity Count", "The number of block entities currently loaded.", new SuffixFormatter(" Block Entity", " Block Entities"), CustomCategories.ENTITIES_AND_CHUNKS);
 
-    public WorldCountCollector() {
-        super(PLAYER_COUNT, ENTITY_COUNT, CHUNK_COUNT, TILE_ENTITY_COUNT);
-
-        this.interval = Duration.ofSeconds(5);
+    public WorldCountCollector(Executor executor) {
+        super(executor, PLAYER_COUNT, ENTITY_COUNT, CHUNK_COUNT, TILE_ENTITY_COUNT);
     }
 
     @Override
     public void run() {
-        if (true) return; // This doesn't work, and it's not worth fixing at the moment. // TODO: Get counts has to be done on the main thread, wait until a proper way to fix is found
         int entities = 0;
         int chunkCount = 0;
         int tileEntityCount = 0;

@@ -1,0 +1,31 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Biquaternions <biquaternions@serlith.net>
+Date: Wed, 22 Oct 2025 13:57:18 -0500
+Subject: [PATCH] Flare Profiler Tasks
+
+For years the Flare profiler was broken since due to {@code gg.pufferfish.pufferfish.flare.collectors.WorldCountCollector}
+  requesting the entity counts asynchronously and getting caught by Spigot's async catcher.
+This implementation uses the same mechanism as spark to collect world data on the main thread.
+Since Flare samples in a 5s interval and the operations are lightweight by nature, this shouldn't pose any significant
+  burden on the server.
+
+diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
+index e7930df70592d9bb3f13350bbe797e9358ea9b13..a122dbcbae705dee07f9a7574b36eef773fba363 100644
+--- a/net/minecraft/server/MinecraftServer.java
++++ b/net/minecraft/server/MinecraftServer.java
+@@ -1611,6 +1611,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+                 }
+                 // Paper end - avoid issues with certain tasks not processing during sleep
+                 this.server.spark.executeMainThreadTasks(); // Paper - spark
++                gg.pufferfish.pufferfish.flare.ProfilingManager.executeMainThreadTasks(); // Pufferfish - Flare
+                 this.tickConnection();
+                 this.server.spark.tickEnd(((double)(System.nanoTime() - this.currentTickStart) / 1000000D)); // Paper - spark
+                 return;
+@@ -1654,6 +1655,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+ 
+         ProfilerFiller profilerFiller = Profiler.get();
+         this.server.spark.executeMainThreadTasks(); // Paper - spark
++        gg.pufferfish.pufferfish.flare.ProfilingManager.executeMainThreadTasks(); // Pufferfish - Flare
+         // Paper start - Server Tick Events
+         long endTime = System.nanoTime();
+         long remaining = this.nextTickTimeNanos - endTime;

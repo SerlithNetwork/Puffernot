@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.time.Duration;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -34,7 +35,12 @@ public class ProfilingManager {
 
     private static Flare currentFlare;
     private static ScheduledFuture<?> currentTask = null;
-    private static final ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(1);
+    private static final ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(1, r -> {
+        Thread t = new Thread(r);
+        t.setName("Flare Profiling Manager Thread");
+        return t;
+    });
+    private static final ConcurrentLinkedQueue<Runnable> mainThreadTaskQueue = new ConcurrentLinkedQueue<>();
 
     public static synchronized boolean isProfiling() {
         return currentFlare != null && currentFlare.isRunning();
@@ -87,12 +93,12 @@ public class ProfilingManager {
                 .withAuth(FlareAuth.fromTokenAndUrl(PufferfishConfig.WEB_SERVICES.TOKEN, PufferfishConfig.FLARE.URL))
 
                 .withFiles(ServerConfigurations.getCleanCopies())
-                .withVersion("Primary Version", Bukkit.getVersion())
+                .withVersion("Primary Version", Bukkit.getName() + " | " + Bukkit.getVersion())
                 .withVersion("Bukkit Version", Bukkit.getBukkitVersion())
                 .withVersion("Minecraft Version", Bukkit.getMinecraftVersion())
 
                 .withGraphCategories(CustomCategories.ENTITIES_AND_CHUNKS, CustomCategories.MC_PERF)
-                .withCollectors(new TPSCollector(), new WorldCountCollector(), new GCEventCollector(), new StatCollector())
+                .withCollectors(new TPSCollector(), new WorldCountCollector(ProfilingManager::submitToMainThread), new GCEventCollector(), new StatCollector())
                 .withClassIdentifier(PluginLookup::getPluginForClass)
 
                 .withHardware(new FlareBuilder.HardwareBuilder()
@@ -155,6 +161,17 @@ public class ProfilingManager {
 
         currentTask = null;
         return true;
+    }
+
+    private static void submitToMainThread(Runnable task) {
+        ProfilingManager.mainThreadTaskQueue.offer(task);
+    }
+
+    public static void executeMainThreadTasks() {
+        Runnable task;
+        while ((task = ProfilingManager.mainThreadTaskQueue.poll()) != null) {
+            task.run();
+        }
     }
 
 }
