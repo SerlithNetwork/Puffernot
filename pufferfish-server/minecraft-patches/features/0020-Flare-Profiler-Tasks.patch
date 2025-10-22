@@ -3,7 +3,7 @@ From: Biquaternions <biquaternions@serlith.net>
 Date: Wed, 22 Oct 2025 13:57:18 -0500
 Subject: [PATCH] Flare Profiler Tasks
 
-For years the Flare profiler was broken since due to {@code gg.pufferfish.pufferfish.flare.collectors.WorldCountCollector}
+For years the Flare profiler was broken due to {@code gg.pufferfish.pufferfish.flare.collectors.WorldCountCollector}
   requesting the entity counts asynchronously and getting caught by Spigot's async catcher.
 This implementation uses the same mechanism as spark to collect world data on the main thread.
 Since Flare samples in a 5s interval and the operations are lightweight by nature, this shouldn't pose any significant
