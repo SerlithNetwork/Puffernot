@@ -29,7 +29,8 @@ public class PluginLookup {
             name.startsWith("net.minecraft.") || name.startsWith("java.") || name.startsWith("com.mojang.") ||
             name.startsWith("com.google.") || name.startsWith("it.unimi.") || name.startsWith("sun.") || name.startsWith("javax.") ||
             name.startsWith("jdk.") || name.startsWith("io.papermc.") || name.startsWith("gg.pufferfish.") || name.startsWith("co.technove.") ||
-            name.startsWith("ca.spottedleaf.") || name.startsWith("com.sun.") || name.startsWith("org.jline.")
+            name.startsWith("ca.spottedleaf.") || name.startsWith("com.sun.") || name.startsWith("org.jline.") || name.startsWith("org.bukkit.") ||
+            name.startsWith("org.spigotmc.") || name.startsWith("com.destroystokyo.paper") || name.startsWith("co.aikar.") || name.startsWith("com.velocitypowered.")
         ) {
             return Optional.empty();
         }
