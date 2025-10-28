@@ -80,18 +80,10 @@ public class FlareCommand {
                         if (!FlareCommand.isFlareAvailable(sender)) {
                             return Command.SINGLE_SUCCESS;
                         }
-
-                        String profile = ProfilingManager.getProfilingUri();
-                        if (ProfilingManager.stop()) {
-                            broadcastPrefixed(
-                                Component.text("Profiling has been stopped.", MAIN_COLOR),
-                                Component.text(profile, HEX).clickEvent(ClickEvent.openUrl(profile))
-                            );
-                        } else {
-                            sendPrefixed(sender,
-                                Component.text("Profiling has already been stopped.", HEX)
-                            );
-                        }
+                        sendPrefixed(sender,
+                            Component.text("Stopping flare...", NamedTextColor.DARK_GRAY)
+                        );
+                        FlareCommand.stop(sender);
                         return Command.SINGLE_SUCCESS;
                     })
                 )
@@ -215,6 +207,30 @@ public class FlareCommand {
                 if (e.getCause() != null) {
                     MinecraftServer.LOGGER.warn("Flare failed to start", e);
                 }
+            }
+        });
+    }
+
+    private static void stop(CommandSender sender) {
+        MCUtil.scheduleAsyncTask(() -> {
+            String profile = ProfilingManager.getProfilingUri();
+            try {
+                if (ProfilingManager.stop()) {
+                    broadcastPrefixed(
+                        Component.text("Profiling has been stopped.", MAIN_COLOR),
+                        Component.text(profile, HEX).clickEvent(ClickEvent.openUrl(profile))
+                    );
+                } else {
+                    sendPrefixed(sender,
+                        Component.text("Profiling has already been stopped.", HEX)
+                    );
+                }
+            } catch (IllegalStateException e) {
+                throw e;
+            } catch (Exception ignore) { // I can't use UserReportableException apparently
+                broadcastPrefixed(
+                    Component.text("Failed to submit the last batch of data, the profiler will still be available", NamedTextColor.RED)
+                );
             }
         });
     }
