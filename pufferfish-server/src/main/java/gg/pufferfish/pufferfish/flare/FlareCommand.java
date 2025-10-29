@@ -216,12 +216,7 @@ public class FlareCommand {
     private static void stop(CommandSender sender) {
         MCUtil.scheduleAsyncTask(() -> {
             try {
-                if (ProfilingManager.stop()) {
-                    broadcastPrefixed(
-                        Component.text("Profiling has been stopped.", MAIN_COLOR),
-                        Component.text(PROFILING_URI, HEX).clickEvent(ClickEvent.openUrl(PROFILING_URI))
-                    );
-                } else {
+                if (!ProfilingManager.stop()) {
                     sendPrefixed(sender,
                         Component.text("Profiling has already been stopped.", HEX)
                     );
@@ -253,7 +248,6 @@ public class FlareCommand {
                     s.sendMessage(PREFIX.append(line));
                 }
             });
-
     }
 
 }

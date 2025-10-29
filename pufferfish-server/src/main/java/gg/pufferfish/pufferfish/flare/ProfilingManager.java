@@ -12,6 +12,12 @@ import gg.pufferfish.pufferfish.flare.collectors.GCEventCollector;
 import gg.pufferfish.pufferfish.flare.collectors.StatCollector;
 import gg.pufferfish.pufferfish.flare.collectors.TPSCollector;
 import gg.pufferfish.pufferfish.flare.collectors.WorldCountCollector;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+import net.minecraft.server.MinecraftServer;
 import org.bukkit.Bukkit;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -30,6 +36,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+import java.util.stream.Stream;
 
 public class ProfilingManager {
 
@@ -41,6 +48,15 @@ public class ProfilingManager {
         return t;
     });
     private static final ConcurrentLinkedQueue<Runnable> mainThreadTaskQueue = new ConcurrentLinkedQueue<>();
+    private static final TextColor MAIN_COLOR = TextColor.color(106, 126, 218);
+    private static final TextColor HEX = TextColor.color(227, 234, 234);
+    private static final Component PREFIX = Component.text()
+        .color(NamedTextColor.GRAY)
+        .append(Component.text("[", NamedTextColor.DARK_GRAY))
+        .append(Component.text("✈", MAIN_COLOR, TextDecoration.BOLD))
+        .append(Component.text("]", NamedTextColor.DARK_GRAY))
+        .append(Component.text(" "))
+        .build();
 
     public static synchronized boolean isProfiling() {
         return currentFlare != null && currentFlare.isRunning();
@@ -145,7 +161,11 @@ public class ProfilingManager {
             currentFlare = null;
             return true;
         }
-        // PufferfishLogger.LOGGER.log(Level.INFO, "Flare has been stopped: " + getProfilingUri());
+        String profilingUri = ProfilingManager.getProfilingUri();
+        ProfilingManager.broadcastPrefixed(
+            Component.text("Profiling has been stopped.", MAIN_COLOR),
+            Component.text(profilingUri, HEX).clickEvent(ClickEvent.openUrl(profilingUri))
+        );
         try {
             currentFlare.stop();
         } catch (IllegalStateException e) {
@@ -172,6 +192,19 @@ public class ProfilingManager {
         while ((task = ProfilingManager.mainThreadTaskQueue.poll()) != null) {
             task.run();
         }
+    }
+
+    private static void broadcastPrefixed(Component ...lines) {
+        Stream.concat(
+                MinecraftServer.getServer().server.getOnlinePlayers().stream(),
+                Stream.of(MinecraftServer.getServer().server.getConsoleSender())
+            )
+            .filter(s -> s.hasPermission("airplane.flare"))
+            .forEach(s -> {
+                for (Component line : lines) {
+                    s.sendMessage(PREFIX.append(line));
+                }
+            });
     }
 
 }
