@@ -186,8 +186,8 @@ public class FlareCommand {
         );
         MCUtil.scheduleAsyncTask(() -> {
             try {
-                PROFILING_URI = ProfilingManager.getProfilingUri();
                 if (ProfilingManager.start(profileType)) {
+                    PROFILING_URI = ProfilingManager.getProfilingUri();
                     broadcastPrefixed(
                         Component.text("Flare has been started!", MAIN_COLOR),
                         Component.text("It will run in the background for 15 minutes", NamedTextColor.GRAY),
