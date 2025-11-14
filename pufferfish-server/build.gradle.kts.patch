@@ -48,14 +48,14 @@
  dependencies {
 -    implementation(project(":paper-api"))
 +    implementation(project(":pufferfish-api")) // Pufferfish
-     implementation("ca.spottedleaf:concurrentutil:0.0.5")
+     implementation("ca.spottedleaf:concurrentutil:0.0.7")
      implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
      implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
 @@ -162,6 +_,9 @@
          isTransitive = false // includes junit
      }
  
-+    implementation("net.serlith:Flare:4.0.6") // Pufferfish - Flare
++    implementation("net.serlith:Flare:4.0.7") // Pufferfish - Flare
 +    implementation("net.serlith.ConfigAPI:ConfigAPI-core:1.2.5") // Pufferfish - Config API
 +
      testImplementation("io.github.classgraph:classgraph:4.8.179") // For mob goal test
