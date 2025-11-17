@@ -133,7 +133,15 @@ public class ProfilingManager {
                     .setFamily(os.getFamily())
                     .setVersion(os.getVersionInfo().toString())
                     .setBitness(os.getBitness())
-                );
+                )
+
+                .withExceptionRunnable(() -> {
+                    String profilingUri = ProfilingManager.getProfilingUri();
+                    ProfilingManager.broadcastPrefixed(
+                        Component.text("An exception happened and profiling has stopped", MAIN_COLOR),
+                        Component.text(profilingUri, HEX).clickEvent(ClickEvent.openUrl(profilingUri))
+                    );
+                });
 
             currentFlare = builder.build();
         } catch (IOException e) {
