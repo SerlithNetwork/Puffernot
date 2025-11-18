@@ -55,7 +55,7 @@
          isTransitive = false // includes junit
      }
  
-+    implementation("net.serlith:Flare:4.0.8") // Pufferfish - Flare
++    implementation("net.serlith:Flare:4.0.9") // Pufferfish - Flare
 +    implementation("net.serlith.ConfigAPI:ConfigAPI-core:1.2.5") // Pufferfish - Config API
 +
      testImplementation("io.github.classgraph:classgraph:4.8.179") // For mob goal test
