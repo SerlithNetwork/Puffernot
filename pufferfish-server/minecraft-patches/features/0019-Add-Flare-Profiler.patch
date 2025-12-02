@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Biquaternions <biquaternions@serlith.net>
 Date: Wed, 22 Oct 2025 13:57:18 -0500
-Subject: [PATCH] Flare Profiler Tasks
+Subject: [PATCH] Add Flare Profiler
 
 For years the Flare profiler was broken due to {@code gg.pufferfish.pufferfish.flare.collectors.WorldCountCollector}
   requesting the entity counts asynchronously and getting caught by Spigot's async catcher.
@@ -10,10 +10,10 @@ Since Flare samples in a 5s interval and the operations are lightweight by natur
   burden on the server.
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 08a4d3d20579a276a29b33c9afcc1cefe8bc9698..8bd7f49f148adf9fb8921fb83e46296e6f92d761 100644
+index 38554451e204d1b63bbe3277fa5e3f3ac9de3a10..48af025fe8a098a71e8d8b66354d003615d91957 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1606,6 +1606,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1600,6 +1600,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  }
                  // Paper end - avoid issues with certain tasks not processing during sleep
                  this.server.spark.executeMainThreadTasks(); // Paper - spark
@@ -21,7 +21,7 @@ index 08a4d3d20579a276a29b33c9afcc1cefe8bc9698..8bd7f49f148adf9fb8921fb83e46296e
                  this.tickConnection();
                  this.server.spark.tickEnd(((double)(System.nanoTime() - this.currentTickStart) / 1000000D)); // Paper - spark
                  return;
-@@ -1649,6 +1650,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1643,6 +1644,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
          ProfilerFiller profilerFiller = Profiler.get();
          this.server.spark.executeMainThreadTasks(); // Paper - spark

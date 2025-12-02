@@ -5,7 +5,7 @@ Subject: [PATCH] Reduce Entity Allocations
 
 
 diff --git a/net/minecraft/world/entity/ai/attributes/AttributeMap.java b/net/minecraft/world/entity/ai/attributes/AttributeMap.java
-index fdb02fc40579866167e8cc9bcefbd961588b53a6..b348e404160b25cdfb51ec7438caabe308f1a4a8 100644
+index 92b7f4cbd276dad49cba78514db3552af8cdd80c..9c6a78d4cb3fb70aae86d057e6314d0bda0a3b1a 100644
 --- a/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 +++ b/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 @@ -18,9 +18,11 @@ public class AttributeMap {
@@ -20,10 +20,10 @@ index fdb02fc40579866167e8cc9bcefbd961588b53a6..b348e404160b25cdfb51ec7438caabe3
      }
  
      private void onAttributeModified(AttributeInstance instance) {
-@@ -44,7 +46,7 @@ public class AttributeMap {
+@@ -43,7 +45,7 @@ public class AttributeMap {
+     }
  
-     @Nullable
-     public AttributeInstance getInstance(Holder<Attribute> attribute) {
+     public @Nullable AttributeInstance getInstance(Holder<Attribute> attribute) {
 -        return this.attributes.computeIfAbsent(attribute, holder -> this.supplier.createInstance(this::onAttributeModified, (Holder<Attribute>)holder));
 +        return this.attributes.computeIfAbsent(attribute, this.pufferfish$createInstance); // Pufferfish - cache lambda, as for some reason java allocates it anyways
      }

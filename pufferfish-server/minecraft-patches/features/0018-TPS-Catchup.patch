@@ -5,10 +5,10 @@ Subject: [PATCH] TPS Catchup
 
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 3562b3fdcbe33c694fe4e6fdc6008de8c60efe06..08a4d3d20579a276a29b33c9afcc1cefe8bc9698 100644
+index c9174d6553c4e7e1b41f42a99f8c9dc184984efc..38554451e204d1b63bbe3277fa5e3f3ac9de3a10 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1302,7 +1302,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1304,7 +1304,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                      final long ticksBehind = Math.max(1L, this.tickSchedule.getPeriodsAhead(l, tickStart));
                      final long catchup = (long)Math.max(
                          1,

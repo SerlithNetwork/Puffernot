@@ -5,7 +5,7 @@ Subject: [PATCH] Block Goal Should Not Load Chunks
 
 
 diff --git a/net/minecraft/world/entity/ai/goal/MoveToBlockGoal.java b/net/minecraft/world/entity/ai/goal/MoveToBlockGoal.java
-index d0ab3db7bbd2942db19f473474371b20ce822608..0f7ccc09880e270f24bcde5b46ddd804581785d7 100644
+index 7e70c7bee633c54497d1cd2854dd60f4fb5ff160..4ec862f38ed480c3e59d020e7a0d411a771e8e55 100644
 --- a/net/minecraft/world/entity/ai/goal/MoveToBlockGoal.java
 +++ b/net/minecraft/world/entity/ai/goal/MoveToBlockGoal.java
 @@ -119,6 +119,7 @@ public abstract class MoveToBlockGoal extends Goal {
