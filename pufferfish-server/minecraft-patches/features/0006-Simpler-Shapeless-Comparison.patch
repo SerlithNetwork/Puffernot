@@ -24,13 +24,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/item/crafting/ShapelessRecipe.java b/net/minecraft/world/item/crafting/ShapelessRecipe.java
-index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..25af823f59c154fc55fc613a6e8c40528eb6e8fd 100644
+index 28d085fce206634ee88c492e06fdbf63a618ee12..e5d302c9d6343c86e42936c2497d634d87c740eb 100644
 --- a/net/minecraft/world/item/crafting/ShapelessRecipe.java
 +++ b/net/minecraft/world/item/crafting/ShapelessRecipe.java
-@@ -23,8 +23,16 @@ public class ShapelessRecipe implements CraftingRecipe {
+@@ -22,8 +22,16 @@ public class ShapelessRecipe implements CraftingRecipe {
+     final ItemStack result;
      final List<Ingredient> ingredients;
-     @Nullable
-     private PlacementInfo placementInfo;
+     private @Nullable PlacementInfo placementInfo;
 +    private final boolean pufferfish$isBukkit; // Pufferfish - Simpler Shapeless Comparison
  
 +    // Pufferfish start - Simpler Shapeless Comparison
@@ -44,7 +44,7 @@ index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..25af823f59c154fc55fc613a6e8c4052
          this.group = group;
          this.category = category;
          this.result = result;
-@@ -72,6 +80,28 @@ public class ShapelessRecipe implements CraftingRecipe {
+@@ -71,6 +79,28 @@ public class ShapelessRecipe implements CraftingRecipe {
  
      @Override
      public boolean matches(CraftingInput input, Level level) {
