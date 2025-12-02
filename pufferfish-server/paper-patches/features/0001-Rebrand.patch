@@ -5,7 +5,7 @@ Subject: [PATCH] Rebrand
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 6abc57669e87f7f98f3b76af3c0e50825fea6eb1..af91d0c7cfa60efa768d5f40d42283d6d67f7614 100644
+index 9f4d73fd321f6f0cd19fdd1b63068d2ea6c0816b..96997fcdeb98fd74fedbb0a0f103e34cde991f50 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
 @@ -593,7 +593,7 @@ public class Metrics {
@@ -32,7 +32,7 @@ index 6abc57669e87f7f98f3b76af3c0e50825fea6eb1..af91d0c7cfa60efa768d5f40d42283d6
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index d0554ed6631535815e5932930911e3fe1dee8710..8af5d4bb172ad5686f992183bedadae89e436a96 100644
+index d0554ed6631535815e5932930911e3fe1dee8710..3643f7eac770782d3dc4e9fbc776c89de3dd14fa 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 @@ -35,7 +35,7 @@ public class PaperVersionFetcher implements VersionFetcher {
@@ -129,7 +129,7 @@ index 74ffdc823e66fc5ec027c4b7c462382bcbfe2be2..c1639f79b5a5e53d3a276458e4aa8f44
              SharedConstants.getCurrentVersion().name(),
              getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index 1354ccfbf525e5e64483ac5f443cc2325ba63850..3b756aca5fa44af6a41d7fcaf3b0f7d3672c691e 100644
+index 7ffb7a210bf840009158d5e4364dad78221ded6c..fb05cbd9fba24f1d8ea2bbcc5ef20b2b2964df9f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -491,7 +491,7 @@ public class CraftScheduler implements BukkitScheduler {
@@ -141,21 +141,8 @@ index 1354ccfbf525e5e64483ac5f443cc2325ba63850..3b756aca5fa44af6a41d7fcaf3b0f7d3
                  // We don't need to parse pending
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
-diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-index 774556a62eb240da42e84db4502e2ed43495be17..a0c69929beefb44e7726e318d52147f088da14c5 100644
---- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-+++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-@@ -11,7 +11,7 @@ public final class Versioning {
-     public static String getBukkitVersion() {
-         String result = "Unknown-Version";
- 
--        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/io.papermc.paper/paper-api/pom.properties");
-+        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/gg.pufferfish.pufferfish/pufferfish-api/pom.properties"); // Pufferfish - Rebrand
-         Properties properties = new Properties();
- 
-         if (stream != null) {
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index c77748061f1c8bb2b0dc8dbd80f608d431752015..b36f91a3c0c00fe5232653becead590d74d318a5 100644
+index e2dc6644ae44ce02821100275ede4b0712cf260d..b1063ec2eb0efceca88b64979e4f9b8e22439112 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
 @@ -25,7 +25,7 @@ public class WatchdogThread extends ca.spottedleaf.moonrise.common.util.TickThre

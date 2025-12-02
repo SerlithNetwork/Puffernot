@@ -1,6 +1,6 @@
 --- a/paper-server/build.gradle.kts
 +++ b/paper-server/build.gradle.kts
-@@ -23,6 +_,18 @@
+@@ -22,6 +_,18 @@
      minecraftVersion = providers.gradleProperty("mcVersion")
      gitFilePatches = false
  
@@ -17,7 +17,7 @@
 +    // Pufferfish end - Rebrand
 +
      spigot {
-         enabled = true
+         enabled = false
          buildDataRef = "42d18d4c4653ffc549778dbe223f6994a031d69e"
 @@ -104,7 +_,21 @@
      }
@@ -56,12 +56,12 @@
      }
  
 +    implementation("net.serlith:Flare:4.0.9") // Pufferfish - Flare
-+    implementation("net.serlith.ConfigAPI:ConfigAPI-core:1.2.5") // Pufferfish - Config API
++    implementation("net.serlith.ConfigAPI:ConfigAPI-core:1.2.7") // Pufferfish - Config API
 +
      testImplementation("io.github.classgraph:classgraph:4.8.179") // For mob goal test
+     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
      testImplementation("org.junit.jupiter:junit-jupiter:5.12.2")
-     testImplementation("org.junit.platform:junit-platform-suite-engine:1.12.2")
-@@ -181,8 +_,8 @@
+@@ -182,8 +_,8 @@
      implementation("io.papermc:reflection-rewriter-proxy-generator:$reflectionRewriterVersion")
  
      // Spark
@@ -72,7 +72,7 @@
  }
  
  tasks.jar {
-@@ -197,14 +_,14 @@
+@@ -198,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -92,7 +92,7 @@
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),
              "Git-Branch" to gitBranch,
-@@ -235,6 +_,12 @@
+@@ -236,6 +_,12 @@
      dependsOn(scanJarForBadCalls)
  }
  
@@ -105,7 +105,7 @@
  // Use TCA for console improvements
  tasks.jar {
      val archiveOperations = services.archiveOperations
-@@ -263,7 +_,7 @@
+@@ -264,7 +_,7 @@
      jvmArgumentProviders.add(provider)
  }
  

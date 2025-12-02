@@ -1,4 +1,4 @@
-name: Build 1.21.10
+name: Build 1.21.11
 on:
   workflow_dispatch:
   push:
@@ -51,17 +51,17 @@ jobs:
       - name: Upload Pufferfish
         uses: actions/upload-artifact@main
         with:
-          name: Pufferfish 1.21.10
-          path: ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.10-R0.1-SNAPSHOT-mojmap.jar
+          name: Pufferfish 1.21.11
+          path: ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.11-R0.1-SNAPSHOT-mojmap.jar
 
       - name: Release Pufferfish
         uses: softprops/action-gh-release@master
         with:
-          name: "🐡 Puffernot 1.21.10 (Build ${{ env.BUILD_NUMBER }})"
-          tag_name: "ver-1.21.10"
+          name: "🐡 Puffernot 1.21.11 (Build ${{ env.BUILD_NUMBER }})"
+          tag_name: "ver-1.21.11"
           files: |
-            ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.10-R0.1-SNAPSHOT-mojmap.jar
-            ./pufferfish-api/build/libs/pufferfish-api-1.21.10-R0.1-SNAPSHOT.jar
+            ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.11-R0.1-SNAPSHOT-mojmap.jar
+            ./pufferfish-api/build/libs/pufferfish-api-1.21.11-R0.1-SNAPSHOT.jar
           body_path: "./RELEASE.md"
           token: "${{ secrets.GITHUB_TOKEN }}"
           target_commitish: "${{ github.sha }}"
