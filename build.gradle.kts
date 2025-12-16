@@ -9,8 +9,10 @@ plugins {
 val paperMavenPublicUrl = "https://repo.papermc.io/repository/maven-public/"
 
 paperweight {
-    upstreams.paper {
+    upstreams.register("paper") {
+        repo.convention(github("Biquaternions", "Paper"))
         ref = providers.gradleProperty("paperCommit")
+        applyUpstreamNested.convention(false)
 
         patchFile {
             path = "paper-server/build.gradle.kts"
