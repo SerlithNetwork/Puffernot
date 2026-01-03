@@ -1,13 +1,12 @@
 package gg.pufferfish.pufferfish.util;
 
 import java.util.Iterator;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public record IterableWrapper<T>(Iterator<T> iterator) implements Iterable<T> {
 
-    @NotNull
     @Override
-    public Iterator<T> iterator() {
+    public @NonNull Iterator<T> iterator() {
         return iterator;
     }
 

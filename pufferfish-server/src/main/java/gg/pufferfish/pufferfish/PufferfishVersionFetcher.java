@@ -9,8 +9,7 @@ import io.papermc.paper.ServerBuildInfo;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
@@ -51,7 +50,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
     }
 
     @Override
-    public @NotNull Component getVersionMessage() {
+    public @NonNull Component getVersionMessage() {
         final Component updateMessage;
         final ServerBuildInfo build = ServerBuildInfo.buildInfo();
         if (build.buildNumber().isEmpty() && build.gitCommit().isEmpty()) {
@@ -59,7 +58,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
         } else {
             updateMessage = PufferfishVersionFetcher.getUpdateStatusMessage(); // Pufferfish - Rebrand
         }
-        final @Nullable Component history = this.getHistory();
+        final Component history = this.getHistory();
 
         return history != null ? Component.textOfChildren(updateMessage, Component.newline(), history) : updateMessage;
     }

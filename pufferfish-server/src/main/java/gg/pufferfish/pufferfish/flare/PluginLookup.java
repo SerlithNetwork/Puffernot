@@ -6,7 +6,8 @@ import io.papermc.paper.plugin.entrypoint.classloader.PaperPluginClassLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.PluginClassLoader;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,11 +17,11 @@ import java.util.concurrent.TimeUnit;
 
 public class PluginLookup {
 
-    private static final Cache<String, String> PLUGIN_NAME_CACHE = CacheBuilder.newBuilder()
+    private static final Cache<@NonNull String, @NonNull String> PLUGIN_NAME_CACHE = CacheBuilder.newBuilder()
         .expireAfterAccess(1, TimeUnit.MINUTES)
         .maximumSize(1024)
         .build();
-    private static final Cache<Boolean, Collection<ClassLoader>> CLASS_LOADER_CACHE = CacheBuilder.newBuilder() // Yes, boolean key, trust
+    private static final Cache<@NonNull Boolean, @NonNull Collection<ClassLoader>> CLASS_LOADER_CACHE = CacheBuilder.newBuilder() // Yes, boolean key, trust
         .expireAfterAccess(1, TimeUnit.MINUTES)
         .build();
 
@@ -47,7 +48,7 @@ public class PluginLookup {
             return Optional.empty();
         }
 
-        @Nullable ClassLoader classLoader = PluginLookup.matchClassLoader(classLoaders, name);
+        ClassLoader classLoader = PluginLookup.matchClassLoader(classLoaders, name);
         if (classLoader == null) {
             return Optional.empty();
         }

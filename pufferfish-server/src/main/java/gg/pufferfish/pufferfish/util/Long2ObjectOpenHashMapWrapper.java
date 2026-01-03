@@ -2,7 +2,7 @@ package gg.pufferfish.pufferfish.util;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import java.util.Map;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class Long2ObjectOpenHashMapWrapper<V> extends Long2ObjectOpenHashMap<V> {
 

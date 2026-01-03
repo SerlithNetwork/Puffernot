@@ -17,6 +17,7 @@ import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
 import org.apache.logging.log4j.core.config.Property;
 import org.apache.logging.log4j.core.filter.AbstractFilter;
+import org.jspecify.annotations.NonNull;
 
 public class PufferfishSentryAppender extends AbstractAppender {
 
@@ -75,7 +76,7 @@ public class PufferfishSentryAppender extends AbstractAppender {
         }
 
         if (hasContext && e.getContextData().containsKey("pufferfishsentry_eventdata")) {
-            Map<String, String> eventFields = GSON.fromJson((String) e.getContextData().getValue("pufferfishsentry_eventdata"), new TypeToken<Map<String, String>>() {}.getType());
+            Map<String, String> eventFields = GSON.fromJson((String) e.getContextData().getValue("pufferfishsentry_eventdata"), new TypeToken<@NonNull Map<String, String>>() {}.getType());
             if (eventFields != null) {
                 event.setExtra("event", eventFields);
             }
