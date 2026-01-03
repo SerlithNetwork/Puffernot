@@ -3,6 +3,7 @@ package gg.pufferfish.pufferfish;
 import com.destroystokyo.paper.PaperVersionFetcher;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
 import io.papermc.paper.ServerBuildInfo;
 import net.kyori.adventure.text.Component;
@@ -98,7 +99,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
             connection.setRequestProperty("User-Agent", PufferfishVersionFetcher.USER_AGENT);
             connection.setRequestProperty("Accept", "application/json");
             try (final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-                final JsonObject json = GSON.fromJson(reader, JsonObject.class);
+                final JsonPrimitive json = GSON.fromJson(reader, JsonPrimitive.class);
                 final int latest = json.getAsInt();
                 return latest - actionsBuild;
             } catch (final JsonSyntaxException ex) {
