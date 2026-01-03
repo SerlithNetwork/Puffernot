@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -105,6 +106,8 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
             } catch (final JsonSyntaxException ex) {
                 LOGGER.error("Error parsing json from Pufferfish's downloads API", ex);
                 return DISTANCE_ERROR;
+            } catch (final SocketTimeoutException ex) {
+                return 0;
             }
         } catch (final IOException e) {
             LOGGER.error("Error while parsing version", e);
