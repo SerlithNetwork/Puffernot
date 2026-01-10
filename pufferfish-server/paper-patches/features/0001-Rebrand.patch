@@ -32,10 +32,10 @@ index 9f4d73fd321f6f0cd19fdd1b63068d2ea6c0816b..96997fcdeb98fd74fedbb0a0f103e34c
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 9a26749302c2b9a1dd247bfd4ea9332428bfbf77..e4b25006a95fe2d9ae424252c8367c1a30083c20 100644
+index 602d3ce2cd16405f35453ce12a207b70312a4a8a..0fbf904abf524ff544674df709b54972c09acce0 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-@@ -138,9 +138,9 @@ public class PaperVersionFetcher implements VersionFetcher {
+@@ -133,9 +133,9 @@ public class PaperVersionFetcher implements VersionFetcher {
          };
      }
  
@@ -47,7 +47,7 @@ index 9a26749302c2b9a1dd247bfd4ea9332428bfbf77..e4b25006a95fe2d9ae424252c8367c1a
          final String currentVersion = PaperVersionFetcher.BUILD_INFO.minecraftVersionId();
  
          try {
-@@ -250,7 +250,7 @@ public class PaperVersionFetcher implements VersionFetcher {
+@@ -244,7 +244,7 @@ public class PaperVersionFetcher implements VersionFetcher {
          }
      }
  

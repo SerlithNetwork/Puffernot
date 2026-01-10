@@ -101,7 +101,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
             try (final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
                 final JsonPrimitive json = GSON.fromJson(reader, JsonPrimitive.class);
                 final int latest = json.getAsInt();
-                return latest - actionsBuild;
+                return Math.max(latest - actionsBuild, 0);
             } catch (final JsonSyntaxException ex) {
                 LOGGER.error("Error parsing json from Pufferfish's downloads API", ex);
                 return DISTANCE_ERROR;
