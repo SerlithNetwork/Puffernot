@@ -19,6 +19,30 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftAsyncScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftAsyncScheduler.java
+index 27562fd66ae9d091837cab74057706c8a6b6521c..a3be6fcdc3767fa5a69f0b92816eeb22672aeab6 100644
+--- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftAsyncScheduler.java
++++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftAsyncScheduler.java
+@@ -44,6 +44,7 @@ public class CraftAsyncScheduler extends CraftScheduler {
+     private final Executor management = Executors.newSingleThreadExecutor(new ThreadFactoryBuilder()
+             .setNameFormat("Craft Async Scheduler Management Thread").build());
+     private final List<CraftTask> temp = new ArrayList<>();
++    public final int pufferfish$getPoolSize() { return this.executor.getPoolSize(); } // Pufferfish - Expose for profiler
+ 
+     CraftAsyncScheduler() {
+         super(true);
+diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
+index 982455a5eecdb6d80762cc17c2461b467ba5072e..8aa4e2286704e43503abbdae0d88ccfd5e0bf7e4 100644
+--- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
++++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
+@@ -115,6 +115,7 @@ public class CraftScheduler implements BukkitScheduler {
+         RECENT_TICKS = 30;
+     }
+ 
++    public final CraftAsyncScheduler pufferfish$getAsyncScheduler() { return (CraftAsyncScheduler) this.asyncScheduler; } // Pufferfish - Expose for profiler
+     // Paper start
+     private final CraftScheduler asyncScheduler;
+     private final boolean isAsyncScheduler;
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java b/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
 index 54f0703f00caed6b8f10f55fe746e5a41242b48b..dda8051c987a8db237f6312c4ebcf41e028d466f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
