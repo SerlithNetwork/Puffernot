@@ -51,6 +51,7 @@ public class ProfilingManager {
         return t;
     });
     private static final ConcurrentLinkedQueue<Runnable> mainThreadTaskQueue = new ConcurrentLinkedQueue<>();
+    private static final TextColor EXCEPTION_COLOR = TextColor.color(218, 144, 147);
     private static final TextColor MAIN_COLOR = TextColor.color(106, 126, 218);
     private static final TextColor HEX = TextColor.color(227, 234, 234);
     private static final Component PREFIX = Component.text()
@@ -139,9 +140,9 @@ public class ProfilingManager {
                 )
 
                 .withExceptionRunnable(() -> {
-                    String profilingUri = ProfilingManager.getProfilingUri();
+                    String profilingUri = FlareCommand.PROFILING_URI;
                     ProfilingManager.broadcastPrefixed(
-                        Component.text("An exception happened and profiling has stopped", MAIN_COLOR),
+                        Component.text("An exception happened and profiling has stopped", EXCEPTION_COLOR),
                         Component.text(profilingUri, HEX).clickEvent(ClickEvent.openUrl(profilingUri))
                     );
                 });

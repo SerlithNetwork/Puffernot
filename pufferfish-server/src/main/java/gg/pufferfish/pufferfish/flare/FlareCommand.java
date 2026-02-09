@@ -38,7 +38,7 @@ public class FlareCommand {
         .append(Component.text("]", NamedTextColor.DARK_GRAY))
         .append(Component.text(" "))
         .build();
-    private static String PROFILING_URI = "";
+    protected static String PROFILING_URI = "";
 
     public static void init() {
 
