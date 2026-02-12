@@ -135,8 +135,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
                 LOGGER.error("Error parsing json from GitHub's API", e);
                 return DISTANCE_ERROR;
             }
-        } catch (final IOException e) {
-            LOGGER.error("Error while parsing version", e);
+        } catch (final IOException ignored) {
             return DISTANCE_ERROR;
         }
     }
