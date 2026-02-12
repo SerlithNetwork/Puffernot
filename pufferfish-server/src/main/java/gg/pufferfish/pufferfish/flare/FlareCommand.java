@@ -70,6 +70,12 @@ public class FlareCommand {
                             return Command.SINGLE_SUCCESS;
                         })
                     )
+                    .then(Commands.literal("--ctimer")
+                        .executes(ctx -> {
+                            FlareCommand.execute(ctx.getSource().getSender(), ProfileType.CTIMER);
+                            return Command.SINGLE_SUCCESS;
+                        })
+                    )
                     .executes(ctx -> {
                         FlareCommand.execute(ctx.getSource().getSender(), ProfileType.ITIMER);
                         return Command.SINGLE_SUCCESS;
