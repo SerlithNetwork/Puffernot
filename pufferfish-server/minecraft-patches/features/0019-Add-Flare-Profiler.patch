@@ -10,10 +10,10 @@ Since Flare samples in a 5s interval and the operations are lightweight by natur
   burden on the server.
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index f933a919151a1750c1822c7501b1d9ec9d816351..c16b2e559fa5619175357ebf00c5034a61a48b58 100644
+index e0d8490778399232151c023d4a71e549f2f4c932..cb5efea0c38c369b5403af7c1604c131fa37c093 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1604,6 +1604,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1599,6 +1599,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  }
                  // Paper end - avoid issues with certain tasks not processing during sleep
                  this.server.spark.executeMainThreadTasks(); // Paper - spark
@@ -21,7 +21,7 @@ index f933a919151a1750c1822c7501b1d9ec9d816351..c16b2e559fa5619175357ebf00c5034a
                  this.tickConnection();
                  this.server.spark.tickEnd(((double)(System.nanoTime() - this.currentTickStart) / 1000000D)); // Paper - spark
                  return;
-@@ -1647,6 +1648,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1642,6 +1643,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
          ProfilerFiller profilerFiller = Profiler.get();
          this.server.spark.executeMainThreadTasks(); // Paper - spark

@@ -5,7 +5,7 @@ Subject: [PATCH] Rebrand
 
 
 diff --git a/net/minecraft/CrashReport.java b/net/minecraft/CrashReport.java
-index c2b6b0625095aa3645872eecbae4280bbadf85f2..355a5e04afe3a1f685bc5fab7e6161e01a7c69c5 100644
+index ad10eda79e6b76fc1896b4cdb27546b515d1cfa4..894faee12a0bba5eff2dea3ff157478aed019be1 100644
 --- a/net/minecraft/CrashReport.java
 +++ b/net/minecraft/CrashReport.java
 @@ -30,6 +30,7 @@ public class CrashReport {
@@ -15,8 +15,8 @@ index c2b6b0625095aa3645872eecbae4280bbadf85f2..355a5e04afe3a1f685bc5fab7e6161e0
 +    private final List<String> extraInfo = List.of("", "DO NOT REPORT THIS TO PAPER! REPORT THIS TO PUFFERFISH!", ""); // Pufferfish - Rebrand
  
      public CrashReport(String title, Throwable exception) {
-         io.papermc.paper.util.StacktraceDeobfuscator.INSTANCE.deobfuscateThrowable(exception); // Paper
-@@ -130,7 +131,7 @@ public class CrashReport {
+         this.title = title;
+@@ -129,7 +130,7 @@ public class CrashReport {
      }
  
      public String getFriendlyReport(ReportType type) {
@@ -25,7 +25,7 @@ index c2b6b0625095aa3645872eecbae4280bbadf85f2..355a5e04afe3a1f685bc5fab7e6161e0
      }
  
      public @Nullable Path getSaveFile() {
-@@ -160,7 +161,7 @@ public class CrashReport {
+@@ -159,7 +160,7 @@ public class CrashReport {
      }
  
      public boolean saveToFile(Path path, ReportType type) {
@@ -35,10 +35,10 @@ index c2b6b0625095aa3645872eecbae4280bbadf85f2..355a5e04afe3a1f685bc5fab7e6161e0
  
      public SystemReport getSystemReport() {
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 21500194b5c92baa6ab82503165b113155e4d994..2772f556d64d2be8a17007de14e3de71c01f51dc 100644
+index ca2caace6aab0dfcb0ab7a0fd28e66555c62fdc5..94913599755567d3cbc6b085b141b7a6727e34af 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1290,7 +1290,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1285,7 +1285,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              // Paper end - Add onboarding message for initial server start
              // Paper start - Improve outdated version checking
              if (System.getProperty("paper.disableStartupVersionCheck") == null && io.papermc.paper.configuration.GlobalConfiguration.get().updateChecker.enabled) {
