@@ -140,6 +140,14 @@ public class ProfilingManager {
                 )
 
                 .withExceptionRunnable(() -> {
+                    try {
+                        currentTask.cancel(true);
+                    } catch (Throwable t) {
+                        PufferfishLogger.LOGGER.log(Level.WARNING, "Error occurred stopping Flare", t);
+                    } finally {
+                        currentTask = null;
+                    }
+
                     String profilingUri = FlareCommand.PROFILING_URI;
                     ProfilingManager.broadcastPrefixed(
                         Component.text("An exception happened and profiling has stopped", EXCEPTION_COLOR),
