@@ -60,15 +60,15 @@
      options.use()
      options.isDocFilesSubDirs = true
      options.links(
-@@ -205,6 +_,7 @@
-         "https://www.javadocs.dev/org.apache.maven.resolver/maven-resolver-api/1.7.3",
+@@ -206,6 +_,7 @@
      )
      options.tags("apiNote:a:API Note:")
+     options.tags("implNote:a:Implementation Note:")
 +    options.addStringOption("-add-modules", "jdk.incubator.vector") // Pufferfish - SIMD Utilities
  
      inputs.files(apiAndDocs).ignoreEmptyDirectories().withPropertyName(apiAndDocs.name + "-configuration")
      val apiAndDocsElements = apiAndDocs.elements
-@@ -216,11 +_,11 @@
+@@ -217,11 +_,11 @@
      }
  
      // workaround for https://github.com/gradle/gradle/issues/4046
