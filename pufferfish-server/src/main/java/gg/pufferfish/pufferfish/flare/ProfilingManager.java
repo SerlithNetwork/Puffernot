@@ -9,7 +9,6 @@ import gg.pufferfish.pufferfish.PufferfishConfig;
 import gg.pufferfish.pufferfish.PufferfishLogger;
 import gg.pufferfish.pufferfish.compat.ServerConfigurations;
 import gg.pufferfish.pufferfish.flare.collectors.GCEventCollector;
-import gg.pufferfish.pufferfish.flare.collectors.PacketCollector;
 import gg.pufferfish.pufferfish.flare.collectors.StatCollector;
 import gg.pufferfish.pufferfish.flare.collectors.TPSCollector;
 import gg.pufferfish.pufferfish.flare.collectors.ThreadCollector;
@@ -20,7 +19,6 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.Bukkit;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -118,7 +116,7 @@ public class ProfilingManager {
                 .withVersion("Minecraft Version", Bukkit.getMinecraftVersion())
 
                 .withGraphCategories(CustomCategories.ENTITIES_AND_CHUNKS, CustomCategories.MC_PERF)
-                .withCollectors(new TPSCollector(), new WorldCountCollector(ProfilingManager::submitToMainThread), new GCEventCollector(), new StatCollector(), new ThreadCollector(), PacketCollector.INSTANCE)
+                .withCollectors(new TPSCollector(), new WorldCountCollector(ProfilingManager::submitToMainThread), new GCEventCollector(), new StatCollector(), new ThreadCollector())
                 .withClassIdentifier(PluginLookup::getPluginForClass)
 
                 .withHardware(new FlareBuilder.HardwareBuilder()
@@ -212,16 +210,6 @@ public class ProfilingManager {
         while ((task = ProfilingManager.mainThreadTaskQueue.poll()) != null) {
             task.run();
         }
-    }
-
-    public static void injectProfilingHandler(ServerPlayer player) {
-        if (ProfilingManager.isProfiling()) {
-            PacketCollector.INSTANCE.injectProfilingHandler(player);
-        }
-    }
-
-    public static void uninjectProfilingHandler(ServerPlayer player) {
-        PacketCollector.INSTANCE.uninjectProfilingHandler(player);
     }
 
     private static void broadcastPrefixed(Component ...lines) {

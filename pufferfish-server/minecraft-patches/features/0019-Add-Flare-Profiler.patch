@@ -29,23 +29,3 @@ index e0d8490778399232151c023d4a71e549f2f4c932..cb5efea0c38c369b5403af7c1604c131
          // Paper start - Server Tick Events
          long endTime = System.nanoTime();
          long remaining = this.nextTickTimeNanos - endTime;
-diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
-index 989ac565c47a70c7947cb7315d0f5c2cfecd0363..c6aa7b4a9d05470a2f7659759fa4d3f2d89300fb 100644
---- a/net/minecraft/server/players/PlayerList.java
-+++ b/net/minecraft/server/players/PlayerList.java
-@@ -170,6 +170,7 @@ public abstract class PlayerList {
-             GameProtocols.SERVERBOUND_TEMPLATE.bind(RegistryFriendlyByteBuf.decorator(this.server.registryAccess()), serverGamePacketListenerImpl),
-             serverGamePacketListenerImpl
-         );
-+        gg.pufferfish.pufferfish.flare.ProfilingManager.injectProfilingHandler(player); // Pufferfish - Flare
-         serverGamePacketListenerImpl.suspendFlushing();
-         GameRules gameRules = serverLevel.getGameRules();
-         boolean flag = gameRules.get(GameRules.IMMEDIATE_RESPAWN);
-@@ -431,6 +432,7 @@ public abstract class PlayerList {
-     }
-     public net.kyori.adventure.text.@Nullable Component remove(ServerPlayer player, net.kyori.adventure.text.Component leaveMessage) {
-         // Paper end - Fix kick event leave message not being sent
-+        gg.pufferfish.pufferfish.flare.ProfilingManager.uninjectProfilingHandler(player); // Pufferfish - Flare
-         ServerLevel serverLevel = player.level();
-         player.awardStat(Stats.LEAVE_GAME);
-         // CraftBukkit start - Quitting must be before we do final save of data, in case plugins need to modify it
