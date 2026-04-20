@@ -5,7 +5,7 @@ Subject: [PATCH] Rebrand
 
 
 diff --git a/net/minecraft/CrashReport.java b/net/minecraft/CrashReport.java
-index ad10eda79e6b76fc1896b4cdb27546b515d1cfa4..894faee12a0bba5eff2dea3ff157478aed019be1 100644
+index 84247ddc9e063676c59a6e62da1eb919320bd18f..c4895c7cce724792ce61d84db935aebb74d3b3ed 100644
 --- a/net/minecraft/CrashReport.java
 +++ b/net/minecraft/CrashReport.java
 @@ -30,6 +30,7 @@ public class CrashReport {
@@ -14,31 +14,31 @@ index ad10eda79e6b76fc1896b4cdb27546b515d1cfa4..894faee12a0bba5eff2dea3ff157478a
      private final SystemReport systemReport = new SystemReport();
 +    private final List<String> extraInfo = List.of("", "DO NOT REPORT THIS TO PAPER! REPORT THIS TO PUFFERFISH!", ""); // Pufferfish - Rebrand
  
-     public CrashReport(String title, Throwable exception) {
+     public CrashReport(final String title, final Throwable t) {
          this.title = title;
 @@ -129,7 +130,7 @@ public class CrashReport {
      }
  
-     public String getFriendlyReport(ReportType type) {
--        return this.getFriendlyReport(type, List.of());
-+        return this.getFriendlyReport(type, this.extraInfo); // Pufferfish - Rebrand
+     public String getFriendlyReport(final ReportType reportType) {
+-        return this.getFriendlyReport(reportType, List.of());
++        return this.getFriendlyReport(reportType, this.extraInfo); // Pufferfish - Rebrand
      }
  
      public @Nullable Path getSaveFile() {
 @@ -159,7 +160,7 @@ public class CrashReport {
      }
  
-     public boolean saveToFile(Path path, ReportType type) {
--        return this.saveToFile(path, type, List.of());
-+        return this.saveToFile(path, type, this.extraInfo); // Pufferfish - Rebrand
+     public boolean saveToFile(final Path file, final ReportType reportType) {
+-        return this.saveToFile(file, reportType, List.of());
++        return this.saveToFile(file, reportType, this.extraInfo); // Pufferfish - Rebrand
      }
  
      public SystemReport getSystemReport() {
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index ca2caace6aab0dfcb0ab7a0fd28e66555c62fdc5..94913599755567d3cbc6b085b141b7a6727e34af 100644
+index 2142757965b7345a011a92de08038473fa8ae320..a54cb80c38e673aacd93b6d4ad2276b854b92706 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1285,7 +1285,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1323,7 +1323,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              // Paper end - Add onboarding message for initial server start
              // Paper start - Improve outdated version checking
              if (System.getProperty("paper.disableStartupVersionCheck") == null && io.papermc.paper.configuration.GlobalConfiguration.get().updateChecker.enabled) {
@@ -48,7 +48,7 @@ index ca2caace6aab0dfcb0ab7a0fd28e66555c62fdc5..94913599755567d3cbc6b085b141b7a6
              // Paper end - Improve outdated version checking
  
 diff --git a/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index 1e9e061ec694ad64fc2724b83a66dfec7e069a43..2b0b3b25ac28972e4852f9fbc465f5dba4a68358 100644
+index eae4963b6d18c5f92871477b93f81c2c79331cd9..6e06fb1f9907eb4aa48de2247c28dd59672ebd9e 100644
 --- a/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 @@ -309,7 +309,7 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise

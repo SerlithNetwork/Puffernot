@@ -11,13 +11,13 @@ you to easily disable books, should you want to preemptively remove this
 functionality before additional exploits are found.
 
 diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index e158d614abed8d16e80192c0c9abd8537c92b9dc..863db29701f2413c3d17819bb41c95cc3c0ca0ce 100644
+index fe6e148322e920989ac3ffc3c10de95d782265f9..afba18247c2d4de34e0de4394809a92cbc939033 100644
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -1294,6 +1294,7 @@ public class ServerGamePacketListenerImpl
+@@ -1332,6 +1332,7 @@ public class ServerGamePacketListenerImpl
  
      @Override
-     public void handleEditBook(ServerboundEditBookPacket packet) {
+     public void handleEditBook(final ServerboundEditBookPacket packet) {
 +        if (!gg.pufferfish.pufferfish.PufferfishConfig.ENABLE_BOOKS && !this.player.getBukkitEntity().hasPermission("pufferfish.usebooks")) return; // Pufferfish - Option to disable books
          // Paper start - Book size limits
          final io.papermc.paper.configuration.type.number.IntOr.Disabled pageMax = io.papermc.paper.configuration.GlobalConfiguration.get().itemValidation.bookSize.pageMax;

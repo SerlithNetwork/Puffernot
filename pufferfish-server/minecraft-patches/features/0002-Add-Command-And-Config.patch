@@ -5,23 +5,23 @@ Subject: [PATCH] Add Command And Config
 
 
 diff --git a/net/minecraft/server/ReloadableServerResources.java b/net/minecraft/server/ReloadableServerResources.java
-index e13ddecde6a5599a4688707a1898db093d314d2b..fcc1c2ca594f543a91e59c680c1892cdddacca36 100644
+index 936266c6c943d799e58b0b06b591d091d540a783..5dea2d28e18fa77e6ce900627445cf2a020faa08 100644
 --- a/net/minecraft/server/ReloadableServerResources.java
 +++ b/net/minecraft/server/ReloadableServerResources.java
-@@ -42,6 +42,8 @@ public class ReloadableServerResources {
-         this.commands = new Commands(commandSelection, CommandBuildContext.simple(registries, enabledFeatures), true); // Paper - Brigadier Command API - use modern alias registration
-         io.papermc.paper.command.brigadier.PaperCommands.INSTANCE.setDispatcher(this.commands, CommandBuildContext.simple(registries, enabledFeatures)); // Paper - Brigadier Command API
+@@ -47,6 +47,8 @@ public class ReloadableServerResources {
+         this.commands = new Commands(commandSelection, CommandBuildContext.simple(loadingContext, enabledFeatures), true); // Paper - Brigadier Command API - use modern alias registration
+         io.papermc.paper.command.brigadier.PaperCommands.INSTANCE.setDispatcher(this.commands, CommandBuildContext.simple(loadingContext, enabledFeatures)); // Paper - Brigadier Command API
          io.papermc.paper.command.PaperCommands.registerCommands(); // Paper
 +        gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish - Config and command
 +        gg.pufferfish.pufferfish.flare.FlareCommand.init(); // Pufferfish - Config and command
-         this.advancements = new ServerAdvancementManager(registries);
-         this.functionLibrary = new ServerFunctionLibrary(permissions, this.commands.getDispatcher());
+         this.advancements = new ServerAdvancementManager(loadingContext);
+         this.functionLibrary = new ServerFunctionLibrary(functionCompilationPermissions, this.commands.getDispatcher());
      }
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index eb06d8f012684845146429832e977e6c1ddcd62b..ad48330977d3d968f733d8d395108187a8e8c393 100644
+index bc857ea218018e5cf651ecd81093b4b4e566034e..b84d334bce1feda1d0ab3cf565e01d877e4393e8 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -274,6 +274,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -295,6 +295,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          this.server.spark.registerCommandBeforePlugins(this.server); // Paper - spark
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
          com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // Paper - load version history now
