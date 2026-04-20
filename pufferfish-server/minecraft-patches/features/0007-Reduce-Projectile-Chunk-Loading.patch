@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/entity/projectile/Projectile.java b/net/minecraft/world/entity/projectile/Projectile.java
-index 6298e6de25f1dd9ff880a9ad2882dc7ccb2f100c..fe8be7fb0d34c733bf3bb2322560bd402bed35c5 100644
+index 2ee2103e78f2b73d1e6df59b92037f219d82e191..199ae275d13903e7499d07eaf0bb6b898863b8f3 100644
 --- a/net/minecraft/world/entity/projectile/Projectile.java
 +++ b/net/minecraft/world/entity/projectile/Projectile.java
 @@ -50,6 +50,36 @@ public abstract class Projectile extends Entity implements TraceableEntity {
@@ -28,35 +28,35 @@ index 6298e6de25f1dd9ff880a9ad2882dc7ccb2f100c..fe8be7fb0d34c733bf3bb2322560bd40
      }
  
 +    // Pufferfish start - Reduce Projectile Chunk Loading
-+    private static int pufferfish$loadedThisTick = 0;
-+    private static int pufferfish$loadedTick;
++    private static int PUFFERFISH$LOADED_THIS_TICK = 0;
++    private static int PUFFERFISH$LOADED_TICK;
 +
 +    private int pufferfish$loadedLifetime = 0;
 +    @Override
-+    public void setPos(double x, double y, double z) {
++    public void setPos(final double x, final double y, final double z) {
 +        int currentTick = net.minecraft.server.MinecraftServer.currentTick;
-+        if (pufferfish$loadedTick != currentTick) {
-+            pufferfish$loadedTick = currentTick;
-+            pufferfish$loadedThisTick = 0;
++        if (Projectile.PUFFERFISH$LOADED_TICK != currentTick) {
++            Projectile.PUFFERFISH$LOADED_TICK = currentTick;
++            Projectile.PUFFERFISH$LOADED_THIS_TICK = 0;
 +        }
 +        int previousX = Mth.floor(this.getX()) >> 4, previousZ = Mth.floor(this.getZ()) >> 4;
 +        int newX = Mth.floor(x) >> 4, newZ = Mth.floor(z) >> 4;
 +        if (previousX != newX || previousZ != newZ) {
 +            boolean isLoaded = ((net.minecraft.server.level.ServerChunkCache) this.level().getChunkSource()).getChunkAtIfLoadedImmediately(newX, newZ) != null;
 +            if (!isLoaded) {
-+                if (Projectile.pufferfish$loadedThisTick > gg.pufferfish.pufferfish.PufferfishConfig.PROJECTILE.MAX_LOADS_PER_TICK) {
++                if (Projectile.PUFFERFISH$LOADED_THIS_TICK > gg.pufferfish.pufferfish.PufferfishConfig.PROJECTILE.MAX_LOADS_PER_TICK) {
 +                    if (++this.pufferfish$loadedLifetime > gg.pufferfish.pufferfish.PufferfishConfig.PROJECTILE.MAX_LOADS_PER_PROJECTILE) {
 +                        this.discard(org.bukkit.event.entity.EntityRemoveEvent.Cause.DESPAWN);
 +                    }
 +                    return;
 +                }
-+                Projectile.pufferfish$loadedThisTick++;
++                Projectile.PUFFERFISH$LOADED_THIS_TICK++;
 +            }
 +        }
 +        super.setPos(x, y, z);
 +    }
 +    // Pufferfish end - Reduce Projectile Chunk Loading
 +
-     protected void setOwner(@Nullable EntityReference<Entity> owner) {
+     protected void setOwner(final @Nullable EntityReference<Entity> owner) {
          this.owner = owner;
-         this.refreshProjectileSource(false); // Paper
+     }
