@@ -8,6 +8,12 @@ disabling this will prevent the server from performing an expensive
 search to attempt respawning the ender dragon whenever a player places
 an end crystal.
 
+Note:
+I'm tempted to deprecate this as 26.1 made it possible for any dimension
+to be able to have the dragon battle (or not have it).
+I'll probably keep it due to the ease of access and possibility of toggle
+it off with a config reload.
+
 diff --git a/net/minecraft/world/item/EndCrystalItem.java b/net/minecraft/world/item/EndCrystalItem.java
 index 05ec512839898f96d9769bb0d00f6ba11dda0c4b..04f5e43c35f4fd642298d26df323f2470756a64f 100644
 --- a/net/minecraft/world/item/EndCrystalItem.java
