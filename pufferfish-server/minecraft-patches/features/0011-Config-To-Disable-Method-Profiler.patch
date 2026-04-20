@@ -5,10 +5,10 @@ Subject: [PATCH] Config To Disable Method Profiler
 
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 753505375096cdca1ca1610cff7d58cd0136cdee..3b779844990690664c9c4d1df6a05a65ad91758e 100644
+index cb71fb4203c556a11dd4905ebded869e9ea4e500..2749c00cf873e4ad283ece4c6d7369493153941e 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -2706,6 +2706,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2760,6 +2760,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      // CraftBukkit end
  
      private ProfilerFiller createProfiler() {

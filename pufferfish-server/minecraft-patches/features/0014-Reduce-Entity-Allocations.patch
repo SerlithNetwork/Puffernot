@@ -5,7 +5,7 @@ Subject: [PATCH] Reduce Entity Allocations
 
 
 diff --git a/net/minecraft/world/entity/ai/attributes/AttributeMap.java b/net/minecraft/world/entity/ai/attributes/AttributeMap.java
-index 92b7f4cbd276dad49cba78514db3552af8cdd80c..9c6a78d4cb3fb70aae86d057e6314d0bda0a3b1a 100644
+index 0c8a719bdfb4932171a8f66d76b00cc499f5beb9..140f647b59391460a06c63a1e54c471f5af0d381 100644
 --- a/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 +++ b/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 @@ -18,9 +18,11 @@ public class AttributeMap {
@@ -14,18 +14,18 @@ index 92b7f4cbd276dad49cba78514db3552af8cdd80c..9c6a78d4cb3fb70aae86d057e6314d0b
      private final AttributeSupplier supplier;
 +    private final java.util.function.Function<Holder<Attribute>, AttributeInstance> pufferfish$createInstance; // Pufferfish
  
-     public AttributeMap(AttributeSupplier supplier) {
+     public AttributeMap(final AttributeSupplier supplier) {
          this.supplier = supplier;
-+        this.pufferfish$createInstance = attributex -> this.supplier.createInstance(this::onAttributeModified, attributex); // Pufferfish
++        this.pufferfish$createInstance = key -> this.supplier.createInstance(this::onAttributeModified, key); // Pufferfish
      }
  
-     private void onAttributeModified(AttributeInstance instance) {
+     private void onAttributeModified(final AttributeInstance attributeInstance) {
 @@ -43,7 +45,7 @@ public class AttributeMap {
      }
  
-     public @Nullable AttributeInstance getInstance(Holder<Attribute> attribute) {
--        return this.attributes.computeIfAbsent(attribute, holder -> this.supplier.createInstance(this::onAttributeModified, (Holder<Attribute>)holder));
+     public @Nullable AttributeInstance getInstance(final Holder<Attribute> attribute) {
+-        return this.attributes.computeIfAbsent(attribute, key -> this.supplier.createInstance(this::onAttributeModified, (Holder<Attribute>)key));
 +        return this.attributes.computeIfAbsent(attribute, this.pufferfish$createInstance); // Pufferfish - cache lambda, as for some reason java allocates it anyways
      }
  
-     public boolean hasAttribute(Holder<Attribute> attribute) {
+     public boolean hasAttribute(final Holder<Attribute> attribute) {
