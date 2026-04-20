@@ -9,7 +9,7 @@
      // Deprecate bungeecord-chat in favor of adventure
      api("net.md-5:bungeecord-chat:$bungeeCordChatVersion") {
 @@ -91,7 +_,7 @@
-     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+     testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.3")
  }
  
 -val generatedDir: java.nio.file.Path = layout.projectDirectory.dir("src/generated/java").asFile.toPath()
