@@ -1,6 +1,6 @@
 --- a/paper-server/build.gradle.kts
 +++ b/paper-server/build.gradle.kts
-@@ -22,6 +_,23 @@
+@@ -22,9 +_,22 @@
      minecraftVersion = providers.gradleProperty("mcVersion")
      gitFilePatches = false
  
