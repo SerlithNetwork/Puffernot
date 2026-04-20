@@ -37,12 +37,12 @@ for (name in listOf("pufferfish-api", "pufferfish-server")) {
 
 gradle.lifecycle.beforeProject {
     val mcVersion = providers.gradleProperty("mcVersion").get().trim()
-    val paperVersionChannel = providers.gradleProperty("channel").get().trim()
-    val paperBuildNumber = providers.environmentVariable("BUILD_NUMBER").orNull?.trim()?.toInt()
-    val versionString = if (paperBuildNumber == null) {
+    val versionChannel = providers.gradleProperty("channel").get().trim()
+    val buildNumber = providers.environmentVariable("BUILD_NUMBER").orNull?.trim()?.toInt()
+    val versionString = if (buildNumber == null) {
         "$mcVersion.local-SNAPSHOT"
     } else {
-        "$mcVersion.build.$paperBuildNumber-${paperVersionChannel.lowercase()}"
+        "$mcVersion.build.$buildNumber-${versionChannel.lowercase()}"
     }
     version = versionString
 }
