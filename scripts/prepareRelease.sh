@@ -43,32 +43,27 @@ echo "" >> $RELEASE_NOTES
 
 # Get checksums
 shopt -s nullglob
-files=(./pufferfish-server/build/libs/pufferfish-paperclip-*.jar)
-if [ ${#files[@]} -gt 0 ]; then
-    for file in "${#files[@]}"; do
-        SHA256=$(sha256sum $file | awk '{ print $1 }')
-          SHA512=$(sha512sum $file | awk '{ print $1 }')
-          FILENAME=$(basename $file)
+for file in ./pufferfish-server/build/libs/pufferfish-paperclip-*.jar; do
+    SHA256=$(sha256sum "$file" | awk '{ print $1 }')
+    SHA512=$(sha512sum "$file" | awk '{ print $1 }')
+    FILENAME=$(basename "$file")
 
-          {
-            echo "|           | $FILENAME |"
-            echo "| --------- | --------- |"
-            echo "| SHA256    | $SHA256   |"
-            echo "| SHA512    | $SHA512   |"
-          } >> $RELEASE_NOTES
+    {
+        echo "|           | $FILENAME |"
+        echo "| --------- | --------- |"
+        echo "| SHA256    | $SHA256   |"
+        echo "| SHA512    | $SHA512   |"
+    } >> $RELEASE_NOTES
 
-          echo "🔒Checksums calculated:"
-          echo "   SHA256: $SHA256"
-          echo "   SHA512: $SHA512"
-    done
-else
-  echo "⚠️No artifacts found." >> $RELEASE_NOTES
-fi
+    echo "🔒Checksums calculated for $file:"
+    echo "   SHA256: $SHA256"
+    echo "   SHA512: $SHA512"
+done
 
 # Delete current release tag
 if git show-ref --tags $CURRENT_TAG --quiet; then
-  {
-    gh release delete $CURRENT_TAG --cleanup-tag -y -R "${GITHUB_REPO}"
-  }
+    {
+        gh release delete $CURRENT_TAG --cleanup-tag -y -R "${GITHUB_REPO}"
+    }
 fi
 echo "🚀Ready for release"
