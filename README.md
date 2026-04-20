@@ -64,7 +64,7 @@ This fork is developed by [Pufferfish Host][home], and we can provide additional
 
 ```bash
 ./gradlew applyAllPatches
-./gradlew createMojmapPaperclipJar
+./gradlew createPaperclipJar
 ```
 
 ## License
