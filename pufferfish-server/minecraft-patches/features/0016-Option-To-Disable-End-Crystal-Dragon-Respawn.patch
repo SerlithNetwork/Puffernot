@@ -15,15 +15,15 @@ I'll probably keep it due to the ease of access and possibility of toggle
 it off with a config reload.
 
 diff --git a/net/minecraft/world/item/EndCrystalItem.java b/net/minecraft/world/item/EndCrystalItem.java
-index 05ec512839898f96d9769bb0d00f6ba11dda0c4b..04f5e43c35f4fd642298d26df323f2470756a64f 100644
+index 1eca60c5a3e1eeb6f44edbb81fe1af011edd8732..89c52329fa4aba982195363b05d206b27e91d294 100644
 --- a/net/minecraft/world/item/EndCrystalItem.java
 +++ b/net/minecraft/world/item/EndCrystalItem.java
 @@ -50,7 +50,7 @@ public class EndCrystalItem extends Item {
-                         level.addFreshEntity(endCrystal);
-                         level.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockPos);
-                         EndDragonFight dragonFight = ((ServerLevel)level).getDragonFight();
--                        if (dragonFight != null) {
-+                        if (dragonFight != null && gg.pufferfish.pufferfish.PufferfishConfig.ALLOW_END_CRYSTAL_RESPAWN) { // Pufferfish
-                             dragonFight.tryRespawn(aboveBlockPos); // Paper - Perf: Do crystal-portal proximity check before entity lookup
+                         level.addFreshEntity(crystal);
+                         level.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, above);
+                         EnderDragonFight fight = ((ServerLevel)level).getDragonFight();
+-                        if (fight != null) {
++                        if (fight != null && gg.pufferfish.pufferfish.PufferfishConfig.ALLOW_END_CRYSTAL_RESPAWN) { // Pufferfish
+                             fight.tryRespawn(above); // Paper - Perf: Do crystal-portal proximity check before entity lookup
                          }
                      }

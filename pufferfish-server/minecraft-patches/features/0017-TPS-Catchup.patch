@@ -5,11 +5,11 @@ Subject: [PATCH] TPS Catchup
 
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 3b779844990690664c9c4d1df6a05a65ad91758e..e0d8490778399232151c023d4a71e549f2f4c932 100644
+index 2749c00cf873e4ad283ece4c6d7369493153941e..eca04b29f3708695ae2ef5728cd948ad32672ad0 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1303,7 +1303,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
-                     final long ticksBehind = Math.max(1L, this.tickSchedule.getPeriodsAhead(l, tickStart));
+@@ -1341,7 +1341,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+                     final long ticksBehind = Math.max(1L, this.tickSchedule.getPeriodsAhead(thisTickNanos, tickStart));
                      final long catchup = (long)Math.max(
                          1,
 -                        5 //ConfigHolder.getConfig().tickLoop.catchupTicks.getOrDefault(MoonriseConfig.TickLoop.DEFAULT_CATCHUP_TICKS).intValue()
