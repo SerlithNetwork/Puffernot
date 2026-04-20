@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-CURRENT_TAG="ver-1.21.11"
+CURRENT_TAG="ver-26.1.2"
 RELEASE_NOTES="RELEASE.md"
 
 # Branch name
@@ -42,22 +42,25 @@ echo "" >> $RELEASE_NOTES
 } >> $RELEASE_NOTES
 
 # Get checksums
-file="./pufferfish-server/build/libs/pufferfish-paperclip-1.21.11-R0.1-SNAPSHOT-mojmap.jar"
-if [ -f $file ]; then
-  SHA256=$(sha256sum $file | awk '{ print $1 }')
-  SHA512=$(sha512sum $file | awk '{ print $1 }')
-  FILENAME=$(basename $file)
+shopt -s nullglob
+files=(./pufferfish-server/build/libs/pufferfish-paperclip-*.jar)
+if [ ${#files[@]} -gt 0 ]; then
+    for file in "${#files[@]}"; do
+        SHA256=$(sha256sum $file | awk '{ print $1 }')
+          SHA512=$(sha512sum $file | awk '{ print $1 }')
+          FILENAME=$(basename $file)
 
-  {
-    echo "|           | $FILENAME |"
-    echo "| --------- | --------- |"
-    echo "| SHA256    | $SHA256   |"
-    echo "| SHA512    | $SHA512   |"
-  } >> $RELEASE_NOTES
+          {
+            echo "|           | $FILENAME |"
+            echo "| --------- | --------- |"
+            echo "| SHA256    | $SHA256   |"
+            echo "| SHA512    | $SHA512   |"
+          } >> $RELEASE_NOTES
 
-  echo "🔒Checksums calculated:"
-  echo "   SHA256: $SHA256"
-  echo "   SHA512: $SHA512"
+          echo "🔒Checksums calculated:"
+          echo "   SHA256: $SHA256"
+          echo "   SHA512: $SHA512"
+    done
 else
   echo "⚠️No artifacts found." >> $RELEASE_NOTES
 fi

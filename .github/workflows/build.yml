@@ -1,4 +1,4 @@
-name: Build 1.21.11
+name: Build 26.1.2
 on:
   workflow_dispatch:
   push:
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 25
           cache: 'gradle'
 
       - name: Setup Gradle
@@ -51,17 +51,17 @@ jobs:
       - name: Upload Pufferfish
         uses: actions/upload-artifact@main
         with:
-          name: Pufferfish 1.21.11
-          path: ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.11-R0.1-SNAPSHOT-mojmap.jar
+          name: Pufferfish 26.1.2
+          path: ./pufferfish-server/build/libs/pufferfish-paperclip-*.jar
 
       - name: Release Pufferfish
         uses: softprops/action-gh-release@master
         with:
-          name: "🐡 Puffernot 1.21.11 (Build ${{ env.BUILD_NUMBER }})"
-          tag_name: "ver-1.21.11"
+          name: "🐡 Puffernot 26.1.2 (Build ${{ env.BUILD_NUMBER }})"
+          tag_name: "ver-26.1.2"
           files: |
-            ./pufferfish-server/build/libs/pufferfish-paperclip-1.21.11-R0.1-SNAPSHOT-mojmap.jar
-            ./pufferfish-api/build/libs/pufferfish-api-1.21.11-R0.1-SNAPSHOT.jar
+            ./pufferfish-server/build/libs/pufferfish-paperclip-*.jar
+            ./pufferfish-api/build/libs/pufferfish-api-*.jar
           body_path: "./RELEASE.md"
           token: "${{ secrets.GITHUB_TOKEN }}"
           target_commitish: "${{ github.sha }}"
@@ -74,4 +74,4 @@ jobs:
           url: https://version.serlith.net/submit
           method: 'POST'
           customHeaders: '{"Content-Type": "application/json", "Authorization": "${{ secrets.VERSION_TOKEN }}", "Server-Software": "Pufferfish"}'
-          data: '{ "software": "Pufferfish", "version": "1.21.11", "build": ${{ env.BUILD_NUMBER }} }'
+          data: '{ "software": "Pufferfish", "version": "26.1.2", "build": ${{ env.BUILD_NUMBER }} }'
