@@ -5,7 +5,7 @@ Subject: [PATCH] Add Sentry
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index 3b756aca5fa44af6a41d7fcaf3b0f7d3672c691e..628af266431b66e93c73f1bc2d4da3aa5cc411e0 100644
+index fb05cbd9fba24f1d8ea2bbcc5ef20b2b2964df9f..982455a5eecdb6d80762cc17c2461b467ba5072e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -478,10 +478,12 @@ public class CraftScheduler implements BukkitScheduler {
