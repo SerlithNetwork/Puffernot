@@ -69,10 +69,10 @@ index ce6b57eeeeb1bd652f4bb53c19dcfbc05126c7e9..12d1e66b4b333d77453f34b6e4ac1909
              }
          }
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index c50773ecaa5bd5f01e51ed73671a009f0e99cf48..e03cc4a318ec6ea572ca528ebfa6c0ab59475a36 100644
+index 73e4723bc3e0f2241aa22d080df2320919804dc9..86906f3425669a5a8bae49c57fcb08a48f2ffe3e 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
-@@ -862,6 +862,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
+@@ -869,6 +869,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
              this.entityTickList
                  .forEach(
                      entity -> {
@@ -81,7 +81,7 @@ index c50773ecaa5bd5f01e51ed73671a009f0e99cf48..e03cc4a318ec6ea572ca528ebfa6c0ab
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profiler.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 9cd46a8619e575a865f4d00ce71d249c9b028b2f..62a6a9c6a6e0a5f0e226490f69ac62a621ac6bb2 100644
+index 82f6582a92f17bdeb3218c4c1fcac86981fd9c37..2a9131735cf8ecd6e13d67cbc179e6e8002897d9 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -387,6 +387,8 @@ public abstract class Entity
@@ -264,7 +264,7 @@ index 3d4bfeae2fddb9ace26e7dea8870704d8309862b..25c3ac255866795748e068f9058ea87f
          profiler.pop();
          profiler.push("tadpoleActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/goat/Goat.java b/net/minecraft/world/entity/animal/goat/Goat.java
-index 22123232e0f5fe60cc9629cde7cf56bd464932d0..4d1ad902ea0b0c0ce5fc53602f3f43fed717ccd6 100644
+index e7beaf8f5a1c6c393e158f15da422217976850f0..c80d88bdc64cec3fd6b9ff6ddc65e545caf61c53 100644
 --- a/net/minecraft/world/entity/animal/goat/Goat.java
 +++ b/net/minecraft/world/entity/animal/goat/Goat.java
 @@ -170,6 +170,7 @@ public class Goat extends Animal {
@@ -288,7 +288,7 @@ index 6e526d65f3c4f982e8483a854d80d23b52bd0fd5..34cbfa3c09f7af02dca22fa4180dbd85
          profiler.pop();
          profiler.push("copperGolemActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/happyghast/HappyGhast.java b/net/minecraft/world/entity/animal/happyghast/HappyGhast.java
-index 413df81578393382a2e6a3aac370d5545d32bd11..364b04d06170feb85702648f68a07eb537b2fa8a 100644
+index a7a9deaf637c2e994940ee8fdad7e5e09464dabe..f6d453977d8f8c04d26e50b37e64aa73935ae582 100644
 --- a/net/minecraft/world/entity/animal/happyghast/HappyGhast.java
 +++ b/net/minecraft/world/entity/animal/happyghast/HappyGhast.java
 @@ -398,6 +398,7 @@ public class HappyGhast extends Animal {
