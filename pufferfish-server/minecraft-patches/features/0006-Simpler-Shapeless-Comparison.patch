@@ -24,7 +24,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/item/crafting/ShapelessRecipe.java b/net/minecraft/world/item/crafting/ShapelessRecipe.java
-index d4d4fad66be0f0c0225993026602dc61e10c6bce..5bcaefe8e50cb1658d24254a00a5743dfe0a67a2 100644
+index 53a818f14709d1978dbbc4aa7367be733a8ee47f..d93cc0711868d4bbafde603735561a44184664af 100644
 --- a/net/minecraft/world/item/crafting/ShapelessRecipe.java
 +++ b/net/minecraft/world/item/crafting/ShapelessRecipe.java
 @@ -38,11 +38,24 @@ public class ShapelessRecipe extends NormalCraftingRecipe {
@@ -74,6 +74,6 @@ index d4d4fad66be0f0c0225993026602dc61e10c6bce..5bcaefe8e50cb1658d24254a00a5743d
 +            return ingredients.isEmpty();
 +        }
 +        // Pufferfish end - Simpler Shapeless Comparison
+         // Paper start - Improve exact choice recipe ingredients & unwrap ternary
          if (input.ingredientCount() != this.ingredients.size()) {
              return false;
-         } else {
