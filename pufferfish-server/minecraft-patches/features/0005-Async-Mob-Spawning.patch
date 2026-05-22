@@ -21,7 +21,7 @@ public net.minecraft.server.level.ServerLevel entityTickList
 public net.minecraft.world.level.entity.EntityTickList entities
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index a54cb80c38e673aacd93b6d4ad2276b854b92706..cb71fb4203c556a11dd4905ebded869e9ea4e500 100644
+index 7ee0aaf71ecd81c0dd0cf463763d1b9f8629737a..2df7d5dffb504716dd46bc51438dc097a17d0232 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
 @@ -336,6 +336,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -33,19 +33,19 @@ index a54cb80c38e673aacd93b6d4ad2276b854b92706..cb71fb4203c556a11dd4905ebded869e
      public final ca.spottedleaf.moonrise.common.time.TickData tickTimes1s  = new ca.spottedleaf.moonrise.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(1L));
      public final ca.spottedleaf.moonrise.common.time.TickData tickTimes5s  = new ca.spottedleaf.moonrise.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(5L));
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index b84d334bce1feda1d0ab3cf565e01d877e4393e8..4c5e0bf891da47ac4f5211513ec952b8ee55b66a 100644
+index aa61ecb1c7ddf96898862b74905d752a1deede62..4af8a6002f136c589ac0f8d831d645e6afeafbc6 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -412,6 +412,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-                 LOGGER.info("JMX monitoring enabled");
-             }
+@@ -408,6 +408,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+             LOGGER.info("JMX monitoring enabled");
+         }
  
-+            if (gg.pufferfish.pufferfish.PufferfishConfig._ENABLE_ASYNC_MOB_SPAWNING) pufferfish$mobSpawnExecutor.start(); // Pufferfish - Async mob spawning
-             this.saveEverything(false, true, true);
-             this.notificationManager().serverStarted();
-             return true;
++        if (gg.pufferfish.pufferfish.PufferfishConfig._ENABLE_ASYNC_MOB_SPAWNING) pufferfish$mobSpawnExecutor.start(); // Pufferfish - Async mob spawning
+         this.saveEverything(false, true, true);
+         this.notificationManager().serverStarted();
+         return true;
 diff --git a/net/minecraft/server/level/ServerChunkCache.java b/net/minecraft/server/level/ServerChunkCache.java
-index 5a309dcf3c357f6b3a12d74aca2e9592f952318c..b3e1b0bb499bb09a12b1f4746b2923c7d40e300a 100644
+index 396ab3cdcf6f726ce7133395bb39594ef4b1c011..70d3b0c754f7adaf4725d7cb97ab706349bc1715 100644
 --- a/net/minecraft/server/level/ServerChunkCache.java
 +++ b/net/minecraft/server/level/ServerChunkCache.java
 @@ -182,6 +182,8 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
@@ -54,10 +54,10 @@ index 5a309dcf3c357f6b3a12d74aca2e9592f952318c..b3e1b0bb499bb09a12b1f4746b2923c7
  
 +    public boolean pufferfish$firstRunSpawnCounts = true; // Pufferfish
 +    public final java.util.concurrent.atomic.AtomicBoolean pufferfish$spawnCountsReady = new java.util.concurrent.atomic.AtomicBoolean(false); // Pufferfish - Optimize count mobs
- 
      public ServerChunkCache(
          final ServerLevel level,
-@@ -518,6 +520,41 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+         final LevelStorageSource.LevelStorageAccess levelStorage,
+@@ -516,6 +518,41 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
              this.broadcastChangedChunks(profiler);
              profiler.pop();
          }
@@ -99,7 +99,7 @@ index 5a309dcf3c357f6b3a12d74aca2e9592f952318c..b3e1b0bb499bb09a12b1f4746b2923c7
      }
  
      private void broadcastChangedChunks(final ProfilerFiller profiler) {
-@@ -540,6 +577,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -538,6 +575,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
          // Paper start - Optional per player mob spawns
          NaturalSpawner.SpawnState spawnCookie;
          if ((this.spawnFriendlies || this.spawnEnemies) && this.level.paperConfig().entities.spawning.perPlayerMobSpawns) { // don't count mobs when animals and monsters are disabled
@@ -107,7 +107,7 @@ index 5a309dcf3c357f6b3a12d74aca2e9592f952318c..b3e1b0bb499bb09a12b1f4746b2923c7
              // re-set mob counts
              for (ServerPlayer player : this.level.players()) {
                  // Paper start - per player mob spawning backoff
-@@ -554,12 +592,16 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -552,12 +590,16 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
                  }
                  // Paper end - per player mob spawning backoff
              }
@@ -127,7 +127,7 @@ index 5a309dcf3c357f6b3a12d74aca2e9592f952318c..b3e1b0bb499bb09a12b1f4746b2923c7
          boolean doMobSpawning = this.level.getGameRules().get(GameRules.SPAWN_MOBS) && !this.level.players().isEmpty(); // CraftBukkit
          int tickSpeed = this.level.getGameRules().get(GameRules.RANDOM_TICK_SPEED);
          List<MobCategory> spawningCategories;
-@@ -573,7 +615,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -571,7 +613,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
              }
              // Paper end - PlayerNaturallySpawnCreaturesEvent
              boolean spawnPersistent = this.level.ticksPerSpawnCategory.getLong(org.bukkit.entity.SpawnCategory.ANIMAL) != 0L && this.level.getGameTime() % this.level.ticksPerSpawnCategory.getLong(org.bukkit.entity.SpawnCategory.ANIMAL) == 0L; // CraftBukkit
@@ -136,7 +136,7 @@ index 5a309dcf3c357f6b3a12d74aca2e9592f952318c..b3e1b0bb499bb09a12b1f4746b2923c7
          } else {
              spawningCategories = List.of();
          }
-@@ -591,7 +633,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -589,7 +631,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
              profiler.popPush("tickSpawningChunks");
  
              for (LevelChunk chunk : spawningChunks) {
@@ -145,7 +145,7 @@ index 5a309dcf3c357f6b3a12d74aca2e9592f952318c..b3e1b0bb499bb09a12b1f4746b2923c7
              }
          } finally {
              spawningChunks.clear();
-@@ -617,7 +659,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -615,7 +657,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
          }
  
          if (!spawningCategories.isEmpty()) {

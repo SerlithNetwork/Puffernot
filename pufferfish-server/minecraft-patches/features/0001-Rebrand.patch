@@ -5,7 +5,7 @@ Subject: [PATCH] Rebrand
 
 
 diff --git a/net/minecraft/CrashReport.java b/net/minecraft/CrashReport.java
-index 84247ddc9e063676c59a6e62da1eb919320bd18f..c4895c7cce724792ce61d84db935aebb74d3b3ed 100644
+index effd79d743d17db2a9f852c8bf3c97666b9ac40f..4fba6cf5072fd8dac0b91e6231d9d59aae3b41ba 100644
 --- a/net/minecraft/CrashReport.java
 +++ b/net/minecraft/CrashReport.java
 @@ -30,6 +30,7 @@ public class CrashReport {
@@ -16,7 +16,7 @@ index 84247ddc9e063676c59a6e62da1eb919320bd18f..c4895c7cce724792ce61d84db935aebb
  
      public CrashReport(final String title, final Throwable t) {
          this.title = title;
-@@ -129,7 +130,7 @@ public class CrashReport {
+@@ -126,7 +127,7 @@ public class CrashReport {
      }
  
      public String getFriendlyReport(final ReportType reportType) {
@@ -25,7 +25,7 @@ index 84247ddc9e063676c59a6e62da1eb919320bd18f..c4895c7cce724792ce61d84db935aebb
      }
  
      public @Nullable Path getSaveFile() {
-@@ -159,7 +160,7 @@ public class CrashReport {
+@@ -156,7 +157,7 @@ public class CrashReport {
      }
  
      public boolean saveToFile(final Path file, final ReportType reportType) {
@@ -35,10 +35,10 @@ index 84247ddc9e063676c59a6e62da1eb919320bd18f..c4895c7cce724792ce61d84db935aebb
  
      public SystemReport getSystemReport() {
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 440e5d2c199c6e8cbab2d5c92256cccfd0c555fe..270b1c4afc9188a6a974869ef67d71d5b7ef7a8c 100644
+index cc35c6271c98615a486422d0490145227626bd85..7ee0aaf71ecd81c0dd0cf463763d1b9f8629737a 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1333,7 +1333,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1323,7 +1323,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              // Paper end - Add onboarding message for initial server start
              // Paper start - Improve outdated version checking
              if (System.getProperty("paper.disableStartupVersionCheck") == null && io.papermc.paper.configuration.GlobalConfiguration.get().updateChecker.enabled) {
@@ -48,15 +48,15 @@ index 440e5d2c199c6e8cbab2d5c92256cccfd0c555fe..270b1c4afc9188a6a974869ef67d71d5
              // Paper end - Improve outdated version checking
  
 diff --git a/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index eae4963b6d18c5f92871477b93f81c2c79331cd9..6e06fb1f9907eb4aa48de2247c28dd59672ebd9e 100644
+index e47a91b1869801258d0db20c126722fb06522c80..623df65e5aab5bfead1adaf26ba445e4381a7519 100644
 --- a/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 @@ -309,7 +309,7 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
  
      // Paper start
      private static void printOversizedLog(String msg, Path file, int x, int z) {
--        org.apache.logging.log4j.LogManager.getLogger().fatal(msg + " (" + file.toString().replaceAll(".+[\\\\/]", "") + " - " + x + "," + z + ") Go clean it up to remove this message. /minecraft:tp " + (x<<4)+" 128 "+(z<<4) + " - DO NOT REPORT THIS TO PAPER - You may ask for help on Discord, but do not file an issue. These error messages can not be removed.");
-+        org.apache.logging.log4j.LogManager.getLogger().fatal(msg + " (" + file.toString().replaceAll(".+[\\\\/]", "") + " - " + x + "," + z + ") Go clean it up to remove this message. /minecraft:tp " + (x<<4)+" 128 "+(z<<4) + " - DO NOT REPORT THIS TO PUFFERFISH - You may ask for help on Discord, but do not file an issue. These error messages can not be removed."); // Pufferfish - Rebrand
+-        LOGGER.error("{} ({} - {},{}) Go clean it up to remove this message. /minecraft:tp {} 128 {} - DO NOT REPORT THIS TO PAPER - You may ask for help on Discord, but do not file an issue. These error messages can not be removed.", msg, file.toString().replaceAll(".+[\\\\/]", ""), x, z, x << 4, z << 4);
++        LOGGER.error("{} ({} - {},{}) Go clean it up to remove this message. /minecraft:tp {} 128 {} - DO NOT REPORT THIS TO PUFFERFISH - You may ask for help on Discord, but do not file an issue. These error messages can not be removed.", msg, file.toString().replaceAll(".+[\\\\/]", ""), x, z, x << 4, z << 4); // Pufferfish - Rebrand
      }
  
      private static CompoundTag readOversizedChunk(RegionFile regionfile, ChunkPos chunkCoordinate) throws IOException {

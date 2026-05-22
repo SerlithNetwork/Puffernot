@@ -17,7 +17,7 @@ but is so much cheaper than the suffocation check that it's worth
 keeping it.
 
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index 6a0ebbdfcc0bc07915574c1cf87463e82213ca7e..168d6d9ddaecfbdce53819c0cbb2fdc79427198e 100644
+index d10d082046e41cf937f1a439e3e7dd61cd16f326..4c6034542265ed61887c4dbaf83fd4ff36d73ee4 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
 @@ -434,7 +434,7 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
@@ -47,10 +47,10 @@ index 6a0ebbdfcc0bc07915574c1cf87463e82213ca7e..168d6d9ddaecfbdce53819c0cbb2fdc7
      protected float getBlockSpeedFactor() {
          return Mth.lerp((float)this.getAttributeValue(Attributes.MOVEMENT_EFFICIENCY), super.getBlockSpeedFactor(), 1.0F);
 diff --git a/net/minecraft/world/entity/boss/wither/WitherBoss.java b/net/minecraft/world/entity/boss/wither/WitherBoss.java
-index 419c29c003b3e690a89a14c0a9b3eb2ac3500175..f357bfc2d4a9e360bce654618c54afd22794f973 100644
+index cb69d75b3234ce63331bc53abe86e6d72697f776..9194f2bef45eaf1ca53c13dd71f263de15e71aff 100644
 --- a/net/minecraft/world/entity/boss/wither/WitherBoss.java
 +++ b/net/minecraft/world/entity/boss/wither/WitherBoss.java
-@@ -139,6 +139,13 @@ public class WitherBoss extends Monster implements RangedAttackMob {
+@@ -138,6 +138,13 @@ public class WitherBoss extends Monster implements RangedAttackMob {
          this.bossEvent.setName(this.getDisplayName());
      }
  

@@ -34,7 +34,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index cfb5fed2c6137240e1cf0596b81479f230719399..73e4723bc3e0f2241aa22d080df2320919804dc9 100644
+index be29c627ccbbe6deb17a7a1223175fb863f7016f..f1a4221978381a5bc6f2200939b121b411532ab2 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -1028,7 +1028,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
@@ -47,10 +47,10 @@ index cfb5fed2c6137240e1cf0596b81479f230719399..73e4723bc3e0f2241aa22d080df23209
              if (this.isRainingAt(pos)) {
                  DifficultyInstance difficulty = this.getCurrentDifficultyAt(pos);
 diff --git a/net/minecraft/world/level/chunk/LevelChunk.java b/net/minecraft/world/level/chunk/LevelChunk.java
-index a4b794781e66e6a054fb437bd0b66712b13320a4..e56e95bd25dddb7dd1bc5ab78f66b65536908551 100644
+index a9d781e2fcac4e2426b0e35e46bbc10c540f9fd9..f56a537aed016c18be7508551f1ce09b81ac82d1 100644
 --- a/net/minecraft/world/level/chunk/LevelChunk.java
 +++ b/net/minecraft/world/level/chunk/LevelChunk.java
-@@ -131,6 +131,18 @@ public class LevelChunk extends ChunkAccess implements DebugValueSource, ca.spot
+@@ -130,6 +130,18 @@ public class LevelChunk extends ChunkAccess implements DebugValueSource, ca.spot
      private final boolean debug;
      private final BlockState defaultBlockState;
  
@@ -69,7 +69,7 @@ index a4b794781e66e6a054fb437bd0b66712b13320a4..e56e95bd25dddb7dd1bc5ab78f66b655
      @Override
      public final BlockState moonrise$getBlock(final int x, final int y, final int z) {
          return this.getBlockStateFinal(x, y, z);
-@@ -173,6 +185,7 @@ public class LevelChunk extends ChunkAccess implements DebugValueSource, ca.spot
+@@ -172,6 +184,7 @@ public class LevelChunk extends ChunkAccess implements DebugValueSource, ca.spot
          this.debug = !empty && this.level.isDebug();
          this.defaultBlockState = empty ? VOID_AIR_BLOCKSTATE : AIR_BLOCKSTATE;
          // Paper end - get block chunk optimisation
