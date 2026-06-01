@@ -106,7 +106,7 @@ index 1ee78f52205cbb0b254a28999f3707ccccbe998e..2d612d18f8b514ffca59ef0c4a0b7d1e
      private @Nullable Component description;
      private final Optional<ResourceKey<LootTable>> lootTable;
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index 8b036640be655c65852e0862e30962e443d3024d..225d22f27cf2274d105ceafec655d1fbbe5a9ff1 100644
+index ea144213f5ac2f813c9007113e4066a3295a7f76..60c2c429b3880da44815787cc3af1ab98bff0787 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
 @@ -216,10 +216,10 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
@@ -122,7 +122,7 @@ index 8b036640be655c65852e0862e30962e443d3024d..225d22f27cf2274d105ceafec655d1fb
              this.targetSelector.tick();
          }
      }
-@@ -811,16 +811,20 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -817,16 +817,20 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
          int idBasedTickCount = this.tickCount + this.getId();
          if (idBasedTickCount % 2 != 0 && this.tickCount > 1) {
              profiler.push("targetSelector");
@@ -143,7 +143,7 @@ index 8b036640be655c65852e0862e30962e443d3024d..225d22f27cf2274d105ceafec655d1fb
              this.goalSelector.tick();
              profiler.pop();
          }
-@@ -842,6 +846,7 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -848,6 +852,7 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
          profiler.pop();
      }
  
