@@ -5,10 +5,10 @@ Subject: [PATCH] Better Check For Useless Packets
 
 
 diff --git a/net/minecraft/server/level/ServerEntity.java b/net/minecraft/server/level/ServerEntity.java
-index 19bb751d3e9c347fe2446412f85c9f28ec8212e6..5b37c5f13f210a288c473286cce38f85fc600f0f 100644
+index fcb3a4435d55f58d71cbf27d7024c60690876493..1205a9152c7c4a391fdcba1a67e506437a9756f3 100644
 --- a/net/minecraft/server/level/ServerEntity.java
 +++ b/net/minecraft/server/level/ServerEntity.java
-@@ -181,7 +181,7 @@ public class ServerEntity {
+@@ -186,7 +186,7 @@ public class ServerEntity {
                      packet = ClientboundEntityPositionSyncPacket.of(this.entity);
                      sentPosition = true;
                      sentRotation = true;
@@ -17,11 +17,11 @@ index 19bb751d3e9c347fe2446412f85c9f28ec8212e6..5b37c5f13f210a288c473286cce38f85
                      if (pos) {
                          packet = new ClientboundMoveEntityPacket.Pos(this.entity.getId(), (short)xa, (short)ya, (short)za, this.entity.onGround());
                          sentPosition = true;
-@@ -194,6 +194,7 @@ public class ServerEntity {
+@@ -199,6 +199,7 @@ public class ServerEntity {
                      sentPosition = true;
                      sentRotation = true;
                  }
 +                } // Pufferfish
  
-                 if (this.entity.needsSync || this.trackDelta || this.entity instanceof LivingEntity && ((LivingEntity)this.entity).isFallFlying()) {
+                 if (this.entity.needsSync || this.trackDelta || this.entity instanceof LivingEntity livingEntity && livingEntity.isFallFlying()) {
                      Vec3 movement = this.entity.getDeltaMovement();

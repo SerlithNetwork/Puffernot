@@ -27,10 +27,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/io/papermc/paper/entity/activation/ActivationRange.java b/io/papermc/paper/entity/activation/ActivationRange.java
-index ce6b57eeeeb1bd652f4bb53c19dcfbc05126c7e9..12d1e66b4b333d77453f34b6e4ac1909bb32d38b 100644
+index fe05c3bd9adeddc2dd740af3546f835c1c2de311..5ab002184319807e34332223ccbc950542ae166b 100644
 --- a/io/papermc/paper/entity/activation/ActivationRange.java
 +++ b/io/papermc/paper/entity/activation/ActivationRange.java
-@@ -165,6 +165,23 @@ public final class ActivationRange {
+@@ -166,6 +166,23 @@ public final class ActivationRange {
                  }
  
                  ActivationRange.activateEntity(entity);
@@ -54,7 +54,7 @@ index ce6b57eeeeb1bd652f4bb53c19dcfbc05126c7e9..12d1e66b4b333d77453f34b6e4ac1909
              }
          }
      }
-@@ -176,11 +193,11 @@ public final class ActivationRange {
+@@ -177,11 +194,11 @@ public final class ActivationRange {
       */
      private static void activateEntity(final Entity entity) {
          if (MinecraftServer.currentTick > entity.activatedTick) {
@@ -69,10 +69,10 @@ index ce6b57eeeeb1bd652f4bb53c19dcfbc05126c7e9..12d1e66b4b333d77453f34b6e4ac1909
              }
          }
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index f1a4221978381a5bc6f2200939b121b411532ab2..bce96dff5ffee49c12e751e2ac3497d45aa5f615 100644
+index 59a492bcaf94e1a3c8bc5d7581755b7109ed3bf2..ef188a148780e1baccd59afd6d39d0d98a78f6ec 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
-@@ -869,6 +869,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
+@@ -882,6 +882,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
              this.entityTickList
                  .forEach(
                      entity -> {
@@ -81,7 +81,7 @@ index f1a4221978381a5bc6f2200939b121b411532ab2..bce96dff5ffee49c12e751e2ac3497d4
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profiler.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 74a2b3dcd303b25e9c26f3e4d4220b390b32f1d5..6d912501d30f43fa257992dd5ef5ea6452f3e9a9 100644
+index 5ab2be51446bb2af71ecc75dfe7bdfa863842260..a619734e7095df69c08903d892e001e5b2481267 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -387,6 +387,8 @@ public abstract class Entity
@@ -94,10 +94,10 @@ index 74a2b3dcd303b25e9c26f3e4d4220b390b32f1d5..6d912501d30f43fa257992dd5ef5ea64
      public void inactiveTick() {
      }
 diff --git a/net/minecraft/world/entity/EntityType.java b/net/minecraft/world/entity/EntityType.java
-index 1ee78f52205cbb0b254a28999f3707ccccbe998e..2d612d18f8b514ffca59ef0c4a0b7d1ef0ddf856 100644
+index 03b3de257f7711165b7dfb14223e2b6fa8954170..8cec47c19ad1627e6224cadac47bb541ec2e17b9 100644
 --- a/net/minecraft/world/entity/EntityType.java
 +++ b/net/minecraft/world/entity/EntityType.java
-@@ -1218,6 +1218,7 @@ public class EntityType<T extends Entity> implements EntityTypeTest<Entity, T>,
+@@ -66,6 +66,7 @@ public class EntityType<T extends Entity> implements EntityTypeTest<Entity, T>,
      private final boolean canSpawnFarFromPlayer;
      private final int clientTrackingRange;
      private final int updateInterval;
@@ -106,10 +106,10 @@ index 1ee78f52205cbb0b254a28999f3707ccccbe998e..2d612d18f8b514ffca59ef0c4a0b7d1e
      private @Nullable Component description;
      private final Optional<ResourceKey<LootTable>> lootTable;
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index ea144213f5ac2f813c9007113e4066a3295a7f76..60c2c429b3880da44815787cc3af1ab98bff0787 100644
+index f5fb78892596c96a4c3d66dcf8737450ef5e08e2..a1060f0c9868ae969888d4a5968ff64179927378 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
-@@ -216,10 +216,10 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -221,10 +221,10 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
      public void inactiveTick() {
          super.inactiveTick();
          if (!this.aware) return; // Paper - Do not tick AI for inactive unaware mobs
@@ -122,7 +122,7 @@ index ea144213f5ac2f813c9007113e4066a3295a7f76..60c2c429b3880da44815787cc3af1ab9
              this.targetSelector.tick();
          }
      }
-@@ -817,16 +817,20 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -843,16 +843,20 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
          int idBasedTickCount = this.tickCount + this.getId();
          if (idBasedTickCount % 2 != 0 && this.tickCount > 1) {
              profiler.push("targetSelector");
@@ -143,7 +143,7 @@ index ea144213f5ac2f813c9007113e4066a3295a7f76..60c2c429b3880da44815787cc3af1ab9
              this.goalSelector.tick();
              profiler.pop();
          }
-@@ -848,6 +852,7 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -874,6 +878,7 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
          profiler.pop();
      }
  
@@ -169,10 +169,10 @@ index bb037ea27688a06bb0d8141ef25d2543d34aba80..65457b512af926bcb669266086d80bb7
          }
      }
 diff --git a/net/minecraft/world/entity/ai/goal/GoalSelector.java b/net/minecraft/world/entity/ai/goal/GoalSelector.java
-index 1ddf8796d14d472bec48546f25ac4583d483c8e9..b1e1c1e960f44fdce3ea2003b0708c5bd0954c47 100644
+index fc748f2575e04b05438cfa3803f5ae23aeca3cb4..08e1822b4380f042b2b016d780bf72b4e951f8bd 100644
 --- a/net/minecraft/world/entity/ai/goal/GoalSelector.java
 +++ b/net/minecraft/world/entity/ai/goal/GoalSelector.java
-@@ -41,6 +41,15 @@ public class GoalSelector {
+@@ -47,6 +47,15 @@ public class GoalSelector {
          return this.curRate % 3 == 0; // TODO newGoalRate was already unused in 1.20.4, check if this is correct
      }
  
@@ -189,10 +189,10 @@ index 1ddf8796d14d472bec48546f25ac4583d483c8e9..b1e1c1e960f44fdce3ea2003b0708c5b
          for (final WrappedGoal task : this.availableGoals) {
              if (task.isRunning()) {
 diff --git a/net/minecraft/world/entity/animal/allay/Allay.java b/net/minecraft/world/entity/animal/allay/Allay.java
-index 69638b9f5c4631ec056ec8066d091e553d814252..1e746805cd767d95d631834c0732f6086d08d606 100644
+index 03627acb68d22232f6f6552ba4dfeeebe83152fd..c133cff63546c0dbd2a479f3d1c5e6ea7df81312 100644
 --- a/net/minecraft/world/entity/animal/allay/Allay.java
 +++ b/net/minecraft/world/entity/animal/allay/Allay.java
-@@ -209,6 +209,7 @@ public class Allay extends PathfinderMob implements InventoryCarrier, VibrationS
+@@ -210,6 +210,7 @@ public class Allay extends PathfinderMob implements InventoryCarrier, VibrationS
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("allayBrain");
@@ -201,10 +201,10 @@ index 69638b9f5c4631ec056ec8066d091e553d814252..1e746805cd767d95d631834c0732f608
          profiler.pop();
          profiler.push("allayActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/armadillo/Armadillo.java b/net/minecraft/world/entity/animal/armadillo/Armadillo.java
-index 14491f7136266a738bbc463731d0785bcce2b4cd..7988d04f183f099346c3f88e7bc4e283147e8ef1 100644
+index c8c50683597a2314a3c0e72888d5d75dc73fb94a..5912f665553d6d552cec6d11a1913b7255c1e547 100644
 --- a/net/minecraft/world/entity/animal/armadillo/Armadillo.java
 +++ b/net/minecraft/world/entity/animal/armadillo/Armadillo.java
-@@ -138,6 +138,7 @@ public class Armadillo extends Animal {
+@@ -142,6 +142,7 @@ public class Armadillo extends Animal {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("armadilloBrain");
@@ -213,10 +213,10 @@ index 14491f7136266a738bbc463731d0785bcce2b4cd..7988d04f183f099346c3f88e7bc4e283
          profiler.pop();
          profiler.push("armadilloActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/axolotl/Axolotl.java b/net/minecraft/world/entity/animal/axolotl/Axolotl.java
-index 317e16e3a78a7d7af71b83cc25f5a00b474bc12a..c4b5547e9799f6d0d728b87de1e4cf55f4bf2b6f 100644
+index fa774ac8f3eea281c9b684c76dd12d4e66d3ee24..9d23c6053426fa898f0cce1c28625cf6996091b1 100644
 --- a/net/minecraft/world/entity/animal/axolotl/Axolotl.java
 +++ b/net/minecraft/world/entity/animal/axolotl/Axolotl.java
-@@ -365,6 +365,7 @@ public class Axolotl extends Animal implements Bucketable {
+@@ -370,6 +370,7 @@ public class Axolotl extends Animal implements Bucketable {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("axolotlBrain");
@@ -225,10 +225,10 @@ index 317e16e3a78a7d7af71b83cc25f5a00b474bc12a..c4b5547e9799f6d0d728b87de1e4cf55
          profiler.pop();
          profiler.push("axolotlActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/camel/Camel.java b/net/minecraft/world/entity/animal/camel/Camel.java
-index 7b30263e2064d5d30a68a055bde2ad28582f4620..1452a2afb664c86ea05b91dd8c34cfe95272552c 100644
+index 57127335a3c68fbf9ac3d64a8504c6e271a5d532..a8fa5f2c4a1c641528498602f3fa7bcb765bc429 100644
 --- a/net/minecraft/world/entity/animal/camel/Camel.java
 +++ b/net/minecraft/world/entity/animal/camel/Camel.java
-@@ -165,8 +165,10 @@ public class Camel extends AbstractHorse {
+@@ -172,8 +172,10 @@ public class Camel extends AbstractHorse {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("camelBrain");
@@ -240,10 +240,10 @@ index 7b30263e2064d5d30a68a055bde2ad28582f4620..1452a2afb664c86ea05b91dd8c34cfe9
          profiler.push("camelActivityUpdate");
          CamelAi.updateActivity(this);
 diff --git a/net/minecraft/world/entity/animal/frog/Frog.java b/net/minecraft/world/entity/animal/frog/Frog.java
-index ef9f543aea1e88e1f81d888c7b21aeac934f102b..26af604cc1af3118b98e05f9958352c52756f2e7 100644
+index d7d8216524e8e4c66c9e5a8dd4e682f46f335ca1..af4a3589c1763c7a0d28b89ed791f558ec3ff1d1 100644
 --- a/net/minecraft/world/entity/animal/frog/Frog.java
 +++ b/net/minecraft/world/entity/animal/frog/Frog.java
-@@ -176,6 +176,7 @@ public class Frog extends Animal {
+@@ -177,6 +177,7 @@ public class Frog extends Animal {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("frogBrain");
@@ -252,10 +252,10 @@ index ef9f543aea1e88e1f81d888c7b21aeac934f102b..26af604cc1af3118b98e05f9958352c5
          profiler.pop();
          profiler.push("frogActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/frog/Tadpole.java b/net/minecraft/world/entity/animal/frog/Tadpole.java
-index 3d4bfeae2fddb9ace26e7dea8870704d8309862b..25c3ac255866795748e068f9058ea87f1fb6833c 100644
+index 296cae1d5f5a3a054949ee03e2a2552bfeae4682..7acd46bf289abc4839e2acae505e7a9ac57aab68 100644
 --- a/net/minecraft/world/entity/animal/frog/Tadpole.java
 +++ b/net/minecraft/world/entity/animal/frog/Tadpole.java
-@@ -85,6 +85,7 @@ public class Tadpole extends AbstractFish {
+@@ -86,6 +86,7 @@ public class Tadpole extends AbstractFish {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("tadpoleBrain");
@@ -264,10 +264,10 @@ index 3d4bfeae2fddb9ace26e7dea8870704d8309862b..25c3ac255866795748e068f9058ea87f
          profiler.pop();
          profiler.push("tadpoleActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/goat/Goat.java b/net/minecraft/world/entity/animal/goat/Goat.java
-index 7573f6d8a408ace4e25d1d12fc5796238ca36294..c88453c804448c97b508396281625f6d0a5af9ee 100644
+index d6ad4b67704b5c8b32d064c94890710d8d2f1e57..bce6ed4cc67473a05cd85486df00d08829ec102e 100644
 --- a/net/minecraft/world/entity/animal/goat/Goat.java
 +++ b/net/minecraft/world/entity/animal/goat/Goat.java
-@@ -170,6 +170,7 @@ public class Goat extends Animal {
+@@ -176,6 +176,7 @@ public class Goat extends Animal {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("goatBrain");
@@ -276,7 +276,7 @@ index 7573f6d8a408ace4e25d1d12fc5796238ca36294..c88453c804448c97b508396281625f6d
          profiler.pop();
          profiler.push("goatActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/golem/CopperGolem.java b/net/minecraft/world/entity/animal/golem/CopperGolem.java
-index 5d3203abaec443244662db4e7f8ae900cf59a584..8e4637dc2fc006b52cfdec70879f6f8cc7c63335 100644
+index b65b2672d8d85aa4637d14323b1f2e27c054d814..3751627d5c94f617928c4950c3ab4d779ad77a63 100644
 --- a/net/minecraft/world/entity/animal/golem/CopperGolem.java
 +++ b/net/minecraft/world/entity/animal/golem/CopperGolem.java
 @@ -183,6 +183,7 @@ public class CopperGolem extends AbstractGolem implements ContainerUser, Shearab
@@ -288,10 +288,10 @@ index 5d3203abaec443244662db4e7f8ae900cf59a584..8e4637dc2fc006b52cfdec70879f6f8c
          profiler.pop();
          profiler.push("copperGolemActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/happyghast/HappyGhast.java b/net/minecraft/world/entity/animal/happyghast/HappyGhast.java
-index 9624a1f4cd829411e46213201200e3af54d57699..270cd529c3c9bf021799b0785cf01b8ae13cb18e 100644
+index ee400d1bfd24cc738ca02c1ec50332d7cfc9c266..b17b4c8c1fa85e67f7fb5036b84c80359d7c52a3 100644
 --- a/net/minecraft/world/entity/animal/happyghast/HappyGhast.java
 +++ b/net/minecraft/world/entity/animal/happyghast/HappyGhast.java
-@@ -397,6 +397,7 @@ public class HappyGhast extends Animal {
+@@ -406,6 +406,7 @@ public class HappyGhast extends Animal {
          if (this.isBaby()) {
              ProfilerFiller profiler = Profiler.get();
              profiler.push("happyGhastBrain");
@@ -300,10 +300,10 @@ index 9624a1f4cd829411e46213201200e3af54d57699..270cd529c3c9bf021799b0785cf01b8a
              profiler.pop();
              profiler.push("happyGhastActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/nautilus/Nautilus.java b/net/minecraft/world/entity/animal/nautilus/Nautilus.java
-index 19e8de70183a159057d542dd057996355df6794d..73dc5d81ff591bde2a84487067dc45f0116d0e01 100644
+index d6ba5f201314148a382ce71e2c570f336c5d7d40..6513e7815808780f5501170d3ecb6bffd72868d7 100644
 --- a/net/minecraft/world/entity/animal/nautilus/Nautilus.java
 +++ b/net/minecraft/world/entity/animal/nautilus/Nautilus.java
-@@ -53,6 +53,7 @@ public class Nautilus extends AbstractNautilus {
+@@ -67,6 +67,7 @@ public class Nautilus extends AbstractNautilus {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("nautilusBrain");
@@ -312,7 +312,7 @@ index 19e8de70183a159057d542dd057996355df6794d..73dc5d81ff591bde2a84487067dc45f0
          profiler.pop();
          profiler.push("nautilusActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/nautilus/ZombieNautilus.java b/net/minecraft/world/entity/animal/nautilus/ZombieNautilus.java
-index c4661d5d89d1a5f4b106a9a015cdaed1976efce4..ff998e2498789fb2a5a23ee87e74f233039eb332 100644
+index c9aa882ab43ced1d3d9b84e19feae39d6ed28b78..c96ecea53c056d3ee493fd690e52ca6845513ad3 100644
 --- a/net/minecraft/world/entity/animal/nautilus/ZombieNautilus.java
 +++ b/net/minecraft/world/entity/animal/nautilus/ZombieNautilus.java
 @@ -76,6 +76,7 @@ public class ZombieNautilus extends AbstractNautilus {
@@ -324,10 +324,10 @@ index c4661d5d89d1a5f4b106a9a015cdaed1976efce4..ff998e2498789fb2a5a23ee87e74f233
          profiler.pop();
          profiler.push("zombieNautilusActivityUpdate");
 diff --git a/net/minecraft/world/entity/animal/sniffer/Sniffer.java b/net/minecraft/world/entity/animal/sniffer/Sniffer.java
-index 42c6100b82b82e3cebd6d808f644f4fc666037e3..4b160353c5f1c251a172b5001ac59ebef2950080 100644
+index d5394ae7ce56555ad21aeafb2d78c291c62e2988..d1c7b584482b511a12d4acfd5fe4c57dfd5b4539 100644
 --- a/net/minecraft/world/entity/animal/sniffer/Sniffer.java
 +++ b/net/minecraft/world/entity/animal/sniffer/Sniffer.java
-@@ -467,6 +467,7 @@ public class Sniffer extends Animal {
+@@ -468,6 +468,7 @@ public class Sniffer extends Animal {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("snifferBrain");
@@ -336,10 +336,10 @@ index 42c6100b82b82e3cebd6d808f644f4fc666037e3..4b160353c5f1c251a172b5001ac59ebe
          profiler.popPush("snifferActivityUpdate");
          SnifferAi.updateActivity(this);
 diff --git a/net/minecraft/world/entity/monster/Zoglin.java b/net/minecraft/world/entity/monster/Zoglin.java
-index 95e5773fe060bdc42847fdf56801eb4fe1494c56..f9e337057886a022dff9bca1670214ee53db2303 100644
+index c9091f9aed31ce23371539cb44695732b2ae4e9b..db15c941ea3c756a20d60821218dcb90e043fd73 100644
 --- a/net/minecraft/world/entity/monster/Zoglin.java
 +++ b/net/minecraft/world/entity/monster/Zoglin.java
-@@ -227,6 +227,7 @@ public class Zoglin extends Monster implements HoglinBase {
+@@ -240,6 +240,7 @@ public class Zoglin extends Monster implements HoglinBase {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("zoglinBrain");
@@ -348,10 +348,10 @@ index 95e5773fe060bdc42847fdf56801eb4fe1494c56..f9e337057886a022dff9bca1670214ee
          profiler.pop();
          this.updateActivity();
 diff --git a/net/minecraft/world/entity/monster/breeze/Breeze.java b/net/minecraft/world/entity/monster/breeze/Breeze.java
-index a58ad6176864c299725f5d51b3c239259f3b9c20..e457f1e401946c8d57819aa3076a00e1e1dc6fa9 100644
+index eaa7eb69bdc819228bbab05b053844f1578294ba..58cafc7b33c67fa6cd2bbbdd0811d3dafb635a93 100644
 --- a/net/minecraft/world/entity/monster/breeze/Breeze.java
 +++ b/net/minecraft/world/entity/monster/breeze/Breeze.java
-@@ -233,6 +233,7 @@ public class Breeze extends Monster {
+@@ -234,6 +234,7 @@ public class Breeze extends Monster {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("breezeBrain");
@@ -360,7 +360,7 @@ index a58ad6176864c299725f5d51b3c239259f3b9c20..e457f1e401946c8d57819aa3076a00e1
          profiler.popPush("breezeActivityUpdate");
          BreezeAi.updateActivity(this);
 diff --git a/net/minecraft/world/entity/monster/creaking/Creaking.java b/net/minecraft/world/entity/monster/creaking/Creaking.java
-index 7e4910d8492dae511db604e52fe5dfa6373c76ee..ec675ea5a422b3d3252da074e485a00eeb8d931d 100644
+index 22ea080d8c793c8c1bb9163808271c28d48dd302..003ef329e344dbfcea0268a4d604981bc13af834 100644
 --- a/net/minecraft/world/entity/monster/creaking/Creaking.java
 +++ b/net/minecraft/world/entity/monster/creaking/Creaking.java
 @@ -208,6 +208,7 @@ public class Creaking extends Monster {
@@ -372,10 +372,10 @@ index 7e4910d8492dae511db604e52fe5dfa6373c76ee..ec675ea5a422b3d3252da074e485a00e
          profiler.pop();
          CreakingAi.updateActivity(this);
 diff --git a/net/minecraft/world/entity/monster/hoglin/Hoglin.java b/net/minecraft/world/entity/monster/hoglin/Hoglin.java
-index 288d03cd7fcf4d3e1536a0d692c31a0343063a8c..f6cf898c4ba71ddb5b178334554edd33d1513797 100644
+index 045b8320ef9d63d7b81a680ad12f1afa94a76c7d..d71a9199d0faa937df44521d0877dfbb504c7a29 100644
 --- a/net/minecraft/world/entity/monster/hoglin/Hoglin.java
 +++ b/net/minecraft/world/entity/monster/hoglin/Hoglin.java
-@@ -136,6 +136,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
+@@ -144,6 +144,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("hoglinBrain");
@@ -384,10 +384,10 @@ index 288d03cd7fcf4d3e1536a0d692c31a0343063a8c..f6cf898c4ba71ddb5b178334554edd33
          profiler.pop();
          HoglinAi.updateActivity(this);
 diff --git a/net/minecraft/world/entity/monster/piglin/Piglin.java b/net/minecraft/world/entity/monster/piglin/Piglin.java
-index b0e8b2db95aa5a0f53ddf8c7d082963dc693f879..2d84167023ebeaa69d9ed9c88a967fad5fbd7780 100644
+index 5855b8cebdca985019d389a858c4764e6c540ea1..5ce580b29f1343070ab3f2471e1e2c26413445e5 100644
 --- a/net/minecraft/world/entity/monster/piglin/Piglin.java
 +++ b/net/minecraft/world/entity/monster/piglin/Piglin.java
-@@ -282,6 +282,7 @@ public class Piglin extends AbstractPiglin implements CrossbowAttackMob, Invento
+@@ -284,6 +284,7 @@ public class Piglin extends AbstractPiglin implements CrossbowAttackMob, Invento
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("piglinBrain");
@@ -396,7 +396,7 @@ index b0e8b2db95aa5a0f53ddf8c7d082963dc693f879..2d84167023ebeaa69d9ed9c88a967fad
          profiler.pop();
          PiglinAi.updateActivity(this);
 diff --git a/net/minecraft/world/entity/monster/piglin/PiglinBrute.java b/net/minecraft/world/entity/monster/piglin/PiglinBrute.java
-index ca543d886dee48a03175d0c96051d4f956d33a9d..42848f976165ce6bd58b3526d14ddcd9ebe30abc 100644
+index 8bba57ee432ab41b47b6dd89a21bf17c4b462d1f..e25b99644ab4e29c6205c513b1bf3bd41357f6cb 100644
 --- a/net/minecraft/world/entity/monster/piglin/PiglinBrute.java
 +++ b/net/minecraft/world/entity/monster/piglin/PiglinBrute.java
 @@ -96,6 +96,7 @@ public class PiglinBrute extends AbstractPiglin {
@@ -408,10 +408,10 @@ index ca543d886dee48a03175d0c96051d4f956d33a9d..42848f976165ce6bd58b3526d14ddcd9
          profiler.pop();
          PiglinBruteAi.updateActivity(this);
 diff --git a/net/minecraft/world/entity/monster/warden/Warden.java b/net/minecraft/world/entity/monster/warden/Warden.java
-index 72332ef3956b0cc1550221dfa6179ea0a6ecc87a..591ca3d42fb8d0db280843e661106c911ac4074a 100644
+index 4552a36c3cd9b5c0f34cd44d376d6d1092ee110a..310f02aef11d93947df044a7bacab5ac4b3469b8 100644
 --- a/net/minecraft/world/entity/monster/warden/Warden.java
 +++ b/net/minecraft/world/entity/monster/warden/Warden.java
-@@ -288,6 +288,7 @@ public class Warden extends Monster implements VibrationSystem {
+@@ -289,6 +289,7 @@ public class Warden extends Monster implements VibrationSystem {
      protected void customServerAiStep(final ServerLevel level) {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("wardenBrain");
@@ -420,10 +420,10 @@ index 72332ef3956b0cc1550221dfa6179ea0a6ecc87a..591ca3d42fb8d0db280843e661106c91
          profiler.pop();
          super.customServerAiStep(level);
 diff --git a/net/minecraft/world/entity/npc/villager/Villager.java b/net/minecraft/world/entity/npc/villager/Villager.java
-index e4ba6e200e85f4e226d6a3e68db734f277b89226..dd91633295cb70a47ed53a34b21e0b6f2eea55ed 100644
+index 4f8439afa4ea602b662e68e6b86e9d927fb6a481..ed6ac2507d58d609aae286a66c9f0b5e39dddbe3 100644
 --- a/net/minecraft/world/entity/npc/villager/Villager.java
 +++ b/net/minecraft/world/entity/npc/villager/Villager.java
-@@ -268,11 +268,12 @@ public class Villager extends AbstractVillager implements VillagerDataHolder, Re
+@@ -259,11 +259,12 @@ public class Villager extends AbstractVillager implements VillagerDataHolder, Re
          // Paper start - EAR 2
          this.customServerAiStep(level, false);
      }
