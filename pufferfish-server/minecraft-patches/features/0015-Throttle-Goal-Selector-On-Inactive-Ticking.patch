@@ -5,10 +5,10 @@ Subject: [PATCH] Throttle Goal Selector On Inactive Ticking
 
 
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index c5006f37812241c94396ec8475a08fd4ae935926..fb6957ef29b819fe981fff763ec434907266788f 100644
+index a1060f0c9868ae969888d4a5968ff64179927378..63eb1e2ee14efaa6011a04c085b464ddd230be65 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
-@@ -211,12 +211,14 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -216,12 +216,14 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
          return this.lookControl;
      }
  

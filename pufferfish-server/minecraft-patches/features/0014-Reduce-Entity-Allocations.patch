@@ -5,7 +5,7 @@ Subject: [PATCH] Reduce Entity Allocations
 
 
 diff --git a/net/minecraft/world/entity/ai/attributes/AttributeMap.java b/net/minecraft/world/entity/ai/attributes/AttributeMap.java
-index 0c8a719bdfb4932171a8f66d76b00cc499f5beb9..140f647b59391460a06c63a1e54c471f5af0d381 100644
+index 68bad6752bd313ca3ebde7fd4e3b2c46c5dee3ef..f417a0bc6212fc242aa21c0b28dbd39112e45cc8 100644
 --- a/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 +++ b/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 @@ -18,9 +18,11 @@ public class AttributeMap {
