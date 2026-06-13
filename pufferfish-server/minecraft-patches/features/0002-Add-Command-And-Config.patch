@@ -18,10 +18,10 @@ index 936266c6c943d799e58b0b06b591d091d540a783..5dea2d28e18fa77e6ce900627445cf2a
          this.functionLibrary = new ServerFunctionLibrary(functionCompilationPermissions, this.commands.getDispatcher());
      }
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index 6a5d404e570ede5d49c82bccc30aa75ddd58983b..aa61ecb1c7ddf96898862b74905d752a1deede62 100644
+index 164a2f0f8c4f2d491c51489b9b667f91aee5f42d..6d8f43332977377bc67f506c120900434e283b62 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -290,6 +290,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -251,6 +251,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          this.server.spark.registerCommandBeforePlugins(this.server); // Paper - spark
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
          com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // Paper - load version history now
