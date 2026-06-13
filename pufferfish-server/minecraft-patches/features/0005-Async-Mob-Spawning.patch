@@ -21,10 +21,10 @@ public net.minecraft.server.level.ServerLevel entityTickList
 public net.minecraft.world.level.entity.EntityTickList entities
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 7ee0aaf71ecd81c0dd0cf463763d1b9f8629737a..2df7d5dffb504716dd46bc51438dc097a17d0232 100644
+index 62e2755a63454e1e16705ca524cf7e6334a6b671..5dc18b2e5c421cc628e7f13cb3cd659da886b53b 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -336,6 +336,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -334,6 +334,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      public boolean isIteratingOverLevels = false; // Paper - Throw exception on world create while being ticked
      private final Set<String> pluginsBlockingSleep = new java.util.HashSet<>(); // Paper - API to allow/disallow tick sleeping
      public static final long SERVER_INIT = System.nanoTime(); // Paper - Lag compensation
@@ -33,10 +33,10 @@ index 7ee0aaf71ecd81c0dd0cf463763d1b9f8629737a..2df7d5dffb504716dd46bc51438dc097
      public final ca.spottedleaf.moonrise.common.time.TickData tickTimes1s  = new ca.spottedleaf.moonrise.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(1L));
      public final ca.spottedleaf.moonrise.common.time.TickData tickTimes5s  = new ca.spottedleaf.moonrise.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(5L));
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index aa61ecb1c7ddf96898862b74905d752a1deede62..4af8a6002f136c589ac0f8d831d645e6afeafbc6 100644
+index 6d8f43332977377bc67f506c120900434e283b62..c8649ab3e6a92045dd6d4cd5c7c07915260cba8c 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -408,6 +408,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -368,6 +368,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
              LOGGER.info("JMX monitoring enabled");
          }
  
@@ -45,7 +45,7 @@ index aa61ecb1c7ddf96898862b74905d752a1deede62..4af8a6002f136c589ac0f8d831d645e6
          this.notificationManager().serverStarted();
          return true;
 diff --git a/net/minecraft/server/level/ServerChunkCache.java b/net/minecraft/server/level/ServerChunkCache.java
-index 396ab3cdcf6f726ce7133395bb39594ef4b1c011..70d3b0c754f7adaf4725d7cb97ab706349bc1715 100644
+index 527e92e4d044a0d7cf1bb867044565cbeab68b9c..45799f47047e64d5dd3b8b271bc73de844b867eb 100644
 --- a/net/minecraft/server/level/ServerChunkCache.java
 +++ b/net/minecraft/server/level/ServerChunkCache.java
 @@ -182,6 +182,8 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
@@ -131,8 +131,8 @@ index 396ab3cdcf6f726ce7133395bb39594ef4b1c011..70d3b0c754f7adaf4725d7cb97ab7063
              }
              // Paper end - PlayerNaturallySpawnCreaturesEvent
              boolean spawnPersistent = this.level.ticksPerSpawnCategory.getLong(org.bukkit.entity.SpawnCategory.ANIMAL) != 0L && this.level.getGameTime() % this.level.ticksPerSpawnCategory.getLong(org.bukkit.entity.SpawnCategory.ANIMAL) == 0L; // CraftBukkit
--            spawningCategories = NaturalSpawner.getFilteredSpawningCategories(spawnCookie, this.spawnFriendlies, this.spawnEnemies, spawnPersistent, this.level); // CraftBukkit
-+            spawningCategories = NaturalSpawner.getFilteredSpawningCategories(this.lastSpawnState, this.spawnFriendlies, this.spawnEnemies, spawnPersistent, this.level); // CraftBukkit // Pufferfish - Async mob spawning
+-            spawningCategories = NaturalSpawner.getFilteredSpawningCategories(spawnCookie, this.spawnFriendlies, this.spawnEnemies, spawnPersistent, this.level); // CraftBukkit // todo snapshot - method lost its spawnFriendlies parameter as mojang is moving away further. We can do what we did prior and reintroduce or re-evaluate. // re-added it for now but let's still re-evaluate later
++            spawningCategories = NaturalSpawner.getFilteredSpawningCategories(this.lastSpawnState, this.spawnFriendlies, this.spawnEnemies, spawnPersistent, this.level); // CraftBukkit // todo snapshot - method lost its spawnFriendlies parameter as mojang is moving away further. We can do what we did prior and reintroduce or re-evaluate. // re-added it for now but let's still re-evaluate later // Pufferfish - Async mob spawning
          } else {
              spawningCategories = List.of();
          }
