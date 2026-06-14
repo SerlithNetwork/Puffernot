@@ -1,4 +1,4 @@
-name: Build 26.1.2
+name: Build 26.2
 on:
   workflow_dispatch:
   push:
@@ -51,14 +51,14 @@ jobs:
       - name: Upload Pufferfish
         uses: actions/upload-artifact@main
         with:
-          name: Pufferfish 26.1.2
+          name: Pufferfish 26.2
           path: ./pufferfish-server/build/libs/pufferfish-paperclip-*.jar
 
       - name: Release Pufferfish
         uses: softprops/action-gh-release@master
         with:
-          name: "🐡 Puffernot 26.1.2 (Build ${{ env.BUILD_NUMBER }})"
-          tag_name: "ver-26.1.2"
+          name: "🐡 Puffernot 26.2 (Build ${{ env.BUILD_NUMBER }})"
+          tag_name: "ver-26.2"
           files: |
             ./pufferfish-server/build/libs/pufferfish-paperclip-*.jar
             ./pufferfish-api/build/libs/pufferfish-api-*.jar
@@ -74,4 +74,4 @@ jobs:
           url: https://version.serlith.net/submit
           method: 'POST'
           customHeaders: '{"Content-Type": "application/json", "Authorization": "${{ secrets.VERSION_TOKEN }}", "Server-Software": "Pufferfish"}'
-          data: '{ "software": "Pufferfish", "version": "26.1.2", "build": ${{ env.BUILD_NUMBER }} }'
+          data: '{ "software": "Pufferfish", "version": "26.2", "build": ${{ env.BUILD_NUMBER }} }'
