@@ -9,8 +9,8 @@ import gg.pufferfish.pufferfish.simd.SIMDDetection;
 import net.j4c0b3y.api.config.ConfigHandler;
 import net.j4c0b3y.api.config.StaticConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.entity.EntityType;
 
 @StaticConfig.Header({
     "Pufferfish Configuration",
@@ -222,7 +222,7 @@ public class PufferfishConfig extends StaticConfig {
         DAB.START_DISTANCE_SQUARED = DAB.START_DISTANCE * DAB.START_DISTANCE;
 
         BuiltInRegistries.ENTITY_TYPE.forEach(e -> e.pufferfish$dabEnabled = true);
-        DAB.BLACKLISTED_ENTITIES.forEach(name -> EntityType.byString(name).ifPresentOrElse(
+        DAB.BLACKLISTED_ENTITIES.forEach(name -> BuiltInRegistries.ENTITY_TYPE.getOptional(Identifier.tryParse(name)).ifPresentOrElse(
             e -> e.pufferfish$dabEnabled = false,
             () -> MinecraftServer.LOGGER.warn("Unknown entity \"{}\"", name)
         ));
