@@ -27,7 +27,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/io/papermc/paper/entity/activation/ActivationRange.java b/io/papermc/paper/entity/activation/ActivationRange.java
-index fe05c3bd9adeddc2dd740af3546f835c1c2de311..5ab002184319807e34332223ccbc950542ae166b 100644
+index 829f7685904fd741e00403647ae76d32275c34a3..f6480ce3468a55185a876f2920ee8310922d4968 100644
 --- a/io/papermc/paper/entity/activation/ActivationRange.java
 +++ b/io/papermc/paper/entity/activation/ActivationRange.java
 @@ -166,6 +166,23 @@ public final class ActivationRange {
@@ -69,10 +69,10 @@ index fe05c3bd9adeddc2dd740af3546f835c1c2de311..5ab002184319807e34332223ccbc9505
              }
          }
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 59a492bcaf94e1a3c8bc5d7581755b7109ed3bf2..ef188a148780e1baccd59afd6d39d0d98a78f6ec 100644
+index 3066f65b21fc3eedfc5ab138906a7c49a251149e..01422bb7b142bf931ffed5b57e682c36b8a598ef 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
-@@ -882,6 +882,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
+@@ -884,6 +884,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
              this.entityTickList
                  .forEach(
                      entity -> {
@@ -81,7 +81,7 @@ index 59a492bcaf94e1a3c8bc5d7581755b7109ed3bf2..ef188a148780e1baccd59afd6d39d0d9
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profiler.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 5ab2be51446bb2af71ecc75dfe7bdfa863842260..a619734e7095df69c08903d892e001e5b2481267 100644
+index 1530810cdb74810e37e3e22ce4fcda4ee7511055..09676b5bae60a825fd803d0161c8306c67ed3f84 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -387,6 +387,8 @@ public abstract class Entity
@@ -106,7 +106,7 @@ index 03b3de257f7711165b7dfb14223e2b6fa8954170..8cec47c19ad1627e6224cadac47bb541
      private @Nullable Component description;
      private final Optional<ResourceKey<LootTable>> lootTable;
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index f5fb78892596c96a4c3d66dcf8737450ef5e08e2..a1060f0c9868ae969888d4a5968ff64179927378 100644
+index a521068fe97243adbf1e7e9b14fe7f0b19f1e65c..934a9812a1242dc49f4c95b3eb82cfe95fa51350 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
 @@ -221,10 +221,10 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
@@ -189,7 +189,7 @@ index fc748f2575e04b05438cfa3803f5ae23aeca3cb4..08e1822b4380f042b2b016d780bf72b4
          for (final WrappedGoal task : this.availableGoals) {
              if (task.isRunning()) {
 diff --git a/net/minecraft/world/entity/animal/allay/Allay.java b/net/minecraft/world/entity/animal/allay/Allay.java
-index 03627acb68d22232f6f6552ba4dfeeebe83152fd..c133cff63546c0dbd2a479f3d1c5e6ea7df81312 100644
+index 69d8a10f524dd4db683a00f194e8d1a26c996f43..fcb6cb59983e5dcd8d8f6a05b95e2e4fe728680e 100644
 --- a/net/minecraft/world/entity/animal/allay/Allay.java
 +++ b/net/minecraft/world/entity/animal/allay/Allay.java
 @@ -210,6 +210,7 @@ public class Allay extends PathfinderMob implements InventoryCarrier, VibrationS
@@ -384,7 +384,7 @@ index 045b8320ef9d63d7b81a680ad12f1afa94a76c7d..d71a9199d0faa937df44521d0877dfbb
          profiler.pop();
          HoglinAi.updateActivity(this);
 diff --git a/net/minecraft/world/entity/monster/piglin/Piglin.java b/net/minecraft/world/entity/monster/piglin/Piglin.java
-index 5855b8cebdca985019d389a858c4764e6c540ea1..5ce580b29f1343070ab3f2471e1e2c26413445e5 100644
+index 77638e1b9b2ab1165d11c1ac8ea09255b04544f6..ce2c08b38f6f15409357eb9ac725311f6110e951 100644
 --- a/net/minecraft/world/entity/monster/piglin/Piglin.java
 +++ b/net/minecraft/world/entity/monster/piglin/Piglin.java
 @@ -284,6 +284,7 @@ public class Piglin extends AbstractPiglin implements CrossbowAttackMob, Invento
