@@ -66,8 +66,8 @@
      options.tags("implNote:a:Implementation Note:")
 +    options.addStringOption("-add-modules", "jdk.incubator.vector") // Pufferfish - SIMD Utilities
  
-     inputs.files(apiAndDocs).ignoreEmptyDirectories().withPropertyName(apiAndDocs.name + "-configuration")
-     val apiAndDocsElements = apiAndDocs.elements
+     inputs.files(javadocSourcepath).ignoreEmptyDirectories().withPropertyName(javadocSourcepath.name + "-configuration")
+     val javadocSourcepathElements = javadocSourcepath.elements
 @@ -217,11 +_,11 @@
      }
  
