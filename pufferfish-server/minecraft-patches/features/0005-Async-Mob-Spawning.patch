@@ -21,7 +21,7 @@ public net.minecraft.server.level.ServerLevel entityTickList
 public net.minecraft.world.level.entity.EntityTickList entities
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 62e2755a63454e1e16705ca524cf7e6334a6b671..5dc18b2e5c421cc628e7f13cb3cd659da886b53b 100644
+index 2c570d28d0b7c9507d656b222154bbab0df659f2..6149a37e51a82f354700ec7ab0b003fe573e6eb1 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
 @@ -334,6 +334,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -30,8 +30,8 @@ index 62e2755a63454e1e16705ca524cf7e6334a6b671..5dc18b2e5c421cc628e7f13cb3cd659d
      public static final long SERVER_INIT = System.nanoTime(); // Paper - Lag compensation
 +    public gg.pufferfish.pufferfish.util.AsyncExecutor pufferfish$mobSpawnExecutor = new gg.pufferfish.pufferfish.util.AsyncExecutor("Pufferfish Async Mob Spawning Thread"); // Pufferfish - Optimize mob spawning
      // Paper start - improve tick loop
-     public final ca.spottedleaf.moonrise.common.time.TickData tickTimes1s  = new ca.spottedleaf.moonrise.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(1L));
-     public final ca.spottedleaf.moonrise.common.time.TickData tickTimes5s  = new ca.spottedleaf.moonrise.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(5L));
+     public final ca.spottedleaf.common.time.TickData tickTimes1s  = new ca.spottedleaf.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(1L));
+     public final ca.spottedleaf.common.time.TickData tickTimes5s  = new ca.spottedleaf.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(5L));
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
 index 6d8f43332977377bc67f506c120900434e283b62..c8649ab3e6a92045dd6d4cd5c7c07915260cba8c 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
@@ -45,7 +45,7 @@ index 6d8f43332977377bc67f506c120900434e283b62..c8649ab3e6a92045dd6d4cd5c7c07915
          this.notificationManager().serverStarted();
          return true;
 diff --git a/net/minecraft/server/level/ServerChunkCache.java b/net/minecraft/server/level/ServerChunkCache.java
-index 527e92e4d044a0d7cf1bb867044565cbeab68b9c..45799f47047e64d5dd3b8b271bc73de844b867eb 100644
+index c3adbe0753f6a4158f25126ed7443f8a958763d9..53a11b4c9c8cd6870ed13b058abb0ed0846aa1b3 100644
 --- a/net/minecraft/server/level/ServerChunkCache.java
 +++ b/net/minecraft/server/level/ServerChunkCache.java
 @@ -182,6 +182,8 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
