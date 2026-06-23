@@ -56,7 +56,7 @@ index 982455a5eecdb6d80762cc17c2461b467ba5072e..8aa4e2286704e43503abbdae0d88ccfd
      private final CraftScheduler asyncScheduler;
      private final boolean isAsyncScheduler;
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java b/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
-index 6050180e65d2a664e96318029cf5031d1bc1f504..e4c075d273ad637669d7a5b61c67dbc5354798fd 100644
+index def2e3c1960d41d8d72c32d36a256350ce3448f1..faa224c9993beca5f93ce1509321988dcf0fa537 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
 @@ -12,6 +12,7 @@ public class ServerShutdownThread extends Thread {
@@ -66,4 +66,4 @@ index 6050180e65d2a664e96318029cf5031d1bc1f504..e4c075d273ad637669d7a5b61c67dbc5
 +        try { gg.pufferfish.pufferfish.flare.ProfilingManager.stop(); } catch (Throwable t) {} // Pufferfish - shut down Flare if it's running
          try {
              // Paper start - try to shutdown on main
-             server.safeShutdown(false, false);
+             server.halt(false, false);
