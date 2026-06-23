@@ -19,6 +19,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+diff --git a/src/main/java/io/papermc/paper/threadedregions/scheduler/FoliaAsyncScheduler.java b/src/main/java/io/papermc/paper/threadedregions/scheduler/FoliaAsyncScheduler.java
+index a1c153650b9146a245bf61ed3e89d407065da077..3af8f4dc7b2085c054f40ef43ae445df7805e76c 100644
+--- a/src/main/java/io/papermc/paper/threadedregions/scheduler/FoliaAsyncScheduler.java
++++ b/src/main/java/io/papermc/paper/threadedregions/scheduler/FoliaAsyncScheduler.java
+@@ -42,6 +42,7 @@ public final class FoliaAsyncScheduler implements AsyncScheduler {
+             }
+         }
+     );
++    public int pufferfish$getPoolSize() { return ((ThreadPoolExecutor) this.executors).getPoolSize(); }
+ 
+     private final ScheduledExecutorService timerThread = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
+         @Override
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftAsyncScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftAsyncScheduler.java
 index 27562fd66ae9d091837cab74057706c8a6b6521c..a3be6fcdc3767fa5a69f0b92816eeb22672aeab6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftAsyncScheduler.java

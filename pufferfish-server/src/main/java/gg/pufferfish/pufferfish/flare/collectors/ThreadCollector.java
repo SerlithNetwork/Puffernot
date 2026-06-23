@@ -4,6 +4,7 @@ import co.technove.flare.live.CollectorData;
 import co.technove.flare.live.LiveCollector;
 import co.technove.flare.live.category.GraphCategory;
 import co.technove.flare.live.formatter.SuffixFormatter;
+import io.papermc.paper.threadedregions.scheduler.FoliaAsyncScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.scheduler.CraftScheduler;
 import java.lang.management.ManagementFactory;
@@ -17,11 +18,12 @@ public class ThreadCollector extends LiveCollector {
     private static final CollectorData STARTED_THREADS = new CollectorData("builtin:thread:startedcount", "Started Threads", "Total number of threads created", new SuffixFormatter("Thread Started", "Threads Started"), GraphCategory.SYSTEM);
     private static final CollectorData DAEMON_THREADS = new CollectorData("builtin:thread:daemoncount", "Daemon Threads", "Number of daemon threads", new SuffixFormatter("Daemon Thread", "Daemon Threads"), GraphCategory.SYSTEM);
     private static final CollectorData SCHEDULER_THREADS = new CollectorData("builtin:thread:schedulercount", "CraftScheduler Threads", "Number of CraftScheduler threads", new SuffixFormatter("CraftScheduler Thread", "CraftScheduler Threads"), GraphCategory.SYSTEM);
+    private static final CollectorData FOLIA_SCHEDULER_THREADS = new CollectorData("builtin:thread:foliaschedulercount", "Folia Async Scheduler Threads", "Number of Folia Async Scheduler threads", new SuffixFormatter("Folia Async Scheduler Thread", "Folia Async Scheduler Threads"), GraphCategory.SYSTEM);
 
     private final ThreadMXBean threadMXBean;
 
     public ThreadCollector() {
-        super(NATIVE_THREADS, PEAK_THREADS, STARTED_THREADS, DAEMON_THREADS, SCHEDULER_THREADS);
+        super(NATIVE_THREADS, PEAK_THREADS, STARTED_THREADS, DAEMON_THREADS, SCHEDULER_THREADS, FOLIA_SCHEDULER_THREADS);
         this.interval = Duration.ofSeconds(5);
         this.threadMXBean = ManagementFactory.getThreadMXBean();
     }
@@ -33,6 +35,7 @@ public class ThreadCollector extends LiveCollector {
         this.report(STARTED_THREADS, this.threadMXBean.getTotalStartedThreadCount());
         this.report(DAEMON_THREADS, this.threadMXBean.getDaemonThreadCount());
         this.report(SCHEDULER_THREADS, ((CraftScheduler) Bukkit.getScheduler()).pufferfish$getAsyncScheduler().pufferfish$getPoolSize());
+        this.report(FOLIA_SCHEDULER_THREADS, ((FoliaAsyncScheduler) Bukkit.getServer().getAsyncScheduler()).pufferfish$getPoolSize());
     }
 
 }
