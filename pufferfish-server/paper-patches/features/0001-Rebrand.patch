@@ -83,7 +83,7 @@ index f4d5123d9488ff066032575de85fde2a1006a118..ce507f849233ff22ce9529b30353d319
  
      @Override
 diff --git a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
-index 74ffdc823e66fc5ec027c4b7c462382bcbfe2be2..c1639f79b5a5e53d3a276458e4aa8f44e6841464 100644
+index 74ffdc823e66fc5ec027c4b7c462382bcbfe2be2..9c9c3658a458e76d93785ae63744850d61a46fc3 100644
 --- a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
 +++ b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
 @@ -31,6 +31,7 @@ public record ServerBuildInfoImpl(
@@ -106,6 +106,15 @@ index 74ffdc823e66fc5ec027c4b7c462382bcbfe2be2..c1639f79b5a5e53d3a276458e4aa8f44
              SharedConstants.getCurrentVersion().id(),
              SharedConstants.getCurrentVersion().name(),
              getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
+@@ -61,7 +62,7 @@ public record ServerBuildInfoImpl(
+ 
+     @Override
+     public boolean isBrandCompatible(final @NotNull Key brandId) {
+-        return brandId.equals(this.brandId);
++        return brandId.equals(this.brandId) || brandId.equals(BRAND_PAPER_ID); // Pufferfish - Rebrand
+     }
+ 
+     @Override
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 index 7ffb7a210bf840009158d5e4364dad78221ded6c..fb05cbd9fba24f1d8ea2bbcc5ef20b2b2964df9f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
@@ -120,7 +129,7 @@ index 7ffb7a210bf840009158d5e4364dad78221ded6c..fb05cbd9fba24f1d8ea2bbcc5ef20b2b
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index aec0bd17d25a1e4ed635c731061bb8900d42be1a..df5ebe43026e6924541125b94f6423126334ddce 100644
+index ab6c553f0f5c228e65c95538fc2deef07d9cd077..9febe16a4202373aef707967cce6929b4922061d 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
 @@ -25,7 +25,7 @@ public class WatchdogThread extends ca.spottedleaf.moonrise.common.util.TickThre
