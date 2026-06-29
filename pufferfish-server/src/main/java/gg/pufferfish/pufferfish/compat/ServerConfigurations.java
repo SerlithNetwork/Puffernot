@@ -1,15 +1,16 @@
 package gg.pufferfish.pufferfish.compat;
 
-import com.google.common.io.Files;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,30 +47,32 @@ public class ServerConfigurations {
 
     public static Map<String, String> getCleanCopies() throws IOException {
         Map<String, String> files = new HashMap<>(configurationFiles.length);
+
         for (String file : configurationFiles) {
-            File f = new File(file);
-            if (f.exists()) files.put(file, getCleanCopy(file));
+            Path path = Path.of(file);
+            if (Files.exists(path)) {
+                files.put(file, getCleanCopy(path));
+            }
         }
+
         MinecraftServer server = MinecraftServer.getServer();
         for (ServerLevel serverLevel : server.getAllLevels()) {
-            File worldDir = serverLevel.getWorld().getWorldFolder();
-            File paperWorldConfig = new File(worldDir, "paper-world.yml");
-            String cleanConfig = getCleanCopy(paperWorldConfig.getPath());
+            Path worldPath = serverLevel.getWorld().getWorldPath();
+            Path paperWorldConfig = worldPath.resolve("paper-world.yml");
+            String cleanConfig = getCleanCopy(paperWorldConfig);
             if (!cleanConfig.isEmpty()) {
-                files.put(paperWorldConfig.getPath(), cleanConfig);
+                files.put(paperWorldConfig.toString(), cleanConfig);
             }
         }
         return files;
     }
 
     @SuppressWarnings("deprecation")
-    public static String getCleanCopy(String configName) throws IOException {
-        File file = new File(configName);
-
-        switch (Files.getFileExtension(configName)) {
+    public static String getCleanCopy(Path configPath) throws IOException {
+        switch (com.google.common.io.Files.getFileExtension(configPath.getFileName().toString())) {
             case "properties": {
                 Properties properties = new Properties();
-                try (FileInputStream inputStream = new FileInputStream(file)) {
+                try (InputStream inputStream = Files.newInputStream(configPath)) {
                     properties.load(inputStream);
                 }
                 for (String hiddenConfig : properties.stringPropertyNames()) {
@@ -84,8 +87,8 @@ public class ServerConfigurations {
             }
             case "yml": {
                 YamlConfiguration configuration = new YamlConfiguration();
-                try {
-                    configuration.load(file);
+                try (BufferedReader reader = Files.newBufferedReader(configPath)) {
+                    configuration.load(reader);
                 } catch (InvalidConfigurationException e) {
                     throw new IOException(e);
                 }
@@ -102,7 +105,7 @@ public class ServerConfigurations {
                 }
             }
             default:
-                throw new IllegalArgumentException("Bad file type " + configName);
+                throw new IllegalArgumentException("Bad file type " + configPath);
         }
     }
 
