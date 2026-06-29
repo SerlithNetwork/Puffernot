@@ -35,10 +35,10 @@ index aad550288b63f7bdedab72e2c94a011a3566986d..65dfd3729478be2a5a73bfda1e1f4b55
  
      public SystemReport getSystemReport() {
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 1049f78b1300a584f87579ee5af83145f46dac18..235f486ae1405f9f258431ab64966a210d356079 100644
+index 68151ce05e7009f28dda0470c744920cbd5f4a27..d5d94480f8e44e09f00608f1b3f5c47d9245b042 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1297,7 +1297,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1299,7 +1299,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              // Paper end - Add onboarding message for initial server start
              // Paper start - Improve outdated version checking
              if (System.getProperty("paper.disableStartupVersionCheck") == null && io.papermc.paper.configuration.GlobalConfiguration.get().updateChecker.enabled) {

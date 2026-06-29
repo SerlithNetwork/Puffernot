@@ -21,10 +21,10 @@ public net.minecraft.server.level.ServerLevel entityTickList
 public net.minecraft.world.level.entity.EntityTickList entities
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 2c570d28d0b7c9507d656b222154bbab0df659f2..6149a37e51a82f354700ec7ab0b003fe573e6eb1 100644
+index d5d94480f8e44e09f00608f1b3f5c47d9245b042..fd89c7dcc4690c46855163c0a04648d9cb85dbb4 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -334,6 +334,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -335,6 +335,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      public boolean isIteratingOverLevels = false; // Paper - Throw exception on world create while being ticked
      private final Set<String> pluginsBlockingSleep = new java.util.HashSet<>(); // Paper - API to allow/disallow tick sleeping
      public static final long SERVER_INIT = System.nanoTime(); // Paper - Lag compensation
@@ -33,7 +33,7 @@ index 2c570d28d0b7c9507d656b222154bbab0df659f2..6149a37e51a82f354700ec7ab0b003fe
      public final ca.spottedleaf.common.time.TickData tickTimes1s  = new ca.spottedleaf.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(1L));
      public final ca.spottedleaf.common.time.TickData tickTimes5s  = new ca.spottedleaf.common.time.TickData(java.util.concurrent.TimeUnit.SECONDS.toNanos(5L));
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index 6d8f43332977377bc67f506c120900434e283b62..c8649ab3e6a92045dd6d4cd5c7c07915260cba8c 100644
+index fafaf1f65b4227f95c62580f9991a4cc6a83e4ed..694c57bf8443adb5d3500721e50ad77babd5a17d 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -368,6 +368,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
