@@ -47,19 +47,17 @@ public class ServerConfigurations {
 
     public static Map<String, String> getCleanCopies() throws IOException {
         Map<String, String> files = new HashMap<>(configurationFiles.length);
-
         for (String file : configurationFiles) {
             Path path = Path.of(file);
             if (Files.exists(path)) {
-                files.put(file, getCleanCopy(path));
+                files.put(file, ServerConfigurations.getCleanCopy(path));
             }
         }
-
         MinecraftServer server = MinecraftServer.getServer();
         for (ServerLevel serverLevel : server.getAllLevels()) {
             Path worldPath = serverLevel.getWorld().getWorldPath();
             Path paperWorldConfig = worldPath.resolve("paper-world.yml");
-            String cleanConfig = getCleanCopy(paperWorldConfig);
+            String cleanConfig = ServerConfigurations.getCleanCopy(paperWorldConfig);
             if (!cleanConfig.isEmpty()) {
                 files.put(paperWorldConfig.toString(), cleanConfig);
             }
@@ -76,7 +74,7 @@ public class ServerConfigurations {
                     properties.load(inputStream);
                 }
                 for (String hiddenConfig : properties.stringPropertyNames()) {
-                    if (matchesRegex(hiddenConfig, hiddenConfigEntries)) properties.remove(hiddenConfig);
+                    if (ServerConfigurations.matchesRegex(hiddenConfig, hiddenConfigEntries)) properties.remove(hiddenConfig);
                 }
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 properties.store(outputStream, "");
@@ -94,7 +92,7 @@ public class ServerConfigurations {
                 }
                 configuration.options().header(null);
                 for (String key : configuration.getKeys(true)) {
-                    if (matchesRegex(key, hiddenConfigEntries)) {
+                    if (ServerConfigurations.matchesRegex(key, hiddenConfigEntries)) {
                         configuration.set(key, null);
                     }
                 }
