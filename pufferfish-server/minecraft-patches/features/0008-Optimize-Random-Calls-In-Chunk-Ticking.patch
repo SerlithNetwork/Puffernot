@@ -34,10 +34,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 277cb28f367082b3d0688c27348e8a0237bce591..3066f65b21fc3eedfc5ab138906a7c49a251149e 100644
+index 8df2a3d01808bcb6445c6b509bffeb052f7e2ff7..ad4760326f29f2fffdd9471d7d14ee767d92b059 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
-@@ -1042,7 +1042,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
+@@ -1043,7 +1043,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
          int minZ = chunkPos.getMinBlockZ();
          ProfilerFiller profiler = Profiler.get();
          profiler.push("thunder");
