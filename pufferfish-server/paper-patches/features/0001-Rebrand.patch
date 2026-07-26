@@ -129,7 +129,7 @@ index 7ffb7a210bf840009158d5e4364dad78221ded6c..fb05cbd9fba24f1d8ea2bbcc5ef20b2b
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index ab6c553f0f5c228e65c95538fc2deef07d9cd077..9febe16a4202373aef707967cce6929b4922061d 100644
+index ab6c553f0f5c228e65c95538fc2deef07d9cd077..244476685b2656649fddb0ff735d9022e0e3fbae 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
 @@ -25,7 +25,7 @@ public class WatchdogThread extends ca.spottedleaf.moonrise.common.util.TickThre
@@ -152,7 +152,7 @@ index ab6c553f0f5c228e65c95538fc2deef07d9cd077..9febe16a4202373aef707967cce6929b
                      logger.log(Level.SEVERE, "If you see a world save or edit, then it means you did far more than your server can handle at once");
                      logger.log(Level.SEVERE, "\t If this is the case, consider increasing timeout-time in spigot.yml but note that this will replace the crash with LARGE lag spikes");
 -                    logger.log(Level.SEVERE, "If you are unsure or still think this is a Paper bug, please report this to https://github.com/PaperMC/Paper/issues");
-+                    logger.log(Level.SEVERE, "If you are unsure or still think this is a Paper bug, please report this to https://github.com/SerlithNetwork/Puffernot/issues"); // Pufferfish - Rebrand
++                    logger.log(Level.SEVERE, "If you are unsure or still think this is a Pufferfish bug, please report this to https://github.com/SerlithNetwork/Puffernot/issues"); // Pufferfish - Rebrand
                      logger.log(Level.SEVERE, "Be sure to include ALL relevant console errors and Minecraft crash reports");
 -                    logger.log(Level.SEVERE, "Paper version: " + Bukkit.getServer().getVersion());
 +                    logger.log(Level.SEVERE, "Pufferfish version: " + Bukkit.getServer().getVersion()); // Pufferfish - Rebrand
