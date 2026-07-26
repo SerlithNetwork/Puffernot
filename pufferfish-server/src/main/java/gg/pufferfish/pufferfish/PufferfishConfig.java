@@ -181,16 +181,6 @@ public class PufferfishConfig extends StaticConfig {
 
     @Priority(11)
     @Comment({
-        "If this setting is true, the server will run faster after a lag spike in",
-        "an attempt to maintain 20 TPS. This option (defaults to true per",
-        "spigot/paper) can cause mobs to move fast after a lag spike."
-    })
-    public static boolean TPS_CATCHUP = true;
-    @Ignore
-    public static int CATCHUP = 5;
-
-    @Priority(12)
-    @Comment({
         "Allows end crystals to respawn the ender dragon.",
         "On servers that expect end crystal fights in the end dimension, disabling this",
         "will prevent the server from performing an expensive search to attempt respawning",
@@ -198,7 +188,7 @@ public class PufferfishConfig extends StaticConfig {
     })
     public static boolean ALLOW_END_CRYSTAL_RESPAWN = true;
 
-    @Priority(13)
+    @Priority(12)
     @Comment({
         "Sentry DSN for improved error logging, leave blank to disable",
         "Obtain from https://sentry.io/"
@@ -230,8 +220,6 @@ public class PufferfishConfig extends StaticConfig {
         if (!WEB_SERVICES.TOKEN.isBlank()) {
             FlareSetup.init();
         }
-
-        CATCHUP = TPS_CATCHUP ? 5 : 1;
 
     }
 

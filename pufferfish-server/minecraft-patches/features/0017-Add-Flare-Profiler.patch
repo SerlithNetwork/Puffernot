@@ -10,7 +10,7 @@ Since Flare samples in a 5s interval and the operations are lightweight by natur
   burden on the server.
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 2f0b7301f99a106dca5525e6be9d92522a4e19b9..4adee6df680e949013ae9c476aa6ee2d324b99ea 100644
+index 245c2e7a806d9224d9d957a23f53d286d37e8b25..306fb41f897ab69e1d1cb7b2f75a19174d4794af 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
 @@ -1609,6 +1609,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa

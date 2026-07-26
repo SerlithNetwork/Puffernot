@@ -57,16 +57,16 @@ index ba32d58c33c65b1384baa7616da64f7a4a1f0d1d..7b7da540541d9e54b5f603525e5aaaa7
          if (data == null) {
              return null;
 diff --git a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
-index 6ee39b534b8d992655bc0cef3c299d12cbae0034..3b04f982b3a31ecdaed412390941e9c9b1e7e0f6 100644
+index 43006c22f26b9b3ff83d6d9511a8f29921b7f46d..6f51bf5fd79f2f136c6985eff4d2a8a44295d1b9 100644
 --- a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
 +++ b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
-@@ -20,7 +20,7 @@ public final class PaperConsole extends SimpleTerminalConsole {
+@@ -21,7 +21,7 @@ public final class PaperConsole extends SimpleTerminalConsole {
      @Override
      protected LineReader buildReader(LineReaderBuilder builder) {
          builder
 -                .appName("Paper")
 +                .appName("Pufferfish") // Pufferfish - Rebrand
-                 .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
+                 .variable(LineReader.HISTORY_FILE, PaperCacheDir.moveFromServerRootAndGet(".console_history", "console_history"))
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/io/papermc/paper/PaperServerInternalAPIBridge.java b/src/main/java/io/papermc/paper/PaperServerInternalAPIBridge.java
