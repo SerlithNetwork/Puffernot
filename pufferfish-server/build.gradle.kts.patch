@@ -72,8 +72,8 @@
      // Spark
 -    implementation("me.lucko:spark-api:0.1-20240720.200737-2")
 -    implementation("me.lucko:spark-paper:1.10.172")
-+    implementation("me.biquaternions.spark:spark-api:1.4-pufferfish")
-+    implementation("me.biquaternions.spark:spark-paper:1.4-pufferfish")
++    implementation("me.biquaternions.spark:spark-api:1.5-pufferfish")
++    implementation("me.biquaternions.spark:spark-paper:1.5-pufferfish")
  }
  
  tasks.jar {
