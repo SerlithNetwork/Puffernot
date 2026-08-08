@@ -70,10 +70,10 @@ index 43006c22f26b9b3ff83d6d9511a8f29921b7f46d..6f51bf5fd79f2f136c6985eff4d2a8a4
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/io/papermc/paper/PaperServerInternalAPIBridge.java b/src/main/java/io/papermc/paper/PaperServerInternalAPIBridge.java
-index f4d5123d9488ff066032575de85fde2a1006a118..ce507f849233ff22ce9529b30353d319658805ad 100644
+index 06c0dbd4099604db151b7651c93149a53143ba5f..49b608ecffb2865b46e2bfd812f9dd7d629e0bc5 100644
 --- a/src/main/java/io/papermc/paper/PaperServerInternalAPIBridge.java
 +++ b/src/main/java/io/papermc/paper/PaperServerInternalAPIBridge.java
-@@ -181,7 +181,7 @@ public class PaperServerInternalAPIBridge implements InternalAPIBridge {
+@@ -188,7 +188,7 @@ public class PaperServerInternalAPIBridge implements InternalAPIBridge {
  
      @Override
      public VersionFetcher getVersionFetcher() {
