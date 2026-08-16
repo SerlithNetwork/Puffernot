@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.stream.MalformedJsonException;
 import io.papermc.paper.ServerBuildInfo;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -102,7 +103,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
                 final JsonPrimitive json = GSON.fromJson(reader, JsonPrimitive.class);
                 final int latest = json.getAsInt();
                 return Math.max(latest - actionsBuild, 0);
-            } catch (final JsonSyntaxException ex) {
+            } catch (final JsonSyntaxException | MalformedJsonException ex) {
                 LOGGER.error("Error parsing json from Pufferfish's downloads API", ex);
                 return DISTANCE_ERROR;
             } catch (final SocketTimeoutException ex) {
