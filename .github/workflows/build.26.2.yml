@@ -71,7 +71,7 @@ jobs:
       - name: Publish Pufferfish Version
         uses: fjogeleit/http-request-action@v1
         with:
-          url: https://version.serlith.net/submit
+          url: https://version.serlith.net/api/v1/project/submit
           method: 'POST'
-          customHeaders: '{"Content-Type": "application/json", "Authorization": "${{ secrets.VERSION_TOKEN }}", "Server-Software": "Pufferfish"}'
-          data: '{ "software": "Pufferfish", "version": "26.2", "build": ${{ env.BUILD_NUMBER }} }'
+          customHeaders: '{"Content-Type": "application/json", "X-API-Token": "${{ secrets.VERSION_TOKEN }}"}'
+          data: '{ "software": "pufferfish", "version": "26.2", "build": ${{ env.BUILD_NUMBER }} }'

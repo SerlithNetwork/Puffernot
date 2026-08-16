@@ -92,7 +92,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
 
     private static int fetchDistanceFromSiteApi(final int actionsBuild) {
         try {
-            final URL buildsUrl = URI.create("https://version.serlith.net/projects/pufferfish/" + PufferfishVersionFetcher.BUILD_INFO.minecraftVersionId() + "/latest").toURL();
+            final URL buildsUrl = URI.create("https://version.serlith.net/api/v1/project/fetch/pufferfish/" + PufferfishVersionFetcher.BUILD_INFO.minecraftVersionId() + "/latest/build").toURL();
             final HttpURLConnection connection = (HttpURLConnection) buildsUrl.openConnection();
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
