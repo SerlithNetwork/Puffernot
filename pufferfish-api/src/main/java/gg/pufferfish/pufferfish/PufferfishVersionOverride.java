@@ -20,7 +20,7 @@ public class PufferfishVersionOverride {
     }
 
     private static final Component HEADER = MiniMessage.miniMessage().deserialize(
-        "<gradient:#0069FF:#96CCFF:#0069FF><st>    </st>[ <white><b>Pufferfish</b></white> ]<st>                                                    </st></gradient>"
+        "<gradient:#0069FF:#96CCFF:#0069FF><st>    </st>[ <white><b>Pufferfish</b></white> ]<st>                                         </st></gradient>"
     );
     private static final TextColor COLOR_PRIMARY = TextColor.color(0x00, 0xAA, 0xFF);
 
@@ -35,6 +35,7 @@ public class PufferfishVersionOverride {
         components.add(HEADER);
 
         Component next = Component.textOfChildren(
+            Component.space(),
             Component.text("Minecraft", COLOR_PRIMARY),
             Component.space(),
             Component.text(version, NamedTextColor.WHITE),
@@ -58,6 +59,7 @@ public class PufferfishVersionOverride {
         final String javaVendorVersion = System.getProperty("java.vendor.version", "Unknown");
         final String javaVendor = System.getProperty("java.vendor", "Unknown");
         components.add(Component.textOfChildren(
+            Component.space(),
             Component.text("Java", COLOR_PRIMARY),
             Component.space(),
             Component.text(javaVersion, NamedTextColor.WHITE),
