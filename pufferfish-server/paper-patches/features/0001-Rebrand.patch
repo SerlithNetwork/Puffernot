@@ -116,9 +116,18 @@ index 74ffdc823e66fc5ec027c4b7c462382bcbfe2be2..9c9c3658a458e76d93785ae63744850d
  
      @Override
 diff --git a/src/main/java/io/papermc/paper/command/PaperVersionCommand.java b/src/main/java/io/papermc/paper/command/PaperVersionCommand.java
-index 5f17c295e2158b93ed6f77012c0ac5507ac88284..c273b3578fac5d9384ffae164e6040d715904144 100644
+index 5f17c295e2158b93ed6f77012c0ac5507ac88284..bda81e02e144205c0eb3f068918b5592b07746a4 100644
 --- a/src/main/java/io/papermc/paper/command/PaperVersionCommand.java
 +++ b/src/main/java/io/papermc/paper/command/PaperVersionCommand.java
+@@ -43,7 +43,7 @@ public class PaperVersionCommand {
+         Component.text(", and ", NamedTextColor.WHITE)
+     );
+     private static final Component FAILED_TO_FETCH = Component.text("Could not fetch version information!", NamedTextColor.RED);
+-    private static final Component FETCHING = Component.text("Checking version, please wait...", NamedTextColor.WHITE, TextDecoration.ITALIC);
++    private static final Component FETCHING = Component.text("Checking version, please wait...", NamedTextColor.DARK_GRAY, TextDecoration.ITALIC); // Pufferfish
+ 
+     private final VersionFetcher versionFetcher = InternalAPIBridge.get().getVersionFetcher();
+     private CompletableFuture<ComputedVersion> computedVersion = CompletableFuture.completedFuture(new ComputedVersion(Component.empty(), -1)); // Precompute-- someday move that stuff out of bukkit
 @@ -165,7 +165,7 @@ public class PaperVersionCommand {
      private CompletableFuture<ComputedVersion> fetchVersionMessage() {
         return CompletableFuture.supplyAsync(() -> {
