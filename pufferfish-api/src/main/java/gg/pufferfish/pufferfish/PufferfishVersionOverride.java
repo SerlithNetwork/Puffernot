@@ -19,8 +19,10 @@ public class PufferfishVersionOverride {
     private PufferfishVersionOverride() {
     }
 
-    private static final Component HEADER = MiniMessage.miniMessage().deserialize("<gradient:#0088FF:#96CCFF:#0088FF><st>  </st>[ <white>Pufferfish</white> ]<st>                      </st></gradient>");
-    private static final TextColor COLOR_PRIMARY = TextColor.color(0x00, 0x69, 0xFF);
+    private static final Component HEADER = MiniMessage.miniMessage().deserialize(
+        "<gradient:#0069FF:#96CCFF:#0069FF><st>    </st>[ <white><b>Pufferfish</b></white> ]<st>                                                    </st></gradient>"
+    );
+    private static final TextColor COLOR_PRIMARY = TextColor.color(0x00, 0xAA, 0xFF);
 
     public static Component getVersionMessage() {
         final ServerBuildInfo build = ServerBuildInfo.buildInfo();
@@ -34,13 +36,13 @@ public class PufferfishVersionOverride {
         components.add(HEADER);
 
         Component next = Component.textOfChildren(
-            Component.text("Version", COLOR_PRIMARY),
+            Component.text("Minecraft", COLOR_PRIMARY),
             Component.space(),
-            Component.text(version, NamedTextColor.WHITE, TextDecoration.UNDERLINED),
+            Component.text(version, NamedTextColor.WHITE),
             Component.space(),
             Component.text("build", COLOR_PRIMARY),
             Component.space(),
-            Component.text(buildNumber, NamedTextColor.WHITE, TextDecoration.UNDERLINED)
+            Component.text(buildNumber, NamedTextColor.WHITE)
         );
         if (branch.isPresent() && commit.isPresent()) {
             next = Component.textOfChildren(
@@ -48,7 +50,7 @@ public class PufferfishVersionOverride {
                 Component.space(),
                 Component.text("branch", COLOR_PRIMARY),
                 Component.space(),
-                Component.text(branch.get(), NamedTextColor.WHITE, TextDecoration.UNDERLINED),
+                Component.text(branch.get(), NamedTextColor.WHITE),
                 Component.space(),
                 Component.text("commit", COLOR_PRIMARY),
                 Component.space(),
