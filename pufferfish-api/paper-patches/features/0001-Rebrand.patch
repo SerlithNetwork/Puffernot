@@ -16,3 +16,16 @@ index 4e099b584c3435ba1ebce492011d35ae1ac0cdf8..b73e8d6aba63213127dfeece1f3eb331
  
      /**
       * Gets the {@code ServerBuildInfo}.
+diff --git a/src/main/java/org/bukkit/command/defaults/VersionCommand.java b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
+index f4dd936d79995014651326b41af706bae179a5a1..d8b18bc3c53d9684ccfea32157eb5c8c1cc34906 100644
+--- a/src/main/java/org/bukkit/command/defaults/VersionCommand.java
++++ b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
+@@ -257,7 +257,7 @@ public class VersionCommand extends BukkitCommand {
+     private void setVersionMessage(final @NotNull Component msg) {
+         lastCheck = System.currentTimeMillis();
+         final Component message = Component.textOfChildren(
+-            Component.text(Bukkit.getVersionMessage(), NamedTextColor.WHITE),
++            gg.pufferfish.pufferfish.PufferfishVersionOverride.getVersionMessage(), // Pufferfish - Rebrand
+             Component.newline(),
+             msg
+         );

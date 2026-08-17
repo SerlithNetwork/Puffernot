@@ -115,6 +115,19 @@ index 74ffdc823e66fc5ec027c4b7c462382bcbfe2be2..9c9c3658a458e76d93785ae63744850d
      }
  
      @Override
+diff --git a/src/main/java/io/papermc/paper/command/PaperVersionCommand.java b/src/main/java/io/papermc/paper/command/PaperVersionCommand.java
+index 5f17c295e2158b93ed6f77012c0ac5507ac88284..c273b3578fac5d9384ffae164e6040d715904144 100644
+--- a/src/main/java/io/papermc/paper/command/PaperVersionCommand.java
++++ b/src/main/java/io/papermc/paper/command/PaperVersionCommand.java
+@@ -165,7 +165,7 @@ public class PaperVersionCommand {
+     private CompletableFuture<ComputedVersion> fetchVersionMessage() {
+        return CompletableFuture.supplyAsync(() -> {
+            final Component message = Component.textOfChildren(
+-               Component.text(Bukkit.getVersionMessage(), NamedTextColor.WHITE),
++               gg.pufferfish.pufferfish.PufferfishVersionOverride.getVersionMessage(), // Pufferfish - Rebrand
+                Component.newline(),
+                this.versionFetcher.getVersionMessage()
+            );
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 index 7ffb7a210bf840009158d5e4364dad78221ded6c..fb05cbd9fba24f1d8ea2bbcc5ef20b2b2964df9f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
