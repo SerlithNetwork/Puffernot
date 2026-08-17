@@ -28,7 +28,6 @@ public class PufferfishVersionOverride {
         final ServerBuildInfo build = ServerBuildInfo.buildInfo();
         final String version = build.minecraftVersionName();
         final String buildNumber = build.buildNumber().stream().mapToObj(String::valueOf).findFirst().orElse("DEV");
-        final Optional<String> branch = build.gitBranch();
         final Optional<String> commit = build.gitCommit();
 
         final List<Component> components = new ArrayList<>(4);
@@ -44,13 +43,9 @@ public class PufferfishVersionOverride {
             Component.space(),
             Component.text(buildNumber, NamedTextColor.WHITE)
         );
-        if (branch.isPresent() && commit.isPresent()) {
+        if (commit.isPresent()) {
             next = Component.textOfChildren(
                 next,
-                Component.space(),
-                Component.text("branch", COLOR_PRIMARY),
-                Component.space(),
-                Component.text(branch.get(), NamedTextColor.WHITE),
                 Component.space(),
                 Component.text("commit", COLOR_PRIMARY),
                 Component.space(),
