@@ -1,6 +1,7 @@
 package gg.pufferfish.pufferfish;
 
 import com.destroystokyo.paper.PaperVersionFetcher;
+import com.destroystokyo.paper.VersionHistoryManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -10,6 +11,9 @@ import io.papermc.paper.ServerBuildInfo;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +30,6 @@ import java.util.OptionalInt;
 import java.util.concurrent.TimeUnit;
 
 import static io.papermc.paper.ServerBuildInfo.StringRepresentation.VERSION_SIMPLE;
-import static net.kyori.adventure.text.Component.text;
-import static net.kyori.adventure.text.format.TextColor.color;
 import static net.minecraft.server.MinecraftServer.COMPONENT_LOGGER;
 
 public class PufferfishVersionFetcher extends PaperVersionFetcher {
@@ -42,6 +44,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
     private static final int DISTANCE_UNKNOWN = -2;
     private static final ServerBuildInfo BUILD_INFO = ServerBuildInfo.buildInfo();
     private static final String USER_AGENT = BUILD_INFO.brandName() + "/" + BUILD_INFO.asString(VERSION_SIMPLE) + " (https://serlith.net)";
+    private static final TextColor COLOR_SECONDARY = TextColor.color(0x87, 0xDD, 0xFF);
 
     private static final Gson GSON = new Gson();
 
@@ -55,7 +58,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
         final Component updateMessage;
         final ServerBuildInfo build = ServerBuildInfo.buildInfo();
         if (build.buildNumber().isEmpty() && build.gitCommit().isEmpty()) {
-            updateMessage = text("You are running a development version without access to version information", color(0xFF5300));
+            updateMessage = Component.text("You are running a development version without access to version information", TextColor.color(0xFF5300));
         } else {
             updateMessage = PufferfishVersionFetcher.getUpdateStatusMessage(); // Pufferfish - Rebrand
         }
@@ -79,15 +82,25 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
         }
 
         return switch (distance) {
-            case DISTANCE_ERROR -> text("Error obtaining version information", NamedTextColor.YELLOW);
-            case 0 -> text("You are running the latest version", NamedTextColor.GREEN);
-            case DISTANCE_UNKNOWN -> text("Unknown version", NamedTextColor.YELLOW);
-            default -> text("You are " + distance + " version(s) behind", NamedTextColor.YELLOW)
+            case DISTANCE_ERROR -> Component.text(" ❌ ", NamedTextColor.DARK_RED)
+                .append(Component.text("Error obtaining version information", NamedTextColor.RED));
+            case 0 -> Component.text(" ✔ ", NamedTextColor.DARK_GREEN)
+                .append(Component.text("You are running the latest version", COLOR_SECONDARY));
+            case DISTANCE_UNKNOWN -> Component.text(" ❓ ", NamedTextColor.DARK_GRAY)
+                .append(Component.text("Unknown version", COLOR_SECONDARY));
+            default -> Component.text(" ■ ", NamedTextColor.GRAY)
+                .append(Component.text(" You are " + distance + " version(s) behind", NamedTextColor.YELLOW))
                 .append(Component.newline())
-                .append(text("Download the new version at: ")
-                    .append(text(DOWNLOAD_PAGE, NamedTextColor.GOLD)
-                        .hoverEvent(text("Click to open", NamedTextColor.WHITE))
-                        .clickEvent(ClickEvent.openUrl(DOWNLOAD_PAGE))));
+                .append(Component.text(" ■ ", NamedTextColor.GRAY))
+                .append(Component.text("Download the new version at: ")
+                    .append(Component.textOfChildren(
+                        Component.text(" You are ", COLOR_SECONDARY),
+                        Component.text(distance, NamedTextColor.WHITE),
+                        Component.text(" version(s) behind. ", COLOR_SECONDARY),
+                        Component.text("Click here to update", NamedTextColor.WHITE, TextDecoration.UNDERLINED)
+                            .hoverEvent(Component.text("Click to open", NamedTextColor.WHITE))
+                            .clickEvent(ClickEvent.openUrl(DOWNLOAD_PAGE))
+                    )));
         };
     }
 
@@ -146,7 +159,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
 
         final OptionalInt buildNumber = BUILD_INFO.buildNumber();
         if (buildNumber.isEmpty() && BUILD_INFO.gitCommit().isEmpty()) {
-            COMPONENT_LOGGER.warn(text("*** You are running a development version without access to version information ***"));
+            COMPONENT_LOGGER.warn(Component.text("*** You are running a development version without access to version information ***"));
         } else {
             final Optional<PaperVersionFetcher.MinecraftVersionFetcher> apiResult = PaperVersionFetcher.fetchMinecraftVersionList();
             if (buildNumber.isPresent()) {
@@ -160,27 +173,44 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
             }
 
             switch (distance) {
-                case DISTANCE_ERROR -> COMPONENT_LOGGER.error(text("*** Error obtaining version information! Cannot fetch version info ***"));
+                case DISTANCE_ERROR -> COMPONENT_LOGGER.error(Component.text("*** Error obtaining version information! Cannot fetch version info ***"));
                 case 0 -> apiResult.ifPresent(result -> {
-                    COMPONENT_LOGGER.warn(text("*************************************************************************************"));
-                    COMPONENT_LOGGER.warn(text("You are running the latest build for your Minecraft version (" + BUILD_INFO.minecraftVersionId() + ")"));
-                    COMPONENT_LOGGER.warn(text("However, you are " + result.distance() + " release(s) behind the latest stable release (" + result.latestVersion() + ")!"));
-                    COMPONENT_LOGGER.warn(text("It is recommended that you update as soon as possible"));
-                    COMPONENT_LOGGER.warn(text(DOWNLOAD_PAGE));
-                    COMPONENT_LOGGER.warn(text("*************************************************************************************"));
+                    COMPONENT_LOGGER.warn(Component.text("*************************************************************************************"));
+                    COMPONENT_LOGGER.warn(Component.text("You are running the latest build for your Minecraft version (" + BUILD_INFO.minecraftVersionId() + ")"));
+                    COMPONENT_LOGGER.warn(Component.text("However, you are " + result.distance() + " release(s) behind the latest stable release (" + result.latestVersion() + ")!"));
+                    COMPONENT_LOGGER.warn(Component.text("It is recommended that you update as soon as possible"));
+                    COMPONENT_LOGGER.warn(Component.text(DOWNLOAD_PAGE));
+                    COMPONENT_LOGGER.warn(Component.text("*************************************************************************************"));
                 });
-                case DISTANCE_UNKNOWN -> COMPONENT_LOGGER.warn(text("*** You are running an unknown version! Cannot fetch version info ***"));
+                case DISTANCE_UNKNOWN -> COMPONENT_LOGGER.warn(Component.text("*** You are running an unknown version! Cannot fetch version info ***"));
                 default -> {
                     if (apiResult.isPresent()) {
-                        COMPONENT_LOGGER.warn(text("*** You are running an outdated version of Minecraft, which is " + apiResult.get().distance() + " release(s) and " + distance + " build(s) behind!"));
-                        COMPONENT_LOGGER.warn(text("*** Please update to the latest stable version on " + DOWNLOAD_PAGE + " ***"));
+                        COMPONENT_LOGGER.warn(Component.text("*** You are running an outdated version of Minecraft, which is " + apiResult.get().distance() + " release(s) and " + distance + " build(s) behind!"));
+                        COMPONENT_LOGGER.warn(Component.text("*** Please update to the latest stable version on " + DOWNLOAD_PAGE + " ***"));
                     } else {
-                        COMPONENT_LOGGER.info(text("*** Currently you are " + distance + " build(s) behind ***"));
-                        COMPONENT_LOGGER.info(text("*** It is highly recommended to download the latest build from " + DOWNLOAD_PAGE + " ***"));
+                        COMPONENT_LOGGER.info(Component.text("*** Currently you are " + distance + " build(s) behind ***"));
+                        COMPONENT_LOGGER.info(Component.text("*** It is highly recommended to download the latest build from " + DOWNLOAD_PAGE + " ***"));
                     }
                 }
             }
         }
+    }
+
+    @Override
+    protected @Nullable Component getHistory() {
+        final VersionHistoryManager.@Nullable VersionData data = VersionHistoryManager.INSTANCE.getVersionData();
+        if (data == null) {
+            return null;
+        }
+
+        final @Nullable String oldVersion = data.getOldVersion();
+        if (oldVersion == null) {
+            return null;
+        }
+
+        return Component.text(" ■ ", NamedTextColor.GRAY)
+            .append(Component.text(" Previous version: ", COLOR_SECONDARY))
+            .append(Component.text(oldVersion, NamedTextColor.GRAY, TextDecoration.ITALIC));
     }
 
 }
