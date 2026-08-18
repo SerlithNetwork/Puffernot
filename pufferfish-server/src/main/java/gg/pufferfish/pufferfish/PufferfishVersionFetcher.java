@@ -39,12 +39,12 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
 
     private static final String REPOSITORY = "SerlithNetwork/Puffernot";
     private static final String DOWNLOAD_PAGE = "https://github.com/SerlithNetwork/Puffernot/releases";
+    private static final TextColor COLOR_SECONDARY = TextColor.color(0x87, 0xDD, 0xFF);
 
     private static final int DISTANCE_ERROR = -1;
     private static final int DISTANCE_UNKNOWN = -2;
     private static final ServerBuildInfo BUILD_INFO = ServerBuildInfo.buildInfo();
     private static final String USER_AGENT = BUILD_INFO.brandName() + "/" + BUILD_INFO.asString(VERSION_SIMPLE) + " (https://serlith.net)";
-    private static final TextColor COLOR_SECONDARY = TextColor.color(0x87, 0xDD, 0xFF);
 
     private static final Gson GSON = new Gson();
 
