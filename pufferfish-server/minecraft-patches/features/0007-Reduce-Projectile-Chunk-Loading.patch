@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/entity/projectile/Projectile.java b/net/minecraft/world/entity/projectile/Projectile.java
-index 9af4bf76974f05d9f752bbd4e8037560ec481cdf..91e2626809be2ea717063517d63e11ed1831b0d6 100644
+index 9af4bf76974f05d9f752bbd4e8037560ec481cdf..bbb088d7e94d4ad808f8d20a449a2f377934666c 100644
 --- a/net/minecraft/world/entity/projectile/Projectile.java
 +++ b/net/minecraft/world/entity/projectile/Projectile.java
 @@ -50,6 +50,36 @@ public abstract class Projectile extends Entity implements TraceableEntity {
@@ -44,8 +44,8 @@ index 9af4bf76974f05d9f752bbd4e8037560ec481cdf..91e2626809be2ea717063517d63e11ed
 +        if (previousX != newX || previousZ != newZ) {
 +            boolean isLoaded = ((net.minecraft.server.level.ServerChunkCache) this.level().getChunkSource()).getChunkAtIfLoadedImmediately(newX, newZ) != null;
 +            if (!isLoaded) {
-+                if (Projectile.PUFFERFISH$LOADED_THIS_TICK > gg.pufferfish.pufferfish.PufferfishConfig.PROJECTILE.MAX_LOADS_PER_TICK) {
-+                    if (++this.pufferfish$loadedLifetime > gg.pufferfish.pufferfish.PufferfishConfig.PROJECTILE.MAX_LOADS_PER_PROJECTILE) {
++                if (Projectile.PUFFERFISH$LOADED_THIS_TICK > gg.pufferfish.pufferfish.PufferfishConfig.getInstance().projectile.maxLoadsPerTick) {
++                    if (++this.pufferfish$loadedLifetime > gg.pufferfish.pufferfish.PufferfishConfig.getInstance().projectile.maxLoadsPerProjectile) {
 +                        this.discard(org.bukkit.event.entity.EntityRemoveEvent.Cause.DESPAWN);
 +                    }
 +                    return;

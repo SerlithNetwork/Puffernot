@@ -67,10 +67,6 @@ public class ProfilingManager {
     public static synchronized String getProfilingUri() {
         return Objects.requireNonNull(currentFlare).getURI()
             .map(URI::toString)
-            .map(s -> {
-                if (!PufferfishConfig.FLARE.WEB_UI_URL.isBlank()) return s.replace(PufferfishConfig.FLARE.URL.toString(), PufferfishConfig.FLARE.WEB_UI_URL);
-                return s;
-            })
             .orElse("Flare is not running");
     }
 
@@ -108,7 +104,7 @@ public class ProfilingManager {
             FlareBuilder builder = new FlareBuilder()
                 .withProfileType(profileType)
                 .withMemoryProfiling(true)
-                .withAuth(FlareAuth.fromTokenAndUrl(PufferfishConfig.WEB_SERVICES.TOKEN, PufferfishConfig.FLARE.URL))
+                .withAuth(FlareAuth.fromTokenAndUrl(PufferfishConfig.getInstance().webServices.token, PufferfishConfig.getInstance().flare.url))
 
                 .withFiles(ServerConfigurations.getCleanCopies())
                 .withVersion("Primary Version", Bukkit.getName() + " | " + Bukkit.getVersion())

@@ -23,7 +23,7 @@ public class SentryManager {
             initialized = true;
 
             Sentry.init(options -> {
-                options.setDsn(PufferfishConfig.SENTRY_DSN);
+                options.setDsn(PufferfishConfig.getInstance().sentryDns);
                 options.setMaxBreadcrumbs(100);
             });
 

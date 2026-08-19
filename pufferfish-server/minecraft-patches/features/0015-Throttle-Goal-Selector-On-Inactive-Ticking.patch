@@ -5,7 +5,7 @@ Subject: [PATCH] Throttle Goal Selector On Inactive Ticking
 
 
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index 2270ba01201198b031744bbb4a32c1d2cebf254b..8f82b5d31cd98a73e89aaaae39668747b7a1e4a6 100644
+index 2270ba01201198b031744bbb4a32c1d2cebf254b..338d07a40978e19d2caa4365283bc315e78b41c7 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
 @@ -215,12 +215,14 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
@@ -19,7 +19,7 @@ index 2270ba01201198b031744bbb4a32c1d2cebf254b..8f82b5d31cd98a73e89aaaae39668747
          super.inactiveTick();
          if (!this.aware) return; // Paper - Do not tick AI for inactive unaware mobs
 -        if (this.goalSelector.pufferfish$inactiveTick(this.pufferfish$activatedPriority, true)) { // Pufferfish - pass activated priority
-+        boolean isThrottled = gg.pufferfish.pufferfish.PufferfishConfig.INACTIVE_GOAL_SELECTOR_THROTTLE && pufferfish$inactiveTickDisableCounter++ % 20 != 0; // Pufferfish - throttle inactive goal selector ticking
++        boolean isThrottled = gg.pufferfish.pufferfish.PufferfishConfig.getInstance().inactiveGoalSelectorThrottle && pufferfish$inactiveTickDisableCounter++ % 20 != 0; // Pufferfish - throttle inactive goal selector ticking
 +        if (this.goalSelector.pufferfish$inactiveTick(this.pufferfish$activatedPriority, true) && !isThrottled) { // Pufferfish - pass activated priroity // Pufferfish - throttle inactive goal selector ticking
              this.goalSelector.tick();
          }

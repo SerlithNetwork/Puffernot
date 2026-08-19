@@ -56,12 +56,13 @@
      implementation("ca.spottedleaf:leafpile:1.0.0")
      implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
      implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
-@@ -144,6 +_,9 @@
+@@ -144,6 +_,10 @@
          isTransitive = false // includes junit
      }
  
 +    implementation("net.serlith:Flare:4.1.5") // Pufferfish - Flare
-+    implementation("net.serlith.ConfigAPI:ConfigAPI-core:1.2.7") // Pufferfish - Config API
++    implementation("net.serlith.jshepherd:core:4.1.0") // Pufferfish - Config Library
++    implementation("net.serlith.jshepherd:yaml:4.1.0") // Pufferfish - Config Library
 +
      testImplementation("io.github.classgraph:classgraph:4.8.184") // For mob goal test
      testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.3")

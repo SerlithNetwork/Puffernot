@@ -30,7 +30,7 @@ public class PufferfishCommand {
                     CommandSender sender = ctx.getSource().getSender();
                     MinecraftServer console = MinecraftServer.getServer();
                     try {
-                        PufferfishConfig.INSTANCE.load();
+                        PufferfishConfig.getInstance().reload();
                     } catch (Exception e) {
                         sender.sendMessage(FEEDBACK_RELOAD_FAILED);
                         console.server.getLogger().severe(e.getMessage());

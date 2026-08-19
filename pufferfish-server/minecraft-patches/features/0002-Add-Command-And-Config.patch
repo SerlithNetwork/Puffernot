@@ -5,7 +5,7 @@ Subject: [PATCH] Add Command And Config
 
 
 diff --git a/net/minecraft/server/ReloadableServerResources.java b/net/minecraft/server/ReloadableServerResources.java
-index 936266c6c943d799e58b0b06b591d091d540a783..5dea2d28e18fa77e6ce900627445cf2a020faa08 100644
+index 8921b17a2caf39ae4b892238e926066c1ebe0330..6db3af5861a25cff70fc940d1cd467ea81d4c29f 100644
 --- a/net/minecraft/server/ReloadableServerResources.java
 +++ b/net/minecraft/server/ReloadableServerResources.java
 @@ -47,6 +47,8 @@ public class ReloadableServerResources {
@@ -18,14 +18,14 @@ index 936266c6c943d799e58b0b06b591d091d540a783..5dea2d28e18fa77e6ce900627445cf2a
          this.functionLibrary = new ServerFunctionLibrary(functionCompilationPermissions, this.commands.getDispatcher());
      }
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index 164a2f0f8c4f2d491c51489b9b667f91aee5f42d..6d8f43332977377bc67f506c120900434e283b62 100644
+index 0b6d7f99edde802cb464baa5a4b2b4a4dcce684a..0afacd704fd1285550b61720761a7b04a97c35ce 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -251,6 +251,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          this.server.spark.registerCommandBeforePlugins(this.server); // Paper - spark
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
          com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // Paper - load version history now
-+        new gg.pufferfish.pufferfish.PufferfishConfig().load(); // Pufferfish - Config and command
++        gg.pufferfish.pufferfish.PufferfishConfig.init(); // Pufferfish - Config and command
  
          // this.worldData.setGameType(properties.gameMode.get()); // CraftBukkit - moved to world loading
          LOGGER.info("Default game type: {}", properties.gameMode.get());

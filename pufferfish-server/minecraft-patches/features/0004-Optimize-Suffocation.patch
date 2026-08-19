@@ -17,7 +17,7 @@ but is so much cheaper than the suffocation check that it's worth
 keeping it.
 
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index 98a9aa825dd7dd17af1b3c269d48d758352328c8..cb3845b59ab6446cc054696cb6a53e42e4769bca 100644
+index 3a4da514c163e7565fc241835db52c464a5c4734..398e248f8916894030172d7e50ed5db832b4a03f 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
 @@ -453,7 +453,7 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
@@ -39,7 +39,7 @@ index 98a9aa825dd7dd17af1b3c269d48d758352328c8..cb3845b59ab6446cc054696cb6a53e42
 +    }
 +
 +    protected boolean pufferfish$shouldCheckForSuffocation() {
-+        return !gg.pufferfish.pufferfish.PufferfishConfig.ENABLE_SUFFOCATION_OPTIMIZATION || (tickCount % 10 == 0 && pufferfish$couldPossiblyBeHurt(1.0F));
++        return !gg.pufferfish.pufferfish.PufferfishConfig.getInstance().enableSuffocationOptimization || (tickCount % 10 == 0 && pufferfish$couldPossiblyBeHurt(1.0F));
 +    }
 +    // Pufferfish end - Optimize suffocation
 +
@@ -47,7 +47,7 @@ index 98a9aa825dd7dd17af1b3c269d48d758352328c8..cb3845b59ab6446cc054696cb6a53e42
      protected float getBlockSpeedFactor() {
          return Mth.lerp((float)this.getAttributeValue(Attributes.MOVEMENT_EFFICIENCY), super.getBlockSpeedFactor(), 1.0F);
 diff --git a/net/minecraft/world/entity/boss/wither/WitherBoss.java b/net/minecraft/world/entity/boss/wither/WitherBoss.java
-index 02be7ade04230903ff98cc1f2195f17082d37e86..21bf5f0f4f103ea5b228134bd122acb9b2c85e10 100644
+index 1ab44f34b5d18d12259717444370f886b3a56144..fc32738d2dfd3bb666bda23d0b7681344b00dbac 100644
 --- a/net/minecraft/world/entity/boss/wither/WitherBoss.java
 +++ b/net/minecraft/world/entity/boss/wither/WitherBoss.java
 @@ -138,6 +138,13 @@ public class WitherBoss extends Monster implements RangedAttackMob {

@@ -15,7 +15,7 @@ I'll probably keep it due to the ease of access and possibility of toggle
 it off with a config reload.
 
 diff --git a/net/minecraft/world/item/EndCrystalItem.java b/net/minecraft/world/item/EndCrystalItem.java
-index 4c9216d7a0c31a721b9e8cd92d2e999f0dde7685..5b51a8655747ab3e564ce855102bfa858b80348e 100644
+index 4c9216d7a0c31a721b9e8cd92d2e999f0dde7685..10df5d6970375fbe849edd700fad31d0f0f38939 100644
 --- a/net/minecraft/world/item/EndCrystalItem.java
 +++ b/net/minecraft/world/item/EndCrystalItem.java
 @@ -53,7 +53,7 @@ public class EndCrystalItem extends Item {
@@ -23,7 +23,7 @@ index 4c9216d7a0c31a721b9e8cd92d2e999f0dde7685..5b51a8655747ab3e564ce855102bfa85
              level.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, above);
              EnderDragonFight fight = serverLevel.getDragonFight();
 -            if (fight != null) {
-+            if (fight != null && gg.pufferfish.pufferfish.PufferfishConfig.ALLOW_END_CRYSTAL_RESPAWN) { // Pufferfish
++            if (fight != null && gg.pufferfish.pufferfish.PufferfishConfig.getInstance().allowEndCrystalRespawn) { // Pufferfish
                  fight.tryRespawn(above); // Paper - Perf: Do crystal-portal proximity check before entity lookup
              }
          }

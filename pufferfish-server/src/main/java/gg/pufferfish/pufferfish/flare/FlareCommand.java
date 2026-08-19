@@ -122,8 +122,8 @@ public class FlareCommand {
                     MCUtil.scheduleAsyncTask(() -> {
                         try (HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build()) {
                             HttpResponse<String> response = client.send(HttpRequest.newBuilder()
-                                .uri(URI.create(PufferfishConfig.FLARE.URL + "/license"))
-                                .header("Authorization", "token " + PufferfishConfig.WEB_SERVICES.TOKEN)
+                                .uri(URI.create(PufferfishConfig.getInstance().flare.url + "/license"))
+                                .header("Authorization", "token " + PufferfishConfig.getInstance().webServices.token)
                                 .GET()
                                 .build(),
                                 HttpResponse.BodyHandlers.ofString()
@@ -157,7 +157,7 @@ public class FlareCommand {
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private static boolean isFlareAvailable(CommandSender sender) {
-        if (PufferfishConfig.WEB_SERVICES.TOKEN.isEmpty()) {
+        if (PufferfishConfig.getInstance().webServices.token.isEmpty()) {
             Component clickable = Component.text(BASE_URL, HEX, TextDecoration.UNDERLINED).clickEvent(ClickEvent.openUrl(BASE_URL));
             sendPrefixed(sender,
                 Component.text("Flare currently requires an access token to use.").color(NamedTextColor.GRAY),

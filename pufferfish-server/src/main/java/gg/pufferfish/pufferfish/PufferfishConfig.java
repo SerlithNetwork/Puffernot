@@ -1,35 +1,51 @@
 package gg.pufferfish.pufferfish;
 
-import java.io.File;
-import java.net.URI;
-import java.util.List;
+
+import de.bsommerfeld.jshepherd.annotation.Comment;
+import de.bsommerfeld.jshepherd.annotation.Key;
+import de.bsommerfeld.jshepherd.annotation.PostInject;
+import de.bsommerfeld.jshepherd.annotation.Section;
+import de.bsommerfeld.jshepherd.core.ConfigurablePojo;
+import de.bsommerfeld.jshepherd.core.ConfigurationLoader;
 import gg.pufferfish.pufferfish.flare.FlareSetup;
 import gg.pufferfish.pufferfish.sentry.SentryManager;
 import gg.pufferfish.pufferfish.simd.SIMDDetection;
-import net.j4c0b3y.api.config.ConfigHandler;
-import net.j4c0b3y.api.config.StaticConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
+import org.jspecify.annotations.NullMarked;
+import java.net.URI;
+import java.nio.file.Paths;
+import java.util.List;
 
-@StaticConfig.Header({
+@NullMarked
+@Comment({
     "Pufferfish Configuration",
     "Check out Pufferfish Host for maximum performance server hosting: https://pufferfish.host",
     "Join our Discord for support: https://discord.gg/reZw4vQV9H",
     "Download new builds at https://ci.pufferfish.host/job/Pufferfish"
 })
-@SuppressWarnings({"unused"})
-public class PufferfishConfig extends StaticConfig {
+@SuppressWarnings({"unused", "FieldMayBeFinal", "FieldCanBeLocal"})
+public class PufferfishConfig extends ConfigurablePojo<PufferfishConfig> {
+    private PufferfishConfig() {
+    }
 
-    @Ignore
-    public static final ConfigHandler HANDLER = new ConfigHandler();
+    @SuppressWarnings("NullAway.Init")
+    private static PufferfishConfig INSTANCE;
+    public static PufferfishConfig getInstance() {
+        return INSTANCE;
+    }
 
-    @Ignore
-    public static PufferfishConfig INSTANCE;
+    private static boolean INITIALIZED = false;
+    public static void init() {
+        if (INITIALIZED) {
+            return;
+        }
 
-    public PufferfishConfig() {
-        super(new File("pufferfish.yml"), HANDLER);
-        INSTANCE = this;
+        INSTANCE = ConfigurationLoader.from(Paths.get("pufferfish.yml"))
+            .withComments()
+            .load(PufferfishConfig::new);
+        INITIALIZED = true;
 
         // Attempt to detect vectorization
         try {
@@ -42,40 +58,40 @@ public class PufferfishConfig extends StaticConfig {
         if (SIMDDetection.isEnabled) {
             PufferfishLogger.LOGGER.info("SIMD operations detected as functional. Will replace some operations with faster versions.");
         } else if (SIMDDetection.versionLimited) {
-            PufferfishLogger.LOGGER.warning("Will not enable SIMD! These optimizations are only safely supported on Java 17-25.");
+            PufferfishLogger.LOGGER.warning("Will not enable SIMD! These optimizations are only safely supported on Java 17-27.");
         } else {
             PufferfishLogger.LOGGER.warning("SIMD operations are available for your server, but are not configured!");
             PufferfishLogger.LOGGER.warning("To enable additional optimizations, add \"--add-modules=jdk.incubator.vector\" to your startup flags, BEFORE the \"-jar\".");
             PufferfishLogger.LOGGER.warning("If you have already added this flag, then SIMD operations are not supported on your JVM or CPU.");
             PufferfishLogger.LOGGER.warning("Debug: Java: " + System.getProperty("java.version") + ", test run: " + SIMDDetection.testRun);
         }
-
     }
 
-    @Priority(1)
-    public static class INFO {
-        public static String VERSION = "1.0";
+    @Section("info")
+    public Info info = new Info();
+    public static class Info {
+        @Key("version")
+        public String version = "1.0";
     }
 
-    @Priority(2)
     @Comment({
         "Whether or not books should be writeable.",
         "Servers that anticipate being a target for duping may want to consider",
         "disabling this option.",
         "This can be overridden per-player with the permission pufferfish.usebooks"
     })
-    public static boolean ENABLE_BOOKS = true;
+    @Key("enable-books")
+    public boolean enableBooks = true;
 
-    @Priority(3)
     @Comment({
         "Optimizes the suffocation check by selectively skipping",
         "the check in a way that still appears vanilla. This should",
         "be left enabled on most servers, but is provided as a",
         "configuration option if the vanilla deviation is undesirable."
     })
-    public static boolean ENABLE_SUFFOCATION_OPTIMIZATION = true;
+    @Key("enable-suffocation-optimization")
+    public boolean enableSuffocationOptimization = true;
 
-    @Priority(4)
     @Comment({
         "Whether or not asynchronous mob spawning should be enabled.",
         "On servers with many entities, this can improve performance by up to 15%. You must have",
@@ -83,52 +99,57 @@ public class PufferfishConfig extends StaticConfig {
         "One quick note - this does not actually spawn mobs async (that would be very unsafe).",
         "This just offloads some expensive calculations that are required for mob spawning."
     })
-    public static boolean ENABLE_ASYNC_MOB_SPAWNING = true;
-    @Ignore
-    public static boolean _ENABLE_ASYNC_MOB_SPAWNING = true;
-    @Ignore
-    public static boolean ASYNC_MOB_SPAWNING_INITIALIZED = false;
+    @Key("enable-async-mob-spawning")
+    private boolean enableAsyncMobSpawning = true;
+    public transient boolean asyncMobSpawning = true;
+    private transient boolean asyncMobSpawningInitialized = false;
 
-    @Priority(5)
     @Comment("Optimizes projectile settings")
-    public static class PROJECTILE {
+    @Section("projectile")
+    public Projectile projectile = new Projectile();
+    public static class Projectile {
 
         @Comment({
             "Controls how many chunks are allowed",
             "to be sync loaded by projectiles in a tick."
         })
-        public static int MAX_LOADS_PER_TICK = 10;
+        @Key("max-loads-per-tick")
+        public int maxLoadsPerTick = 10;
 
         @Comment({
             "Controls how many chunks a projectile",
             "can load in its lifetime before it gets", "automatically removed."
         })
-        public static int MAX_LOADS_PER_PROJECTILE = 10;
+        @Key("max-loads-per-projectile")
+        public int maxLoadsPerProjectile = 10;
 
     }
 
-    @Priority(6)
+    @Section("dab")
     @Comment({
         "Optimizes entity brains when",
         "they're far away from the player"
     })
+    public DAB dab = new DAB();
     public static class DAB {
 
-        public static boolean ENABLED = true;
+        @Key("enabled")
+        public boolean enabled = true;
 
         @Comment({
             "This value determines how far away an entity has to be",
             "from the player to start being effected by DEAR."
         })
-        public static int START_DISTANCE = 12;
-        @Ignore
-        public static int START_DISTANCE_SQUARED = 144;
+        @Key("start-distance")
+        private int startDistance = 12;
+        public transient int startDistanceSquared = 144;
 
         @Comment({
             "This value defines how often in ticks, the furthest entity",
             "will get their pathfinders and behaviors ticked. 20 = 1s"
         })
-        public static int MAX_TICK_FREQ = 20;
+        @Key("max-tick-freq")
+        public int maxTickFreq = 20;
 
         @Comment({
             "This value defines how much distance modifies an entity's",
@@ -136,91 +157,100 @@ public class PufferfishConfig extends StaticConfig {
             "If you want further away entities to tick less often, use 7.",
             "If you want further away entities to tick more often, try 9."
         })
-        public static int ACTIVATION_DIST_MOD = 8;
+        @Key("activation-dist-mod")
+        public int activationDistMod = 8;
 
         @Comment("A list of entities to ignore for activation")
-        public static List<String> BLACKLISTED_ENTITIES = List.of();
+        @Key("blacklisted-entities")
+        public List<String> blacklistedEntities = List.of();
 
     }
 
-    @Priority(7)
     @Comment("Configures Flare, the built-in profiler")
-    public static class FLARE {
+    @Section("flare")
+    public Flare flare = new Flare();
+    public static class Flare {
 
         @Comment("Sets the server to use for profiles.")
-        public static URI URL = URI.create("https://flare.airplane.gg");
-
-        @Hidden
-        @Comment("Sets the url to use as a Web UI to show profiles")
-        public static String WEB_UI_URL = "";
+        @Key("url")
+        private String urlString = "https://flare.airplane.gg";
+        public transient URI url = URI.create(this.urlString);
 
     }
 
-    @Priority(8)
     @Comment("Options for connecting to Pufferfish/Airplane's online utilities")
-    public static class WEB_SERVICES {
+    @Section("web-services")
+    public WebServices webServices = new WebServices();
+    public static class WebServices {
 
-        public static String TOKEN = "";
+        @Key("token")
+        public String token = "";
 
     }
 
-    @Priority(9)
     @Comment("Settings for things that don't belong elsewhere")
-    public static class MISC {
+    @Section("misc")
+    public Misc misc = new Misc();
+    public static class Misc {
 
-        public static boolean DISABLE_METHOD_PROFILER = true;
+        @Key("disable-method-profiler")
+        public boolean disableMethodProfiler = true;
 
     }
 
-    @Priority(10)
     @Comment({
         "Throttles the AI goal selector in entity inactive ticks.",
         "This can improve performance by a few percent, but has minor gameplay implications."
     })
-    public static boolean INACTIVE_GOAL_SELECTOR_THROTTLE = true;
+    @Key("inactive-goal-selector-throttle")
+    public boolean inactiveGoalSelectorThrottle = true;
 
-    @Priority(11)
     @Comment({
         "Allows end crystals to respawn the ender dragon.",
         "On servers that expect end crystal fights in the end dimension, disabling this",
         "will prevent the server from performing an expensive search to attempt respawning",
         "the ender dragon whenever a player places an end crystal."
     })
-    public static boolean ALLOW_END_CRYSTAL_RESPAWN = true;
+    @Key("allow-end-crystal-respawn")
+    public boolean allowEndCrystalRespawn = true;
 
-    @Priority(12)
     @Comment({
         "Sentry DSN for improved error logging, leave blank to disable",
         "Obtain from https://sentry.io/"
     })
-    public static String SENTRY_DSN = "";
+    @Key("sentry-dsn")
+    public String sentryDns = "";
 
-    @Override
-    public void load() {
-        super.load();
+    @PostInject
+    private void validate() {
 
+        // Sentry
         String sentryEnvironment = System.getenv("SENTRY_DSN");
-        if (!SENTRY_DSN.isBlank() || (sentryEnvironment != null && !sentryEnvironment.isBlank())) {
+        if (!this.sentryDns.isBlank() || (sentryEnvironment != null && !sentryEnvironment.isBlank())) {
             SentryManager.init();
         }
 
-        if (!ASYNC_MOB_SPAWNING_INITIALIZED) {
-            ASYNC_MOB_SPAWNING_INITIALIZED = true;
-            _ENABLE_ASYNC_MOB_SPAWNING = ENABLE_ASYNC_MOB_SPAWNING;
+        // Mob spawning
+        if (!this.asyncMobSpawningInitialized) {
+            this.asyncMobSpawningInitialized = true;
+            this.asyncMobSpawning = this.enableAsyncMobSpawning;
         }
 
-        DAB.START_DISTANCE_SQUARED = DAB.START_DISTANCE * DAB.START_DISTANCE;
-
+        // Dynamic activation of brain
+        this.dab.startDistanceSquared = this.dab.startDistance * this.dab.startDistance;
         BuiltInRegistries.ENTITY_TYPE.forEach(e -> e.pufferfish$dabEnabled = true);
-        DAB.BLACKLISTED_ENTITIES.forEach(name -> BuiltInRegistries.ENTITY_TYPE.getOptional(Identifier.tryParse(name)).ifPresentOrElse(
+        this.dab.blacklistedEntities.forEach(name -> BuiltInRegistries.ENTITY_TYPE.getOptional(Identifier.tryParse(name)).ifPresentOrElse(
             e -> e.pufferfish$dabEnabled = false,
             () -> MinecraftServer.LOGGER.warn("Unknown entity \"{}\"", name)
         ));
 
-        if (!WEB_SERVICES.TOKEN.isBlank()) {
+        // Flare
+        this.flare.url = URI.create(this.flare.urlString);
+        if (!this.webServices.token.isBlank()) {
             FlareSetup.init();
         }
 
     }
+
 
 }

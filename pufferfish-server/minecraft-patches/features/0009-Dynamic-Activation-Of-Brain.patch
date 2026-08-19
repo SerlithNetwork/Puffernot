@@ -27,7 +27,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/io/papermc/paper/entity/activation/ActivationRange.java b/io/papermc/paper/entity/activation/ActivationRange.java
-index 829f7685904fd741e00403647ae76d32275c34a3..f6480ce3468a55185a876f2920ee8310922d4968 100644
+index 829f7685904fd741e00403647ae76d32275c34a3..9f6bf69b142ac883632bc7fa321822ca9e3145df 100644
 --- a/io/papermc/paper/entity/activation/ActivationRange.java
 +++ b/io/papermc/paper/entity/activation/ActivationRange.java
 @@ -166,6 +166,23 @@ public final class ActivationRange {
@@ -35,17 +35,17 @@ index 829f7685904fd741e00403647ae76d32275c34a3..f6480ce3468a55185a876f2920ee8310
  
                  ActivationRange.activateEntity(entity);
 +                // Pufferfish start
-+                if (gg.pufferfish.pufferfish.PufferfishConfig.DAB.ENABLED && entity.getType().pufferfish$dabEnabled) {
++                if (gg.pufferfish.pufferfish.PufferfishConfig.getInstance().dab.enabled && entity.getType().pufferfish$dabEnabled) {
 +                    if (!entity.pufferfish$activatedPriorityReset) {
 +                        entity.pufferfish$activatedPriorityReset = true;
-+                        entity.pufferfish$activatedPriority = gg.pufferfish.pufferfish.PufferfishConfig.DAB.MAX_TICK_FREQ;
++                        entity.pufferfish$activatedPriority = gg.pufferfish.pufferfish.PufferfishConfig.getInstance().dab.maxTickFreq;
 +                    }
 +                    net.minecraft.world.phys.Vec3 playerVec = player.position();
 +                    net.minecraft.world.phys.Vec3 entityVec = entity.position();
 +                    double diffX = playerVec.x - entityVec.x, diffY = playerVec.y - entityVec.y, diffZ = playerVec.z - entityVec.z;
 +                    int squaredDistance = (int) (diffX * diffX + diffY * diffY + diffZ * diffZ);
-+                    entity.pufferfish$activatedPriority = squaredDistance > gg.pufferfish.pufferfish.PufferfishConfig.DAB.START_DISTANCE_SQUARED ?
-+                        Math.max(1, Math.min(squaredDistance >> gg.pufferfish.pufferfish.PufferfishConfig.DAB.ACTIVATION_DIST_MOD, entity.pufferfish$activatedPriority)) :
++                    entity.pufferfish$activatedPriority = squaredDistance > gg.pufferfish.pufferfish.PufferfishConfig.getInstance().dab.startDistanceSquared ?
++                        Math.max(1, Math.min(squaredDistance >> gg.pufferfish.pufferfish.PufferfishConfig.getInstance().dab.activationDistMod, entity.pufferfish$activatedPriority)) :
 +                        1;
 +                } else {
 +                    entity.pufferfish$activatedPriority = 1;
@@ -81,7 +81,7 @@ index b6fa766cd63419b1dcde19bc651f1b0862a9493c..135b2bec89b5255f3b3e354e74cfd75d
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profiler.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index d958c4717739e588c5f8985dec5d215c745f49fc..2eee30ee82b79f0f304b914e9ad9f1e966fce6d7 100644
+index d958c4717739e588c5f8985dec5d215c745f49fc..a3ce3fd2e680c26dc66466e51d06960cf2e6e0f8 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -388,6 +388,8 @@ public abstract class Entity
@@ -89,7 +89,7 @@ index d958c4717739e588c5f8985dec5d215c745f49fc..2eee30ee82b79f0f304b914e9ad9f1e9
      public boolean isTemporarilyActive;
      public long activatedImmunityTick = Integer.MIN_VALUE;
 +    public boolean pufferfish$activatedPriorityReset = false; // Pufferfish - DAB
-+    public int pufferfish$activatedPriority = gg.pufferfish.pufferfish.PufferfishConfig.DAB.MAX_TICK_FREQ; // Pufferfish - DAB (golf score)
++    public int pufferfish$activatedPriority = gg.pufferfish.pufferfish.PufferfishConfig.getInstance().dab.maxTickFreq; // Pufferfish - DAB (golf score)
  
      public void inactiveTick() {
      }
@@ -169,7 +169,7 @@ index bb037ea27688a06bb0d8141ef25d2543d34aba80..65457b512af926bcb669266086d80bb7
          }
      }
 diff --git a/net/minecraft/world/entity/ai/goal/GoalSelector.java b/net/minecraft/world/entity/ai/goal/GoalSelector.java
-index 0439543fbb25ddb974550fe9dbdaa479e330937d..c01d4ba94ad17a86610753082d464ba69413908d 100644
+index 0439543fbb25ddb974550fe9dbdaa479e330937d..e65c9c27cc7432d5c2b1bc957fd2d41d011bb113 100644
 --- a/net/minecraft/world/entity/ai/goal/GoalSelector.java
 +++ b/net/minecraft/world/entity/ai/goal/GoalSelector.java
 @@ -47,6 +47,15 @@ public class GoalSelector {
@@ -178,7 +178,7 @@ index 0439543fbb25ddb974550fe9dbdaa479e330937d..c01d4ba94ad17a86610753082d464ba6
  
 +    // Pufferfish start - DAB
 +    public boolean pufferfish$inactiveTick(int tickRate, final boolean inactive) {
-+        if (inactive && !gg.pufferfish.pufferfish.PufferfishConfig.DAB.ENABLED) tickRate = 4; // reset to Paper's
++        if (inactive && !gg.pufferfish.pufferfish.PufferfishConfig.getInstance().dab.enabled) tickRate = 4; // reset to Paper's
 +        tickRate = Math.min(tickRate, 3);
 +        this.curRate++;
 +        return this.curRate % tickRate == 0; // TODO newGoalRate was already unused in 1.20.4, check if this is correct
