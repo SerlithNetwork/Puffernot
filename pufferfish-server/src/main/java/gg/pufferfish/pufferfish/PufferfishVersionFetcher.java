@@ -92,15 +92,14 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
                 .append(Component.text(" You are " + distance + " version(s) behind", NamedTextColor.YELLOW))
                 .append(Component.newline())
                 .append(Component.text(" ■ ", NamedTextColor.GRAY))
-                .append(Component.text("Download the new version at: ")
-                    .append(Component.textOfChildren(
-                        Component.text(" You are ", COLOR_SECONDARY),
-                        Component.text(distance, NamedTextColor.WHITE),
-                        Component.text(" version(s) behind. ", COLOR_SECONDARY),
-                        Component.text("Click here to update", NamedTextColor.WHITE, TextDecoration.UNDERLINED)
-                            .hoverEvent(Component.text("Click to open", NamedTextColor.WHITE))
-                            .clickEvent(ClickEvent.openUrl(DOWNLOAD_PAGE))
-                    )));
+                .append(Component.textOfChildren(
+                    Component.text("You are ", COLOR_SECONDARY),
+                    Component.text(distance, NamedTextColor.WHITE),
+                    Component.text(" version(s) behind. ", COLOR_SECONDARY),
+                    Component.text("Click here to update", NamedTextColor.WHITE, TextDecoration.UNDERLINED)
+                        .hoverEvent(Component.text("Click to open", NamedTextColor.WHITE))
+                        .clickEvent(ClickEvent.openUrl(DOWNLOAD_PAGE))
+                ));
         };
     }
 
