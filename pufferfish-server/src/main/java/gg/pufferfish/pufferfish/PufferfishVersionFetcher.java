@@ -89,9 +89,6 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
             case DISTANCE_UNKNOWN -> Component.text(" ❓ ", NamedTextColor.DARK_GRAY)
                 .append(Component.text("Unknown version", COLOR_SECONDARY));
             default -> Component.text(" ■ ", NamedTextColor.GRAY)
-                .append(Component.text(" You are " + distance + " version(s) behind", NamedTextColor.YELLOW))
-                .append(Component.newline())
-                .append(Component.text(" ■ ", NamedTextColor.GRAY))
                 .append(Component.textOfChildren(
                     Component.text("You are ", COLOR_SECONDARY),
                     Component.text(distance, NamedTextColor.WHITE),
