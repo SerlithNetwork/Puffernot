@@ -108,6 +108,10 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
             connection.setReadTimeout(5000);
             connection.setRequestProperty("User-Agent", PufferfishVersionFetcher.USER_AGENT);
             connection.setRequestProperty("Accept", "application/json");
+            if (connection.getResponseCode() / 100 != 2) {
+                return DISTANCE_ERROR;
+            }
+
             try (final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
                 final JsonPrimitive json = GSON.fromJson(reader, JsonPrimitive.class);
                 final int latest = json.getAsInt();
@@ -116,7 +120,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
                 LOGGER.error("Error parsing json from Pufferfish's downloads API", ex);
                 return DISTANCE_ERROR;
             } catch (final SocketTimeoutException ex) {
-                return 0;
+                return DISTANCE_ERROR;
             }
         } catch (final IOException e) {
             LOGGER.error("Error while parsing version", e);
@@ -205,7 +209,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
         }
 
         return Component.text(" ■ ", NamedTextColor.GRAY)
-            .append(Component.text(" Previous version: ", COLOR_SECONDARY))
+            .append(Component.text("Previous version: ", COLOR_SECONDARY))
             .append(Component.text(oldVersion, NamedTextColor.GRAY, TextDecoration.ITALIC));
     }
 
