@@ -53,7 +53,7 @@
  dependencies {
 -    implementation(project(":paper-api"))
 +    implementation(project(":pufferfish-api")) // Pufferfish
-     implementation("ca.spottedleaf:leafpile:1.0.0")
+     implementation("ca.spottedleaf:leafpile:1.1.0")
      implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
      implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
 @@ -144,6 +_,10 @@
@@ -72,9 +72,9 @@
  
      // Spark
 -    implementation("me.lucko:spark-api:0.1-20240720.200737-2")
--    implementation("me.lucko:spark-paper:1.10.172")
-+    implementation("me.biquaternions.spark:spark-api:1.5-pufferfish")
-+    implementation("me.biquaternions.spark:spark-paper:1.5-pufferfish")
+-    implementation("me.lucko:spark-paper:1.10.177")
++    implementation("me.biquaternions.spark:spark-api:1.6-pufferfish")
++    implementation("me.biquaternions.spark:spark-paper:1.6-pufferfish")
  }
  
  tasks.jar {
