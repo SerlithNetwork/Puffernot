@@ -20,7 +20,7 @@ public class PufferfishVersionOverride {
     }
 
     private static final Component HEADER = MiniMessage.miniMessage().deserialize(
-        "<gradient:#0069FF:#96CCFF:#0069FF><st>    </st>[ <white><b>Pufferfish</b></white> ]<st>                                         </st></gradient>"
+        "<gradient:#0069FF:#96CCFF:#0069FF><st>    </st>[ <white><b>Pufferfish</b></white> ]<st>                                                 </st></gradient>"
     );
     private static final TextColor COLOR_PRIMARY = TextColor.color(0x00, 0xAA, 0xFF);
 
