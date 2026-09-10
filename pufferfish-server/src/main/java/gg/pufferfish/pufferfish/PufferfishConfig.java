@@ -45,6 +45,7 @@ public class PufferfishConfig extends ConfigurablePojo<PufferfishConfig> {
         INSTANCE = ConfigurationLoader.from(Paths.get("pufferfish.yml"))
             .withComments()
             .load(PufferfishConfig::new);
+        INSTANCE.save();
         INITIALIZED = true;
 
         // Attempt to detect vectorization
