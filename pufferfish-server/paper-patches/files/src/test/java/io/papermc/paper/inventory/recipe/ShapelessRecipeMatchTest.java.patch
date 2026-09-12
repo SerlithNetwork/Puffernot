@@ -1,0 +1,10 @@
+--- a/src/test/java/io/papermc/paper/inventory/recipe/ShapelessRecipeMatchTest.java
++++ b/src/test/java/io/papermc/paper/inventory/recipe/ShapelessRecipeMatchTest.java
+@@ -58,6 +_,7 @@
+             new CraftingRecipe.CraftingBookInfo(CraftingBookCategory.MISC, ""),
+             new ItemStackTemplate(Items.DIAMOND), // result is irrelevant to matches()
+             List.of(ingredients)
++            , true // Pufferfish - Simpler Shapeless Comparison
+         );
+     }
+ 
