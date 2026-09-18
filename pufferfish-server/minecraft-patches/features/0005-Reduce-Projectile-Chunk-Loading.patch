@@ -20,10 +20,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/entity/projectile/Projectile.java b/net/minecraft/world/entity/projectile/Projectile.java
-index 9af4bf76974f05d9f752bbd4e8037560ec481cdf..bbb088d7e94d4ad808f8d20a449a2f377934666c 100644
+index 089dd82e6806f4f1fbff554058dc44f15593e37f..1703a617699eaaad99d081355b1314faef9333da 100644
 --- a/net/minecraft/world/entity/projectile/Projectile.java
 +++ b/net/minecraft/world/entity/projectile/Projectile.java
-@@ -50,6 +50,36 @@ public abstract class Projectile extends Entity implements TraceableEntity {
+@@ -61,6 +61,36 @@ public abstract class Projectile extends Entity implements TraceableEntity {
          super(type, level);
      }
  
@@ -57,6 +57,6 @@ index 9af4bf76974f05d9f752bbd4e8037560ec481cdf..bbb088d7e94d4ad808f8d20a449a2f37
 +    }
 +    // Pufferfish end - Reduce Projectile Chunk Loading
 +
-     protected void setOwner(final @Nullable EntityReference<Entity> owner) {
-         this.owner = owner;
-     }
+     @Override
+     protected void applyImplicitComponents(final DataComponentGetter components) {
+         this.applyImplicitComponentIfPresent(components, DataComponents.CAN_BREAK);
