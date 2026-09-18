@@ -35,10 +35,10 @@ index aad550288b63f7bdedab72e2c94a011a3566986d..65dfd3729478be2a5a73bfda1e1f4b55
  
      public SystemReport getSystemReport() {
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 879f53a64e3070aca5f6c58a0e200b62c3e51117..45b0eca4c000f7fb0832b3873e795846196cc15b 100644
+index d6500e28e6b50912718e0b75ee495f279acd2ee0..65409a2e9836ce6934c63597bb23bd79049c17e9 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1298,7 +1298,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1279,7 +1279,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              // Paper end - Add onboarding message for initial server start
              // Paper start - Improve outdated version checking
              if (System.getProperty("paper.disableStartupVersionCheck") == null && io.papermc.paper.configuration.GlobalConfiguration.get().updateChecker.enabled) {
@@ -48,10 +48,10 @@ index 879f53a64e3070aca5f6c58a0e200b62c3e51117..45b0eca4c000f7fb0832b3873e795846
              // Paper end - Improve outdated version checking
  
 diff --git a/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index 63b40c420030d935bb81a219fb33defe0946e21f..3c7f825c01553207f9618e16c157943a82c821cd 100644
+index a2dd62ced02de213ffe1244b893069b93011713c..f246e62f64ace3c69250bc8286a63d4b9a7571d6 100644
 --- a/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-@@ -309,7 +309,7 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
+@@ -245,7 +245,7 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
  
      // Paper start
      private static void printOversizedLog(String msg, Path file, int x, int z) {
