@@ -5,7 +5,7 @@ Subject: [PATCH] Optimize Map Rendering
 
 
 diff --git a/src/main/java/org/bukkit/map/MapPalette.java b/src/main/java/org/bukkit/map/MapPalette.java
-index 477b8cd1820259bc3726fed7674402a9e705e681..458cd4baa01ac57811a19be9c97f44e5af261ed7 100644
+index 76ae2750ff7b04a281d4b794dc1f48dd832db2b6..7d842eef875308f76f11e4217ebf49dac74ea6b6 100644
 --- a/src/main/java/org/bukkit/map/MapPalette.java
 +++ b/src/main/java/org/bukkit/map/MapPalette.java
 @@ -35,7 +35,7 @@ public final class MapPalette {
