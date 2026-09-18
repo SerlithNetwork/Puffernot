@@ -35,3 +35,15 @@ index 6a7bb225f044c9f299d6a3e703de82a1093878b4..95b3ad5101b80162006cc7fa2a682e97
          );
          MinecraftServer.getServer().getRecipeManager().addRecipe(new RecipeHolder<>(CraftNamespacedKey.toResourceKey(Registries.RECIPE, this.getKey()), recipe));
      }
+diff --git a/src/test/java/io/papermc/paper/inventory/recipe/ShapelessRecipeMatchTest.java b/src/test/java/io/papermc/paper/inventory/recipe/ShapelessRecipeMatchTest.java
+index 8a5e44c97c4cec59c1c00f879e511368437da2ab..deb4fcbb3bcd2fade987910b9691ff839763d02e 100644
+--- a/src/test/java/io/papermc/paper/inventory/recipe/ShapelessRecipeMatchTest.java
++++ b/src/test/java/io/papermc/paper/inventory/recipe/ShapelessRecipeMatchTest.java
+@@ -60,6 +60,7 @@ class ShapelessRecipeMatchTest {
+             new CraftingRecipe.CraftingBookInfo(CraftingBookCategory.MISC, ""),
+             new ItemStackTemplate(Items.DIAMOND), // result is irrelevant to matches()
+             List.of(ingredients)
++            , true // Pufferfish - Simpler Shapeless Comparison
+         );
+     }
+ 
