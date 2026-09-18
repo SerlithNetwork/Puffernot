@@ -17,10 +17,10 @@ but is so much cheaper than the suffocation check that it's worth
 keeping it.
 
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index 3a4da514c163e7565fc241835db52c464a5c4734..398e248f8916894030172d7e50ed5db832b4a03f 100644
+index f332edbc4dad82cbdc02a58aa9ec21faf1f2db89..a7ed85b57924ffe4d69593fc396251eefbf631fd 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
-@@ -453,7 +453,7 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+@@ -456,7 +456,7 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
          profiler.push("livingEntityBaseTick");
          if (this.isAlive() && this.level() instanceof ServerLevel level) {
              boolean isPlayer = this instanceof Player;
@@ -29,7 +29,7 @@ index 3a4da514c163e7565fc241835db52c464a5c4734..398e248f8916894030172d7e50ed5db8
                  this.hurtServer(level, this.damageSources().inWall(), 1.0F);
              } else if (isPlayer && !level.getWorldBorder().isWithinBounds(this.getBoundingBox())) {
                  double dist = level.getWorldBorder().getDistanceToBorder(this) + level.getWorldBorder().getSafeZone();
-@@ -538,6 +538,16 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+@@ -539,6 +539,16 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
          return this.getAirSupply() <= -20;
      }
  
