@@ -1,0 +1,41 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Paul Sauve <paul@technove.co>
+Date: Thu, 4 Feb 2021 23:33:52 -0600
+Subject: [PATCH] Reduce Chunk Loading Lookups
+
+Airplane
+Copyright (C) 2020 Technove LLC
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
+index a7ed85b57924ffe4d69593fc396251eefbf631fd..a2d0fcf1f79d51c897352e1df39ae3756a4feb5d 100644
+--- a/net/minecraft/world/entity/LivingEntity.java
++++ b/net/minecraft/world/entity/LivingEntity.java
+@@ -4542,10 +4542,13 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+         WorldBorder worldBorder = level.getWorldBorder();
+         Vec3 clamped = worldBorder.clampVec3ToBound(xx, y, zz);
+         BlockPos.MutableBlockPos pos = BlockPos.containing(clamped).mutable();
+-        if (level.hasChunkAt(pos)) {
++        // Pufferfish start - single chunk lookup
++        net.minecraft.world.level.chunk.LevelChunk pufferfish$chunk = level.getChunkIfLoaded(pos);
++        if (pufferfish$chunk != null) {
++        // Pufferfish stop - single chunk lookup
+             while (pos.getY() > level.getMinY()) {
+                 pos.move(Direction.DOWN);
+-                BlockState state = level.getBlockState(pos);
++                BlockState state = pufferfish$chunk.getBlockState(pos); // Pufferfish - single chunk lookup
+                 if (state.is(BlockTags.ENTITIES_CAN_TELEPORT_TO)) {
+                     return this.checkPositionAndTeleport(clamped.x, y, clamped.z, showParticles, isInvalidPosition, state, level, cause); // Paper - teleport cause API
+                 }
