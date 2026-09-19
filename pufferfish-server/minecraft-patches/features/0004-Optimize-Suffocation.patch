@@ -17,7 +17,7 @@ but is so much cheaper than the suffocation check that it's worth
 keeping it.
 
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index f332edbc4dad82cbdc02a58aa9ec21faf1f2db89..a7ed85b57924ffe4d69593fc396251eefbf631fd 100644
+index f332edbc4dad82cbdc02a58aa9ec21faf1f2db89..6a5883744f399931c4c37963a5569846e23324c1 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
 @@ -456,7 +456,7 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
@@ -35,7 +35,7 @@ index f332edbc4dad82cbdc02a58aa9ec21faf1f2db89..a7ed85b57924ffe4d69593fc396251ee
  
 +    // Pufferfish start - Optimize suffocation
 +    private boolean pufferfish$couldPossiblyBeHurt(final float amount) {
-+        return !((float) this.invulnerableTime > (float) this.invulnerableDuration / 2.0F) || !(amount <= this.lastHurt);
++        return !((float) this.damageCooldownTime > (float) this.invulnerableDuration / 2.0F) || !(amount <= this.lastHurt);
 +    }
 +
 +    protected boolean pufferfish$shouldCheckForSuffocation() {
