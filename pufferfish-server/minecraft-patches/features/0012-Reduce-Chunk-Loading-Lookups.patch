@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index a7ed85b57924ffe4d69593fc396251eefbf631fd..a2d0fcf1f79d51c897352e1df39ae3756a4feb5d 100644
+index 6a5883744f399931c4c37963a5569846e23324c1..1ccfa1cad3f54d61d4501975d3f59331ae41fa2a 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
 @@ -4542,10 +4542,13 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin

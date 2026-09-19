@@ -69,7 +69,7 @@ index 829f7685904fd741e00403647ae76d32275c34a3..9f6bf69b142ac883632bc7fa321822ca
              }
          }
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 6299009a4ad87066c78c27d0e8ced1725ada8320..352bee71fad418f5e5c933bf200c4c4bb36f3986 100644
+index 3d14b7287ccabeb1cd4eac530ca638e7bc8b6399..7c0adf87c8990df0eafdba24346e1174018ec961 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -892,6 +892,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
@@ -81,7 +81,7 @@ index 6299009a4ad87066c78c27d0e8ced1725ada8320..352bee71fad418f5e5c933bf200c4c4b
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profiler.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index ef72b4a4b8fa2f6ebcfb59b2dd0466bce028a1ed..c7ed37cef6b90a7aba11a17778fad4dc2034d743 100644
+index cf3619b6de23f32e9e5a81fbe287fb438ecfcabc..49e1b17d3971b92c9e920cfa5b066f9da55aea00 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -393,6 +393,8 @@ public abstract class Entity
