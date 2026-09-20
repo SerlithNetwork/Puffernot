@@ -8,6 +8,7 @@ import co.technove.flare.live.category.GraphCategory;
 import co.technove.flare.live.formatter.DataFormatter;
 import com.google.common.collect.ImmutableMap;
 import com.sun.management.GarbageCollectionNotificationInfo;
+import org.jspecify.annotations.NullMarked;
 
 import javax.management.ListenerNotFoundException;
 import javax.management.Notification;
@@ -17,6 +18,7 @@ import javax.management.openmbean.CompositeData;
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
 
+@NullMarked
 public class GCEventCollector extends EventCollector implements NotificationListener {
 
     private static final CollectorData MINOR_GC = new CollectorData("builtin:gc:minor", "Minor GC", "A small pause in the program to allow Garbage Collection to run.", DataFormatter.MILLISECONDS, GraphCategory.SYSTEM);

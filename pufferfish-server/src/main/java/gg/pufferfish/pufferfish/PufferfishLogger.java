@@ -3,7 +3,9 @@ package gg.pufferfish.pufferfish;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class PufferfishLogger extends Logger {
     public static final PufferfishLogger LOGGER = new PufferfishLogger();
 

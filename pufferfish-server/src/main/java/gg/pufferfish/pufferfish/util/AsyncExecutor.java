@@ -2,12 +2,15 @@ package gg.pufferfish.pufferfish.util;
 
 import com.google.common.collect.Queues;
 import gg.pufferfish.pufferfish.PufferfishLogger;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import java.util.Queue;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 
+@NullMarked
 public class AsyncExecutor implements Runnable {
 
     private final Queue<Runnable> jobs = Queues.newArrayDeque();
@@ -21,29 +24,29 @@ public class AsyncExecutor implements Runnable {
     }
 
     public void start() {
-        thread.start();
+        this.thread.start();
     }
 
     public void kill() {
-        killswitch = true;
-        cond.signalAll();
+        this.killswitch = true;
+        this.cond.signalAll();
     }
 
     public void submit(Runnable runnable) {
-        mutex.lock();
+        this.mutex.lock();
         try {
-            jobs.offer(runnable);
-            cond.signalAll();
+            this.jobs.offer(runnable);
+            this.cond.signalAll();
         } finally {
-            mutex.unlock();
+            this.mutex.unlock();
         }
     }
 
     @Override
     public void run() {
-        while (!killswitch) {
+        while (!this.killswitch) {
             try {
-                Runnable runnable = takeRunnable();
+                Runnable runnable = this.takeRunnable();
                 if (runnable != null) {
                     runnable.run();
                 }
@@ -55,23 +58,23 @@ public class AsyncExecutor implements Runnable {
         }
     }
 
-    private Runnable takeRunnable() throws InterruptedException {
-        mutex.lock();
+    private @Nullable Runnable takeRunnable() throws InterruptedException {
+        this.mutex.lock();
         try {
-            while (jobs.isEmpty() && !killswitch) {
-                cond.await();
+            while (this.jobs.isEmpty() && !this.killswitch) {
+                this.cond.await();
             }
 
-            if (jobs.isEmpty()) return null; // We've set killswitch
+            if (this.jobs.isEmpty()) return null; // We've set killswitch
 
-            return jobs.remove();
+            return this.jobs.remove();
         } finally {
-            mutex.unlock();
+            this.mutex.unlock();
         }
     }
 
     public int getJobs() {
-        return jobs.size();
+        return this.jobs.size();
     }
 
 }

@@ -7,10 +7,12 @@ import co.technove.flare.live.formatter.SuffixFormatter;
 import io.papermc.paper.threadedregions.scheduler.FoliaAsyncScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.scheduler.CraftScheduler;
+import org.jspecify.annotations.NullMarked;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 import java.time.Duration;
 
+@NullMarked
 public class ThreadCollector extends LiveCollector {
 
     private static final CollectorData NATIVE_THREADS = new CollectorData("builtin:thread:threadcount", "Threads", "Number of threads", new SuffixFormatter("Thread", "Threads"), GraphCategory.SYSTEM);

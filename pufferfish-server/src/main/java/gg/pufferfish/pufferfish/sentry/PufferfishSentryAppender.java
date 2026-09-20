@@ -17,8 +17,10 @@ import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
 import org.apache.logging.log4j.core.config.Property;
 import org.apache.logging.log4j.core.filter.AbstractFilter;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
+@NullMarked
 public class PufferfishSentryAppender extends AbstractAppender {
 
     private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(PufferfishSentryAppender.class);
@@ -76,7 +78,7 @@ public class PufferfishSentryAppender extends AbstractAppender {
         }
 
         if (hasContext && e.getContextData().containsKey("pufferfishsentry_eventdata")) {
-            Map<String, String> eventFields = GSON.fromJson((String) e.getContextData().getValue("pufferfishsentry_eventdata"), new TypeToken<@NonNull Map<String, String>>() {}.getType());
+            Map<String, String> eventFields = GSON.fromJson((String) e.getContextData().getValue("pufferfishsentry_eventdata"), new TypeToken<Map<String, String>>() {}.getType());
             if (eventFields != null) {
                 event.setExtra("event", eventFields);
             }
@@ -120,11 +122,11 @@ public class PufferfishSentryAppender extends AbstractAppender {
         }
 
         @Override
-        public Result filter(LogEvent event) {
+        public @Nullable Result filter(@Nullable LogEvent event) {
             return this.filter(event == null ? null : event.getLoggerName());
         }
 
-        private Result filter(String loggerName) {
+        private Result filter(@Nullable String loggerName) {
             return loggerName != null && loggerName.startsWith("gg.castaway.pufferfish.sentry") ? Result.DENY
                 : Result.NEUTRAL;
         }

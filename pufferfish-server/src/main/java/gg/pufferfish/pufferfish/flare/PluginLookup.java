@@ -5,24 +5,25 @@ import com.google.common.cache.CacheBuilder;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NonNull;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+@NullMarked
 public class PluginLookup {
 
-    private static final Cache<@NonNull String, @NonNull String> PLUGIN_NAME_CACHE = CacheBuilder.newBuilder()
-        .expireAfterAccess(2, TimeUnit.MINUTES)
+    private static final Cache<String, String> PLUGIN_NAME_CACHE = CacheBuilder.newBuilder()
+        .expireAfterAccess(Duration.ofMinutes(2))
         .maximumSize(1024)
         .build();
-    private static final Cache<@NonNull Boolean, @NonNull Map<Plugin, ClassLoader>> CLASS_LOADER_CACHE = CacheBuilder.newBuilder() // Yes, boolean key, trust
-        .expireAfterAccess(2, TimeUnit.MINUTES)
+    private static final Cache<Boolean, Map<Plugin, ClassLoader>> CLASS_LOADER_CACHE = CacheBuilder.newBuilder() // Yes, boolean key, trust
+        .expireAfterAccess(Duration.ofMinutes(2))
         .build();
 
     public static Optional<String> getPluginForClass(String name) {

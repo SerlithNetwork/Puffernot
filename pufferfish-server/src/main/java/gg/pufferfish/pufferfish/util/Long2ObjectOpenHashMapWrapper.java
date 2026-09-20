@@ -2,8 +2,10 @@ package gg.pufferfish.pufferfish.util;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import java.util.Map;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+@NullMarked
 public class Long2ObjectOpenHashMapWrapper<V> extends Long2ObjectOpenHashMap<V> {
 
     private final Map<Long, V> backingMap;
@@ -13,7 +15,7 @@ public class Long2ObjectOpenHashMapWrapper<V> extends Long2ObjectOpenHashMap<V> 
     }
 
     @Override
-    public V put(Long key, V value) {
+    public @Nullable V put(Long key, V value) {
         return backingMap.put(key, value);
     }
 

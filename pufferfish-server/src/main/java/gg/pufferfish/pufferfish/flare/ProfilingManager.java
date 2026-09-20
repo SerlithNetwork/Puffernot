@@ -20,6 +20,8 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.Bukkit;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
@@ -39,10 +41,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.stream.Stream;
 
+@NullMarked
 public class ProfilingManager {
 
-    private static Flare currentFlare;
-    private static ScheduledFuture<?> currentTask = null;
+    private static @Nullable Flare currentFlare;
+    private static @Nullable ScheduledFuture<?> currentTask = null;
     private static final ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(1, r -> {
         Thread t = new Thread(r);
         t.setName("Flare Profiling Manager Thread");
@@ -135,7 +138,7 @@ public class ProfilingManager {
 
                 .withExceptionRunnable(() -> {
                     try {
-                        currentTask.cancel(true);
+                        Objects.requireNonNull(currentTask).cancel(true);
                     } catch (Throwable t) {
                         PufferfishLogger.LOGGER.log(Level.WARNING, "Error occurred stopping Flare", t);
                     } finally {
@@ -171,7 +174,7 @@ public class ProfilingManager {
         if (!ProfilingManager.isProfiling()) {
             return false;
         }
-        if (!currentFlare.isRunning()) {
+        if (!Objects.requireNonNull(currentFlare).isRunning()) {
             currentFlare = null;
             return true;
         }
@@ -188,7 +191,7 @@ public class ProfilingManager {
         currentFlare = null;
 
         try {
-            currentTask.cancel(true);
+            Objects.requireNonNull(currentTask).cancel(true);
         } catch (Throwable t) {
             PufferfishLogger.LOGGER.log(Level.WARNING, "Error occurred stopping Flare", t);
         }

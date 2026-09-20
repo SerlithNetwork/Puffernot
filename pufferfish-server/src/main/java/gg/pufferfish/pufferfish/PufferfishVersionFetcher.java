@@ -14,7 +14,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
@@ -32,6 +32,7 @@ import java.util.concurrent.TimeUnit;
 import static io.papermc.paper.ServerBuildInfo.StringRepresentation.VERSION_SIMPLE;
 import static net.minecraft.server.MinecraftServer.COMPONENT_LOGGER;
 
+@NullMarked
 public class PufferfishVersionFetcher extends PaperVersionFetcher {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PufferfishVersionFetcher.class.getSimpleName());
@@ -54,7 +55,7 @@ public class PufferfishVersionFetcher extends PaperVersionFetcher {
     }
 
     @Override
-    public @NonNull Component getVersionMessage() {
+    public Component getVersionMessage() {
         final Component updateMessage;
         final ServerBuildInfo build = ServerBuildInfo.buildInfo();
         if (build.buildNumber().isEmpty() && build.gitCommit().isEmpty()) {

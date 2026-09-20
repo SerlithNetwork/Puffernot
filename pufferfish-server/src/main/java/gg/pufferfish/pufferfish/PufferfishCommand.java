@@ -11,15 +11,18 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
+@NullMarked
 public class PufferfishCommand {
 
     private static final Component PREFIX = MiniMessage.miniMessage().deserialize("<#12fff6><b>Pufferfish »</b></#12fff6> ");
     private static final Component FEEDBACK_RELOAD_SUCCESS = PREFIX.append(Component.text("Pufferfish configuration has been reloaded.", NamedTextColor.WHITE));
     private static final Component FEEDBACK_RELOAD_FAILED = PREFIX.append(Component.text("Failed to reload.", NamedTextColor.RED));
-    private static Component FEEDBACK_CURRENT_VERSION = null;
+    private static @Nullable Component FEEDBACK_CURRENT_VERSION = null;
 
     public static void init() {
 

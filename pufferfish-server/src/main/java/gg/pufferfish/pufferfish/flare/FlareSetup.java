@@ -3,8 +3,10 @@ package gg.pufferfish.pufferfish.flare;
 import co.technove.flare.FlareInitializer;
 import co.technove.flare.internal.profiling.InitializationException;
 import net.minecraft.server.MinecraftServer;
+import org.jspecify.annotations.NullMarked;
 import java.util.Locale;
 
+@NullMarked
 public class FlareSetup {
 
     private static final String OS_NAME = System.getProperty("os.name").toLowerCase(Locale.ROOT);

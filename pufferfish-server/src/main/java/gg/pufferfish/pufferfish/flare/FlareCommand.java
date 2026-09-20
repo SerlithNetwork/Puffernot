@@ -16,6 +16,7 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.command.CommandSender;
+import org.jspecify.annotations.NullMarked;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+@NullMarked
 public class FlareCommand {
 
     private static final String BASE_URL = "https://blog.airplane.gg/flare-tutorial/#setting-the-access-token";
@@ -103,7 +105,7 @@ public class FlareCommand {
                     }
                     if (ProfilingManager.isProfiling()) {
                         sendPrefixed(sender,
-                            Component.text("Current profile has been ran for " + ProfilingManager.getTimeRan().toString(), HEX)
+                            Component.text("Current profile has been ran for " + ProfilingManager.getTimeRan(), HEX)
                         );
                     } else {
                         sendPrefixed(sender,

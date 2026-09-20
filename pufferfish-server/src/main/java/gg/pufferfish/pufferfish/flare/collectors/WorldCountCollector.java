@@ -6,9 +6,11 @@ import co.technove.flare.live.formatter.SuffixFormatter;
 import gg.pufferfish.pufferfish.flare.CustomCategories;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.concurrent.Executor;
 
+@NullMarked
 public class WorldCountCollector extends PolledCollector {
 
     private static final CollectorData PLAYER_COUNT = new CollectorData("airplane:world:playercount", "Player Count", "The number of players currently on the server.", new SuffixFormatter(" Player", " Players"), CustomCategories.ENTITIES_AND_CHUNKS);

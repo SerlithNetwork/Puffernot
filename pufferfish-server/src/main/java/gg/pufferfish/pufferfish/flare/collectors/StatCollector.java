@@ -5,12 +5,14 @@ import co.technove.flare.live.LiveCollector;
 import co.technove.flare.live.category.GraphCategory;
 import co.technove.flare.live.formatter.DataFormatter;
 import com.sun.management.OperatingSystemMXBean;
+import org.jspecify.annotations.NullMarked;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 
 import java.lang.management.ManagementFactory;
 import java.time.Duration;
 
+@NullMarked
 public class StatCollector extends LiveCollector {
 
     private static final CollectorData CPU = new CollectorData("builtin:stat:cpu", "CPU Load", "The total amount of CPU usage across all cores.", DataFormatter.PERCENT, GraphCategory.SYSTEM);
