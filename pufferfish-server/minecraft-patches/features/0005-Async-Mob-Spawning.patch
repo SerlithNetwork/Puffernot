@@ -45,10 +45,10 @@ index 696889d73354f6eae0262c53d4c94c70fbac2967..971f4e5ae6ec526e58487de3294c6a42
          this.notificationManager().serverStarted();
          return true;
 diff --git a/net/minecraft/server/level/ServerChunkCache.java b/net/minecraft/server/level/ServerChunkCache.java
-index cdf64cbd84460f88d29583e9bd3bc644eb607395..0c8f0ed4749b1422b22793c375818e4e930f0bc3 100644
+index 66d706d2a7995b437d102903012a714c38e4876c..479591dfe9a297def01570c0292c347b71993168 100644
 --- a/net/minecraft/server/level/ServerChunkCache.java
 +++ b/net/minecraft/server/level/ServerChunkCache.java
-@@ -181,6 +181,8 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -186,6 +186,8 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
      }
      // Paper end - chunk tick iteration optimisations
  
@@ -57,7 +57,7 @@ index cdf64cbd84460f88d29583e9bd3bc644eb607395..0c8f0ed4749b1422b22793c375818e4e
      public ServerChunkCache(
          final ServerLevel level,
          final LevelStorageSource.LevelStorageAccess levelStorage,
-@@ -510,6 +512,41 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -515,6 +517,41 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
              this.broadcastChangedChunks(profiler);
              profiler.pop();
          }
@@ -99,7 +99,7 @@ index cdf64cbd84460f88d29583e9bd3bc644eb607395..0c8f0ed4749b1422b22793c375818e4e
      }
  
      private void broadcastChangedChunks(final ProfilerFiller profiler) {
-@@ -532,6 +569,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -537,6 +574,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
          // Paper start - Optional per player mob spawns
          NaturalSpawner.SpawnState spawnCookie;
          if ((this.spawnFriendlies || this.spawnEnemies) && this.level.paperConfig().entities.spawning.perPlayerMobSpawns) { // don't count mobs when animals and monsters are disabled
@@ -107,7 +107,7 @@ index cdf64cbd84460f88d29583e9bd3bc644eb607395..0c8f0ed4749b1422b22793c375818e4e
              // re-set mob counts
              for (ServerPlayer player : this.level.players()) {
                  // Paper start - per player mob spawning backoff
-@@ -546,12 +584,16 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -551,12 +589,16 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
                  }
                  // Paper end - per player mob spawning backoff
              }
@@ -127,7 +127,7 @@ index cdf64cbd84460f88d29583e9bd3bc644eb607395..0c8f0ed4749b1422b22793c375818e4e
          boolean doMobSpawning = this.level.getGameRules().get(GameRules.SPAWN_MOBS) && !this.level.players().isEmpty(); // CraftBukkit
          int tickSpeed = this.level.getGameRules().get(GameRules.RANDOM_TICK_SPEED);
          List<MobCategory> spawningCategories;
-@@ -565,7 +607,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -570,7 +612,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
              }
              // Paper end - PlayerNaturallySpawnCreaturesEvent
              boolean spawnPersistent = this.level.ticksPerSpawnCategory.getLong(org.bukkit.entity.SpawnCategory.ANIMAL) != 0L && this.level.getGameTime() % this.level.ticksPerSpawnCategory.getLong(org.bukkit.entity.SpawnCategory.ANIMAL) == 0L; // CraftBukkit
@@ -136,7 +136,7 @@ index cdf64cbd84460f88d29583e9bd3bc644eb607395..0c8f0ed4749b1422b22793c375818e4e
          } else {
              spawningCategories = List.of();
          }
-@@ -583,7 +625,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -588,7 +630,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
              profiler.popPush("tickSpawningChunks");
  
              for (LevelChunk chunk : spawningChunks) {
@@ -145,7 +145,7 @@ index cdf64cbd84460f88d29583e9bd3bc644eb607395..0c8f0ed4749b1422b22793c375818e4e
              }
          } finally {
              spawningChunks.clear();
-@@ -607,7 +649,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -612,7 +654,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
          }
  
          if (!spawningCategories.isEmpty()) {
