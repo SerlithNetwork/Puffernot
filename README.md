@@ -10,12 +10,12 @@ A highly optimized Paper fork designed for large servers requiring both maximum 
 > [!WARNING]
 > This is an unofficial port for [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) to 1.21.6+ \
 > All credits go to Pufferfish Host. \
-> **Do not** report errors to Pufferfish Host while using this port.
-
-> [!WARNING]
-> The purpose of this project is to serve as a template for other Pufferfish forks in this organization. \
+> **Do not** report errors to Pufferfish Host while using this port. \
+> You may ask for support here: https://discord.biquaternions.me
+>
+> The purpose of this project is to serve as a base for our own Pufferfish forks.
+> However, builds will still be provided. \
 > Therefore we've made some aesthetic and dependency changes that fit our taste and needs. \
-> If you want to run a Pufferfish jar closer to the original project, please refer to [Toffikk's port](https://github.com/Toffikk/Pufferfork). \
 > This is <u>our</u> interpretation of the Pufferfish software as a _modern implementation_ according to <u>our</u> personal style.
 
 > [!TIP]
@@ -37,6 +37,7 @@ A highly optimized Paper fork designed for large servers requiring both maximum 
 11. Added two additional QoL patches:
     1. [Custom plugin UI](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/paper-patches/files/src/main/java/io/papermc/paper/command/PaperPluginsCommand.java.patch).
     2. [Spark tps and ping aliases added by default](https://github.com/SerlithNetwork/Puffernot/blob/ver/1.21.6/pufferfish-server/paper-patches/files/src/main/resources/configurations/commands.yml.patch).
+12. Decorated the `/version` command.
 
 ## Pufferfish Features
 
@@ -73,5 +74,4 @@ All other files are licensed under MIT.
 
 ## Additional Credits
 1. PurpurMC for their paperweight setup
-2. Toffikk for [ServerConfigurations](https://github.com/Toffikk/Pufferfork/blob/ver/1.21.6/pufferfork-server/src/main/java/gg/pufferfish/pufferfish/compat/ServerConfigurations.java) and [0014-Pufferfish-Better-Check-For-Useless-Packets.patch](https://github.com/Toffikk/Pufferfork/blob/ver/1.21.6/pufferfork-server/minecraft-patches/sources/net/minecraft/server/level/ServerEntity.java.patch)
-3. Winds-Studio for their [auto-release script](https://github.com/Winds-Studio/Leaf/blob/ver/1.21.5/scripts/prepareRelease.sh)
+2. Winds-Studio for their [auto-release script](https://github.com/Winds-Studio/Leaf/blob/ver/1.21.5/scripts/prepareRelease.sh)
