@@ -18,7 +18,7 @@
 +
 +    /* Pufferfish - Unneeded
      updatingMinecraft {
-         // oldPaperCommit = "e5fe71723e2ffde7cc9fafc085ac3bb73e63175e"
+         //oldPaperCommit = "e5fe71723e2ffde7cc9fafc085ac3bb73e63175e"
      }
 +     */
  }
@@ -53,10 +53,10 @@
  dependencies {
 -    implementation(project(":paper-api"))
 +    implementation(project(":pufferfish-api")) // Pufferfish
-     implementation("ca.spottedleaf:leafpile:1.2.2")
-     implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
-     implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
-@@ -144,6 +_,10 @@
+     implementation(platform("ca.spottedleaf.leafpile:bom:1.2.4"))
+     implementation("ca.spottedleaf.leafpile:common")
+     implementation("ca.spottedleaf.leafpile:concurrentutil")
+@@ -147,6 +_,10 @@
          isTransitive = false // includes junit
      }
  
@@ -67,7 +67,7 @@
      testImplementation("io.github.classgraph:classgraph:4.8.184") // For mob goal test
      testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.3")
      testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
-@@ -155,8 +_,8 @@
+@@ -158,8 +_,8 @@
      testImplementation("org.junit-pioneer:junit-pioneer:2.3.0") // CartesianTest
  
      // Spark
@@ -78,7 +78,7 @@
  }
  
  tasks.jar {
-@@ -171,14 +_,14 @@
+@@ -174,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -98,7 +98,7 @@
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),
              "Git-Branch" to gitBranch,
-@@ -218,6 +_,12 @@
+@@ -221,6 +_,12 @@
      dependsOn(scanJarForBadCalls)
  }
  
@@ -111,7 +111,7 @@
  // Use TCA for console improvements
  tasks.jar {
      val archiveOperations = services.archiveOperations
-@@ -246,7 +_,7 @@
+@@ -249,7 +_,7 @@
      jvmArgumentProviders.add(provider)
  }
  

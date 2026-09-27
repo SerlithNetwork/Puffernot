@@ -69,7 +69,7 @@ index 829f7685904fd741e00403647ae76d32275c34a3..9f6bf69b142ac883632bc7fa321822ca
              }
          }
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 3d14b7287ccabeb1cd4eac530ca638e7bc8b6399..7c0adf87c8990df0eafdba24346e1174018ec961 100644
+index 4d8d85305c8b64e2c44eb8d7ed882f7b3612c5d4..5921fbf3c43de1f2f3b9123797e2fe57179ec4b8 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -892,6 +892,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
@@ -106,10 +106,10 @@ index 04b9138882054b8d5160463987821d9ad205c628..c9737ed85d3b7ff2e9e41134cb565ccc
      private @Nullable Component description;
      private final Optional<ResourceKey<LootTable>> lootTable;
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index 648826138efdc48487c78133893394c9e4908d3f..6c61b6c9a39b000935ba4dc603b5da533b8fa749 100644
+index 078054c499e7b29d64543f92c1808b5623e3c8e5..5e4a2c0d7fe5c393ffc1eb2216dbaaaabd53025c 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
-@@ -221,10 +221,10 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -222,10 +222,10 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
      public void inactiveTick() {
          super.inactiveTick();
          if (!this.aware) return; // Paper - Do not tick AI for inactive unaware mobs
@@ -122,7 +122,7 @@ index 648826138efdc48487c78133893394c9e4908d3f..6c61b6c9a39b000935ba4dc603b5da53
              this.targetSelector.tick();
          }
      }
-@@ -823,16 +823,20 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -830,16 +830,20 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
          int idBasedTickCount = this.tickCount + this.getId();
          if (idBasedTickCount % 2 != 0 && this.tickCount > 1) {
              profiler.push("targetSelector");
@@ -143,7 +143,7 @@ index 648826138efdc48487c78133893394c9e4908d3f..6c61b6c9a39b000935ba4dc603b5da53
              this.goalSelector.tick();
              profiler.pop();
          }
-@@ -854,6 +858,7 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -861,6 +865,7 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
          profiler.pop();
      }
  
