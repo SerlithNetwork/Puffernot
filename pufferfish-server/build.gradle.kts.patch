@@ -56,7 +56,7 @@
      implementation(platform("ca.spottedleaf.leafpile:bom:1.2.4"))
      implementation("ca.spottedleaf.leafpile:common")
      implementation("ca.spottedleaf.leafpile:concurrentutil")
-@@ -147,6 +_,10 @@
+@@ -146,6 +_,10 @@
          isTransitive = false // includes junit
      }
  
@@ -67,7 +67,7 @@
      testImplementation("io.github.classgraph:classgraph:4.8.184") // For mob goal test
      testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.3")
      testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
-@@ -158,8 +_,8 @@
+@@ -157,8 +_,8 @@
      testImplementation("org.junit-pioneer:junit-pioneer:2.3.0") // CartesianTest
  
      // Spark
@@ -78,7 +78,7 @@
  }
  
  tasks.jar {
-@@ -174,14 +_,14 @@
+@@ -173,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -98,7 +98,7 @@
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),
              "Git-Branch" to gitBranch,
-@@ -221,6 +_,12 @@
+@@ -220,6 +_,12 @@
      dependsOn(scanJarForBadCalls)
  }
  
@@ -111,7 +111,7 @@
  // Use TCA for console improvements
  tasks.jar {
      val archiveOperations = services.archiveOperations
-@@ -249,7 +_,7 @@
+@@ -248,7 +_,7 @@
      jvmArgumentProviders.add(provider)
  }
  
