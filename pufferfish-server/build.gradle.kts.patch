@@ -72,7 +72,7 @@
  
      // Spark
 -    implementation("me.lucko:spark-api:0.1-20240720.200737-2")
--    implementation("me.lucko:spark-paper:1.10.180")
+-    implementation("me.lucko:spark-paper:1.10.191")
 +    implementation("me.biquaternions.spark:spark-api:1.7-pufferfish")
 +    implementation("me.biquaternions.spark:spark-paper:1.7-pufferfish")
  }
@@ -111,8 +111,8 @@
  // Use TCA for console improvements
  tasks.jar {
      val archiveOperations = services.archiveOperations
-@@ -248,7 +_,7 @@
-     jvmArgumentProviders.add(provider)
+@@ -258,7 +_,7 @@
+     )
  }
  
 -val generatedDir: java.nio.file.Path = layout.projectDirectory.dir("src/generated/java").asFile.toPath()
