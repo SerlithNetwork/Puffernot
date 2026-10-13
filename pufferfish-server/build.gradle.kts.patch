@@ -1,5 +1,13 @@
 --- a/paper-server/build.gradle.kts
 +++ b/paper-server/build.gradle.kts
+@@ -9,6 +_,7 @@
+     idea
+     id("io.papermc.paperweight.core")
+     id("io.papermc.fill.gradle") version "1.0.14"
++    id("fr.fidorial.dependency-patcher") version "1.2.0" // Puffernot
+ }
+ 
+ val paperMavenPublicUrl = "https://repo.papermc.io/repository/maven-public/"
 @@ -22,9 +_,23 @@
      minecraftVersion = providers.gradleProperty("mcVersion")
      gitFilePatches = false
@@ -67,17 +75,45 @@
      testImplementation("io.github.classgraph:classgraph:4.8.184") // For mob goal test
      testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.3")
      testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
-@@ -157,8 +_,8 @@
-     testImplementation("org.junit-pioneer:junit-pioneer:2.3.0") // CartesianTest
+@@ -158,8 +_,36 @@
  
      // Spark
--    implementation("me.lucko:spark-api:0.1-20240720.200737-2")
+     implementation("me.lucko:spark-api:0.1-20240720.200737-2")
 -    implementation("me.lucko:spark-paper:1.10.191")
-+    implementation("me.biquaternions.spark:spark-api:1.7-pufferfish")
-+    implementation("me.biquaternions.spark:spark-paper:1.7-pufferfish")
- }
+-}
++    // implementation("me.lucko:spark-paper:1.10.191")
++}
++
++// Puffernot start
++dependencyPatcher {
++    patchSet("spark-paper") {
++        library("me.lucko:spark-paper:1.10.191")
++        targetConfigurations.set(emptySet())
++        dependencies {
++            compileOnly(project(":pufferfish-api"))
++            compileOnly("me.lucko:spark-common:1.10.191")
++        }
++    }
++}
++configurations.consumable("patchedSparkPaperElements") {
++    attributes {
++        attribute(Usage.USAGE_ATTRIBUTE, named(Usage.JAVA_RUNTIME))
++        attribute(Category.CATEGORY_ATTRIBUTE, named(Category.LIBRARY))
++        attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, named(LibraryElements.JAR))
++        attribute(Bundling.BUNDLING_ATTRIBUTE, named(Bundling.EXTERNAL))
++    }
++    outgoing.capability("me.lucko.spark:spark-paper-patched:1.10.191")
++    outgoing.artifact(tasks.named<Jar>("patchedSparkPaperJar"))
++}
++dependencies {
++    implementation(project(":pufferfish-server")) {
++        capabilities { requireCapability("me.lucko.spark:spark-paper-patched") }
++    }
++}
++// Puffernot end
  
  tasks.jar {
+     manifest {
 @@ -173,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
