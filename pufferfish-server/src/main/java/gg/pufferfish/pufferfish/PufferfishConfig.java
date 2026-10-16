@@ -200,13 +200,6 @@ public class PufferfishConfig extends ConfigurablePojo<PufferfishConfig> {
     }
 
     @Comment({
-        "Throttles the AI goal selector in entity inactive ticks.",
-        "This can improve performance by a few percent, but has minor gameplay implications."
-    })
-    @Key("inactive-goal-selector-throttle")
-    public boolean inactiveGoalSelectorThrottle = true;
-
-    @Comment({
         "Allows end crystals to respawn the ender dragon.",
         "On servers that expect end crystal fights in the end dimension, disabling this",
         "will prevent the server from performing an expensive search to attempt respawning",

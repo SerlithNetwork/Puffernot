@@ -69,7 +69,7 @@ index 829f7685904fd741e00403647ae76d32275c34a3..9f6bf69b142ac883632bc7fa321822ca
              }
          }
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 4d8d85305c8b64e2c44eb8d7ed882f7b3612c5d4..5921fbf3c43de1f2f3b9123797e2fe57179ec4b8 100644
+index 67be590b4659c0c2d92a92ad326a57d893197d2e..6458b360d8b8cd6f3e35b0b229a71c42567f9226 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -892,6 +892,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
@@ -81,7 +81,7 @@ index 4d8d85305c8b64e2c44eb8d7ed882f7b3612c5d4..5921fbf3c43de1f2f3b9123797e2fe57
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profiler.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index cf3619b6de23f32e9e5a81fbe287fb438ecfcabc..49e1b17d3971b92c9e920cfa5b066f9da55aea00 100644
+index 9757a49eca1d52194881841e5f8661b523b375a5..fe94143c428083bd5d2edbde61b8f004b569071b 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -393,6 +393,8 @@ public abstract class Entity
@@ -106,15 +106,15 @@ index 04b9138882054b8d5160463987821d9ad205c628..c9737ed85d3b7ff2e9e41134cb565ccc
      private @Nullable Component description;
      private final Optional<ResourceKey<LootTable>> lootTable;
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index 078054c499e7b29d64543f92c1808b5623e3c8e5..5e4a2c0d7fe5c393ffc1eb2216dbaaaabd53025c 100644
+index 92ce15b22517bda5033e6377c76abaa6a9d68d03..85e03ac3f41e547b485d260a5c732a0728c5f5f5 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
-@@ -222,10 +222,10 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
-     public void inactiveTick() {
+@@ -225,10 +225,10 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
          super.inactiveTick();
          if (!this.aware) return; // Paper - Do not tick AI for inactive unaware mobs
--        if (this.goalSelector.inactiveTick()) {
-+        if (this.goalSelector.pufferfish$inactiveTick(this.pufferfish$activatedPriority, true)) { // Pufferfish - pass activated priority
+         final boolean isThrottled = this.level().paperConfig().entities.behavior.inactiveMobGoalSelectorThrottleRate.enabled() && inactiveTickDisableCounter++ % this.level().paperConfig().entities.behavior.inactiveMobGoalSelectorThrottleRate.intValue() != 0; // Paper - Throttle inactive goal selector ticking
+-        if (this.goalSelector.inactiveTick() && !isThrottled) {
++        if (this.goalSelector.pufferfish$inactiveTick(this.pufferfish$activatedPriority, true) && !isThrottled) { // Pufferfish - pass activated priority
              this.goalSelector.tick();
          }
 -        if (this.targetSelector.inactiveTick()) {
@@ -122,7 +122,7 @@ index 078054c499e7b29d64543f92c1808b5623e3c8e5..5e4a2c0d7fe5c393ffc1eb2216dbaaaa
              this.targetSelector.tick();
          }
      }
-@@ -830,16 +830,20 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -833,16 +833,20 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
          int idBasedTickCount = this.tickCount + this.getId();
          if (idBasedTickCount % 2 != 0 && this.tickCount > 1) {
              profiler.push("targetSelector");
@@ -143,7 +143,7 @@ index 078054c499e7b29d64543f92c1808b5623e3c8e5..5e4a2c0d7fe5c393ffc1eb2216dbaaaa
              this.goalSelector.tick();
              profiler.pop();
          }
-@@ -861,6 +865,7 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
+@@ -864,6 +868,7 @@ public abstract class Mob extends LivingEntity implements Targeting, EquipmentUs
          profiler.pop();
      }
  
