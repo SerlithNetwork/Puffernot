@@ -21,10 +21,10 @@ public net.minecraft.server.level.ServerLevel entityTickList
 public net.minecraft.world.level.entity.EntityTickList entities
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index a728188d534de3331f7424ef140bb15d5bf62f9c..071906b06fe21761e85d875e7fa85b92594a67f4 100644
+index d49cae08003601e7f92b4ce429016c04d7ab7f91..44cb0d822f2beb46ccbbf8cfc4f3ed769a93a13b 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -330,6 +330,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -331,6 +331,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      public boolean isIteratingOverLevels = false; // Paper - Throw exception on world create while being ticked
      private final Set<String> pluginsBlockingSleep = new java.util.HashSet<>(); // Paper - API to allow/disallow tick sleeping
      public static final long SERVER_INIT = System.nanoTime(); // Paper - Lag compensation
@@ -45,7 +45,7 @@ index 696889d73354f6eae0262c53d4c94c70fbac2967..971f4e5ae6ec526e58487de3294c6a42
          this.notificationManager().serverStarted();
          return true;
 diff --git a/net/minecraft/server/level/ServerChunkCache.java b/net/minecraft/server/level/ServerChunkCache.java
-index c4cfb53e145d69666ffc27ef4ee0c50b54eb9143..36cad318ac0724420a75268741ae5aaa8ff49f9b 100644
+index ef53d4d17222a882dd3d33575096c864a0a00a06..25df7d80ed972839855d5cb572f5422a6b73db75 100644
 --- a/net/minecraft/server/level/ServerChunkCache.java
 +++ b/net/minecraft/server/level/ServerChunkCache.java
 @@ -186,6 +186,8 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon

@@ -56,10 +56,10 @@ index 982455a5eecdb6d80762cc17c2461b467ba5072e..8aa4e2286704e43503abbdae0d88ccfd
      private final CraftScheduler asyncScheduler;
      private final boolean isAsyncScheduler;
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java b/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
-index def2e3c1960d41d8d72c32d36a256350ce3448f1..faa224c9993beca5f93ce1509321988dcf0fa537 100644
+index 147aca282eab7c3843bb98f2f25ce90e7dc60873..4b92eec2242db18a9f7ec6a29eaa53eac572c809 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
-@@ -12,6 +12,7 @@ public class ServerShutdownThread extends Thread {
+@@ -14,6 +14,7 @@ public class ServerShutdownThread extends TickThread {
  
      @Override
      public void run() {
