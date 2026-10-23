@@ -60,7 +60,7 @@
          isTransitive = false // includes junit
      }
  
-+    implementation("net.serlith:Flare:4.1.5") // Pufferfish - Flare
++    implementation("net.serlith:Flare:4.1.6") // Pufferfish - Flare
 +    implementation("net.serlith.jshepherd:core:4.1.1") // Pufferfish - Config Library
 +    implementation("net.serlith.jshepherd:yaml:4.1.1") // Pufferfish - Config Library
 +
