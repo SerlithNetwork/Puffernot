@@ -5,10 +5,10 @@ Subject: [PATCH] Rebrand
 
 
 diff --git a/src/main/java/io/papermc/paper/ServerBuildInfo.java b/src/main/java/io/papermc/paper/ServerBuildInfo.java
-index 4e099b584c3435ba1ebce492011d35ae1ac0cdf8..b73e8d6aba63213127dfeece1f3eb331c9782d5d 100644
+index 614b3d9f11b544379ec8facb8860d951d5a0ba3a..26a637da780c8441be8274caecbf605a29587965 100644
 --- a/src/main/java/io/papermc/paper/ServerBuildInfo.java
 +++ b/src/main/java/io/papermc/paper/ServerBuildInfo.java
-@@ -16,6 +16,7 @@ public interface ServerBuildInfo {
+@@ -17,6 +17,7 @@ public interface ServerBuildInfo {
       * The brand id for Paper.
       */
      Key BRAND_PAPER_ID = Key.key("papermc", "paper");

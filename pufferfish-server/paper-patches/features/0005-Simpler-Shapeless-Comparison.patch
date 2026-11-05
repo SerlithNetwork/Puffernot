@@ -36,10 +36,10 @@ index a70ef66804a6d7b07de6f181f379106a9db7df1a..0f687319a99d9ee266d89482225d1361
      }
  }
 diff --git a/src/test/java/io/papermc/paper/inventory/recipe/ShapelessRecipeMatchTest.java b/src/test/java/io/papermc/paper/inventory/recipe/ShapelessRecipeMatchTest.java
-index 8a5e44c97c4cec59c1c00f879e511368437da2ab..deb4fcbb3bcd2fade987910b9691ff839763d02e 100644
+index fa59727014c52998b5117a316422c747b63677ac..675cffa0a2d3ba57ac1e583240d509d559034ccd 100644
 --- a/src/test/java/io/papermc/paper/inventory/recipe/ShapelessRecipeMatchTest.java
 +++ b/src/test/java/io/papermc/paper/inventory/recipe/ShapelessRecipeMatchTest.java
-@@ -60,6 +60,7 @@ class ShapelessRecipeMatchTest {
+@@ -59,6 +59,7 @@ class ShapelessRecipeMatchTest {
              new CraftingRecipe.CraftingBookInfo(CraftingBookCategory.MISC, ""),
              new ItemStackTemplate(Items.DIAMOND), // result is irrelevant to matches()
              List.of(ingredients)

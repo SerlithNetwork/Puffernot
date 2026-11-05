@@ -20,10 +20,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index 6a5883744f399931c4c37963a5569846e23324c1..1ccfa1cad3f54d61d4501975d3f59331ae41fa2a 100644
+index 1119ee21fe49a0d98f30649e07856a2a1784dca2..c2081f85dc2e14da4d2d4ef8452272e562fae705 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
-@@ -4542,10 +4542,13 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+@@ -4553,10 +4553,13 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
          WorldBorder worldBorder = level.getWorldBorder();
          Vec3 clamped = worldBorder.clampVec3ToBound(xx, y, zz);
          BlockPos.MutableBlockPos pos = BlockPos.containing(clamped).mutable();

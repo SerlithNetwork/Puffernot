@@ -74,8 +74,8 @@
 +
  tasks.jar {
      from(generateApiVersioningFile.flatMap { it.outputFile })
-     manifest {
-@@ -197,8 +_,9 @@
+ }
+@@ -192,8 +_,9 @@
  val services = objects.newInstance<Services>()
  
  tasks.withType<Javadoc>().configureEach {
@@ -86,7 +86,7 @@
      options.use()
      options.isDocFilesSubDirs = true
      options.links(
-@@ -214,6 +_,7 @@
+@@ -209,6 +_,7 @@
          "https://www.javadocs.dev/org.apache.maven.resolver/maven-resolver-api/1.7.3",
      )
      options.tags(projectCustomJavadocTags.map { it.toOptionString() })
@@ -94,7 +94,7 @@
  
      inputs.files(javadocSourcepath).ignoreEmptyDirectories().withPropertyName(javadocSourcepath.name + "-configuration")
      val javadocSourcepathElements = javadocSourcepath.elements
-@@ -225,11 +_,11 @@
+@@ -220,11 +_,11 @@
      }
  
      // workaround for https://github.com/gradle/gradle/issues/4046
