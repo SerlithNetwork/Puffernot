@@ -34,6 +34,18 @@ index aad550288b63f7bdedab72e2c94a011a3566986d..65dfd3729478be2a5a73bfda1e1f4b55
      }
  
      public SystemReport getSystemReport() {
+diff --git a/net/minecraft/server/Main.java b/net/minecraft/server/Main.java
+index a6d9b95c42926754acd2e54e7af7ade3f7d2c322..56ae61bfa624ce14eebfb419bc6d3f8b8d092aa3 100644
+--- a/net/minecraft/server/Main.java
++++ b/net/minecraft/server/Main.java
+@@ -110,6 +110,7 @@ public class Main {
+                 JvmProfiler.INSTANCE.start(Environment.SERVER);
+             }
+ 
++            me.biquaternions.spark.common.SparkStyleProvider.getInstance().register(gg.pufferfish.pufferfish.PufferfishSparkStyle::new); // Pufferfish
+             io.papermc.paper.plugin.PluginInitializerManager.load(options); // Paper
+             Bootstrap.bootStrap();
+             Bootstrap.validate();
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
 index 7517b872794f3bbe556f3abbeb294f426c8da899..d49cae08003601e7f92b4ce429016c04d7ab7f91 100644
 --- a/net/minecraft/server/MinecraftServer.java
