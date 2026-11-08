@@ -77,8 +77,8 @@
      }
  
 +    implementation("net.serlith:Flare:4.1.6") // Pufferfish - Flare
-+    implementation("net.serlith.jshepherd:core:4.1.1") // Pufferfish - Config Library
-+    implementation("net.serlith.jshepherd:yaml:4.1.1") // Pufferfish - Config Library
++    implementation("me.biquaternions.jshepherd:core:4.2.1") // Pufferfish - Config Library
++    implementation("me.biquaternions.jshepherd:yaml:4.2.1") // Pufferfish - Config Library
 +
      testImplementation("io.github.classgraph:classgraph:4.8.184") // For mob goal test
      testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.3")
