@@ -69,10 +69,10 @@ index 829f7685904fd741e00403647ae76d32275c34a3..9f6bf69b142ac883632bc7fa321822ca
              }
          }
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 67be590b4659c0c2d92a92ad326a57d893197d2e..6458b360d8b8cd6f3e35b0b229a71c42567f9226 100644
+index 2cbe8e7b3c0ae4178852d6a0fad4658918e09ef1..90d818f61aad70eb87f1f4ed3d45ff8b09661b1b 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
-@@ -892,6 +892,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
+@@ -893,6 +893,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
              this.entityTickList
                  .forEach(
                      entity -> {
@@ -81,7 +81,7 @@ index 67be590b4659c0c2d92a92ad326a57d893197d2e..6458b360d8b8cd6f3e35b0b229a71c42
                              if (!tickRateManager.isEntityFrozen(entity)) {
                                  profiler.push("checkDespawn");
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 9757a49eca1d52194881841e5f8661b523b375a5..fe94143c428083bd5d2edbde61b8f004b569071b 100644
+index bea975af0b8be42883bac92d0366cf93ebadc0fc..89f3ecf999a430c1ad8c926d23925c7b76c67735 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -393,6 +393,8 @@ public abstract class Entity
@@ -94,7 +94,7 @@ index 9757a49eca1d52194881841e5f8661b523b375a5..fe94143c428083bd5d2edbde61b8f004
      public void inactiveTick() {
      }
 diff --git a/net/minecraft/world/entity/EntityType.java b/net/minecraft/world/entity/EntityType.java
-index 04b9138882054b8d5160463987821d9ad205c628..c9737ed85d3b7ff2e9e41134cb565ccc63574cfa 100644
+index 9cd12e7781349a2d0b1dd2c41651409af1684db5..b90e791cac30b316f48edffaa29dbb2f26a5006f 100644
 --- a/net/minecraft/world/entity/EntityType.java
 +++ b/net/minecraft/world/entity/EntityType.java
 @@ -67,6 +67,7 @@ public class EntityType<T extends Entity> implements EntityTypeTest<Entity, T>,
@@ -189,7 +189,7 @@ index 0439543fbb25ddb974550fe9dbdaa479e330937d..e65c9c27cc7432d5c2b1bc957fd2d41d
          for (final WrappedGoal task : this.availableGoals) {
              if (task.isRunning()) {
 diff --git a/net/minecraft/world/entity/animal/allay/Allay.java b/net/minecraft/world/entity/animal/allay/Allay.java
-index 2613bd150fb8f76bc406f0a9e164820a75b3079a..00f3e8929ae4b0a6de06a1e346e270d2a67c7a8f 100644
+index a051b6c69b76b4a5251a951bbc2028c6363d4881..1e201ed498fed1bcea1139340e3ee460af79e29b 100644
 --- a/net/minecraft/world/entity/animal/allay/Allay.java
 +++ b/net/minecraft/world/entity/animal/allay/Allay.java
 @@ -210,6 +210,7 @@ public class Allay extends PathfinderMob implements InventoryCarrier, VibrationS
